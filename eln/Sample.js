@@ -176,10 +176,7 @@ class Sample {
         if (type === 'other') {
             await this.roc.addAttachment(this.sample, droppedDatas);
         } else {
-            for (let i = 0; i < droppedDatas.length; i++) {
-                var data = DataObject.resurrect(droppedDatas[i]);
-                await this.roc.attach(type, this.sample, data);
-            }
+            await this.attachFiles(droppedDatas, type);
         }
 
     }
@@ -216,10 +213,7 @@ class Sample {
                 var type = action.name.replace('attach', '').toLowerCase();
                 var droppedDatas = action.value;
                 droppedDatas = droppedDatas.file || droppedDatas.str;
-                for (let i = 0; i < droppedDatas.length; i++) {
-                    const data = DataObject.resurrect(droppedDatas[i]);
-                    await this.roc.attach(type, this.sample, data);
-                }
+                await this.attachFiles(droppedDatas, type);
                 break;
             }
             case 'refresh': {
@@ -237,6 +231,18 @@ class Sample {
             }
             default:
                 break;
+        }
+    }
+
+    async attachFiles(files, type) {
+        if (!files || !type) return;
+
+        if (!Array.isArray(files)) {
+            files = [files];
+        }
+        for (let i = 0; i < files.length; i++) {
+            const data = DataObject.resurrect(files[i]);
+            await this.roc.attach(type, this.sample, data);
         }
     }
 }
