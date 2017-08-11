@@ -599,7 +599,9 @@ define(['src/main/datas', 'src/util/api', 'src/util/ui', 'src/util/util', 'src/u
                 });
                 try {
                     await idb.delete(uuid);
-                } catch (e) {}
+                } catch (e) {
+                    // ignored error
+                }
                 // Track data again
                 this.bindChangeByUuid(uuid);
                 return entry;

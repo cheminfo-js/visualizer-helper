@@ -15,13 +15,14 @@ module.exports = {
         var nextID = current + 1;
         return numberToId(nextID, type);
     },
-    
-    numberToId(num, type) {
-        var check = getCheckDigit(num);
-        var numStr = String(num);
-        return type + '-' + '0'.repeat(6 - numStr.length) + numStr + '-' + check;
-    }
+    numberToId
 };
+
+function numberToId(num, type) {
+    var check = getCheckDigit(num);
+    var numStr = String(num);
+    return type + '-' + '0'.repeat(6 - numStr.length) + numStr + '-' + check;
+}
 
 function getCheckDigit(number) {
     var str = number.toString();
