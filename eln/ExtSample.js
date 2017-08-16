@@ -2,77 +2,99 @@ import Datas from 'src/main/datas';
 import ExpandableMolecule from './ExpandableMolecule';
 import MF from './MF';
 import API from 'src/util/api';
+import IDB from 'src/util/IDBKeyValue';
 
 const DataObject = Datas.DataObject;
+const idb = new IDB('external-samples');
 
 const defaultOptions = {
-    varName: 'sample',
+    varName: 'sample'
 };
 
 class Sample {
     constructor(sample, options) {
         // make sure we don't copy attachment metadata
-        const s = {
+        const s = sample.$content ? {
             $content: {
                 general: sample.$content.general,
                 identifier: sample.$content.identifier,
                 stock: sample.$content.stock
+            }
+        } : {
+            $content: {
+                general: {}
             }
         };
 
         this.sample = JSON.parse(JSON.stringify(s));
         this.options = Object.assign({}, defaultOptions, options);
         Object.assign(this.sample, this.options.sample);
+        this._init();
+    }
 
-        API.createData(this.options.varName, this.sample).then(sample => {
-            this.sample = sample;
-            var sampleVar = API.getVar(this.options.varName);
+    _loadSample(sample) {
+        this.sample = sample;
+        var sampleVar = API.getVar(this.options.varName);
 
-            API.setVariable('sampleCode', sampleVar, ['$id', 0]);
-            API.setVariable('batchCode', sampleVar, ['$id', 1]);
-            API.setVariable('content', sampleVar, ['$content']);
-            API.setVariable('general', sampleVar, ['$content', 'general']);
-            API.setVariable('molfile', sampleVar, ['$content', 'general', 'molfile']);
-            API.setVariable('mf', sampleVar, ['$content', 'general', 'mf']);
-            API.setVariable('mw', sampleVar, ['$content', 'general', 'mw']);
-            API.setVariable('em', sampleVar, ['$content', 'general', 'em']);
-            API.setVariable('description', sampleVar, ['$content', 'general', 'description']);
-            API.setVariable('iupac', sampleVar, ['$content', 'general', 'iupac']);
+        API.setVariable('sampleCode', sampleVar, ['$id', 0]);
+        API.setVariable('batchCode', sampleVar, ['$id', 1]);
+        API.setVariable('content', sampleVar, ['$content']);
+        API.setVariable('general', sampleVar, ['$content', 'general']);
+        API.setVariable('molfile', sampleVar, ['$content', 'general', 'molfile']);
+        API.setVariable('mf', sampleVar, ['$content', 'general', 'mf']);
+        API.setVariable('mw', sampleVar, ['$content', 'general', 'mw']);
+        API.setVariable('em', sampleVar, ['$content', 'general', 'em']);
+        API.setVariable('description', sampleVar, ['$content', 'general', 'description']);
+        API.setVariable('iupac', sampleVar, ['$content', 'general', 'iupac']);
 
-            this.expandableMolecule = new ExpandableMolecule(this.sample, options);
-            this.mf = new MF(this.sample);
-            this.mf.fromMF();
+        this.expandableMolecule = new ExpandableMolecule(this.sample, this.options);
+        this.mf = new MF(this.sample);
+        this.mf.fromMF();
 
-            this.onChange = (event) => {
-                var jpathStr = event.jpath.join('.');
+        this.onChange = (event) => {
+            var jpathStr = event.jpath.join('.');
 
+            // We have modified the nmr annotations
+            if (jpathStr.replace(/\.\d+\..*/, '') === '$content.spectra.nmr') {
+                // execute peak picking
+                var currentNmr = this.sample.getChildSync(jpathStr.replace(/(\.\d+)\..*/, '$1').split('.'));
+                this.nmr1dManager.executePeakPicking(currentNmr);
+                // this.nmr1dManager.updateIntegrals();
+            }
 
-                // We have modified the nmr annotations
-                if (jpathStr.replace(/\.\d+\..*/, '') === '$content.spectra.nmr') {
-                    // execute peak picking
-                    var currentNmr = this.sample.getChildSync(jpathStr.replace(/(\.\d+)\..*/, '$1').split('.'));
-                    this.nmr1dManager.executePeakPicking(currentNmr);
-                    // this.nmr1dManager.updateIntegrals();
-                }
+            switch (event.jpath.join('.')) {
+                case '$content.general.molfile':
+                    this.mf.fromMolfile();
+                    break;
+                case '$content.general.mf':
+                    try {
+                        this.mf.fromMF();
+                    } catch (e) {
+                        // ignore
+                    }
+                    break;
+                default:
+                    break;
+            }
 
+            const contentString = JSON.stringify(this.sample.$content);
+            if ((contentString !== this.contentString) && this.options.trackId) {
+                this.contentString = JSON.stringify(this.sample.$content);
+                idb.set(this.options.trackId, this.sample.resurrect());
+            }
+        };
 
-                switch (event.jpath.join('.')) {
-                    case '$content.general.molfile':
-                        this.mf.fromMolfile();
-                        break;
-                    case '$content.general.mf':
-                        try {
-                            this.mf.fromMF();
-                        } catch (e) {
-                            // ignore
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            };
+        this.bindChange();
+    }
 
-            this.bindChange();
+    async _init() {
+        this._initialized = new Promise(async (resolve) => {
+            if (this.options.trackId) {
+                var sample = await idb.get(this.options.trackId);
+            }
+            sample = await API.createData(this.options.varName, sample || this.sample);
+            this._loadSample(sample);
+            resolve();
         });
     }
 

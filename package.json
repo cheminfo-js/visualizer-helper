@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/cheminfo-js/visualizer-helper#readme",
   "devDependencies": {
-    "babel-cli": "^6.18.0",
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-es2015-modules-amd-if-required": "^1.0.4",
     "babel-preset-es2017": "^6.16.0",
     "eslint": "^3.19.0",
