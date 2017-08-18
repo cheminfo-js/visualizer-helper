@@ -89,8 +89,16 @@ class Sample {
 
     async _init() {
         this._initialized = new Promise(async (resolve) => {
+            var sample;
             if (this.options.trackId) {
-                var sample = await idb.get(this.options.trackId);
+                try {
+                    sample = await idb.get(this.options.trackId);
+                } catch (e) {
+                    // eslint-disable-next-line no-console
+                    console.error(e);
+                    sample = this.sample;
+                    this.options.trackId = false;
+                }
             }
             sample = await API.createData(this.options.varName, sample || this.sample);
             this._loadSample(sample);
