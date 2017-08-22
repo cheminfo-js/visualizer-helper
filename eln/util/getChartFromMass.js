@@ -9,9 +9,9 @@ import {parseXY} from '../libs/parseXY';
  */
 export async function getChartFromMass(experiment, options = {}) {
     if (experiment.jcamp) {
-        let name = options.name || experiment.jcamp.filename.match(/([^\/]+)\..+/)[1];
-        if (experiment.jcamp.encoding === 'text') {
-            let result = convert(experiment.jcamp.content, {xy: true});
+        let name = options.name || String(experiment.jcamp.filename).match(/([^\/]+)\..+/)[1];
+        if (String(experiment.jcamp.encoding) === 'text') {
+            let result = convert(String(experiment.jcamp.content), {xy: true});
             let points = result.spectra[0].data[0];
             return {
                 data: [{
@@ -21,7 +21,7 @@ export async function getChartFromMass(experiment, options = {}) {
                 }]
             };
         } else if (experiment.jcamp.dUrl) {
-            let content = await fetch(experiment.jcamp.dUrl, {credentials: 'include'}).then(r => r.text());
+            let content = await fetch(String(experiment.jcamp.dUrl), {credentials: 'include'}).then(r => r.text());
             let result = convert(content, {xy: true});
             let points = result.spectra[0].data[0];
             return {
@@ -35,9 +35,9 @@ export async function getChartFromMass(experiment, options = {}) {
             throw new Error(`unsupported encoding ${experiment.jcamp.encoding}`);
         }
     } else if (experiment.txt) {
-        let name = options.name || experiment.txt.filename.match(/([^\/]+)\..+/)[1];
-        if (experiment.txt.encoding === 'text') {
-            let points = parseXY(experiment.txt.content, {arrayType: 'xxyy', uniqueX: true});
+        let name = options.name || String(experiment.txt.filename).match(/([^\/]+)\..+/)[1];
+        if (String(experiment.txt.encoding) === 'text') {
+            let points = parseXY(String(experiment.txt.content), {arrayType: 'xxyy', uniqueX: true});
             return {
                 data: [{
                     label: name,
@@ -46,7 +46,7 @@ export async function getChartFromMass(experiment, options = {}) {
                 }]
             };
         } else if (experiment.txt.dUrl) {
-            let content = await fetch(experiment.txt.dUrl, {credentials: 'include'}).then(r => r.text());
+            let content = await fetch(String(experiment.txt.dUrl), {credentials: 'include'}).then(r => r.text());
             let points = parseXY(content, {arrayType: 'xxyy', uniqueX: true});
             return {
                 data: [{

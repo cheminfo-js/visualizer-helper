@@ -18,22 +18,22 @@ export function appendedDragAndDrop(experimentalFiles, targetName) {
     }
 
     for (var file of experimentalFiles) {
-        if (file.filename && file.filename !== '') {
+        if (file.filename && String(file.filename) !== '') {
             // handle from drag and drop
-            var property = elnPlugin.util.getTargetProperty(file.filename);
+            var property = elnPlugin.util.getTargetProperty(String(file.filename));
             if (property !== 'file') {
                 target.push({[property]: file});
-            } else if (file.encoding === 'text') {
+            } else if (String(file.encoding) === 'text') {
                 target.push({txt: file});
             } else {
                 target.push({file: file});
             }
         } else {
             var type;
-            if (file.encoding === 'text') {
-                type = getTargetType(file.content);
+            if (String(file.encoding) === 'text') {
+                type = getTargetType(String(file.content));
             } else {
-                var first = firstCharacters(file.content);
+                var first = firstCharacters(String(file.content));
                 type = getTargetType(first);
             }
 
