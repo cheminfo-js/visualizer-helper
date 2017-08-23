@@ -1,14 +1,15 @@
 import API from 'src/util/api';
 import Roc from '../rest-on-couch/Roc';
-import IDB from 'src/util/IDBKeyValue';
 
-export async function preferenceFactory(id, options) {
+export async function preferencesFactory(id, options) {
     const {
-        kind = 'viewOptions',
+        name = 'viewPreferences',
         url = undefined,
         database = 'eln',
         initial = []
     } = options;
+
+    const kind = 'viewPreferences';
 
     var roc = new Roc({
         url: url,
@@ -16,72 +17,42 @@ export async function preferenceFactory(id, options) {
         kind: kind
     });
 
-    var idb = new IDB(kind);
+    var user = await roc.getUser();
+    id += '_' + user.username;
 
-    var existing = await roc.view('entryByKindAndId', {key: [kind, id]});
-    var preferenceRoc = existing[0];
-    var newVariable = !preferenceRoc;
-    var local;
-    try {
-        local = await idb.get(id);
-    } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-        idb = false;
-    }
-
-    if (local) {
-        preferenceRoc = local;
-    } else if (newVariable) {
-        preferenceRoc = {
+    var existing = (await roc.view('entryByKindAndId', {key: [kind, id]}))[0];
+    var preferenceRoc;
+    var rocOptions = {
+        varName: id,
+        track: true
+    };
+    if (existing) {
+        preferenceRoc = await roc.document(existing._id, rocOptions);
+    } else {
+        var created = await roc.create({
             $id: id,
             $content: initial,
             $kind: kind
-        };
+        });
+        preferenceRoc = await roc.document(created._id, rocOptions);
     }
 
-    preferenceRoc = await API.createData(id, preferenceRoc);
     var preferenceVar = API.getVar(id);
-    API.setVariable('preferences', preferenceVar, ['$content']);
+    API.setVariable(name, preferenceVar, ['$content']);
 
-    return new Preference(id, roc, idb, preferenceRoc, newVariable);
+    var viewPreferences = new Preference(roc, preferenceRoc);
+
+    await API.cache(name, viewPreferences);
+    return viewPreferences;
 }
 
 export class Preference {
-    constructor(id, roc, idb, preferenceRoc, newVariable) {
-        this.id = id;
+    constructor(roc, preferenceRoc) {
         this.roc = roc;
-        this.idb = idb;
         this.preference = preferenceRoc;
-        this.newVariable = newVariable;
-        this.contentString = JSON.stringify(this.preference);
-
-        this.onChange = () => {
-            const contentString = JSON.stringify(this.preference);
-            if (contentString !== this.contentString) {
-                this.contentString = contentString;
-                this.idb.set(this.id, JSON.parse(contentString));
-            }
-        };
-
-        this.bindChange();
-    }
-
-    bindChange() {
-        this.preference.unbindChange(this.onChange);
-        this.preference.onChange(this.onChange);
-    }
-
-    unbindChange() {
-        this.preference.unbindChange(this.onChange);
     }
 
     async save() {
-        if (this.newVariable) {
-            await this.roc.update(this.preference);
-        } else {
-            this.newVariable = false;
-            this.preference = await this.roc.create(this.preference);
-        }
+        await this.roc.update(this.preference);
     }
 }
