@@ -23,7 +23,7 @@ export async function preferencesFactory(id, options) {
     var existing = (await roc.view('entryByKindAndId', {key: [kind, id]}))[0];
     var preferenceRoc;
     var rocOptions = {
-        varName: id,
+        varName: name,
         track: true
     };
     if (existing) {
@@ -36,9 +36,6 @@ export async function preferencesFactory(id, options) {
         });
         preferenceRoc = await roc.document(created._id, rocOptions);
     }
-
-    var preferenceVar = API.getVar(id);
-    API.setVariable(name, preferenceVar, ['$content']);
 
     var viewPreferences = new Preference(roc, preferenceRoc);
 
