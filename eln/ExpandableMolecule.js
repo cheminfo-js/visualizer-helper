@@ -32,7 +32,8 @@ class ExpandableMolecule {
                 this.sample.setChildSync(['$content', 'general', 'molfile'], this.molfile);
                 this.sample.setChildSync(['$content', 'general', 'ocl'], {
                     value: oclID.idCode,
-                    coordinates: oclID.coordinates
+                    coordinates: oclID.coordinates,
+                    index: newMolecule.getIndex()
                 });
             }
             this.options.onMolfileChanged(this);
