@@ -286,6 +286,7 @@ Your local changes will be lost.</p>`;
         droppedChrom: 'chromatogram',
         droppedCV: 'cyclicVoltammetry',
         droppedTGA: 'thermogravimetricAnalysis',
+        droppedIsotherm: 'isotherm',
         droppedDSC: 'differentialScanningCalorimetry',
         droppedXray: 'xray',
         droppedXRD: 'xrd',
@@ -315,7 +316,7 @@ Your local changes will be lost.</p>`;
             'Thermogravimetric Analysis (csv, tsv, txt, jcamp)',
           xrd: 'Powerder XRD Analysis (csv, tsv, txt, jcamp)',
           xps: 'XPS (csv, tsv, txt, jcamp)',
-          isotherm: 'Isotherm (csv, tsv, txt, jcamp)',
+          isotherm: 'Isotherm (csv, tsv, txt, jcamp, xls)',
           cyclicVoltammetry: 'Cyclic voltammetry (csv, tsv, txt, jcamp, pdf)',
           differentialScanningCalorimetry:
             'Differential Scanning Calorimetry (csv, tsv, txt, jcamp)',
@@ -452,6 +453,11 @@ Your local changes will be lost.</p>`;
           type: 'Differentical scanning calorimetry',
           xUnit: 'I [mA]',
           yUnit: 'Ewe [V]',
+        },
+        isotherm: {
+          type: 'Isotherm',
+          xUnit: ['p/p0', 'p / kPa'],
+          yUnit: ['excess adsorption mmol/g', 'adsorbed volume cm3/g'],
         },
         xrd: {
           type: 'X-ray powder diffraction',
