@@ -150,6 +150,7 @@ Your local changes will be lost.</p>`;
     createVar(sampleVar, 'xray');
     createVar(sampleVar, 'chromatogram');
     createVar(sampleVar, 'thermogravimetricAnalysis');
+    createVar(sampleVar, 'isotherm');
     createVar(sampleVar, 'xrd');
     createVar(sampleVar, 'xps');
     createVar(sampleVar, 'cyclicVoltammetry');
