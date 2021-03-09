@@ -12,6 +12,7 @@ define([
   'src/util/IDBKeyValue',
   'eventEmitter',
   './UserViewPrefs',
+  './UserPrefs',
   './UserAnalysisResults'
 ], function (
   Datas,
@@ -26,6 +27,7 @@ define([
   mimeTypes,
   IDB,
   EventEmitter,
+  UserViewPrefs,
   UserViewPrefs,
   UserAnalysisResults
 ) {
@@ -198,6 +200,7 @@ define([
       this.__ready = Promise.resolve();
 
       this.UserViewPrefs = new UserViewPrefs(this);
+      this.UserPrefs = new UserPrefs(this);
       this.UserAnalysisResults = new UserAnalysisResults(this);
     }
 
