@@ -1,12 +1,11 @@
-import OCL from 'openchemlib/openchemlib-core';
-
 define([
   'src/main/datas',
   'src/util/ui',
   'browserified/twig/twig',
   'canvg',
-  '../../libs/Image'
-], function (Datas, UI, twig, canvg, IJS) {
+  '../../libs/Image',
+  'openchemlib/openchemlib-core'
+], function (Datas, UI, twig, canvg, IJS, OCL) {
   IJS = IJS.default;
   const DataObject = Datas.DataObject;
   let chars =

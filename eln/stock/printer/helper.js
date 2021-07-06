@@ -8,14 +8,19 @@ module.exports = {
     const printers = await printer.getPrinters();
     for (let i = 0; i < printers.length; i++) {
       for (let j = 0; j < types.length; j++) {
-        const sFormats = (await printer.getFormats(printers[i], types[j])).map((f) => ({
-          printer: printers[i],
-          format: f
-        }));
+        const sFormats = (await printer.getFormats(printers[i], types[j])).map(
+          (f) => ({
+            printer: printers[i],
+            format: f
+          })
+        );
         varFormats[j] = varFormats[j].concat(sFormats);
       }
     }
 
+    for (let j = 0; j < types.length; j++) {
+      API.cache(`${types[j]}Formats`, varFormats[j]);
+    }
 
     for (let j = 0; j < types.length; j++) {
       await API.createData(`${types[j]}Formats`, varFormats[j]);
@@ -69,7 +74,8 @@ module.exports = {
     formats.forEach((format) => {
       format.id = `${format.printer._id};${format.format._id}`;
     });
-    await ui.form(`
+    await ui.form(
+      `
             <div>
                 <form>
                 <table>
@@ -87,7 +93,10 @@ module.exports = {
                 <input type="submit"/>
                 </form>
             </div>
-    `, f, { twig: { formats, lastPrinterFormat } });
+    `,
+      f,
+      { twig: { formats, lastPrinterFormat } }
+    );
     if (!f.printer) return f.printer;
     localStorage.setItem('lastPrinterFormat', f.printer);
     return String(f.printer);
