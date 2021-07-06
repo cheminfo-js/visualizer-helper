@@ -356,23 +356,38 @@ module.exports = `
             <table>
                 <tr>
                     <th></th><th></th>
-                    <th>Gas</th>
+                    <th>Gas 1</th>
+                    <th>Gas 2</th>
                     <th>Temp [°C]</th>
                     <th>Selectivity</th>
                 </tr>
                 <tr data-repeat='gasPermselectivity'>
                     <td>
-                        <select data-field='gas'>
+                        <select data-field='gas1'>
                             <option value=""></option>
-                            <option value="H2/N2">H2/N2</option>
-                            <option value="H2/CH4">H2/CH4</option>
-                            <option value="O2/N2">O2/N2</option>
-                            <option value="CO2/N2">CO2/N2</option>
-                            <option value="CO2/CH4">CO2/CH4</option>
-                            <option value="C2H4/C2H6">C2H4/C2H6</option>
-                            <option value="C3H6/C3H8">C3H6/C3H8</option>
-                            <option value="H2/C3H8">H2/C3H8</option>
-                            <option value="H2/C3H6">H2/C3H6</option>
+                            <option value="H2">H2</option>
+                            <option value="N2">N2</option>
+                            <option value="O2">O2</option>
+                            <option value="CO2">CO2</option>
+                            <option value="CH4">CH4</option>
+                            <option value="C2H4">C2H4</option>
+                            <option value="C2H6">C2H6</option>
+                            <option value="C3H6">C3H6</option>
+                            <option value="C3H8">C3H8</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select data-field='gas2'>
+                            <option value=""></option>
+                            <option value="H2">H2</option>
+                            <option value="N2">N2</option>
+                            <option value="O2">O2</option>
+                            <option value="CO2">CO2</option>
+                            <option value="CH4">CH4</option>
+                            <option value="C2H4">C2H4</option>
+                            <option value="C2H6">C2H6</option>
+                            <option value="C3H6">C3H6</option>
+                            <option value="C3H8">C3H8</option>
                         </select>
                     </td>
                     <td>
