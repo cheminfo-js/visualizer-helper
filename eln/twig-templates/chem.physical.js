@@ -351,7 +351,7 @@ module.exports = `
 
 <table>
     <tr>
-        <th>Gas permeselectivity</th>
+        <th>Gas permselectivity</th>
         <td>
             <table>
                 <tr>
@@ -360,7 +360,7 @@ module.exports = `
                     <th>Temp [°C]</th>
                     <th>Selectivity</th>
                 </tr>
-                <tr data-repeat='gasPermSelectivity'>
+                <tr data-repeat='gasPermselectivity'>
                     <td>
                         <select data-field='gas'>
                             <option value=""></option>
