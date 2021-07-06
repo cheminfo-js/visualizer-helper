@@ -251,6 +251,7 @@ module.exports = `
                 <tr>
                     <th></th><th></th>
                     <th>Probe</th>
+                    <th>Method</th>
                     <th>Temp [°C]</th>
                     <th>Surface [m<sup>2</sup>/g]</th>
                 </tr>
@@ -261,6 +262,13 @@ module.exports = `
                             <option value="N2">N2</option>
                             <option value="Ar">Ar</option>
                         </select>
+                    </td>
+                    <td>
+                    <select data-field='method'>
+                        <option value=""></option>
+                        <option value="Langmuir">Langmuir</option>
+                        <option value="BET">BET</option>
+                    </select>
                     </td>
                     <td>
                         <input type='number' data-field='temperature'>
@@ -291,6 +299,80 @@ module.exports = `
                             <option value=""></option>
                             <option value="N2">N2</option>
                             <option value="Ar">Ar</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type='number' data-field='temperature'>
+                    </td>
+                    <td>
+                        <input type='number' data-field='value'>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Gas permeability</th>
+        <td>
+            <table>
+                <tr>
+                    <th></th><th></th>
+                    <th>Gas</th>
+                    <th>Temp [°C]</th>
+                    <th>Permeability [Barrer]</th>
+                </tr>
+                <tr data-repeat='gasPermeability'>
+                    <td>
+                        <select data-field='gas'>
+                            <option value=""></option>
+                            <option value="He">He</option>
+                            <option value="H2">H2</option>
+                            <option value="CO2">CO2</option>
+                            <option value="CH4">CH4</option>
+                            <option value="C2H4">C2H4</option>
+                            <option value="C3H6">C3H6</option>
+                            <option value="C3H8">C3H8</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type='number' data-field='temperature'>
+                    </td>
+                    <td>
+                        <input type='number' data-field='value'>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Gas permeselectivity</th>
+        <td>
+            <table>
+                <tr>
+                    <th></th><th></th>
+                    <th>Gas</th>
+                    <th>Temp [°C]</th>
+                    <th>Selectivity</th>
+                </tr>
+                <tr data-repeat='gasPermSelectivity'>
+                    <td>
+                        <select data-field='gas'>
+                            <option value=""></option>
+                            <option value="H2/N2">H2/N2</option>
+                            <option value="H2/CH4">H2/CH4</option>
+                            <option value="O2/N2">O2/N2</option>
+                            <option value="CO2/N2">CO2/N2</option>
+                            <option value="CO2/CH4">CO2/CH4</option>
+                            <option value="C2H4/C2H6">C2H4/C2H6</option>
+                            <option value="C3H6/C3H8">C3H6/C3H8</option>
+                            <option value="H2/C3H8">H2/C3H8</option>
+                            <option value="H2/C3H6">H2/C3H6</option>
                         </select>
                     </td>
                     <td>
