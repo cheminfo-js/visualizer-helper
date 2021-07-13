@@ -186,6 +186,8 @@ function hideAllSpectra() {
 }
 
 function removeAllSpectra() {
+  const analysesManager = API.cache('analysesManager');
+  analysesManager.removeAllAnalyses();
   let selectedSpectra = API.getData('selectedSpectra');
   selectedSpectra.length = 0;
   selectedSpectra.triggerChange();
