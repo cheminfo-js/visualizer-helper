@@ -29,15 +29,26 @@ async function processActions(action) {
       let selectedSpectra = API.getData('selectedSpectra');
       analysesManager.analyses.splice(0);
       selectedSpectra.length = 0;
-      return await addSpectrum(action);
+      let result = await addSpectrum(action, {});
+      API.getData('selectedSpectra').triggerChange();
+      return result;
     }
+    case 'addSample':
+      await addSample(action);
+      API.getData('selectedSpectra').triggerChange();
+      break;
     case 'addSpectrum':
-      return await addSpectrum(action);
+      let result = await addSpectrum(action, {});
+      API.getData('selectedSpectra').triggerChange();
+      return result;
     case 'hideSpectra':
       hideSpectra();
       break;
     case 'hideAllSpectra':
       hideAllSpectra();
+      break;
+    case 'removeAllSpectra':
+      removeAllSpectra();
       break;
     case 'showOnlySpectra':
       showOnlySpectra();
@@ -59,16 +70,39 @@ function getSampleID(entry) {
   return '';
 }
 
-async function addSpectrum(action) {
+async function addSample(action) {
+  const entryID = action.value.id;
+  const sample = await API.cache('roc').document(entryID);
+  const analysesManager = API.cache('analysesManager');
+  const target = analysesManager.target;
+  if (!target || !sample.$content.spectra || !sample.$content.spectra[target]) {
+    return;
+  }
+
+  for (let i = 0; i < sample.$content.spectra[target].length; i++) {
+    const spectrum = sample.$content.spectra[target][i];
+    await addSpectrum(
+      { value: { __name: i, ...spectrum } },
+      {
+        sampleID: sample.$id.join(' '),
+        sampleUUID: sample._id,
+        spectrumUUID: sample._id + '_' + i
+      }
+    );
+  }
+}
+
+async function addSpectrum(action, options = {}) {
   const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
   let selectedSpectra = API.getData('selectedSpectra');
+  console.log(selectedSpectra.length);
   const analysesManager = API.cache('analysesManager');
-  let sampleID = getSampleID(action.value);
-  let sampleUUID = getSampleUUID(action.value);
-  let spectrumUUID = getSpectrumUUID(action.value);
+  let sampleID = options.sampleID || getSampleID(action.value);
+  let sampleUUID = options.sampleUUID || getSampleUUID(action.value);
+  let spectrumUUID = options.spectrumUUID || getSpectrumUUID(action.value);
 
   let spectrumID = sampleID + ' ' + action.value.__name;
-
+  console.log({ spectrumID, spectrumUUID });
   let jcamp = '';
 
   if (action.value.jcamp && action.value.jcamp.filename) {
@@ -119,7 +153,6 @@ async function addSpectrum(action) {
       display: true,
       toc: JSON.parse(JSON.stringify(API.getData('currentSampleTOC')))
     };
-    selectedSpectra.triggerChange();
     return spectrum;
   }
 }
@@ -150,6 +183,12 @@ function hideAllSpectra() {
     spectrum.display = false;
   }
   API.getData('selectedSpectra').triggerChange();
+}
+
+function removeAllSpectra() {
+  let selectedSpectra = API.getData('selectedSpectra');
+  selectedSpectra.length = 0;
+  selectedSpectra.triggerChange();
 }
 
 function removeSpectrum(action) {
