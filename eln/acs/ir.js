@@ -2,13 +2,14 @@ function toHTML(value, options = {}) {
   const { parenthesis = false, ascending = false } = options;
   value = JSON.parse(JSON.stringify(value));
   if (value && value.peak) {
+    // hack for old wrong peaks
     value.peak.forEach((item) => {
       if (!item.wavenumber) item.wavenumber = item.wavelength;
     });
     if (ascending) {
-      value.peak.sort((a, b) => a.wavenumber - b.wavelength);
+      value.peak.sort((a, b) => a.wavenumber - b.wavenumber);
     } else {
-      value.peak.sort((a, b) => b.wavenumber - a.wavelength);
+      value.peak.sort((a, b) => b.wavenumber - a.wavenumber);
     }
   }
   if (parenthesis) return format2(value);
@@ -36,7 +37,7 @@ function format2(value) {
       .map(
         (a) =>
           Math.round(a.wavenumber) +
-          (a.kind ? ` (${a.kind.toLowerCase()})` : ''),
+          (a.kind ? ` (${a.kind.toLowerCase()})` : '')
       )
       .join(', ');
   }
