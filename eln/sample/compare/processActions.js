@@ -95,7 +95,6 @@ async function addSample(action) {
 async function addSpectrum(action, options = {}) {
   const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
   let selectedSpectra = API.getData('selectedSpectra');
-  console.log(selectedSpectra.length);
   const analysesManager = API.cache('analysesManager');
   let sampleID = options.sampleID || getSampleID(action.value);
   let sampleUUID = options.sampleUUID || getSampleUUID(action.value);
