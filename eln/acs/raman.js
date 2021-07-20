@@ -12,7 +12,7 @@ function toHTML(value, options = {}) {
   return format1(value);
 }
 
-// IR (cm-1): 1955w, 1881w, 1807w, 1614m, 1500S, 1454m
+// Raman (cm-1): 1955w, 1881w, 1807w, 1614m, 1500S, 1454m
 function format1(value) {
   var acsString = '';
   if (value && value.peak) {
