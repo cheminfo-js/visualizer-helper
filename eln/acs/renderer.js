@@ -3,6 +3,7 @@ import TypeRenderer from 'src/util/typerenderer';
 import toHtmlEA from './ea';
 import toHtmlIR from './ir';
 import toHtmlRaman from './raman';
+import toHtmlUV from './uv';
 import toHtmlNMR from './nmr';
 import toHtmlMass from './mass';
 
@@ -16,6 +17,12 @@ export function add() {
   TypeRenderer.addType('acsraman', {
     toscreen($element, val, root, options = {}) {
       $element.html(toHtmlRaman(val, options));
+    }
+  });
+
+  TypeRenderer.addType('acsuv', {
+    toscreen($element, val, root, options = {}) {
+      $element.html(toHtmlUV(val, options));
     }
   });
 
