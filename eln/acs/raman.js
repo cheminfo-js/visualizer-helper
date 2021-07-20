@@ -3,9 +3,9 @@ function toHTML(value, options = {}) {
   value = JSON.parse(JSON.stringify(value));
   if (value && value.peak) {
     if (ascending) {
-      value.peak.sort((a, b) => a.wavenumber - b.wavelength);
+      value.peak.sort((a, b) => a.wavenumber - b.wavenumber);
     } else {
-      value.peak.sort((a, b) => b.wavenumber - a.wavelength);
+      value.peak.sort((a, b) => b.wavenumber - a.wavenumber);
     }
   }
   if (parenthesis) return format2(value);
