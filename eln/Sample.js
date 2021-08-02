@@ -458,8 +458,8 @@ Your local changes will be lost.</p>`;
         },
         cyclicVoltammetry: {
           type: 'Cyclic voltammetry',
-          xUnit: 'I [mA]',
-          yUnit: 'Ewe [V]'
+          xUnit: 'Ewe [V]',
+          yUnit: 'I [mA]'
         },
         thermogravimetricAnalysis: {
           type: 'Thermogravimetric analysis',
