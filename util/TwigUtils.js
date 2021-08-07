@@ -12,20 +12,18 @@ export async function twigToDoc(moduleID, options = {}) {
   let domCopy = div.firstChild.cloneNode(true);
   let canvasesCopy = domCopy.querySelectorAll('canvas');
   for (let i = 0; i < canvases.length; i++) {
-    const context = canvasesCopy[i].getContext('2d');
-    context.drawImage(canvases[i], 0, 0);
-  }
-
-  for (const canvas of canvases) {
-    const png = canvas.toDataURL('image/png');
-    canvas.parentElement.innerHTML = '<img src="' + png + '" />';
+    const png = canvases[i].toDataURL('image/png');
+    canvasesCopy[i].parentElement.innerHTML = '<img src="' + png + '" />';
   }
 
   let svgs = div.querySelectorAll('svg');
+  let svgsCopy = domCopy.querySelectorAll('svg');
 
   const promises = [];
 
-  for (let svgDOM of svgs) {
+  for (let i = 0; i < svgs.length; i++) {
+    const svgDOM = svgs[i];
+    const svgDOMCopy = svgsCopy[i];
     const width = svgDOM.clientWidth;
     const height = svgDOM.clientHeight;
     const svgString = svgDOM.parentElement.innerHTML;
@@ -38,11 +36,12 @@ export async function twigToDoc(moduleID, options = {}) {
     const image = new Image();
     const svg = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(svg);
+
     const promise = new Promise((resolve, reject) => {
       image.onload = () => {
         ctx.drawImage(image, 0, 0);
         const png = canvas.toDataURL('image/png');
-        svgDOM.parentElement.innerHTML = '<img src="' + png + '" />';
+        svgDOMCopy.parentElement.innerHTML = '<img src="' + png + '" />';
         URL.revokeObjectURL(url);
         resolve();
       };
@@ -53,12 +52,8 @@ export async function twigToDoc(moduleID, options = {}) {
 
   await Promise.all(promises);
 
-  var blob = new Blob([div.innerHTML], {
+  const blob = new Blob([domCopy.innerHTML], {
     type: 'text/html'
   });
   fileSaver(blob, filename);
-
-  const firstChild = div.firstChild;
-  div.removeChild(firstChild);
-  div.appendChild(domCopy);
 }
