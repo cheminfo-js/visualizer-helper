@@ -152,7 +152,7 @@ class Sample {
   }
 
   async handleDrop(name, askType, options = {}) {
-    let { converters, autoJcamp, autoKind } = options;
+    let { converters = {}, autoJcamp, autoKind } = options;
     if (!name) {
       throw new Error('handleDrop expects a variable name');
     }
