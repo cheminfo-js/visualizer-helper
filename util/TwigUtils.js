@@ -52,7 +52,7 @@ export async function twigToDoc(moduleID, options = {}) {
 
   await Promise.all(promises);
 
-  const blob = new Blob([domCopy.innerHTML], {
+  const blob = new Blob(['<html>' + domCopy.innerHTML + '</html>'], {
     type: 'text/html'
   });
   fileSaver(blob, filename);
