@@ -7,77 +7,54 @@ module.exports = {
   search(term) {
     return superagent
       .get(
-        `https://mastersearch.chemexper.com/search/reference/json2/quick/${encodeURIComponent(
+        `https://reference.cheminfo.org/v1/search?appendMolfile=true&quick=${encodeURIComponent(
           term
         )}`
       )
-      .then(function (result) {
-        result = result.body && result.body.entry;
-        if (!result) {
+      .then((result) => {
+        const data = result.body && result.body.data;
+        if (!data) {
           ui.showNotification('No results in reference DB', 'warn');
           return Promise.resolve([]);
         }
-        var list = [];
-        for (var i = 0; i < result.length; i++) {
-          if (result[i] && result[i].value) {
-            var val = result[i].value;
-            val.code = val.catalogID;
-            list.push({
-              id: i,
-              name: val && val.iupac && val.iupac[0] ? val.iupac[0].value : '',
-              row: val
-            });
-          }
-        }
-        return list;
+        return data;
       })
       .then((data) => data.map(fromChemexper))
       .then((data) =>
         data.sort((a, b) => {
-          let rn1 =
-            a.$content.identifier.cas.length > 0
-              ? Number(a.$content.identifier.cas[0].value.replace(/-/g, ''))
-              : Number.MAX_SAFE_INTEGER;
-          let rn2 =
-            b.$content.identifier.cas.length > 0
-              ? Number(b.$content.identifier.cas[0].value.replace(/-/g, ''))
-              : Number.MAX_SAFE_INTEGER;
+          let rn1 = Number(a.catalogID);
+          let rn2 = Number(b.catalogID);
           return rn1 - rn2;
         })
       );
   }
 };
 
-function fromChemexper(chemexper) {
-  const mol = chemexper.row.mol;
-  const mf =
-    chemexper.row.mf && chemexper.row.mf[0] && chemexper.row.mf[0].value.value;
-  const cas =
-    chemexper.row.rn &&
-    chemexper.row.rn.map((rn) => ({ value: numberToCas(rn.value.value) }));
-  if (!chemexper.row.iupac) chemexper.row.iupac = [];
+function fromChemexper(datum) {
   return {
     $content: {
       general: {
-        molfile: mol && mol[0] && mol[0].value.value,
-        description: chemexper.name,
-        name: chemexper.row.iupac,
-        mf
+        molfile: datum.molfile,
+        description: datum.iupac && datum.iupac[0],
+        name: [{ value: datum.iupac[0] }],
+        mf: datum.mf && datum.mf.mf,
+        mw: datum.mf && datum.mf.mass,
+        em: datum.mf && datum.mf.monoisotopicMass
       },
       identifier: {
-        cas
+        cas: numberToCas(datum.catalogID)
       },
       stock: {
-        catalogNumber: chemexper.row.code
+        catalogNumber: datum.catalogID
       },
       physical: {
-        density: chemexper.row.density,
-        mp: chemexper.row.mp,
-        bp: chemexper.row.bp
+        density: datum.density,
+        mp: datum.mp,
+        bp: datum.bp
       }
     },
     id: util.getNextUniqueId(true),
-    names: _.uniq([chemexper.name, ...chemexper.row.iupac.map((i) => i.value)]),
+    names: datum.iupac,
     source: 'reference'
   };
 }
