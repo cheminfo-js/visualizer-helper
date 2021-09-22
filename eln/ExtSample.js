@@ -18,6 +18,12 @@ class Sample {
       ? {
           $content: {
             general: sample.$content.general,
+            spectra: {
+              nmr: [],
+              mass: [],
+              ir: [],
+              chromatogram: []
+            },
             identifier: sample.$content.identifier,
             stock: sample.$content.stock
           }
@@ -48,7 +54,6 @@ class Sample {
   }
 
   _loadSample(sample) {
-    console.log('loadSample:', { sample });
     this.sample = sample;
     var sampleVar = API.getVar(this.options.varName);
 
@@ -103,10 +108,10 @@ class Sample {
           break;
       }
 
-      const contentString = JSON.stringify(this.sample.$content);
+      const contentString = JSON.stringify(this.sample);
       if (contentString !== this.contentString && this.options.trackId) {
-        this.contentString = JSON.stringify(this.sample.$content);
-        idb.set(this.options.trackId, this.sample.resurrect());
+        this.contentString = contentString;
+        idb.set(this.options.trackId, JSON.parse(contentString));
       }
     };
 
