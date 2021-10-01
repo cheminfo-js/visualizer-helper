@@ -26,7 +26,7 @@ export async function twigToDoc(moduleID, options = {}) {
     const svgDOMCopy = svgsCopy[i];
     const width = svgDOM.clientWidth;
     const height = svgDOM.clientHeight;
-    const svgString = svgDOM.parentElement.innerHTML;
+    const svgString = svgDOM.outerHTML;
     const canvas = document.createElement('canvas');
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
@@ -41,7 +41,9 @@ export async function twigToDoc(moduleID, options = {}) {
       image.onload = () => {
         ctx.drawImage(image, 0, 0);
         const png = canvas.toDataURL('image/png');
-        svgDOMCopy.parentElement.innerHTML = '<img src="' + png + '" />';
+        const img = document.createElement('img');
+        img.src = png;
+        svgDOMCopy.replaceWith(img);
         URL.revokeObjectURL(url);
         resolve();
       };
