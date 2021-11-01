@@ -1,5 +1,6 @@
 import API from 'src/util/api';
 import UI from 'src/util/ui';
+import Renderer from 'src/util/typerenderer';
 
 import getViewInfo from './getViewInfo';
 
@@ -46,7 +47,13 @@ export class ModulePrefsManager {
       if (!item.id) item.id = Math.random();
     });
 
-    await UI.editTable(cols, {
+    const forceTypeChoices = Renderer.getList()
+      .map((k) => k + ':' + k)
+      .join(';');
+
+    console.log(cols);
+
+    const result = await UI.editTable(cols, {
       remove: true,
       reorder: true,
       dialog: {
@@ -72,11 +79,11 @@ export class ModulePrefsManager {
           editor: Slick.CustomEditors.NumberValue
         },
         {
-          id: 'x',
-          name: 'x',
-          jpath: ['x'],
+          id: 'forceType',
+          name: 'forceType',
+          jpath: ['forceType'],
           editor: Slick.CustomEditors.Select,
-          editorOptions: { choices: 'ab:cd;ef:gh' }
+          editorOptions: { choices: forceTypeChoices }
         },
         {
           id: 'jpath',
@@ -90,6 +97,9 @@ export class ModulePrefsManager {
         }
       ]
     });
+
+    console.log({ result });
+    if (!result) return;
 
     cols.forEach((item) => {
       item.formatter = 'typerenderer';
