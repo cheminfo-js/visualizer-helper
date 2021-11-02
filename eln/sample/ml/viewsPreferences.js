@@ -56,6 +56,7 @@ export const dataNormalization = `
                         <select onchange="updateOptions(this);" data-field='name'>
                             <option value=""></option>
                             <option value="centerMean">Center Mean</option>
+			    <option value="growingX">Ensure growing value of X</option>
                             <option value="scaleSD">Divide by SD</option>
                             <option value="rescale">Rescale (0 to 1)</option>
                             <option value="normalize">Normalize (sum to 1)</option>
