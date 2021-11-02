@@ -1,4 +1,5 @@
 import API from 'src/util/api';
+import UI from 'src/util/ui';
 
 export default function recalculateCharts() {
   const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
@@ -16,26 +17,33 @@ export default function recalculateCharts() {
   let analyses = analysesManager.getAnalyses({ ids });
 
   console.log('Calculate chart');
-  if (preferences.normalization.processing) {
-    let chartProcessed = ExtendedCommonSpectrum.JSGraph.getJSGraph(analyses, {
-      colors,
-      opacities: [0.2],
-      linesWidth: [3],
-      ids,
-      selector: preferences.selector,
-      normalization: {
-        processing: preferences.normalization.processing,
-        filters: [
-          {
-            name: 'rescale'
-          }
-        ]
-      }
-    });
-    delete preferences.normalization.processing;
-    API.createData('chartProcessed', chartProcessed);
-  } else {
-    API.createData('chartProcessed', {});
+  try {
+    if (preferences.normalization.processing) {
+      let chartProcessed = ExtendedCommonSpectrum.JSGraph.getJSGraph(analyses, {
+        colors,
+        opacities: [0.2],
+        linesWidth: [3],
+        ids,
+        selector: preferences.selector,
+        normalization: {
+          processing: preferences.normalization.processing,
+          filters: [
+            {
+              name: 'rescale'
+            }
+          ]
+        }
+      });
+      delete preferences.normalization.processing;
+      API.createData('chartProcessed', chartProcessed);
+    } else {
+      API.createData('chartProcessed', {});
+    }
+  } catch (e) {
+    UI.showNotification(
+      'There was an error during processing. Adding the filter growingX could help'
+    );
+    UI.showNotification(e.toString());
   }
 
   let chart = ExtendedCommonSpectrum.JSGraph.getJSGraph(analyses, {

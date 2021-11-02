@@ -55,6 +55,7 @@ export const dataNormalization = `
                               <option value="centerMean">Center Mean</option>
                               <option value="divideBySD">Divide by SD</option>
                               <option value="divideByMax">Divide by max Y</option>
+                              <option value="growingX">Ensure growing value of X</option>
                               <option value="rescale" data-options="min,max">Rescale (x to y)</option>
                               <option value="normalize" data-options="value">Normalize (sum to n)</option>
                               <option value="multiply" data-options="value">Multiply (value)</option>
