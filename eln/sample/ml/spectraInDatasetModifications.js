@@ -22,10 +22,10 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
         let processorSpectrum = spectraProcessor.getSpectrum(id);
         processorSpectrum.meta.color = DataObject.resurrect(spectrum.color);
         processorSpectrum.meta.selected = DataObject.resurrect(
-          spectrum.selected,
+          spectrum.selected
         );
         processorSpectrum.meta.category = DataObject.resurrect(
-          spectrum.category,
+          spectrum.category
         );
         continue;
       }
@@ -35,27 +35,35 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
           roc
             .getAttachment({ _id: spectrum.sampleID }, spectrum.jcamp.filename)
             .then((jcamp) => {
-              spectraProcessor.addFromJcamp(jcamp, {
-                id,
-                meta: {
-                  info: DataObject.resurrect(spectrum.toc),
-                  color: DataObject.resurrect(spectrum.color),
-                  selected: DataObject.resurrect(spectrum.selected),
-                  category: DataObject.resurrect(spectrum.category),
-                },
-              });
-            }),
+              try {
+                spectraProcessor.addFromJcamp(jcamp, {
+                  id,
+                  meta: {
+                    info: DataObject.resurrect(spectrum.toc),
+                    color: DataObject.resurrect(spectrum.color),
+                    selected: DataObject.resurrect(spectrum.selected),
+                    category: DataObject.resurrect(spectrum.category)
+                  }
+                });
+              } catch (e) {
+                UI.showNotification(e.toString());
+              }
+            })
         );
       } else if (spectrum.data) {
-        spectraProcessor.addFromData(DataObject.resurrect(spectrum.data), {
-          id,
-          meta: {
-            ...DataObject.resurrect(spectrum.toc),
-            color: DataObject.resurrect(spectrum.color),
-            selected: DataObject.resurrect(spectrum.selected),
-            category: DataObject.resurrect(spectrum.category),
-          },
-        });
+        try {
+          spectraProcessor.addFromData(DataObject.resurrect(spectrum.data), {
+            id,
+            meta: {
+              ...DataObject.resurrect(spectrum.toc),
+              color: DataObject.resurrect(spectrum.color),
+              selected: DataObject.resurrect(spectrum.selected),
+              category: DataObject.resurrect(spectrum.category)
+            }
+          });
+        } catch (e) {
+          UI.showNotification(e.toString());
+        }
       }
     }
     if (promises.length) API.createData('chart', {});
