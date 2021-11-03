@@ -95,7 +95,13 @@ module.exports = {
             </div>
     `,
       f,
-      { twig: { formats, lastPrinterFormat } }
+      {
+        twig: { formats, lastPrinterFormat },
+        dialog: {
+          width: 400,
+          height: 250
+        }
+      }
     );
     if (!f.printer) return f.printer;
     localStorage.setItem('lastPrinterFormat', f.printer);
