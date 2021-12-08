@@ -159,6 +159,8 @@ Your local changes will be lost.</p>`;
     createVar(sampleVar, 'xrd');
     createVar(sampleVar, 'xrf');
     createVar(sampleVar, 'xps');
+    createVar(sampleVar, 'icp');
+    createVar(sampleVar, 'dls');
     createVar(sampleVar, 'cyclicVoltammetry');
     createVar(sampleVar, 'elementalAnalysis');
     createVar(sampleVar, 'differentialScanningCalorimetry');
