@@ -17,7 +17,8 @@ const DataObject = Datas.DataObject;
 var defaultOptions = {
   varName: 'sample',
   track: false,
-  bindChange: true
+  bindChange: true,
+  afterLoad: undefined // what should be done after loading the sample. This callback allows to add new properties
 };
 
 class Sample {
@@ -55,6 +56,9 @@ class Sample {
       .then(async (sample) => {
         this.sample = sample;
         this.updateOtherAttachments();
+        if (this.options.afterLoad) {
+          this.options.afterLoad(sample);
+        }
         this._loadInstanceInVisualizer();
       });
 
