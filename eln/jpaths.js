@@ -50,6 +50,8 @@ jpaths.biology = ['$content', 'biology'];
 jpaths.xrd = ['$content', 'spectra', 'xrd'];
 jpaths.xrf = ['$content', 'spectra', 'xrf'];
 jpaths.xps = ['$content', 'spectra', 'xps'];
+jpaths.ips = ['$content', 'spectra', 'ips'];
+jpaths.dls = ['$content', 'spectra', 'dls'];
 jpaths.isotherm = ['$content', 'spectra', 'isotherm'];
 jpaths.thermogravimetricAnalysis = [
   '$content',
