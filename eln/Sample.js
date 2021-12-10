@@ -659,7 +659,11 @@ Your local changes will be lost.</p>`;
         break;
       case 'deleteNmr': // Deprecated. Use unattach. Leave this for backward compatibility
       case 'unattach':
-        await this.roc.unattach(this.sample, action.value);
+        if (
+          await UI.confirm('Are you sure you want to delete the analysis ?')
+        ) {
+          await this.roc.unattach(this.sample, action.value);
+        }
         break;
       case 'attachNMR':
       case 'attachIR':
