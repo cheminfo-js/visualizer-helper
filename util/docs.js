@@ -26,7 +26,7 @@ define(['src/util/ui', './getViewInfo'], function (UI, getViewInfo) {
       options._id === undefined ? await getViewInfo() : { _id: options._id };
     if (!info._id) return;
 
-    const response = await fetch(`${pagesURL + info._id}`, {
+    const response = await fetch(`${pagesURL + info._id + '/'}`, {
       method: 'HEAD'
     });
     if (response.status !== 200) return;
