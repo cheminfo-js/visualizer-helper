@@ -51,9 +51,12 @@ export class RangesManager {
       }
       if (range.to) {
         let annotation = {
-          position: [{ x: range.from, y: '15px' }, { x: range.to, y: '20px' }],
+          position: [
+            { x: range.from, y: '15px' },
+            { x: range.to, y: '20px' }
+          ],
           type: 'rect',
-          fillColor: 'red',
+          fillColor: range.color || 'red',
           strokeColor: 'red',
           _highlight: [range._highlight],
           info: range
