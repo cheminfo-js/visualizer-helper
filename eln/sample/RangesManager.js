@@ -67,7 +67,7 @@ export class RangesManager {
               text: range.label,
               size: '18px',
               anchor: 'middle',
-              color: 'red',
+              color: range.color || 'red',
               position: {
                 x: (range.from + range.to) / 2,
                 y: '10px'
