@@ -57,7 +57,7 @@ export class RangesManager {
           ],
           type: 'rect',
           fillColor: range.color || 'red',
-          strokeColor: 'red',
+          strokeColor: range.color || 'red',
           _highlight: [range._highlight],
           info: range
         };
