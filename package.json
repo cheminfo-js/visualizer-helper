@@ -19,12 +19,6 @@
   "bugs": {
     "url": "https://github.com/cheminfo-js/visualizer-helper/issues"
   },
-  "prettier": {
-    "trailingComma": "none",
-    "singleQuote": true,
-    "semi": true,
-    "arrowParens": "always"
-  },
   "homepage": "https://github.com/cheminfo-js/visualizer-helper#readme",
   "devDependencies": {
     "@babel/cli": "^7.10.1",

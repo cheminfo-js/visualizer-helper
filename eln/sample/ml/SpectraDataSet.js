@@ -250,7 +250,7 @@ class SpectraDataSet {
       displayYAxis: ['display', 'main', 'sec'],
       xLabel: 'X axis',
       dislayXAxis: ['display', 'main', 'sec'],
-    }
+    };
   }
 
   /**
@@ -607,7 +607,6 @@ class SpectraDataSet {
       preferences.triggerChange();
     }
   }
-
 }
 
 function recolor(spectraInDataset) {
