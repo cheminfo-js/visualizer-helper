@@ -227,7 +227,7 @@ const SpectraConfigs = {
     chartPrefs: {
       yLabel: 'Intensity',
       displayYAxis: ['main', 'sec'],
-      xLabel: 'Time [min]',
+      xLabel: 'Time [s]',
       displayXAxis: ['display', 'main', 'sec'],
     },
   },
@@ -257,7 +257,6 @@ class SpectraDataSet {
    * @param {object} [options={}]
    * @param {string} [options.varName='analysisKind'] contains the name of the variable containing the form value
    * @param {string} [options.schemaVarName='analysisKindSchema'] contains the name of the variable containing the form schema
-   * @param {string} [options.cookieName='eln-default-analysis-kind']
    * @return {string} the form to select group}
    */
   async initializeAnalysis(options = {}) {
