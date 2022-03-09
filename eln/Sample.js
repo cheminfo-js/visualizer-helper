@@ -17,7 +17,7 @@ const DataObject = Datas.DataObject;
 var defaultOptions = {
   varName: 'sample',
   track: false,
-  bindChange: true
+  bindChange: true,
 };
 
 class Sample {
@@ -30,7 +30,7 @@ class Sample {
         url: couchDB.url,
         database: couchDB.database,
         processor: elnPlugin,
-        kind: couchDB.kind
+        kind: couchDB.kind,
       });
       API.cache('roc', roc);
     }
@@ -46,7 +46,7 @@ class Sample {
     if (!this.uuid) {
       UI.showNotification(
         'Cannot create an editable sample without an uuid',
-        'error'
+        'error',
       );
       return;
     }
@@ -71,14 +71,14 @@ class Sample {
       key: id,
       filter: (entry) => {
         return entry.id === this.uuid;
-      }
+      },
     });
     if (result.length === 0) {
       result = await this.roc.query('sample_toc', {
         key: id.trimEnd(' '),
         filter: (entry) => {
           return entry.id === this.uuid;
-        }
+        },
       });
     }
     return result[0];
@@ -190,7 +190,7 @@ Your local changes will be lost.</p>`;
         case '$content.general.molfile':
           this.mf.fromMolfile();
           this.nmr1dManager.handleAction({
-            name: 'clearAllAssignments'
+            name: 'clearAllAssignments',
           });
           break;
         case '$content.general.mf':
@@ -212,7 +212,7 @@ Your local changes will be lost.</p>`;
 
   updateOtherAttachments() {
     let otherAttachments = this.sample.attachmentList.filter(
-      (entry) => !entry.name.includes('/')
+      (entry) => !entry.name.includes('/'),
     );
     API.createData('otherAttachments', otherAttachments);
   }
@@ -257,7 +257,7 @@ Your local changes will be lost.</p>`;
         default:
           UI.showNotification(
             'For overview only the following formats are allowed: png, jpg and svg.',
-            'error'
+            'error',
           );
           return undefined;
       }
@@ -309,7 +309,7 @@ Your local changes will be lost.</p>`;
         droppedImage: 'image',
         droppedVideo: 'video',
         droppedGenbank: 'genbank',
-        droppedOther: 'other'
+        droppedOther: 'other',
       };
       if (!types[variableName]) {
         throw new Error('Unexpected variable name');
@@ -342,7 +342,7 @@ Your local changes will be lost.</p>`;
           xray: 'Crystal structure (cif, pdb)',
           image: 'Images (jpg, png or tiff)',
           video: 'Videos (mp4, m4a, avi, wav)',
-          other: 'Other'
+          other: 'Other',
         },
         {
           noConfirmation: true,
@@ -350,10 +350,10 @@ Your local changes will be lost.</p>`;
             {
               id: 'description',
               name: 'description',
-              field: 'description'
-            }
-          ]
-        }
+              field: 'description',
+            },
+          ],
+        },
       );
       if (!type) return;
     }
@@ -388,18 +388,18 @@ Your local changes will be lost.</p>`;
             newData.push({
               filename: droppedData.filename.replace(
                 '.' + extension,
-                '_' + i + '.jdx'
+                '_' + i + '.jdx',
               ),
               mimetype: 'chemical/x-jcamp-dx',
               contentType: 'chemical/x-jcamp-dx',
               encoding: 'utf8',
-              content: converted[i]
+              content: converted[i],
             });
           }
 
           droppedData.filename = droppedData.filename.replace(
             '.' + extension,
-            '.jdx'
+            '.jdx',
           );
           droppedData.mimetype = 'chemical/x-jcamp-dx';
           droppedData.contentType = 'chemical/x-jcamp-dx';
@@ -422,17 +422,17 @@ Your local changes will be lost.</p>`;
         nmr: {
           type: 'NMR SPECTRUM',
           xUnit: 'Delta [ppm]',
-          yUnit: 'Relative'
+          yUnit: 'Relative',
         },
         ir: {
           type: 'IR SPECTRUM',
           xUnit: 'wavelength [cm-1]',
-          yUnit: ['Transmittance (%)', 'Absorbance']
+          yUnit: ['Transmittance (%)', 'Absorbance'],
         },
         raman: {
           type: 'RAMAN SPECTRUM',
           xUnit: 'wavelength [cm-1]',
-          yUnit: 'Absorbance'
+          yUnit: 'Absorbance',
         },
         iv: {
           type: 'IV SPECTRUM',
@@ -444,60 +444,65 @@ Your local changes will be lost.</p>`;
             'Potential vs SCE [V]',
             'Potential vs NHE [V]',
             'Potential vs SSCE [V]',
-            'Potential vs Hg/Hg2SO4/K2SO4 [V]'
+            'Potential vs Hg/Hg2SO4/K2SO4 [V]',
           ],
-          yUnit: ['Current [mA]', 'Current [µA]']
+          yUnit: ['Current [mA]', 'Current [µA]'],
         },
         uv: {
           type: 'UV SPECTRUM',
           xUnit: 'wavelength [nm]',
-          yUnit: 'Absorbance'
+          yUnit: 'Absorbance',
         },
         mass: {
           type: 'MASS SPECTRUM',
           xUnit: 'm/z [Da]',
-          yUnit: 'Relative'
+          yUnit: 'Relative',
         },
         cyclicVoltammetry: {
           type: 'Cyclic voltammetry',
           xUnit: 'Ewe [V]',
-          yUnit: 'I [mA]'
+          yUnit: 'I [mA]',
         },
         thermogravimetricAnalysis: {
           type: 'Thermogravimetric analysis',
           xUnit: 'Temperature [°C]',
-          yUnit: 'Weight [mg]'
+          yUnit: 'Weight [mg]',
         },
         hgPorosimetry: {
           type: 'Hg porosimetry',
           xUnit: 'Pressure [MPa]',
-          yUnit: 'Volume [mm³/g]'
+          yUnit: 'Volume [mm³/g]',
         },
         differentialCentrifugalSedimentation: {
           type: 'Differential Centrifugal Sedimentation',
           xUnit: 'Diameter [nm]',
-          yUnit: 'Quantity'
+          yUnit: 'Quantity',
         },
         differentialScanningCalorimetry: {
           type: 'Differentical scanning calorimetry',
           xUnit: 'I [mA]',
-          yUnit: 'Ewe [V]'
+          yUnit: 'Ewe [V]',
         },
         isotherm: {
           type: 'Isotherm',
           xUnit: ['p/p0', 'p / kPa'],
-          yUnit: ['excess adsorption mmol/g', 'adsorbed volume cm3/g']
+          yUnit: ['excess adsorption mmol/g', 'adsorbed volume cm3/g'],
         },
         xrd: {
           type: 'X-ray powder diffraction',
           xUnit: '2ϴ [°]',
-          yUnit: 'counts'
+          yUnit: 'counts',
         },
         xrf: {
           type: 'X-ray fluoresence',
           xUnit: 'Energy [keV]',
-          yUnit: 'Intensity'
-        }
+          yUnit: 'Intensity',
+        },
+        chromatogram: {
+          type: 'Chromatography',
+          xUnit: 'Time [min]',
+          yUnit: 'Intensity',
+        },
       };
 
       for (let droppedData of droppedDatas) {
@@ -508,7 +513,7 @@ Your local changes will be lost.</p>`;
           if (info) {
             info.filename = `${droppedData.filename.replace(
               /\.[^.]*$/,
-              ''
+              '',
             )}.jdx`;
             // we will ask for meta information
             let meta = await UI.form(
@@ -540,7 +545,7 @@ Your local changes will be lost.</p>`;
                       info.xUnit instanceof Array
                         ? `<td><select name="xUnit">${info.xUnit.map(
                             (xUnit) =>
-                              `<option value="${xUnit}">${xUnit}</option>`
+                              `<option value="${xUnit}">${xUnit}</option>`,
                           )}</select></td>`
                         : `<td><input type="text" readonly name="xUnit" value="${info.xUnit}"></td>`
                     }
@@ -551,7 +556,7 @@ Your local changes will be lost.</p>`;
                     info.yUnit instanceof Array
                       ? `<td><select name="yUnit">${info.yUnit.map(
                           (yUnit) =>
-                            `<option value="${yUnit}">${yUnit}</option>`
+                            `<option value="${yUnit}">${yUnit}</option>`,
                         )}</select></td>`
                       : `<td><input type="text" readonly name="yUnit" value="${info.yUnit}"></td>`
                   }
@@ -564,9 +569,9 @@ Your local changes will be lost.</p>`;
               {},
               {
                 dialog: {
-                  width: 600
-                }
-              }
+                  width: 600,
+                },
+              },
             );
             if (!meta) return;
 
@@ -586,7 +591,7 @@ Your local changes will be lost.</p>`;
                 break;
             }
             droppedData.content = convertToJcamp(content, {
-              meta
+              meta,
             });
           } else {
             // eslint-disable-next-line no-console
@@ -637,12 +642,12 @@ Your local changes will be lost.</p>`;
         if (advancedOptions1H) {
           API.createData(
             'nmr1hOndeTemplate',
-            API.cache('nmr1hOndeTemplates').full
+            API.cache('nmr1hOndeTemplates').full,
           );
         } else {
           API.createData(
             'nmr1hOndeTemplate',
-            API.cache('nmr1hOndeTemplates').short
+            API.cache('nmr1hOndeTemplates').short,
           );
         }
         break;
@@ -650,7 +655,7 @@ Your local changes will be lost.</p>`;
         this.createVariables();
       case 'deleteAttachment':
         const ok = await UI.confirm(
-          'Are you sure you want to delete the attachment?'
+          'Are you sure you want to delete the attachment?',
         );
         if (!ok) return;
         const attachment = action.value.name;
@@ -678,7 +683,7 @@ Your local changes will be lost.</p>`;
       }
       case 'refresh': {
         const ok = await UI.confirm(
-          'Are you sure you want to refresh? This will discard your local modifications.'
+          'Are you sure you want to refresh? This will discard your local modifications.',
         );
         if (!ok) return;
         this.unbindChange();
@@ -738,7 +743,7 @@ function updateSample(sample) {
     }
     sample.setChildSync(
       ['$content', 'biology', 'peptidic', 0, 'seq', 0, 'sequence'],
-      sample.$content.general.sequence
+      sample.$content.general.sequence,
     );
     sample.$content.general.sequence = undefined;
   }
