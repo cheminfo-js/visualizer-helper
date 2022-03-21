@@ -119,7 +119,7 @@ const SpectraConfigs = {
         sample.$content.spectra &&
         Array.isArray(sample.$content.spectra.differentialScanningCalorimetry)
       ) {
-        let spectra = sample.$content.spectra.differenqtialScanningCalorimetry;
+        let spectra = sample.$content.spectra.differentialScanningCalorimetry;
         return spectra;
       } else {
         return [];
