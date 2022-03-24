@@ -231,6 +231,59 @@ const SpectraConfigs = {
       displayXAxis: ['display', 'main', 'sec'],
     },
   },
+  'Pellet hardness': {
+    tocFilter: (entry) => entry.value.nbPelletHardness && !entry.value.hidden,
+    tocCallback: (entry) => {
+      entry.value.nbSpectra = entry.value.nbPelletHardness;
+    },
+    getSpectra: (sample) => {
+      if (
+        sample &&
+        sample.$content &&
+        sample.$content.spectra &&
+        Array.isArray(sample.$content.spectra.pelletHardness)
+      ) {
+        let spectra = sample.$content.spectra.pelletHardness;
+        return spectra;
+      } else {
+        return [];
+      }
+    },
+    chartPrefs: {
+      yLabel: 'IPH (cN)',
+      displayYAxis: ['display', 'main', 'sec'],
+      xLabel: 'Pellet ID',
+      displayXAxis: ['display', 'main', 'sec'],
+    },
+  },
+  DCS: {
+    tocFilter: (entry) => entry.value.nbDCS && !entry.value.hidden,
+    tocCallback: (entry) => {
+      entry.value.nbSpectra = entry.value.nbDCS;
+    },
+    getSpectra: (sample) => {
+      if (
+        sample &&
+        sample.$content &&
+        sample.$content.spectra &&
+        Array.isArray(
+          sample.$content.spectra.differentialCentrifugalSedimentation,
+        )
+      ) {
+        let spectra =
+          sample.$content.spectra.differentialCentrifugalSedimentation;
+        return spectra;
+      } else {
+        return [];
+      }
+    },
+    chartPrefs: {
+      yLabel: 'ug / micron',
+      displayYAxis: ['display', 'main', 'sec'],
+      xLabel: 'Diameter (µm)',
+      displayXAxis: ['display', 'main', 'sec'],
+    },
+  },
 };
 
 class SpectraDataSet {
