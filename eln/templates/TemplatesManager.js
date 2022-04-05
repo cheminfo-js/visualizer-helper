@@ -3,7 +3,7 @@ define([
   '../../rest-on-couch/getChangedGroups',
   'src/util/api',
   'vh/rest-on-couch/showRecordInfo',
-  'src/util/ui'
+  'src/util/ui',
 ], function (Roc, getChangedGroups, API, showRecordInfo, UI) {
   class TemplatesManager {
     /**
@@ -19,7 +19,7 @@ define([
       this.basename = options.basename || '';
       if (this.basename && !this.basename.endsWith('.')) this.basename += '.';
       this.categories = options.categories || [
-        { value: 'chemical', description: 'Chemical' }
+        { value: 'chemical', description: 'Chemical' },
       ];
       this.refreshTemplates();
     }
@@ -36,7 +36,7 @@ define([
         'Are you sure you want to delete this template ?',
         'Delete',
         'Cancel',
-        {}
+        {},
       );
       if (!result) return;
       await this.roc.delete(template.id);
@@ -56,7 +56,7 @@ define([
                   <select name="category">
 		  ${this.categories.map(
         (category) =>
-          `<option value="${category.value}">${category.description}</option>`
+          `<option value="${category.value}">${category.description}</option>`,
       )}
                   </select>
                   <i>
@@ -78,7 +78,7 @@ define([
           </form>
           </div>
       `,
-        {}
+        {},
       );
       if (!form || !form.name || form.category == null) return;
       const templateEntry = {
@@ -88,12 +88,13 @@ define([
           title: '',
           description: '',
           twig: defaultTwig,
+          script: '',
           category: [
             {
-              value: this.basename + form.category + '.' + form.name
-            }
-          ]
-        }
+              value: this.basename + form.category + '.' + form.name,
+            },
+          ],
+        },
       };
 
       const template = await this.roc.create(templateEntry);
@@ -107,7 +108,7 @@ define([
         template.value.category &&
         template.value.category.find(
           (category) =>
-            category.value && category.value.startsWith(this.basename)
+            category.value && category.value.startsWith(this.basename),
         );
 
       let templates = await this.roc.query('toc', { mine: true, filter });
@@ -122,7 +123,7 @@ define([
       }
 
       templates = templates.sort(
-        (a, b) => b.value.modificationDate - a.value.modificationDate
+        (a, b) => b.value.modificationDate - a.value.modificationDate,
       );
       await API.createData('templates', templates);
       setTimeout(() => {
