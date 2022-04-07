@@ -86,8 +86,8 @@ async function addSample(action) {
       {
         sampleID: sample.$id.join(' '),
         sampleUUID: sample._id,
-        spectrumUUID: sample._id + '_' + i
-      }
+        spectrumUUID: sample._id + '_' + i,
+      },
     );
   }
 }
@@ -107,7 +107,7 @@ async function addSpectrum(action, options = {}) {
   if (action.value.jcamp && action.value.jcamp.filename) {
     jcamp += await API.cache('roc').getAttachment(
       { _id: sampleUUID },
-      action.value.jcamp.filename
+      action.value.jcamp.filename,
     );
   }
 
@@ -119,7 +119,7 @@ async function addSpectrum(action, options = {}) {
     ) {
       jcamp += await API.cache('roc').getAttachment(
         { _id: sampleUUID },
-        action.value.jcampTemperature.filename
+        action.value.jcampTemperature.filename,
       );
     }
 
@@ -128,7 +128,7 @@ async function addSpectrum(action, options = {}) {
         '\n' +
         (await API.cache('roc').getAttachment(
           { _id: sampleUUID },
-          action.value.jcampTime.filename
+          action.value.jcampTime.filename,
         ));
     }
   }
@@ -136,7 +136,7 @@ async function addSpectrum(action, options = {}) {
   if (jcamp) {
     let spectrum = ExtendedCommonSpectrum.fromJcamp(jcamp, {
       id: spectrumUUID,
-      label: spectrumID
+      label: spectrumID,
     });
 
     analysesManager.addAnalysis(spectrum);
@@ -150,7 +150,7 @@ async function addSpectrum(action, options = {}) {
       spectrum: JSON.parse(JSON.stringify(action.value)),
       color: colors[index % nbColors],
       display: true,
-      toc: JSON.parse(JSON.stringify(API.getData('currentSampleTOC')))
+      toc: JSON.parse(JSON.stringify(API.getData('currentSampleTOCLookup'))),
     };
     return spectrum;
   }
@@ -211,7 +211,8 @@ function showSpectra() {
   let currentlySelectedSpectra = API.getData('currentlySelectedSpectra');
   for (let currentlySelectedSpectrum of currentlySelectedSpectra) {
     let spectrum = selectedSpectra.filter(
-      (spectrum) => String(spectrum.id) === String(currentlySelectedSpectrum.id)
+      (spectrum) =>
+        String(spectrum.id) === String(currentlySelectedSpectrum.id),
     )[0];
     spectrum.display = true;
   }
@@ -227,7 +228,8 @@ function showOnlySpectra() {
   let currentlySelectedSpectra = API.getData('currentlySelectedSpectra');
   for (let currentlySelectedSpectrum of currentlySelectedSpectra) {
     let spectrum = selectedSpectra.filter(
-      (spectrum) => String(spectrum.id) === String(currentlySelectedSpectrum.id)
+      (spectrum) =>
+        String(spectrum.id) === String(currentlySelectedSpectrum.id),
     )[0];
     spectrum.display = true;
   }
@@ -239,7 +241,8 @@ function hideSpectra() {
   let currentlySelectedSpectra = API.getData('currentlySelectedSpectra');
   for (let currentlySelectedSpectrum of currentlySelectedSpectra) {
     let spectrum = selectedSpectra.filter(
-      (spectrum) => String(spectrum.id) === String(currentlySelectedSpectrum.id)
+      (spectrum) =>
+        String(spectrum.id) === String(currentlySelectedSpectrum.id),
     )[0];
     spectrum.display = false;
   }
