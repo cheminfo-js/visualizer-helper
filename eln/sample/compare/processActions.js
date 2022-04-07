@@ -87,6 +87,7 @@ async function addSample(action) {
         sampleID: sample.$id.join(' '),
         sampleUUID: sample._id,
         spectrumUUID: sample._id + '_' + i,
+        toc: action.value,
       },
     );
   }
@@ -150,7 +151,9 @@ async function addSpectrum(action, options = {}) {
       spectrum: JSON.parse(JSON.stringify(action.value)),
       color: colors[index % nbColors],
       display: true,
-      toc: JSON.parse(JSON.stringify(API.getData('currentSampleTOCLookup'))),
+      toc: JSON.parse(
+        JSON.stringify(options.toc || API.getData('currentSampleTOCLookup')),
+      ),
     };
     return spectrum;
   }
