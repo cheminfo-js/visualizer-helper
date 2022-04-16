@@ -27,9 +27,12 @@ async function processActions(action) {
     case 'setSpectrum': {
       const analysesManager = API.cache('analysesManager');
       let selectedSpectra = API.getData('selectedSpectra');
+      // should only be used from the home page and the product is 'tocSample'
+      let tocSample = API.getData('tocSample');
+
       analysesManager.analyses.splice(0);
       selectedSpectra.length = 0;
-      let result = await addSpectrum(action, {});
+      let result = await addSpectrum(action, { toc: tocSample });
       API.getData('selectedSpectra').triggerChange();
       return result;
     }
