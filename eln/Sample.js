@@ -11,6 +11,7 @@ import { createVar } from './jpaths';
 import elnPlugin from './libs/elnPlugin';
 import Sequence from './Sequence';
 import convertToJcamp from './libs/convertToJcamp';
+import { createTree } from './libs/jcampconverter';
 
 const DataObject = Datas.DataObject;
 
@@ -706,10 +707,34 @@ Your local changes will be lost.</p>`;
 
   async attachFiles(files, type, options) {
     if (!files || !type) return;
-
     if (!Array.isArray(files)) {
       files = [files];
     }
+
+    if (type === 'nmr') {
+      const newFiles = [];
+      // we need some hacks for compositve JCAMP files to keep only NMR spectrum and no FID
+      for (const file of files) {
+        if (file.filename.match(/\.(jdx|dx)$/i)) {
+          const tree = createTree(file.content, { flatten: true }).filter(
+            (spectrum) => spectrum.dataType.match(/NMR SPECTRUM/i),
+          );
+          for (const entry of tree) {
+            newFiles.push({
+              content: entry.jcamp,
+              contentType: file.contentType,
+              filename: file.filename.replace(/fid.jdx/i, 'jdx'),
+              mimetype: file.mimetype,
+              encoding: 'text',
+            });
+          }
+        } else {
+          newFiles.push(file);
+        }
+      }
+      files = newFiles;
+    }
+
     for (let i = 0; i < files.length; i++) {
       const data = DataObject.resurrect(files[i]);
       await this.roc.attach(type, this.sample, data, options);
