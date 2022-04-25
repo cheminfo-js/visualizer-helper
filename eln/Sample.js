@@ -746,6 +746,9 @@ function updateSample(sample) {
   if (!sample.$content.general) {
     sample.$content.general = {};
   }
+  if (!sample.$content.general) {
+    sample.$content.general = {};
+  }
 
   /** This is the old place we used to put the sequence.
    * By default we expect it is a peptidic sequence
