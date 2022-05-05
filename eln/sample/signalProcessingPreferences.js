@@ -66,6 +66,7 @@ export const filters = `
 	    </table>
 	</td>
     </tr>
+    <!--
     <tr>
 	<th align="left">Processing:</th>
 	<td>
@@ -77,6 +78,7 @@ export const filters = `
 	    </select>
 	</td>
     </tr>
+    -->
     <!--
     <tr>
 	<th align="left">Number of points:</th>
