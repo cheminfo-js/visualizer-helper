@@ -19,6 +19,11 @@ export const filters = `
 			    <option value="divideBySD">Divide by SD</option>
 			    <option value="normed" data-options="value,normedAlgorithm">Normed</option>
 			    <option value="rescale" data-options="min,max">Rescale</option>
+			    
+			    <option value="firstDerivative" data-options="">First derivative</option>
+			    <option value="secondDerivative" data-options="">Second derivative</option>
+			    <option value="thirdDerivative" data-options="">Third derivative</option>
+			    <option value="savitzkyGolay" data-options="windowSize,derivative,polynomial">Third derivative</option>
 
 			    <option value="airPLSBaseline" data-options="">AirPLS baseline</option>
 			    <option value="iterativePolynomialBaseline" data-options="">Iterative polynomial baseline</option>
@@ -33,6 +38,9 @@ export const filters = `
 			<input style="display:none" type='number' placeholder="min" data-field='options.min' size="5">
 			<input style="display:none" type='number' placeholder="max" data-field='options.max' size="5">
 			<input style="display:none" type='number' placeholder="value" data-field='options.value' size="5">
+			<input style="display:none" type='number' placeholder="windowSize" data-field='options.windowSize' size="5">
+			<input style="display:none" type='number' placeholder="derivative" data-field='options.derivative' size="5">
+			<input style="display:none" type='number' placeholder="polynomial" data-field='options.polynomial' size="5">
 			<select style="display:none" placeholder="normedAlgorithm" data-field='options.algorithm'>
 				<option value="sum">Sum to value</option>
 				<option value="absolute">Absolute sum to value</option>
