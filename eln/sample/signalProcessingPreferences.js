@@ -23,7 +23,7 @@ export const filters = `
 			    <option value="firstDerivative" data-options="">First derivative</option>
 			    <option value="secondDerivative" data-options="">Second derivative</option>
 			    <option value="thirdDerivative" data-options="">Third derivative</option>
-			    <option value="savitzkyGolay" data-options="windowSize,derivative,polynomial">Third derivative</option>
+			    <option value="savitzkyGolay" data-options="windowSize,derivative,polynomial">Savitzky-Golay</option>
 
 			    <option value="airPLSBaseline" data-options="">AirPLS baseline</option>
 			    <option value="iterativePolynomialBaseline" data-options="">Iterative polynomial baseline</option>
