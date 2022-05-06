@@ -87,14 +87,12 @@ export const filters = `
 	</td>
     </tr>
     -->
-    <!--
     <tr>
 	<th align="left">Number of points:</th>
 	<td>
-	    <input type='number' name='normalization.numberOfPoints' size="6">
+	    <input type='text' name='normalization.numberOfPoints' size="6">
 	</td>
     </tr>
-    -->
 </table>
 <script>
   function updateOptions(source) {
