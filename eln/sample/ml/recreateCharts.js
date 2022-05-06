@@ -43,12 +43,16 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
       } else {
         spectraProcessor.setNormalization(preferences.normalization);
         if (preferences.postProcessing && preferences.postProcessing.scale) {
-          let postProcessingOptions = JSON.parse(JSON.stringify(preferences.postProcessing));
+          let postProcessingOptions = JSON.parse(
+            JSON.stringify(preferences.postProcessing),
+          );
           let ranges = API.getData('ranges');
           if (Array.isArray(ranges)) {
             postProcessingOptions.scale.range = ranges
               .resurrect()
-              .filter((range) => range.label === postProcessingOptions.scale.range)[0];
+              .filter(
+                (range) => range.label === postProcessingOptions.scale.range,
+              )[0];
           }
           postProcessingOptions.ids = ids;
           console.log({ postProcessingOptions });
@@ -136,6 +140,8 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
       });
       API.createData('correlationAnnotations', annotations);
     }
+
+    window.setTimeout(() => API.doAction('fullZoomOut', 'xy'), 10);
   }
   return recreateCharts;
 });
