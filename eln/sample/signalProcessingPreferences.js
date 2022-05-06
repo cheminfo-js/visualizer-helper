@@ -32,15 +32,25 @@ export const filters = `
 			    <option value="rollingBallBaseline" data-options="">Rolling ball basline</option>
 
 			    <option value="ensureGrowing" data-options="value">Ensure growing X values</option>
+
+			    <option value="xFunction" data-options="function">Function on X</option>
+			    <option value="yFunction" data-options="function">Function on Y</option>
+			    <option value="calibrateX" data-options="from,to,targetX,nbPeaks">Calibrate X</option>
+			    <option value="paretoNormalization" data-options="">Pareto normalization</option>
 			</select>
 		    </td>
 		    <td>
 			<input style="display:none" type='number' placeholder="min" data-field='options.min' size="5">
 			<input style="display:none" type='number' placeholder="max" data-field='options.max' size="5">
+			<input style="display:none" type='number' placeholder="from" data-field='options.from' size="5">
+			<input style="display:none" type='number' placeholder="to" data-field='options.to' size="5">
+			<input style="display:none" type='number' placeholder="nbPeaks" data-field='options.nbPeaks' size="7">
+			<input style="display:none" type='number' placeholder="targetX" data-field='options.targetX' size="7">
 			<input style="display:none" type='number' placeholder="value" data-field='options.value' size="5">
 			<input style="display:none" type='number' placeholder="windowSize" data-field='options.windowSize' size="5">
 			<input style="display:none" type='number' placeholder="derivative" data-field='options.derivative' size="5">
 			<input style="display:none" type='number' placeholder="polynomial" data-field='options.polynomial' size="5">
+			<input style="display:none" type='text' placeholder="function" data-field='options.function' size="10">
 			<select style="display:none" placeholder="normedAlgorithm" data-field='options.algorithm'>
 				<option value="sum">Sum to value</option>
 				<option value="absolute">Absolute sum to value</option>
