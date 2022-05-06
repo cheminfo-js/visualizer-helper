@@ -101,6 +101,7 @@ export const filters = `
       let optionsElement = $(source).parent().next();
       optionsElement.find('input').hide();
       optionsElement.find('textarea').hide();
+      optionsElement.find('select').hide();
       for (let key of show) {
 	  optionsElement.find('input[placeholder='+key+']').show();
 	  optionsElement.find('textarea[placeholder='+key+']').show();
