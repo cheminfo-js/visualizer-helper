@@ -164,7 +164,7 @@ const SpectraConfigs = {
     },
     chartPrefs: {
       yLabel: 'Intensity',
-      displayYAxis: ['main', 'sec'],
+      displayYAxis: ['display', 'main', 'sec'],
       xLabel: 'δ [ppm]',
       displayXAxis: ['display', 'flip', 'main', 'sec'],
     },
@@ -201,7 +201,7 @@ const SpectraConfigs = {
     },
     chartPrefs: {
       yLabel: 'Intensity',
-      displayYAxis: ['main', 'sec'],
+      displayYAxis: ['dispay', 'main', 'sec'],
       xLabel: 'δ [ppm]',
       displayXAxis: ['display', 'flip', 'main', 'sec'],
     },
@@ -226,7 +226,7 @@ const SpectraConfigs = {
     },
     chartPrefs: {
       yLabel: 'Intensity',
-      displayYAxis: ['main', 'sec'],
+      displayYAxis: ['display', 'main', 'sec'],
       xLabel: 'Time [s]',
       displayXAxis: ['display', 'main', 'sec'],
     },
