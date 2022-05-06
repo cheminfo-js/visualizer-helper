@@ -90,7 +90,7 @@ export const filters = `
     <tr>
 	<th align="left">Number of points:</th>
 	<td>
-	    <input type='text' name='normalization.numberOfPoints' size="6">
+	    <input type='text' name='normalization.numberOfPoints'> 
 	</td>
     </tr>
 </table>
