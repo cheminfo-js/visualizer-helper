@@ -79,7 +79,7 @@ const SpectraConfigs = {
       yLabel: 'Absorbance',
       displayYAxis: ['display', 'main', 'sec'],
       xLabel: 'Wavelength [cm-1]',
-      displayXAxis: ['display', 'flip', 'main', 'sec'],
+      displayXAxis: ['display', 'main', 'sec'],
     },
   },
   TGA: {

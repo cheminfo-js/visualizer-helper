@@ -12,7 +12,7 @@ define([
   'src/util/IDBKeyValue',
   'eventEmitter',
   './UserViewPrefs',
-  './UserAnalysisResults'
+  './UserAnalysisResults',
 ], function (
   Datas,
   API,
@@ -27,7 +27,7 @@ define([
   IDB,
   EventEmitter,
   UserViewPrefs,
-  UserAnalysisResults
+  UserAnalysisResults,
 ) {
   const DataObject = Datas.DataObject;
   const eventEmitters = {};
@@ -40,7 +40,7 @@ define([
   function setTabSavedStatus(saved) {
     if (self.IframeBridge) {
       self.IframeBridge.postMessage('tab.status', {
-        saved
+        saved,
       });
     }
   }
@@ -58,8 +58,8 @@ define([
       403: 'Forbidden',
       408: 'Request timeout',
       500: 'Internal server error',
-      502: 'Bad gateway'
-    }
+      502: 'Bad gateway',
+    },
   };
 
   const getTypes = [
@@ -70,77 +70,77 @@ define([
     'getTokens',
     'getGroups',
     'getGroupsInfo',
-    'getToken'
+    'getToken',
   ];
 
   const messagesByType = {
     get: {
-      401: 'Unauthorized to get entry'
+      401: 'Unauthorized to get entry',
     },
     getAll: {
-      401: 'Unauthorized to get all entries'
+      401: 'Unauthorized to get all entries',
     },
     create: {
       200: 'Entry created',
       201: 'Entry created',
-      401: 'Unauthorized to create entry'
+      401: 'Unauthorized to create entry',
     },
     update: {
       200: 'Entry updated',
       401: 'Unauthorized to update entry',
-      404: 'Could not update entry: does not exist'
+      404: 'Could not update entry: does not exist',
     },
     delete: {
       200: 'Entry deleted',
       401: 'Unauthorized to delete entry',
-      404: 'Cannot delete entry: does not exist'
+      404: 'Cannot delete entry: does not exist',
     },
     addAttachment: {
       200: 'Added attachment',
       401: 'Unauthorized to add attachment',
-      404: 'Cannot add attachment: document does not exist'
+      404: 'Cannot add attachment: document does not exist',
     },
     deleteAttachment: {
       200: 'Attachment deleted',
       401: 'Unauthorized to delete attachment',
-      404: 'Cannot delete attachment: does not exist'
+      404: 'Cannot delete attachment: does not exist',
     },
     getAttachment: {
       401: 'Unauthorized to get attachment',
-      404: 'Attachment does not exist'
+      404: 'Attachment does not exist',
     },
     getView: {
       401: 'Unauthorized to get view',
-      404: 'View does not exist'
+      404: 'View does not exist',
     },
     getQuery: {
       401: 'Unauthorized to get query',
-      404: 'Query does not exist'
+      404: 'Query does not exist',
     },
     getGroups: {},
     getGroupsInfo: {},
     addGroup: {
       401: 'Unauthorized to add group',
-      200: 'Group added to entry'
+      200: 'Group added to entry',
     },
     deleteGroup: {
       401: 'Unauthorized to remove group',
-      200: 'Group removed from entry'
+      200: 'Group removed from entry',
     },
     getTokens: {},
     getToken: {},
     createToken: {
       200: 'Token created',
-      401: 'Unauthorized to create token'
+      401: 'Unauthorized to create token',
     },
     createUserToken: {
       200: 'Token created',
-      401: 'Unauthorized to create token'
+      401: 'Unauthorized to create token',
     },
     deleteToken: {
       200: 'Token deleted',
-      401: 'Unauthorized to delete token'
-    }
+      401: 'Unauthorized to delete token',
+    },
   };
 
   for (let key in defaultOptions.messages) {
@@ -161,7 +161,7 @@ define([
     'reduce',
     'include_docs',
     'group',
-    'group_level'
+    'group_level',
   ];
   const mandatoryOptions = ['url', 'database'];
 
@@ -217,7 +217,7 @@ define([
       try {
         return (
           await fetch(`${this.databaseUrl}/user/_me`, {
-            credentials: 'include'
+            credentials: 'include',
           })
         ).json();
       } catch (e) {
@@ -243,7 +243,7 @@ define([
       await this.__ready;
       return (
         await fetch(`${this.databaseUrl}/userInfo/_me`, {
-          credentials: 'include'
+          credentials: 'include',
         })
       ).json();
     }
@@ -277,7 +277,7 @@ define([
                   options,
                   viewName,
                   requestUrl,
-                  data: data
+                  data: data,
                 };
                 for (var i = 0; i < data.length; i++) {
                   data.traceSync([i]);
@@ -298,6 +298,7 @@ define([
       let requestUrl = new URI(this.databaseUrl).segment(`_query/${viewName}`);
       addSearch(requestUrl, options);
       requestUrl = requestUrl.normalize().href();
+      console.log({ requestUrl });
 
       return superagent
         .get(requestUrl)
@@ -315,12 +316,12 @@ define([
                 res.body[i].anonymousRead = {
                   type: 'boolean',
                   withCredentials: true,
-                  url: `${this.entryUrl}/${res.body[i].id}/_rights/read?asAnonymous=true`
+                  url: `${this.entryUrl}/${res.body[i].id}/_rights/read?asAnonymous=true`,
                 };
                 res.body[i].userWrite = {
                   type: 'boolean',
                   withCredentials: true,
-                  url: `${this.entryUrl}/${res.body[i].id}/_rights/write`
+                  url: `${this.entryUrl}/${res.body[i].id}/_rights/write`,
                 };
               }
             }
@@ -328,7 +329,7 @@ define([
               res.body[i].document = {
                 type: 'object',
                 withCredentials: true,
-                url: `${this.entryUrl}/${res.body[i].id}`
+                url: `${this.entryUrl}/${res.body[i].id}`,
               };
             }
             if (options.varName) {
@@ -338,7 +339,7 @@ define([
                   options,
                   requestUrl,
                   viewName,
-                  data: data
+                  data: data,
                 };
                 return data;
               });
@@ -355,7 +356,7 @@ define([
         // We use this object to store some state...
         eventEmitters[uuid] = {
           isSync: undefined,
-          eventEmitter: new EventEmitter()
+          eventEmitter: new EventEmitter(),
         };
       } else {
         if (!eventEmitters[uuid].eventEmitter) {
@@ -377,7 +378,7 @@ define([
         }
       } else {
         eventEmitters[uuid] = {
-          isSync
+          isSync,
         };
       }
     }
@@ -441,7 +442,7 @@ define([
         this.variables[options.varName] = {
           type: 'document',
           data: data,
-          serverJsonString: JSON.stringify(data.$content)
+          serverJsonString: JSON.stringify(data.$content),
         };
         if (options.track) {
           this.bindChange(options.varName);
@@ -642,7 +643,7 @@ define([
             this._updateByUuid(
               entry._id,
               entry,
-              Object.assign(options, { updateServerString: true })
+              Object.assign(options, { updateServerString: true }),
             );
             idb.delete(entry._id);
           }
@@ -740,7 +741,7 @@ define([
 
       attachment.filename = this.processor.getFilename(
         type,
-        attachment.filename
+        attachment.filename,
       );
 
       // If we had to ask for a filename, resolve content type
@@ -770,7 +771,7 @@ define([
         entry = await this.addAttachment(
           entry,
           attachments,
-          addAttachmentOptions
+          addAttachmentOptions,
         );
 
         for (let i = 0; i < attachments.length; i++) {
@@ -798,7 +799,7 @@ define([
         entry = await this.addAttachment(
           entry,
           attachment,
-          addAttachmentOptions
+          addAttachmentOptions,
         );
         if (!this.processor) {
           throw new Error('no processor');
@@ -808,7 +809,7 @@ define([
           type,
           entry.$content,
           attachment,
-          attachOptions.customMetadata
+          attachOptions.customMetadata,
         );
         this.typeUrl(entry.$content, entry);
         await this.update(entry);
@@ -827,7 +828,7 @@ define([
       // Get from server again
       const serverEntry = await this.get(entry);
       this._updateByUuid(entry._id, serverEntry, {
-        updateServerString: true
+        updateServerString: true,
       });
       try {
         await idb.delete(uuid);
@@ -897,7 +898,7 @@ define([
       try {
         const cdb = this._getCdb(entry);
         await cdb.inlineUploads(attachments, {
-          noRefresh: true
+          noRefresh: true,
         });
         const data = await this.get(entry, { noUpdate: true });
         entry._rev = data._rev;
@@ -1019,7 +1020,7 @@ define([
       await this.__ready;
       options = createOptions(options, remove ? 'deleteGroup' : 'addGroup');
       return superagent[method](
-        `${this.entryUrl}/${uuid}/_owner/${String(group)}`
+        `${this.entryUrl}/${uuid}/_owner/${String(group)}`,
       )
         .withCredentials()
         .then(handleSuccess(this, options))
@@ -1095,7 +1096,7 @@ define([
       if (!this.variables[key]) return null;
       if (this.variables[key].type === 'view') {
         return this.variables[key].data.find(
-          (entry) => String(entry._id) === String(uuid)
+          (entry) => String(entry._id) === String(uuid),
         );
       } else if (this.variables[key].type === 'document') {
         if (String(this.variables[key].data._id) === String(uuid)) {
@@ -1123,7 +1124,7 @@ define([
         return this.variables[key].data;
       } else if (this.variables[key].type === 'view') {
         return this.variables[key].data.find((entry) =>
-          _.isEqual(id, DataObject.resurrect(entry.$id))
+          _.isEqual(id, DataObject.resurrect(entry.$id)),
         );
       }
       return null;
@@ -1135,11 +1136,11 @@ define([
         return -1;
       } else if (this.variables[key].type === 'view') {
         return this.variables[key].data.findIndex(
-          (entry) => String(entry._id) === String(uuid)
+          (entry) => String(entry._id) === String(uuid),
         );
       } else if (this.variables[key].type === 'query') {
         return this.variables[key].data.findIndex(
-          (entry) => String(entry.id) === String(uuid)
+          (entry) => String(entry.id) === String(uuid),
         );
       }
       return -1;
@@ -1164,7 +1165,7 @@ define([
             let doc = this.variables[key].data;
             if (options.updateServerString) {
               this.variables[key].serverJsonString = JSON.stringify(
-                doc.$content
+                doc.$content,
               );
               this._emitSync(uuid, true);
             }
@@ -1179,7 +1180,7 @@ define([
             // Redo the same query
             this.query(
               this.variables[key].viewName,
-              this.variables[key].options
+              this.variables[key].options,
             );
           }
         }
@@ -1277,21 +1278,21 @@ define([
 
         Object.defineProperty(v, 'data', {
           value: {
-            type: vtype || 'string'
+            type: vtype || 'string',
           },
           enumerable: false,
           writable: true,
-          configurable: true
+          configurable: true,
         });
 
         var dUrl = `${this.entryUrl}/${entry._id}/${encodeURIComponent(
-          v.filename
+          v.filename,
         )}`;
         v.data[prop] = dUrl;
         Object.defineProperty(v, 'dUrl', {
           value: dUrl,
           enumerable: false,
-          writable: true
+          writable: true,
         });
       });
     }
@@ -1302,7 +1303,7 @@ define([
       {},
       defaultOptions.messages,
       messagesByType[type],
-      options && options.messages
+      options && options.messages,
     );
     options = Object.assign({}, defaultOptions, options, custom);
     if (messages) options.messages = messages;
@@ -1401,7 +1402,7 @@ define([
       if (options[viewSearchJsonify[i]]) {
         requestUrl.addSearch(
           viewSearchJsonify[i],
-          JSON.stringify(options[viewSearchJsonify[i]])
+          JSON.stringify(options[viewSearchJsonify[i]]),
         );
       }
     }
