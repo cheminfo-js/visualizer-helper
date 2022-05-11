@@ -5,6 +5,7 @@ import UI from 'src/util/ui';
 import _ from 'lodash';
 import Versioning from 'src/util/versioning';
 import Color from 'src/util/color';
+import { createTree } from '../../libs/jcampconverter';
 
 const SpectraConfigs = {
   IR: {
@@ -462,6 +463,15 @@ class SpectraDataSet {
         );
         API.stopLoading('loading');
         break;
+      case 'addSpectra':
+        API.loading('loading', 'Loading spectra');
+        await this.addSpectrum(
+          API.getData('tocClicked').resurrect(),
+          action.value.resurrect(),
+          { allSpectra: true },
+        );
+        API.stopLoading('loading');
+        break;
       case 'addDirectSpectrum': // data are in memory in data property
         this.addDirectSpectrum(action.value.resurrect());
         break;
@@ -542,9 +552,14 @@ class SpectraDataSet {
     API.getData('spectraInDataset').triggerChange();
   }
 
-  addSpectrum(tocEntry, spectrum) {
+  async addSpectrum(tocEntry, spectrum, options) {
     let spectraInDataset = API.getData('spectraInDataset');
-    this.addSpectrumToSelected(spectrum, tocEntry, spectraInDataset);
+    await this.addSpectrumToSelected(
+      spectrum,
+      tocEntry,
+      spectraInDataset,
+      options,
+    );
     recolor(spectraInDataset);
     spectraInDataset.triggerChange();
   }
@@ -578,11 +593,15 @@ class SpectraDataSet {
     let promises = [];
     for (let tocEntry of tocSelected) {
       promises.push(
-        this.roc.document(tocEntry.id).then((sample) => {
+        this.roc.document(tocEntry.id).then(async (sample) => {
           let spectra = this.spectraConfig.getSpectra(sample);
           for (let spectrum of spectra) {
             if (spectrum.jcamp && spectrum.jcamp.filename) {
-              this.addSpectrumToSelected(spectrum, tocEntry, spectraInDataset);
+              await this.addSpectrumToSelected(
+                spectrum,
+                tocEntry,
+                spectraInDataset,
+              );
             }
           }
         }),
@@ -619,7 +638,14 @@ class SpectraDataSet {
     }
   }
 
-  addSpectrumToSelected(spectrum, tocEntry, spectraInDataset) {
+  async addSpectrumToSelected(
+    spectrum,
+    tocEntry,
+    spectraInDataset,
+    options = {},
+  ) {
+    const { allSpectra = false } = options;
+    const roc = API.cache('roc');
     if (spectrum.jcamp) {
       API.loading('loading', 'Loading: ' + spectrum.jcamp.filename);
       let spectrumID = String(
@@ -629,25 +655,46 @@ class SpectraDataSet {
         )}`,
       );
       let sampleID = String(tocEntry.id);
-      if (
-        spectraInDataset.filter(
-          (spectrum) => String(spectrum.id) === spectrumID,
-        ).length > 0
-      ) {
-        return;
-      }
+
       spectrum.sampleID = sampleID;
-      spectrum.id = spectrumID;
       spectrum.selected = true;
       for (let key in this.defaultAttributes) {
         spectrum[key] = this.defaultAttributes[key];
       }
-
       spectrum.sampleCode = tocEntry.key.slice(1).join('_');
       spectrum.toc = tocEntry;
       spectrum.category = spectrum.sampleCode;
       spectrum._highlight = spectrumID;
-      spectraInDataset.push(spectrum);
+
+      if (allSpectra) {
+        // if we want allSpectra we need to load the jcamp
+        const jcamp = await roc.getAttachment(
+          { _id: sampleID },
+          spectrum.jcamp.filename,
+        );
+        const tree = createTree(jcamp, { flatten: true });
+        for (let i = 0; i < tree.length; i++) {
+          const id = spectrumID + '_' + i;
+          if (spectraInDataset.find((spectrum) => String(spectrum.id) === id)) {
+            continue;
+          }
+          const newSpectrum = JSON.parse(JSON.stringify(spectrum));
+          newSpectrum.id = id;
+          newSpectrum.jcamp.data = { value: tree[i].jcamp };
+          spectraInDataset.push(newSpectrum);
+        }
+      } else {
+        if (
+          spectraInDataset.find(
+            (spectrum) => String(spectrum.id) === spectrumID,
+          )
+        ) {
+          return;
+        }
+        spectrum.id = spectrumID;
+
+        spectraInDataset.push(spectrum);
+      }
     }
   }
 
