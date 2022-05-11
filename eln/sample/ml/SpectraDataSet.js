@@ -29,7 +29,7 @@ const SpectraConfigs = {
     chartPrefs: {
       yLabel: 'Absorbance',
       displayYAxis: ['display', 'main', 'sec'],
-      xLabel: 'Wavelength [cm-1]',
+      xLabel: 'Wavenumber [cm-1]',
       displayXAxis: ['display', 'flip', 'main', 'sec'],
     },
   },
@@ -79,7 +79,7 @@ const SpectraConfigs = {
     chartPrefs: {
       yLabel: 'Absorbance',
       displayYAxis: ['display', 'main', 'sec'],
-      xLabel: 'Wavelength [cm-1]',
+      xLabel: 'Wavenumber [cm-1]',
       displayXAxis: ['display', 'main', 'sec'],
     },
   },

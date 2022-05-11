@@ -7,7 +7,7 @@ function toAnnotations(peaks, options = {}) {
     if (!peak._highlight) {
       Object.defineProperty(peak, '_highlight', {
         enumerable: false,
-        writable: true
+        writable: true,
       });
       peak._highlight = Math.random();
       shouldRefresh = true;
@@ -18,7 +18,7 @@ function toAnnotations(peaks, options = {}) {
       type: 'rect',
       strokeColor: strokeColor,
       strokeWidth: 0,
-      fillColor: fillColor
+      fillColor: fillColor,
     };
     annotation.label = [
       {
@@ -27,23 +27,23 @@ function toAnnotations(peaks, options = {}) {
         anchor: 'middle',
         color: 'red',
         position: {
-          x: peak.wavelength,
+          x: peak.wavenumber,
           y: peak.transmittance,
-          dy: '-22px'
-        }
-      }
+          dy: '-22px',
+        },
+      },
     ];
     annotation.position = [
       {
-        x: peak.wavelength - 10,
+        x: peak.wavenumber - 10,
         y: peak.transmittance,
-        dy: '-20px'
+        dy: '-20px',
       },
       {
-        x: peak.wavelength + 10,
+        x: peak.wavenumber + 10,
         y: peak.transmittance,
-        dy: '-10px'
-      }
+        dy: '-10px',
+      },
     ];
     return annotation;
   });

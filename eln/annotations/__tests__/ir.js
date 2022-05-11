@@ -1,12 +1,10 @@
 var toAnnotations = require('../ir');
 
-
 var peaks = [
-  { wavelength: 1000, transmittance: 10, kind: 'w' },
-  { wavelength: 2000, transmittance: 50, kind: 'm' },
-  { wavelength: 3000, transmittance: 100, kind: 'S' }
+  { wavenumber: 1000, transmittance: 10, kind: 'w' },
+  { wavenumber: 2000, transmittance: 50, kind: 'm' },
+  { wavenumber: 3000, transmittance: 100, kind: 'S' },
 ];
-
 
 describe('Annotations object for IR spectrum', () => {
   it('default options', () => {

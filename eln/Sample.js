@@ -427,12 +427,12 @@ Your local changes will be lost.</p>`;
         },
         ir: {
           type: 'IR SPECTRUM',
-          xUnit: 'wavelength [cm-1]',
+          xUnit: 'Wavenumber [cm-1]',
           yUnit: ['Transmittance (%)', 'Absorbance'],
         },
         raman: {
           type: 'RAMAN SPECTRUM',
-          xUnit: 'wavelength [cm-1]',
+          xUnit: 'Wavenumber [cm-1]',
           yUnit: 'Absorbance',
         },
         iv: {
