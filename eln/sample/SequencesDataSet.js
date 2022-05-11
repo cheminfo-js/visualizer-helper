@@ -279,7 +279,6 @@ class SequencesDataSet {
       promises.push(
         this.roc.document(tocEntry.id).then((sample) => {
           let sequences = this.spectraConfig.getSequences(sample);
-          console.log({ sequences });
           for (let sequence of sequences) {
             if (Array.isArray(sequence.seq)) {
               for (let seq of sequence.seq) {
