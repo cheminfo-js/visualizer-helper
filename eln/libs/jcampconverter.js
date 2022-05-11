@@ -1,4 +1,4 @@
 export {
   convert,
   createTree,
-} from '../../../../../../../../lib/jcampconverter/8.4.0/jcampconverter.min';
+} from '../../../../../../../../lib/jcampconverter/9.0.1/jcampconverter.min';
