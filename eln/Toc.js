@@ -125,11 +125,16 @@ class Toc {
     this.updateOptions(sampleFilter);
 
     const sampleFilterTwig = `
+<div style="display: flex">
+<div>
 Group: <select name="group">
 <option value='all'>All</option>
 <option value='mine'>Mine</option>
 ${groups.map((group) => '<option value="' + group + '">' + group + '</option>')}
 </select>
+</div>
+<div>&nbsp;</div>
+<div>
 Modified: <select name="startEpoch">
 <option value='${24 * 3600 * 1000 * 31}'>Last month</option>
 <option value='${24 * 3600 * 1000 * 91}'>Last 3 months</option>
@@ -139,6 +144,8 @@ Modified: <select name="startEpoch">
 <option value='${24 * 3600 * 1000 * 1830}'>Last 5 years</option>
 <option value=''>Any time</option>
 </select>
+</div>
+</div>
 `;
     API.createData(twigVarName, sampleFilterTwig);
 
