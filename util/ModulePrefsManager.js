@@ -150,7 +150,6 @@ export class ModulePrefsManager {
 
   async reloadModulePrefsFromRoc(moduleID) {
     const record = await this.getRecord();
-    console.log('------------------', record);
     if (!record) return;
     if (record.$content.version !== this.currentVersion) {
       console.log('Not correct version', record.$content, this.currentVersion);
