@@ -95,6 +95,75 @@ class Toc {
       });
   }
 
+  async initializeSampleFilter(options = {}) {
+    const {
+      twigVarName = 'sampleFilterTwig',
+      varName = 'sampleFilter',
+      cookieName = 'eln-default-sample-filter',
+      filter,
+      autoRefresh = true,
+      listAllGroups = false,
+    } = options;
+
+    let groups = [];
+    if (listAllGroups) {
+      groups = (await this.roc.getGroupsInfo()).map((g) => g.name);
+    } else {
+      groups = (await this.roc.getGroupMembership()).map((g) => g.name);
+    }
+
+    const defaultSampleFilter = {
+      group: 'mine',
+      startEpoch: 24 * 3600 * 1000 * 31,
+      endEpoch: '',
+    };
+    const sampleFilter = localStorage.getItem(cookieName)
+      ? JSON.parse(localStorage.getItem(cookieName))
+      : defaultSampleFilter;
+    API.createData(varName, sampleFilter);
+
+    this.updateOptions(sampleFilter);
+
+    const sampleFilterTwig = `
+Group: <select name="group">
+<option value='all'>All</option>
+<option value='mine'>Mine</option>
+${groups.map((group) => '<option value="' + group + '">' + group + '</option>')}
+</select>
+Period: <select name="startEpoch">
+<option value='${24 * 3600 * 1000 * 31}'>Last month</option>
+<option value='${24 * 3600 * 1000 * 91}'>Last 3 months</option>
+<option value='${24 * 3600 * 1000 * 182}'>Last 6 months</option>
+<option value='${24 * 3600 * 1000 * 365}'>Last year</option>
+<option value='${24 * 3600 * 1000 * 730}'>Last 2 years</option>
+<option value='${24 * 3600 * 1000 * 1830}'>Last 5 years</option>
+<option value=''>Any time</option>
+</select>
+`;
+    API.createData(twigVarName, sampleFilterTwig);
+
+    if (autoRefresh) {
+      await this.refresh(filter);
+    }
+    let mainData = Versioning.getData();
+    mainData.onChange((evt) => {
+      if (evt.jpath[0] === varName) {
+        const currentSampleFilter = API.getData(varName).resurrect();
+        localStorage.setItem(cookieName, JSON.stringify(currentSampleFilter));
+        this.updateOptions(currentSampleFilter);
+        this.refresh();
+      }
+    });
+  }
+
+  updateOptions(options) {
+    this.options.group = options.group;
+    this.options.startkey = options.startEpoch
+      ? Date.now() - options.startEpoch
+      : undefined;
+    this.options.endkey = undefined;
+  }
+
   /**
    * Retrieve the allowed groups for the logged in user and create 'groupForm'
    * variable and 'groupFormSchema' (for onde module). It will keep in a cookie
