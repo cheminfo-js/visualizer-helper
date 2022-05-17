@@ -130,7 +130,7 @@ Group: <select name="group">
 <option value='mine'>Mine</option>
 ${groups.map((group) => '<option value="' + group + '">' + group + '</option>')}
 </select>
-Period: <select name="startEpoch">
+Modified: <select name="startEpoch">
 <option value='${24 * 3600 * 1000 * 31}'>Last month</option>
 <option value='${24 * 3600 * 1000 * 91}'>Last 3 months</option>
 <option value='${24 * 3600 * 1000 * 182}'>Last 6 months</option>
