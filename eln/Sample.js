@@ -67,13 +67,24 @@ class Sample {
   }
 
   async getToc() {
-    let id = DataObject.resurrect(this.sample.$id).join(' ');
+    // sample_toc is now expected to be based on last modification date
+    let id = DataObject.resurrect(this.sample.modificationDate);
     let result = await this.roc.query('sample_toc', {
       key: id,
       filter: (entry) => {
         return entry.id === this.uuid;
       },
     });
+
+    if (result.length === 0) {
+      id = DataObject.resurrect(this.sample.$id).join(' ');
+      result = await this.roc.query('sample_toc', {
+        key: id,
+        filter: (entry) => {
+          return entry.id === this.uuid;
+        },
+      });
+    }
     if (result.length === 0) {
       result = await this.roc.query('sample_toc', {
         key: id.trimEnd(' '),
