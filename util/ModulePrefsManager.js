@@ -51,8 +51,6 @@ export class ModulePrefsManager {
       .map((k) => k + ':' + k)
       .join(';');
 
-    console.log(cols);
-
     const result = await UI.editTable(cols, {
       remove: true,
       reorder: true,
@@ -98,7 +96,6 @@ export class ModulePrefsManager {
       ],
     });
 
-    console.log({ result });
     if (!result) return;
 
     cols.forEach((item) => {
@@ -140,11 +137,10 @@ export class ModulePrefsManager {
     var user = await this.roc.getUser();
     if (!user || !user.username) return undefined;
     const record = (
-      await this.roc.view('entryByOwnerAndId', {
-        key: [user.username, ['userModulePrefs', this.viewID]],
+      await this.roc.view('entryById', {
+        key: ['userModulePrefs', this.viewID],
       })
     )[0];
-    console.log({ record });
     return record;
   }
 
