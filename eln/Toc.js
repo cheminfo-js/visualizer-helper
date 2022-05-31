@@ -125,6 +125,9 @@ class Toc {
     this.updateOptions(sampleFilter);
 
     const sampleFilterTwig = `
+{% if sampleFilter.startEpoch %}
+<span style="color: red; font-size: 1.3em; font-weight: bold">Searching for a specific sample.</span>&nbsp;<button onclick="resetFilterOptions()">Reset</button>
+{% else %}
 <div style="display: flex">
 <div>
 Group: <select name="group">
@@ -135,7 +138,7 @@ ${groups.map((group) => '<option value="' + group + '">' + group + '</option>')}
 </div>
 <div>&nbsp;</div>
 <div>
-Modified: <select name="startEpoch">
+Modified: <select name="dateRange">
 <option value='${24 * 3600 * 1000 * 31}'>Last month</option>
 <option value='${24 * 3600 * 1000 * 91}'>Last 3 months</option>
 <option value='${24 * 3600 * 1000 * 182}'>Last 6 months</option>
@@ -146,6 +149,19 @@ Modified: <select name="startEpoch">
 </select>
 </div>
 </div>
+{% endif %}
+<script>
+function resetFilterOptions() {
+  const sampleFilter = API.getData('sampleFilter');
+  sampleFilter.endEpoch = undefined;
+  sampleFilter.startEpoch = undefined;
+  if (sampleFilter.previousGroup) {
+    sampleFilter.group = sampleFilter.previousGroup;
+  }
+  sampleFilter.triggerChange()
+}
+console.log(API);
+</script>
 `;
     API.createData(twigVarName, sampleFilterTwig);
 
@@ -165,10 +181,16 @@ Modified: <select name="startEpoch">
 
   updateOptions(options) {
     this.options.group = options.group;
-    this.options.startkey = options.startEpoch
-      ? Date.now() - options.startEpoch
-      : undefined;
-    this.options.endkey = undefined;
+    if (options.startEpoch || options.endEpoch) {
+      this.options.startkey = options.startEpoch;
+      this.options.endkey = options.endEpoch;
+    } else {
+      this.options.startkey = options.dateRange
+        ? Date.now() - options.dateRange
+        : undefined;
+      this.options.endkey = undefined;
+    }
+    console.log(this.options);
   }
 
   /**
