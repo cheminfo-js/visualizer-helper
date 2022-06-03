@@ -120,6 +120,8 @@ class Toc {
     const sampleFilter = localStorage.getItem(cookieName)
       ? JSON.parse(localStorage.getItem(cookieName))
       : defaultSampleFilter;
+    delete sampleFilter.startEpoch;
+    delete sampleFilter.endEpoch;
     API.createData(varName, sampleFilter);
 
     this.updateOptions(sampleFilter);
