@@ -122,9 +122,13 @@ class Toc {
       : defaultSampleFilter;
     delete sampleFilter.startEpoch;
     delete sampleFilter.endEpoch;
-    API.createData(varName, sampleFilter);
+    if (sampleFilter.previousGroup && !sampleFilter.group) {
+      sampleFilter.group = sampleFilter.previousGroup;
+    }
 
     this.updateOptions(sampleFilter);
+
+    API.createData(varName, sampleFilter);
 
     const sampleFilterTwig = `
 {% if sampleFilter.startEpoch %}
@@ -192,7 +196,6 @@ console.log(API);
         : undefined;
       this.options.endkey = undefined;
     }
-    console.log(this.options);
   }
 
   /**
