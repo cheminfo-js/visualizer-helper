@@ -29,10 +29,10 @@ export default function recalculateCharts() {
           processing: preferences.normalization.processing,
           filters: [
             {
-              name: 'rescale'
-            }
-          ]
-        }
+              name: 'rescale',
+            },
+          ],
+        },
       });
       delete preferences.normalization.processing;
       API.createData('chartProcessed', chartProcessed);
@@ -41,7 +41,7 @@ export default function recalculateCharts() {
     }
   } catch (e) {
     UI.showNotification(
-      'There was an error during processing. Adding the filter growingX could help'
+      'There was an error during processing. Adding the filter growingX could help',
     );
     UI.showNotification(e.toString());
   }
@@ -50,10 +50,8 @@ export default function recalculateCharts() {
     colors,
     ids,
     selector: preferences.selector,
-    normalization: preferences.normalization
+    normalization: preferences.normalization,
   });
-
-  console.log(chart);
 
   API.createData('chart', chart);
 
@@ -61,8 +59,8 @@ export default function recalculateCharts() {
     ExtendedCommonSpectrum.JSGraph.getNormalizationAnnotations(
       preferences.normalization,
       {
-        y: { min: '0px', max: '2000px' }
-      }
+        y: { min: '0px', max: '2000px' },
+      },
     );
 
   API.createData('filterAnnotations', filterAnnotations);
