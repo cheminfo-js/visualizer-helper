@@ -29,20 +29,22 @@ async function processActions(action) {
       let selectedSpectra = API.getData('selectedSpectra');
       // should only be used from the home page and the product is 'tocSample'
       let tocSample = API.getData('tocSample');
-
       analysesManager.analyses.splice(0);
       selectedSpectra.length = 0;
       let result = await addSpectrum(action, { toc: tocSample });
       API.getData('selectedSpectra').triggerChange();
+      updateDistinctLabelUnits();
       return result;
     }
     case 'addSample':
       await addSample(action);
       API.getData('selectedSpectra').triggerChange();
+      updateDistinctLabelUnits();
       break;
     case 'addSpectrum':
       let result = await addSpectrum(action, {});
       API.getData('selectedSpectra').triggerChange();
+      updateDistinctLabelUnits();
       return result;
     case 'hideSpectra':
       hideSpectra();
@@ -160,6 +162,11 @@ async function addSpectrum(action, options = {}) {
     };
     return spectrum;
   }
+}
+
+function updateDistinctLabelUnits() {
+  const analysesManager = API.cache('analysesManager');
+  API.createData('distinctLabelUnits', analysesManager.getDistinctLabelUnits());
 }
 
 function getSampleUUID(entry) {
