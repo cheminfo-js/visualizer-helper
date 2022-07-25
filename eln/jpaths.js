@@ -39,6 +39,7 @@ jpaths.lastStock = ['$content', 'stock', 'history', 0];
 jpaths.supplier = ['$content', 'stock', 'supplier'];
 jpaths.ir = ['$content', 'spectra', 'ir'];
 jpaths.raman = ['$content', 'spectra', 'raman'];
+jpaths.permeability = ['$content', 'spectra', 'permeability'];
 jpaths.uv = ['$content', 'spectra', 'uv'];
 jpaths.iv = ['$content', 'spectra', 'iv'];
 jpaths.mass = ['$content', 'spectra', 'mass'];
@@ -56,7 +57,7 @@ jpaths.isotherm = ['$content', 'spectra', 'isotherm'];
 jpaths.thermogravimetricAnalysis = [
   '$content',
   'spectra',
-  'thermogravimetricAnalysis'
+  'thermogravimetricAnalysis',
 ];
 jpaths.cyclicVoltammetry = ['$content', 'spectra', 'cyclicVoltammetry'];
 jpaths.hgPorosimetry = ['$content', 'spectra', 'hgPorosimetry'];
@@ -65,14 +66,14 @@ jpaths.oan = ['$content', 'spectra', 'oan'];
 jpaths.differentialCentrifugalSedimentation = [
   '$content',
   'spectra',
-  'differentialCentrifugalSedimentation'
+  'differentialCentrifugalSedimentation',
 ];
 jpaths.disc = ['$content', 'spectra', 'hgPorosimetry'];
 jpaths.elementalAnalysis = ['$content', 'spectra', 'elementalAnalysis'];
 jpaths.differentialScanningCalorimetry = [
   '$content',
   'spectra',
-  'differentialScanningCalorimetry'
+  'differentialScanningCalorimetry',
 ];
 jpaths.xray = ['$content', 'spectra', 'xray'];
 

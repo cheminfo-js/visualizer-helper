@@ -157,6 +157,7 @@ Your local changes will be lost.</p>`;
     createVar(sampleVar, 'ir');
     createVar(sampleVar, 'uv');
     createVar(sampleVar, 'raman');
+    createVar(sampleVar, 'permeability');
     createVar(sampleVar, 'mass');
     createVar(sampleVar, 'nmr');
     createVar(sampleVar, 'iv');
@@ -304,6 +305,7 @@ Your local changes will be lost.</p>`;
         droppedIV: 'iv',
         droppedMS: 'mass',
         droppedRaman: 'raman',
+        droppedPermeability: 'permeability',
         droppedChrom: 'chromatogram',
         droppedCV: 'cyclicVoltammetry',
         droppedTGA: 'thermogravimetricAnalysis',
@@ -334,6 +336,7 @@ Your local changes will be lost.</p>`;
           mass: 'Mass (csv, tsv, txt, jcamp, pdf, netcdf, xml)',
           ir: 'Infrared (csv, tsv, txt, jcamp, pdf)',
           raman: 'Raman (csv, tsv, txt, jcamp, pdf)',
+          permeability: 'Permeability (csv, tsv, txt, jcamp, pdf)',
           uv: 'UV (csv, tsv, txt, jcamp, pdf)',
           iv: 'IV (csv, tsv, txt, jcamp, pdf)',
           chromatogram:
@@ -443,6 +446,11 @@ Your local changes will be lost.</p>`;
         },
         raman: {
           type: 'RAMAN SPECTRUM',
+          xUnit: 'Wavenumber [cm-1]',
+          yUnit: 'Absorbance',
+        },
+        permeability: {
+          type: 'PERMEABILITY MEASUREMENT',
           xUnit: 'Wavenumber [cm-1]',
           yUnit: 'Absorbance',
         },
@@ -685,6 +693,7 @@ Your local changes will be lost.</p>`;
       case 'attachNMR':
       case 'attachIR':
       case 'attachRaman':
+      case 'attachPermeability':
       case 'attachMass': {
         var tempType = action.name.replace('attach', '');
         var type = tempType.charAt(0).toLowerCase() + tempType.slice(1);

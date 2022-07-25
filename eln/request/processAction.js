@@ -59,7 +59,7 @@ async function requestFromScan(scan) {
 
 async function refreshRequests(options) {
   var queryOptions = {
-    sort: (a, b) => a.value.status.date - b.value.status.date
+    sort: (a, b) => b.value.status.date - a.value.status.date,
   };
   if (String(options.group) === 'mine') {
     queryOptions.mine = true;
@@ -121,17 +121,17 @@ async function askNewStatus(request) {
             <form>
                 <select name="status">
                     ${statusArray.map(
-    (item, i) =>
-      `<option value="${i}" ${
-        i === currentStatus ? 'selected' : ''
-      }>${item.description}</option>`
-  )}
+                      (item, i) =>
+                        `<option value="${i}" ${
+                          i === currentStatus ? 'selected' : ''
+                        }>${item.description}</option>`,
+                    )}
                 </select>
                 <input type="submit" value="Submit"/>
             </form>
         </div>
     `,
-    {}
+    {},
   );
   return statusArray[newStatus.status].code;
 }
@@ -139,7 +139,7 @@ async function askNewStatus(request) {
 async function prependStatus(request, newStatus) {
   request.$content.status.unshift({
     status: Number(newStatus),
-    date: Date.now()
+    date: Date.now(),
   });
   await roc.update(request);
 }
@@ -152,7 +152,7 @@ async function createForm() {
     defaultGroup = 'all';
   }
   var possibleStatus = ['any'].concat(
-    Status.getStatusArray().map((s) => s.description)
+    Status.getStatusArray().map((s) => s.description),
   );
   var schema = {
     type: 'object',
@@ -161,15 +161,15 @@ async function createForm() {
         type: 'string',
         enum: possibleGroups,
         default: defaultGroup,
-        required: true
+        required: true,
       },
       status: {
         type: 'string',
         enum: possibleStatus,
         default: '30',
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   };
   API.createData('formSchema', schema);
 }
