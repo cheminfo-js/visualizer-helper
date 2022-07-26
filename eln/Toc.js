@@ -166,7 +166,6 @@ function resetFilterOptions() {
   }
   sampleFilter.triggerChange()
 }
-console.log(API);
 </script>
 `;
     API.createData(twigVarName, sampleFilterTwig);
