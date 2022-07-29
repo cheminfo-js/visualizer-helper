@@ -46,7 +46,6 @@ function generateTrackAnnotations(action) {
     function getLabel(spectrumId) {
       const analysis = analysesManager.getAnalysisBySpectrumId(spectrumId);
       if (!analysis) return;
-      console.log(analysis);
       return analysis.label;
     }
 
