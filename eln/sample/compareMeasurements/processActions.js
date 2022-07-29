@@ -1,5 +1,5 @@
 import API from 'src/util/api';
-import trackMove from '../compare/trackMove';
+import trackMove from './trackMove';
 import recalculateCharts from './recalculateCharts';
 import Color from 'src/util/color';
 
@@ -9,6 +9,11 @@ const colors = Color.getDistinctColorsAsString(nbColors);
 async function processActions(action) {
   if (!action || !action.name) return;
   switch (action.name) {
+    case 'ResetPreferences': {
+      let preferences = API.getData('preferences');
+      preferences.resetValue();
+      break;
+    }
     case 'trackMove':
       trackMove(action);
       break;

@@ -7,6 +7,19 @@ export default function recalculateCharts() {
   const selectedMeasurements = API.getData('selectedMeasurements');
   const preferences = JSON.parse(JSON.stringify(API.getData('preferences')));
 
+  console.log(preferences);
+  if (preferences.selector && preferences.selector.yLabels) {
+    //escape regexp
+    preferences.selector.yLabel =
+      '/' +
+      preferences.selector.yLabels
+        .map((label) => label.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'))
+        .join('|') +
+      '/i';
+    delete preferences.selector.labels;
+  }
+  console.log(preferences.selector.yLabel);
+
   let ids = selectedMeasurements
     .filter((entry) => DataObject.resurrect(entry.display))
     .map((entry) => String(entry.id));
@@ -16,39 +29,8 @@ export default function recalculateCharts() {
 
   let analyses = analysesManager.getAnalyses({ ids });
 
-  console.log('Calculate chart');
-  try {
-    if (preferences.normalization.processing) {
-      let chartProcessed = ExtendedCommonMeasurement.JSGraph.getJSGraph(
-        analyses,
-        {
-          colors,
-          opacities: [0.2],
-          linesWidth: [3],
-          ids,
-          selector: preferences.selector,
-          normalization: {
-            processing: preferences.normalization.processing,
-            filters: [
-              {
-                name: 'rescale',
-              },
-            ],
-          },
-        },
-      );
-      delete preferences.normalization.processing;
-      API.createData('chartProcessed', chartProcessed);
-    } else {
-      API.createData('chartProcessed', {});
-    }
-  } catch (e) {
-    UI.showNotification(
-      'There was an error during processing. Adding the filter growingX could help',
-    );
-    UI.showNotification(e.toString());
-  }
-
+  console.log(preferences);
+  debugger;
   let chart = ExtendedCommonMeasurement.JSGraph.getJSGraph(analyses, {
     colors,
     ids,
