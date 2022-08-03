@@ -19,7 +19,11 @@ module.exports = function showMfGroupsList(CustomMolecularFormula) {
 
 function getHtml(CustomMolecularFormula = MolecularFormula) {
   const MF = CustomMolecularFormula.MF;
-  const groups = JSON.parse(JSON.stringify(CustomMolecularFormula.Groups));
+  const groups = JSON.parse(
+    JSON.stringify(
+      CustomMolecularFormula.Groups || CustomMolecularFormula.groups,
+    ),
+  );
   console.log(groups);
   groups.forEach((group) => {
     group.mfHtml = new MF(String(group.mf)).toHtml();
