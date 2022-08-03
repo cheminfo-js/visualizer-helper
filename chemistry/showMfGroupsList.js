@@ -24,7 +24,6 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
       CustomMolecularFormula.Groups || CustomMolecularFormula.groups,
     ),
   );
-  console.log(groups);
   groups.forEach((group) => {
     group.mfHtml = new MF(String(group.mf)).toHtml();
   });
