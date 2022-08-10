@@ -43,6 +43,14 @@ module.exports = `
             }
             sample.setChildSync(['$content', 'general', 'meta', parameterName], '');
         }
+
+        if (API.cache('firstEmplateLoad')) {
+		if (API.getData('meta')) {
+		    API.cache('firstEmplateLoad', false);
+		    API.getData('meta').triggerChange();
+		}
+	    }
+
     })
 </script>
 `;
