@@ -415,7 +415,7 @@ Your local changes will be lost.</p>`;
                 content: converted[i],
               });
             } else {
-              newData.push(converted[i]);
+              newData.push({ ...converted[i] });
             }
           }
           droppedData.converted = true;
