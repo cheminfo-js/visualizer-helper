@@ -394,38 +394,37 @@ Your local changes will be lost.</p>`;
         if (converters[kind]) {
           autoJcamp = false;
 
-          let converted = await converters[kind](droppedData.content);
+          let converted = await converters[kind](
+            droppedData.content,
+            droppedData,
+          );
           if (!Array.isArray(converted)) {
             converted = [converted];
           }
-
-          for (let i = 1; i < converted.length; i++) {
-            newData.push({
-              filename: droppedData.filename.replace(
-                '.' + extension,
-                '_' + i + '.jdx',
-              ),
-              mimetype: 'chemical/x-jcamp-dx',
-              contentType: 'chemical/x-jcamp-dx',
-              encoding: 'utf8',
-              content: converted[i],
-            });
+          for (let i = 0; i < converted.length; i++) {
+            if (typeof converted[i] === 'string') {
+              const extend = i > 0 ? '_' + (i + 1) : '';
+              newData.push({
+                filename: droppedData.filename.replace(
+                  '.' + extension,
+                  extend + '.jdx',
+                ),
+                mimetype: 'chemical/x-jcamp-dx',
+                contentType: 'chemical/x-jcamp-dx',
+                encoding: 'utf8',
+                content: converted[i],
+              });
+            } else {
+              newData.push(converted[i]);
+            }
           }
-
-          droppedData.filename = droppedData.filename.replace(
-            '.' + extension,
-            '.jdx',
-          );
-          droppedData.mimetype = 'chemical/x-jcamp-dx';
-          droppedData.contentType = 'chemical/x-jcamp-dx';
-          droppedData.encoding = 'utf8';
-          droppedData.content = converted[0];
+          droppedData = null;
         }
       }
-      droppedDatas = droppedDatas.concat(newData);
+      droppedDatas = droppedDatas
+        .filter((droppedData) => droppedData)
+        .concat(newData);
     }
-
-    console.log({ droppedDatas });
 
     /*
       Possible autoconvertion of text file to jcamp
