@@ -418,11 +418,11 @@ Your local changes will be lost.</p>`;
               newData.push(converted[i]);
             }
           }
-          droppedData = null;
+          droppedData.converted = true;
         }
       }
       droppedDatas = droppedDatas
-        .filter((droppedData) => droppedData)
+        .filter((droppedData) => !droppedData.converted)
         .concat(newData);
     }
 
