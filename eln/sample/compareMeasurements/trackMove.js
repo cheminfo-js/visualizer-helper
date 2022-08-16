@@ -31,6 +31,8 @@ function generateTrackAnnotations(action) {
   const analysesManager = API.cache('analysesManager');
 
   let data;
+  if (false) {
+  }
   if (analysesManager.getAnalysisByMeasurementId) {
     function getColor(measurementId) {
       const analysis =
@@ -86,6 +88,19 @@ function generateTrackAnnotations(action) {
         measurement: measurements[index],
       };
     }
+  }
+
+  let keys = Object.keys(trackMove);
+  data = new Array(keys.length);
+  for (let key of keys) {
+    let index = Number(key.replace(/chart-?/, '') || 0);
+    const serie = chart.series[index];
+    data[index] = {
+      x: trackMove[key].xClosest,
+      y: trackMove[key].yClosest,
+      color: serie.style[0].style.line.color,
+      label: serie.name,
+    };
   }
 
   let trackAnnotations = getTrackAnnotations(data);

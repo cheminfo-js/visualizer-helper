@@ -85,16 +85,12 @@ async function addSample(action) {
   const sample = await API.cache('roc').document(entryID);
   const analysesManager = API.cache('analysesManager');
   const target = analysesManager.target;
-  if (
-    !target ||
-    !sample.$content.measurements ||
-    !sample.$content.measurements[target]
-  ) {
+  if (!target || !sample.$content.spectra || !sample.$content.spectra[target]) {
     return;
   }
 
-  for (let i = 0; i < sample.$content.measurements[target].length; i++) {
-    const measurement = sample.$content.measurements[target][i];
+  for (let i = 0; i < sample.$content.spectra[target].length; i++) {
+    const measurement = sample.$content.spectra[target][i];
     await addMeasurement(
       { value: { __name: i, ...measurement } },
       {
@@ -116,7 +112,8 @@ async function addMeasurement(action, options = {}) {
   let measurementUUID =
     options.measurementUUID || getMeasurementUUID(action.value);
 
-  let measurementID = sampleID + ' ' + action.value.__name;
+  let measurementID =
+    sampleID + (action.value.__name !== 0 ? ' ' + action.value.__name : '');
   console.log({ measurementID, measurementUUID });
   let jcamp = '';
 

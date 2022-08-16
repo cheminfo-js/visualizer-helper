@@ -7,30 +7,33 @@ export default function recalculateCharts() {
   const selectedMeasurements = API.getData('selectedMeasurements');
   const preferences = JSON.parse(JSON.stringify(API.getData('preferences')));
 
-  console.log(preferences);
-  if (preferences.selector && preferences.selector.yLabels) {
+  if (
+    preferences.selector &&
+    preferences.selector.y &&
+    preferences.selector.y.labels
+  ) {
     //escape regexp
-    preferences.selector.yLabel =
+    preferences.selector.y.label =
       '/' +
-      preferences.selector.yLabels
+      preferences.selector.y.labels
         .map((label) => label.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'))
         .join('|') +
       '/i';
-    delete preferences.selector.labels;
+    delete preferences.selector.y.labels;
   }
-  console.log(preferences.selector.yLabel);
 
   let ids = selectedMeasurements
     .filter((entry) => DataObject.resurrect(entry.display))
     .map((entry) => String(entry.id));
-  let colors = selectedMeasurements
-    .filter((entry) => DataObject.resurrect(entry.display))
-    .map((entry) => String(entry.color));
+  let colors =
+    selectedMeasurements.length > 1
+      ? selectedMeasurements
+          .filter((entry) => DataObject.resurrect(entry.display))
+          .map((entry) => String(entry.color))
+      : undefined;
 
   let analyses = analysesManager.getAnalyses({ ids });
 
-  console.log(preferences);
-  debugger;
   let chart = ExtendedCommonMeasurement.JSGraph.getJSGraph(analyses, {
     colors,
     ids,
