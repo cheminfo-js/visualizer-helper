@@ -2,28 +2,28 @@ const STATUS = [
   {
     code: 10,
     label: 'Started',
-    color: 'rgba(244,204,204,1)'
+    color: 'rgba(244,204,204,1)',
   },
   {
     code: 20,
     label: 'Finished',
-    color: 'rgba(252,229,205,1)'
+    color: 'rgba(252,229,205,1)',
   },
   {
     code: 30,
     label: 'Worked up',
-    color: 'rgba(255,242,204,1)'
+    color: 'rgba(255,242,204,1)',
   },
   {
     code: 40,
     label: 'Purified',
-    color: 'rgba(217,234,211,1)'
+    color: 'rgba(217,234,211,1)',
   },
   {
     code: 50,
     label: 'Closed',
-    color: 'rgba(206,224,227,1)'
-  }
+    color: 'rgba(206,224,227,1)',
+  },
 ];
 
 function getColor(statusCode) {
@@ -39,7 +39,7 @@ function getColorFromReaction(reaction) {
   let status = Number(
     reaction.$content.status &&
       reaction.$content.status[0] &&
-      reaction.$content.status[0].code
+      reaction.$content.status[0].code,
   );
   return getColor(status);
 }
@@ -111,14 +111,20 @@ function getForm(currentStatus) {
         <b>Please select the new status</b>
         <p>&nbsp;</p>
         <form>
-            <select name="status">
+	<p>
+            <select name="code">
                 ${STATUS.map(
-    (item) =>
-      `<option value="${item.code}" ${
-        item.code === currentStatus ? 'selected' : ''
-      }>${item.label}</option>`
-  )}
+                  (item) =>
+                    `<option value="${item.code}" ${
+                      item.code === currentStatus ? 'selected' : ''
+                    }>${item.label}</option>`,
+                )}
             </select>
+	</p>
+	<p style="padding: 4px; font-size: 0.8em">
+	    <span style="font-size: 0.8em">You may enter a custom label:</span><br>
+	    <input type="text" style="width: 150px" name="customLabel">
+	</p>
             <input type="submit" value="Submit"/>
         </form>
     </div>
@@ -133,5 +139,5 @@ module.exports = {
   getNextStatus,
   getColorFromReaction,
   updateStatus,
-  updateStatuses
+  updateStatuses,
 };
