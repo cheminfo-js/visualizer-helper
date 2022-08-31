@@ -6,15 +6,22 @@ module.exports = {
     API.cache('printer', printer);
     let varFormats = types.map(() => []);
     const printers = await printer.getPrinters();
+    let varPrinterFormats = printers.map((printer) => ({
+      ...JSON.parse(JSON.stringify(printer)),
+      formats: [],
+    }));
+    console.log(varPrinterFormats);
     for (let i = 0; i < printers.length; i++) {
       for (let j = 0; j < types.length; j++) {
         const sFormats = (await printer.getFormats(printers[i], types[j])).map(
           (f) => ({
             printer: printers[i],
-            format: f
-          })
+            format: f,
+          }),
         );
         varFormats[j] = varFormats[j].concat(sFormats);
+        varPrinterFormats[i].formats =
+          varPrinterFormats[i].formats.concat(sFormats);
       }
     }
 
@@ -25,6 +32,8 @@ module.exports = {
     for (let j = 0; j < types.length; j++) {
       await API.createData(`${types[j]}Formats`, varFormats[j]);
     }
+    API.createData('varPrinterFormats', varPrinterFormats);
+    console.log(varPrinterFormats);
   },
 
   async askPrintEntry(entry, type) {
@@ -48,7 +57,7 @@ module.exports = {
       } else {
         info = {
           printer: info[0],
-          format: info[1]
+          format: info[1],
         };
       }
     } else if (typeof info !== 'object') {
@@ -99,12 +108,12 @@ module.exports = {
         twig: { formats, lastPrinterFormat },
         dialog: {
           width: 400,
-          height: 250
-        }
-      }
+          height: 250,
+        },
+      },
     );
     if (!f.printer) return f.printer;
     localStorage.setItem('lastPrinterFormat', f.printer);
     return String(f.printer);
-  }
+  },
 };
