@@ -31,60 +31,76 @@ function generateTrackAnnotations(action) {
   const analysesManager = API.cache('analysesManager');
 
   let data;
-  if (analysesManager.getAnalysisBySpectrumId) {
-    function getColor(spectrumId) {
-      const analysis = analysesManager.getAnalysisBySpectrumId(spectrumId);
-      if (!analysis) return;
-      // selectedSpectra is actually selectedAnalyses
-      const currentSpectrum = selectedSpectra.filter(
-        (spectrum) => spectrum.id === analysis.id,
-      );
-      if (currentSpectrum.length === 0) return;
-      return currentSpectrum[0].color;
-    }
+  if (false) {
+    if (analysesManager.getAnalysisBySpectrumId) {
+      function getColor(spectrumId) {
+        const analysis = analysesManager.getAnalysisBySpectrumId(spectrumId);
+        if (!analysis) return;
+        // selectedSpectra is actually selectedAnalyses
+        const currentSpectrum = selectedSpectra.filter(
+          (spectrum) => spectrum.id === analysis.id,
+        );
+        if (currentSpectrum.length === 0) return;
+        return currentSpectrum[0].color;
+      }
 
-    function getLabel(spectrumId) {
-      const analysis = analysesManager.getAnalysisBySpectrumId(spectrumId);
-      if (!analysis) return;
-      return analysis.label;
-    }
+      function getLabel(spectrumId) {
+        const analysis = analysesManager.getAnalysisBySpectrumId(spectrumId);
+        if (!analysis) return;
+        return analysis.label;
+      }
 
-    // we will get the index for all the charts
-    let keys = Object.keys(trackMove);
-    data = new Array(keys.length);
-    for (let key of keys) {
-      let index = Number(key.replace(/chart-?/, '') || 0);
-      let spectrumId = spectrumIDs[index];
-      data[index] = {
-        x: trackMove[key].xClosest,
-        y: trackMove[key].yClosest,
-        color: getColor(spectrumId),
-        label: getLabel(spectrumId),
-        spectrum: analysesManager.getSpectrumById(spectrumId),
-      };
-    }
-  } else {
-    let ids = selectedSpectra
-      .filter((entry) => DataObject.resurrect(entry.display))
-      .map((entry) => String(entry.id));
-    let colors = selectedSpectra
-      .filter((entry) => DataObject.resurrect(entry.display))
-      .map((entry) => String(entry.color));
-    const spectra = API.cache('analysesManager').getAnalyses({ ids });
-    // we will get the index for all the charts
-    let keys = Object.keys(trackMove);
-    data = new Array(keys.length);
-    for (let key of keys) {
-      let index = Number(key.replace(/chart-?/, '') || 0);
-      data[index] = {
-        x: trackMove[key].xClosest,
-        y: trackMove[key].yClosest,
-        color: colors[index],
-        label: spectra[index].label,
-        spectrum: spectra[index],
-      };
+      // we will get the index for all the charts
+      let keys = Object.keys(trackMove);
+      data = new Array(keys.length);
+      for (let key of keys) {
+        let index = Number(key.replace(/chart-?/, '') || 0);
+        let spectrumId = spectrumIDs[index];
+        data[index] = {
+          x: trackMove[key].xClosest,
+          y: trackMove[key].yClosest,
+          color: getColor(spectrumId),
+          label: getLabel(spectrumId),
+          spectrum: analysesManager.getSpectrumById(spectrumId),
+        };
+      }
+    } else {
+      let ids = selectedSpectra
+        .filter((entry) => DataObject.resurrect(entry.display))
+        .map((entry) => String(entry.id));
+      let colors = selectedSpectra
+        .filter((entry) => DataObject.resurrect(entry.display))
+        .map((entry) => String(entry.color));
+      const spectra = API.cache('analysesManager').getAnalyses({ ids });
+      // we will get the index for all the charts
+      let keys = Object.keys(trackMove);
+      data = new Array(keys.length);
+      for (let key of keys) {
+        let index = Number(key.replace(/chart-?/, '') || 0);
+        data[index] = {
+          x: trackMove[key].xClosest,
+          y: trackMove[key].yClosest,
+          color: colors[index],
+          label: spectra[index].label,
+          spectrum: spectra[index],
+        };
+      }
     }
   }
+
+  let keys = Object.keys(trackMove);
+  data = new Array(keys.length);
+  for (let key of keys) {
+    let index = Number(key.replace(/chart-?/, '') || 0);
+    const serie = chart.series[index];
+    data[index] = {
+      x: trackMove[key].xClosest,
+      y: trackMove[key].yClosest,
+      color: serie.style[0].style.line.color,
+      label: serie.name,
+    };
+  }
+  data = data.filter((data) => data.x);
 
   let trackAnnotations = getTrackAnnotations(data);
   API.createData('trackAnnotations', trackAnnotations);

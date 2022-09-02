@@ -32,61 +32,61 @@ function generateTrackAnnotations(action) {
 
   let data;
   if (false) {
-  }
-  if (analysesManager.getAnalysisByMeasurementId) {
-    function getColor(measurementId) {
-      const analysis =
-        analysesManager.getAnalysisByMeasurementId(measurementId);
-      if (!analysis) return;
-      // selectedMeasurements is actually selectedAnalyses
-      const currentMeasurement = selectedMeasurements.filter(
-        (measurement) => measurement.id === analysis.id,
-      );
-      if (currentMeasurement.length === 0) return;
-      return currentMeasurement[0].color;
-    }
+    if (analysesManager.getAnalysisByMeasurementId) {
+      function getColor(measurementId) {
+        const analysis =
+          analysesManager.getAnalysisByMeasurementId(measurementId);
+        if (!analysis) return;
+        // selectedMeasurements is actually selectedAnalyses
+        const currentMeasurement = selectedMeasurements.filter(
+          (measurement) => measurement.id === analysis.id,
+        );
+        if (currentMeasurement.length === 0) return;
+        return currentMeasurement[0].color;
+      }
 
-    function getLabel(measurementId) {
-      const analysis =
-        analysesManager.getAnalysisByMeasurementId(measurementId);
-      if (!analysis) return;
-      return analysis.label;
-    }
+      function getLabel(measurementId) {
+        const analysis =
+          analysesManager.getAnalysisByMeasurementId(measurementId);
+        if (!analysis) return;
+        return analysis.label;
+      }
 
-    // we will get the index for all the charts
-    let keys = Object.keys(trackMove);
-    data = new Array(keys.length);
-    for (let key of keys) {
-      let index = Number(key.replace(/chart-?/, '') || 0);
-      let measurementId = measurementIDs[index];
-      data[index] = {
-        x: trackMove[key].xClosest,
-        y: trackMove[key].yClosest,
-        color: getColor(measurementId),
-        label: getLabel(measurementId),
-        measurement: analysesManager.getMeasurementById(measurementId),
-      };
-    }
-  } else {
-    let ids = selectedMeasurements
-      .filter((entry) => DataObject.resurrect(entry.display))
-      .map((entry) => String(entry.id));
-    let colors = selectedMeasurements
-      .filter((entry) => DataObject.resurrect(entry.display))
-      .map((entry) => String(entry.color));
-    const measurements = API.cache('analysesManager').getAnalyses({ ids });
-    // we will get the index for all the charts
-    let keys = Object.keys(trackMove);
-    data = new Array(keys.length);
-    for (let key of keys) {
-      let index = Number(key.replace(/chart-?/, '') || 0);
-      data[index] = {
-        x: trackMove[key].xClosest,
-        y: trackMove[key].yClosest,
-        color: colors[index],
-        label: measurements[index].label,
-        measurement: measurements[index],
-      };
+      // we will get the index for all the charts
+      let keys = Object.keys(trackMove);
+      data = new Array(keys.length);
+      for (let key of keys) {
+        let index = Number(key.replace(/chart-?/, '') || 0);
+        let measurementId = measurementIDs[index];
+        data[index] = {
+          x: trackMove[key].xClosest,
+          y: trackMove[key].yClosest,
+          color: getColor(measurementId),
+          label: getLabel(measurementId),
+          measurement: analysesManager.getMeasurementById(measurementId),
+        };
+      }
+    } else {
+      let ids = selectedMeasurements
+        .filter((entry) => DataObject.resurrect(entry.display))
+        .map((entry) => String(entry.id));
+      let colors = selectedMeasurements
+        .filter((entry) => DataObject.resurrect(entry.display))
+        .map((entry) => String(entry.color));
+      const measurements = API.cache('analysesManager').getAnalyses({ ids });
+      // we will get the index for all the charts
+      let keys = Object.keys(trackMove);
+      data = new Array(keys.length);
+      for (let key of keys) {
+        let index = Number(key.replace(/chart-?/, '') || 0);
+        data[index] = {
+          x: trackMove[key].xClosest,
+          y: trackMove[key].yClosest,
+          color: colors[index],
+          label: measurements[index].label,
+          measurement: measurements[index],
+        };
+      }
     }
   }
 
@@ -102,6 +102,8 @@ function generateTrackAnnotations(action) {
       label: serie.name,
     };
   }
+
+  data = data.filter((data) => data.x);
 
   let trackAnnotations = getTrackAnnotations(data);
   API.createData('trackAnnotations', trackAnnotations);
