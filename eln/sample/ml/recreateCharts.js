@@ -1,5 +1,5 @@
 define(['src/util/api', 'src/util/ui'], function (API, UI) {
-  async function recreateCharts(variable) {
+  async function recreateCharts(variable, action) {
     if (!API.getData('preferences')) return;
     const preferences = JSON.parse(JSON.stringify(API.getData('preferences')));
 
@@ -9,9 +9,12 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
 
     const spectraProcessor = API.cache('spectraProcessor');
     const spectraDataSet = API.cache('spectraDataSet');
-
-    if (!spectraProcessor.spectra || spectraProcessor.spectra.length === 0)
+    const currentSpectraIds = JSON.stringify(
+      spectraProcessor.spectra.map((spectrum) => spectrum.id),
+    );
+    if (!spectraProcessor.spectra || spectraProcessor.spectra.length === 0) {
       return;
+    }
 
     if (variable === 'preferences') {
       let currentPreferences = JSON.stringify(preferences);
@@ -19,6 +22,17 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
       API.cache('previousPreferences', currentPreferences);
     }
 
+    // if preferences didn't change and number of spectra in spectraDataSet didn't change we don't update the spectra
+    if (action && action.name === 'UpdateChart') {
+      let currentPreferences = JSON.stringify(preferences);
+      if (
+        API.cache('previousPreferences') === currentPreferences &&
+        API.cache('previousIdsInDataSet') === currentSpectraIds
+      ) {
+        return;
+      }
+    }
+    API.cache('previousIdsInDataSet', currentSpectraIds);
     console.log('Update chart');
 
     const selectedIDs = spectraProcessor.spectra
