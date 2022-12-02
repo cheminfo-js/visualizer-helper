@@ -29,11 +29,8 @@ module.exports = `
 <div id='biologyForm'>
     <h1>Peptidic sequences</h1>
     
-    <table>
-        <tr data-repeat='peptidic'>
-            <td>
                 <table>
-                    <tr data-repeat='seq'>
+                    <tr data-repeat='peptidic.0.seq'>
                         <td>
                             Name: <input data-field='name' size=40>
                             Type: <select data-field='moleculeType'>
@@ -54,16 +51,10 @@ module.exports = `
                         </td>
                     </tr>
                 </table>
-            </td>
-        </tr>
-    </table>
     
     <h1>Nucleic sequences</h1>
-        <table>
-        <tr data-repeat='nucleic'>
-            <td>
                 <table>
-                    <tr data-repeat='seq'>
+                    <tr data-repeat='nucleic.0.seq'>
                         <td>
                             Name: <input data-field='name' size=40><br>
                             Type: <select data-field='moleculeType'>
@@ -91,9 +82,6 @@ module.exports = `
                         </td>
                     </tr>
                 </table>
-            </td>
-        </tr>
-    </table>
 </div>
 
 <script>
@@ -101,6 +89,7 @@ module.exports = `
         AF('biologyForm', {debug:true});
     });
 </script>
+
 
 
 `;
