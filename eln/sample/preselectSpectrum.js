@@ -21,7 +21,7 @@ We add in the module that contains the list of spectra an action out with 'onLoa
  
 */
 
-export default function preselectSpectrum(kind, spectrumID) {
+export function preselectSpectrum(kind, spectrumID) {
   setTimeout(() => {
     const spectra = API.getData(kind);
     console.log({ kind, spectrumID });
