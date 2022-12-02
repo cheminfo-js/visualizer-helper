@@ -21,7 +21,7 @@ We add in the module that contains the list of spectra an action out with 'onLoa
  
 */
 
-export function preselectSpectrum(kind, spectrumID) {
+module.exports = function preselectSpectrum(kind, spectrumID) {
   setTimeout(() => {
     const spectra = API.getData(kind);
     console.log({ kind, spectrumID });
@@ -32,7 +32,7 @@ export function preselectSpectrum(kind, spectrumID) {
     }
     preselectSpectrum(kind, spectrumID);
   }, 500);
-}
+};
 
 function findSpectrum(spectra, spectrumID) {
   spectra = spectra.resurrect();
