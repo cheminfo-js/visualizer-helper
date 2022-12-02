@@ -114,7 +114,7 @@ function generateTrackAnnotations(action) {
 
     let line = 0;
 
-    if (isNaN(data[0].x)) return;
+    if (!data || !data[0] || isNaN(data[0].x)) return;
     annotations.push({
       type: 'line',
       position: [
