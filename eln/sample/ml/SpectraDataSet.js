@@ -83,6 +83,31 @@ const SpectraConfigs = {
       displayXAxis: ['display', 'main', 'sec'],
     },
   },
+  UV: {
+    tocFilter: (entry) => entry.value.nbUV && !entry.value.hidden,
+    tocCallback: (entry) => {
+      entry.value.nbSpectra = entry.value.nbUV;
+    },
+    getSpectra: (sample) => {
+      if (
+        sample &&
+        sample.$content &&
+        sample.$content.spectra &&
+        Array.isArray(sample.$content.spectra.uv)
+      ) {
+        let spectra = sample.$content.spectra.uv;
+        return spectra;
+      } else {
+        return [];
+      }
+    },
+    chartPrefs: {
+      yLabel: 'Absorbance',
+      displayYAxis: ['display', 'main', 'sec'],
+      xLabel: 'Wavelength [nm]',
+      displayXAxis: ['display', 'main', 'sec'],
+    },
+  },
   TGA: {
     tocFilter: (entry) => entry.value.nbTGA && !entry.value.hidden,
     tocCallback: (entry) => {
