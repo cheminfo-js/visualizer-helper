@@ -17,39 +17,39 @@ const nmr1hOndeTemplates = {
       integral: {
         type: 'number',
         title: 'value to fit the spectrum integral',
-        label: 'Integral'
+        label: 'Integral',
       },
       noiseFactor: {
         type: 'number',
         title: 'Mutiplier of the auto-detected noise level',
-        label: 'noiseFactor'
+        label: 'noiseFactor',
       },
       clean: {
         type: 'number',
         title: 'Delete signals with integration less than input value',
-        label: 'clean'
+        label: 'clean',
       },
       compile: {
         type: 'boolean',
         title: 'Compile the multiplets',
-        label: 'compile'
+        label: 'compile',
       },
       optimize: {
         type: 'boolean',
         title: 'Optimize the peaks to fit the spectrum',
-        label: 'optimize'
+        label: 'optimize',
       },
       integralFn: {
         type: 'string',
         title: 'Type of integration',
         label: 'Integral type',
-        enum: ['sum', 'peaks']
+        enum: ['sum', 'peaks'],
       },
       type: {
         type: 'string',
         title: 'Nucleus',
         label: 'Nucleus',
-        editable: false
+        editable: false,
       },
       removeImpurities: {
         type: 'object',
@@ -57,16 +57,16 @@ const nmr1hOndeTemplates = {
         properties: {
           useIt: {
             type: 'boolean',
-            label: 'Remove Impurities'
+            label: 'Remove Impurities',
           },
           error: {
             type: 'number',
             label: 'Tolerance',
-            title: 'Allowed error in ppm'
-          }
-        }
-      }
-    }
+            title: 'Allowed error in ppm',
+          },
+        },
+      },
+    },
   },
   short: {
     type: 'object',
@@ -74,7 +74,7 @@ const nmr1hOndeTemplates = {
       integral: {
         type: 'number',
         title: 'Total integral value',
-        label: 'Integral'
+        label: 'Integral',
       },
       removeImpurities: {
         type: 'object',
@@ -82,17 +82,17 @@ const nmr1hOndeTemplates = {
         properties: {
           useIt: {
             type: 'boolean',
-            label: 'Remove Impurities'
+            label: 'Remove Impurities',
           },
           error: {
             type: 'number',
             label: 'Tolerance',
-            title: 'Allowed error in ppm'
-          }
-        }
-      }
-    }
-  }
+            title: 'Allowed error in ppm',
+          },
+        },
+      },
+    },
+  },
 };
 API.cache('nmr1hOndeTemplates', nmr1hOndeTemplates);
 
@@ -112,7 +112,7 @@ class Nmr1dManager {
       }
       case 'downloadSVG': {
         var blob = new Blob([`${action.value}`], {
-          type: 'application/jcamp-dx;charset=utf-8'
+          type: 'image/svg+xml;charset=utf-8',
         });
         fileSaver(blob, 'spectra.svg');
         break;
@@ -123,12 +123,12 @@ class Nmr1dManager {
         if (advancedOptions1H) {
           API.createData(
             'nmr1hOndeTemplate',
-            API.cache('nmr1hOndeTemplates').full
+            API.cache('nmr1hOndeTemplates').full,
           );
         } else {
           API.createData(
             'nmr1hOndeTemplate',
-            API.cache('nmr1hOndeTemplates').short
+            API.cache('nmr1hOndeTemplates').short,
           );
         }
         break;
@@ -171,7 +171,7 @@ class Nmr1dManager {
           if (typeof UI !== 'undefined') {
             UI.showNotification(
               'Peak picking can only be applied on 1D spectra',
-              'warning'
+              'warning',
             );
           }
           return false;
@@ -280,7 +280,7 @@ class Nmr1dManager {
       const ranges = new Ranges(nmr.range);
       var ppOptions = API.getData('nmr1hOptions');
       spectrum.updateIntegrals(ranges, {
-        nH: Number(ppOptions.integral)
+        nH: Number(ppOptions.integral),
       });
     }
   }
@@ -325,7 +325,7 @@ class Nmr1dManager {
         removeImpurityOptions = {
           solvent: nmrLine.solvent,
           nH: Number(ppOptions.integral),
-          error: ppOptions.removeImpurities.error
+          error: ppOptions.removeImpurities.error,
         };
       }
       var ranges = nmrSpectrum.getRanges({
@@ -339,7 +339,7 @@ class Nmr1dManager {
         optimize: ppOptions.optimize,
         integralType: ppOptions.integralFn,
         gsdOptions: { minMaxRatio: 0.001, smoothY: false, broadWidth: 0.004 },
-        removeImpurity: removeImpurityOptions
+        removeImpurity: removeImpurityOptions,
       });
       nmrLine.setChildSync(['range'], ranges);
     });
@@ -362,8 +362,8 @@ class Nmr1dManager {
         GUI.annotations1D(ranges, {
           line: 1,
           fillColor: 'lightgreen',
-          strokeWidth: 0
-        })
+          strokeWidth: 0,
+        }),
       );
     }
 
@@ -372,8 +372,8 @@ class Nmr1dManager {
       SD.getACS(ranges, {
         rangeForMultiplet: true,
         nucleus,
-        observe
-      })
+        observe,
+      }),
     );
   }
 
@@ -455,8 +455,8 @@ class Nmr1dManager {
       type: '1H',
       removeImpurities: {
         useIt: true,
-        error: 0.025
-      }
+        error: 0.025,
+      },
     });
 
     API.createData('nmr1hOndeTemplate', nmr1hOndeTemplates.short);
