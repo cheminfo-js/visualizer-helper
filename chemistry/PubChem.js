@@ -1,13 +1,17 @@
 import ui from 'src/util/ui';
 
-const pubchemURL = 'https://pubchem.cheminfo.org/molecules/mf?mf=';
+const pubchemURL = 'https://octochemdb.cheminfo.org/compounds/v1/fromMF?';
 
 async function getMolecules(mf) {
-  let response = await fetch(`${pubchemURL}${mf}`);
-  let results = (await response.json()).result;
-  return new Promise(function (resolve) {
-    resolve(results);
-  });
+  const searchParams = new URLSearchParams();
+  searchParams.set('mf', mf);
+  searchParams.set('fields', 'data.iupac,data.ocl');
+  searchParams.set('limit', '50000');
+
+  let response = await fetch(`${pubchemURL}` + searchParams.toString());
+  let results = await response.json();
+  console.log(results.data);
+  return results.data;
 }
 
 module.exports = {
@@ -21,7 +25,7 @@ module.exports = {
         returnRow: false,
         dialog: {
           width: 1000,
-          height: 800
+          height: 800,
         },
         columns: [
           {
@@ -31,18 +35,18 @@ module.exports = {
             rendererOptions: {
               forceType: 'object',
               twig: `
-                {{iupac}}
-              `
-            }
+                {{data.iupac}}
+              `,
+            },
           },
           {
             id: 'structure',
             name: 'Structure',
-            jpath: ['ocl', 'id'],
+            jpath: ['data', 'ocl', 'idCode'],
             rendererOptions: {
-              forceType: 'oclID'
+              forceType: 'oclID',
             },
-            maxWidth: 500
+            maxWidth: 500,
           },
           {
             id: 'url',
@@ -52,19 +56,19 @@ module.exports = {
               forceType: 'object',
               twig: `
                 <a href="https://pubchem.ncbi.nlm.nih.gov/compound/{{_id}}" onclick="event.stopPropagation()" target="_blank">&#x2B08;</a>
-              `
+              `,
             },
-            maxWidth: 70
-          }
+            maxWidth: 70,
+          },
         ],
         idField: 'id',
         slick: {
-          rowHeight: 140
-        }
+          rowHeight: 140,
+        },
       })
       .catch(function (e) {
         console.error(e); // eslint-disable-line no-console
         ui.showNotification('search failed', 'error');
       });
-  }
+  },
 };
