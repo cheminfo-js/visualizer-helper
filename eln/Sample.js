@@ -22,7 +22,7 @@ var defaultOptions = {
 };
 
 class Sample {
-  constructor(couchDB, uuid, options) {
+  constructor(couchDB, uuid, options = {}) {
     this.options = Object.assign({}, defaultOptions, options);
 
     var roc = API.cache('roc');
