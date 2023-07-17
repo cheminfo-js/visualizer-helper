@@ -1,8 +1,8 @@
 import TypeRenderer from 'src/util/typerenderer';
 
 
-import { createTaxonomyTree } from '../../../../../../../../lib//mass-tools/7.8.0/mass-tools';
-import * as TreeSVG from '../../../../../../../../lib/react-tree-svg/0.0.2/react-tree-svg';
+import { createTaxonomyTree } from '../../../../../../../../lib//mass-tools/7.8.2/mass-tools';
+import * as TreeSVG from '../../../../../../../../lib/react-tree-svg/0.1.0/react-tree-svg';
 
 
 
