@@ -3,6 +3,7 @@ function toAnnotations(peaks, options = {}) {
     fillColor = 'green',
     strokeColor = 'red',
     yPosition = undefined,
+    nbDigits = 1,
   } = options;
 
   if (!peaks) return [];
@@ -29,7 +30,7 @@ function toAnnotations(peaks, options = {}) {
     };
     annotation.label = [
       {
-        text: Number(peak.mass).toFixed(1),
+        text: Number(peak.mass).toFixed(nbDigits),
         size: '18px',
         anchor: 'middle',
         color: 'red',
