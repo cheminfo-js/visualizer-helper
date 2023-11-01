@@ -69,7 +69,7 @@ export async function load(uuid) {
 
   const overview = reaction._attachments
     ? reaction._attachments['overview.svg'] ||
-      reaction._attachments['overview.png']
+    reaction._attachments['overview.png']
     : undefined;
   if (overview) {
     API.createData('overviewImage', overview.url);
@@ -107,9 +107,8 @@ function updateEntry(entry) {
 export async function loadViewPreferences() {
   const roc = API.cache('roc');
   if (!roc) return;
-  let userInfo = API.getData('userInfo');
+  let userInfo = API.cache('userInfo');
   if (!userInfo || !userInfo.email || !userInfo.email.includes('@')) return;
-  console.log({ userInfo });
   let userViewPrefs = await roc.UserViewPrefs.get();
   if (!userViewPrefs) {
     userViewPrefs = {};

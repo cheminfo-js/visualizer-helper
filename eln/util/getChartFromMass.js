@@ -7,10 +7,11 @@ import { parseXY } from '../libs/parseXY';
 /**
  * Create a chart object from a clicked row
  * @param {object} experiment
- * @param {object} [options]
+ * @param {object} [options={}]
  * @return {Promise.<{data: [object]}>}
  */
 export async function getChartFromMass(experiment, options = {}) {
+  const { scaleY } = options;
   if (experiment.jcamp) {
     let name =
       options.name || String(experiment.jcamp.filename).match(/([^/]+)\..+/)[1];
@@ -28,7 +29,7 @@ export async function getChartFromMass(experiment, options = {}) {
         {
           label: name,
           x: points.x,
-          y: points.y,
+          y: rescaleY(points.y, scaleY),
         },
       ],
     };
@@ -48,11 +49,24 @@ export async function getChartFromMass(experiment, options = {}) {
         {
           label: name,
           x: points[0],
-          y: points[1],
+          y: rescaleY(points[1], scaleY),
         },
       ],
     };
   } else {
     throw new Error('the file should be a jcamp or text');
+  }
+
+  function rescaleY(ys, scaleY) {
+    if (!scaleY) return ys;
+    let maxValue = Number.NEGATIVE_INFINITY;
+    for (let y of ys) {
+      if (y > maxValue) maxValue = y;
+    }
+    scaleY /= maxValue;
+    for (let i = 0; i < ys.length; i++) {
+      ys[i] = ys[i] * scaleY;
+    }
+    return ys;
   }
 }
