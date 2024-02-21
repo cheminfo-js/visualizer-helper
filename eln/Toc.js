@@ -39,6 +39,7 @@ class Toc {
    * @param {string} [options.viewName='sample_toc']
    * @param {function} [options.sort] Callback, by default sort by reverse date
    * @param {function} [options.filter] Callback to filter the result
+   * @param {function} [options.callback] Callback to apply on each entry
    */
   constructor(roc, options = {}) {
     this.roc = roc;
