@@ -44,6 +44,11 @@ const status = {
   }
 };
 
+for (const key in status) {
+  status[key].value = +key;
+}
+
+
 // register type renderer
 function toscreen($element, value, root, options) {
   $element.html(getStatusDescription(+value));
