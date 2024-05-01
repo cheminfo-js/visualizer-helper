@@ -553,7 +553,7 @@ Your local changes will be lost.</p>`;
                   <table>
                   <tr>
                     <th>Kind</th>
-                    <td><input type="text" readonly name="type" value="${info.type
+                    <td><input type="text" name="type" value="${info.type
               }"></td>
                   </tr>
                   <tr>
@@ -568,7 +568,7 @@ Your local changes will be lost.</p>`;
                   (xUnit) =>
                     `<option value="${xUnit}">${xUnit}</option>`,
                 )}</select></td>`
-                : `<td><input type="text" readonly name="xUnit" value="${info.xUnit}"></td>`
+                : `<td><input type="text" name="xUnit" value="${info.xUnit}"></td>`
               }
                   </tr>
                   <tr>
@@ -578,7 +578,7 @@ Your local changes will be lost.</p>`;
                   (yUnit) =>
                     `<option value="${yUnit}">${yUnit}</option>`,
                 )}</select></td>`
-                : `<td><input type="text" readonly name="yUnit" value="${info.yUnit}"></td>`
+                : `<td><input type="text" name="yUnit" value="${info.yUnit}"></td>`
               }
                 </tr>
                   </table>
