@@ -1,7 +1,12 @@
+import fileSaver from 'file-saver';
+import Datas from 'src/main/datas';
 import API from 'src/util/api';
-import trackMove from './trackMove';
-import recalculateCharts from './recalculateCharts';
 import Color from 'src/util/color';
+
+import recalculateCharts from './recalculateCharts';
+import trackMove from './trackMove';
+
+const DataObject = Datas.DataObject;
 
 const nbColors = 8;
 const colors = Color.getDistinctColorsAsString(nbColors);
@@ -17,11 +22,36 @@ async function processActions(action) {
       break;
     case 'spectrumInfo':
       const jcampInfo = await API.require('vh/eln/util/jcampInfo');
-      console.log(action.value);
       jcampInfo(action.value);
       break;
     case 'removeSpectrum': {
       removeSpectrum(action);
+      break;
+    }
+    case 'DownloadTSV': {
+      const analysesManager = API.cache('analysesManager');
+      const selectedSpectra = API.getData('selectedSpectra');
+      const preferences = API.getData('preferences').resurrect();
+      const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
+      let ids = selectedSpectra
+        .filter((entry) => DataObject.resurrect(entry.display))
+        .map((entry) => String(entry.id));
+      let analysis = analysesManager.getAnalyses({ ids })[0];
+      if (!analysis) {
+        console.error('No analysis found')
+      }
+
+      const text = ExtendedCommonSpectrum.toText(analysis, {
+        selector: preferences.selector,
+        endOfLine: '\n',
+        fieldSeparator: '\t',
+      });
+      let blob = new Blob([text], {
+        type: 'text/plain',
+      });
+      fileSaver(blob, 'spectra.tsv');
+      break;
+
       break;
     }
     case 'setSpectrum': {
@@ -64,6 +94,8 @@ async function processActions(action) {
     case 'showAllSpectra':
       showAllSpectra();
       break;
+    default:
+      console.error(`Action ${action.name} is not recognized`);
   }
 }
 
@@ -91,7 +123,7 @@ async function addSample(action) {
       {
         sampleID: sample.$id.join(' '),
         sampleUUID: sample._id,
-        spectrumUUID: sample._id + '_' + i,
+        spectrumUUID: `${sample._id}_${i}`,
         toc: action.value,
       },
     );
@@ -106,7 +138,7 @@ async function addSpectrum(action, options = {}) {
   let sampleUUID = options.sampleUUID || getSampleUUID(action.value);
   let spectrumUUID = options.spectrumUUID || getSpectrumUUID(action.value);
 
-  let spectrumID = sampleID + ' ' + action.value.__name;
+  let spectrumID = `${sampleID} ${action.value.__name}`;
   console.log({ spectrumID, spectrumUUID });
   let jcamp = '';
 
@@ -131,11 +163,10 @@ async function addSpectrum(action, options = {}) {
 
     if (action.value.jcampTime && action.value.jcampTime.filename) {
       jcamp +=
-        '\n' +
-        (await API.cache('roc').getAttachment(
+        `\n${await API.cache('roc').getAttachment(
           { _id: sampleUUID },
           action.value.jcampTime.filename,
-        ));
+        )}`;
     }
   }
 
@@ -152,7 +183,7 @@ async function addSpectrum(action, options = {}) {
       id: spectrumUUID,
       code: sampleID,
       label: spectrumID,
-      index: action.value.__name + '',
+      index: `${action.value.__name}`,
       spectrum: JSON.parse(JSON.stringify(action.value)),
       color: colors[index % nbColors],
       display: true,
@@ -178,7 +209,7 @@ function getSampleUUID(entry) {
 }
 
 function getSpectrumUUID(entry) {
-  return getSampleUUID(entry) + '_' + entry.__name;
+  return `${getSampleUUID(entry)}_${entry.__name}`;
 }
 
 function showAllSpectra() {
