@@ -1,10 +1,11 @@
 // this class is not really related to a sampleToc but can be used for any TOC
 
-import API from 'src/util/api';
-import UI from 'src/util/ui';
 import _ from 'lodash';
-import Versioning from 'src/util/versioning';
+import API from 'src/util/api';
 import Color from 'src/util/color';
+import UI from 'src/util/ui';
+import Versioning from 'src/util/versioning';
+
 import { createTree } from '../../libs/jcampconverter';
 
 const SpectraConfigs = {
@@ -21,6 +22,10 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.ir)
       ) {
         let spectra = sample.$content.spectra.ir;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -46,6 +51,10 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.mass)
       ) {
         let spectra = sample.$content.spectra.mass;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -71,6 +80,10 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.raman)
       ) {
         let spectra = sample.$content.spectra.raman;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -96,6 +109,10 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.uv)
       ) {
         let spectra = sample.$content.spectra.uv;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -121,6 +138,10 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.thermogravimetricAnalysis)
       ) {
         let spectra = sample.$content.spectra.thermogravimetricAnalysis;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -146,6 +167,10 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.differentialScanningCalorimetry)
       ) {
         let spectra = sample.$content.spectra.differentialScanningCalorimetry;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -245,6 +270,12 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.chromatogram)
       ) {
         let spectra = sample.$content.spectra.chromatogram;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          if (spectrum.experiment) info.push(spectrum.experiment);
+          if (spectrum.analyzer) info.push(spectrum.analyzer);
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -270,6 +301,10 @@ const SpectraConfigs = {
         Array.isArray(sample.$content.spectra.pelletHardness)
       ) {
         let spectra = sample.$content.spectra.pelletHardness;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -298,6 +333,10 @@ const SpectraConfigs = {
       ) {
         let spectra =
           sample.$content.spectra.differentialCentrifugalSedimentation;
+        spectra.forEach((spectrum) => {
+          let info = [];
+          spectrum.info = info.join(', ');
+        });
         return spectra;
       } else {
         return [];
@@ -345,12 +384,12 @@ class SpectraDataSet {
       cookieName = 'eln-default-analysis-kind',
     } = options;
 
-    var possibleAnalysis = Object.keys(SpectraConfigs);
-    var defaultAnalysis = localStorage.getItem(cookieName);
+    let possibleAnalysis = Object.keys(SpectraConfigs);
+    let defaultAnalysis = localStorage.getItem(cookieName);
     if (possibleAnalysis.indexOf(defaultAnalysis) === -1) {
       defaultAnalysis = possibleAnalysis[0];
     }
-    var schema = {
+    let schema = {
       type: 'object',
       properties: {
         analysis: {
@@ -515,6 +554,7 @@ class SpectraDataSet {
     let uuid = String(samples[0].id);
     let data = await this.roc.document(uuid, { varName: 'linkedSample' });
     let spectra = this.spectraConfig.getSpectra(data);
+    console.log({ spectra })
     API.createData('spectra', spectra);
   }
 
@@ -672,7 +712,7 @@ class SpectraDataSet {
     const { allSpectra = false } = options;
     const roc = API.cache('roc');
     if (spectrum.jcamp) {
-      API.loading('loading', 'Loading: ' + spectrum.jcamp.filename);
+      API.loading('loading', `Loading: ${spectrum.jcamp.filename}`);
       let spectrumID = String(
         `${tocEntry.value.reference} / ${spectrum.jcamp.filename.replace(
           /.*\/(.*)\..*/,
@@ -699,7 +739,7 @@ class SpectraDataSet {
         );
         const tree = createTree(jcamp, { flatten: true });
         for (let i = 0; i < tree.length; i++) {
-          const id = spectrumID + '_' + i;
+          const id = `${spectrumID}_${i}`;
           if (spectraInDataset.find((spectrum) => String(spectrum.id) === id)) {
             continue;
           }

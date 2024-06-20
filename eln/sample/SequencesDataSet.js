@@ -291,7 +291,6 @@ class SequencesDataSet {
     }
     await Promise.all(promises);
     recolor(selectedSequences);
-    console.log(selectedSequences);
     selectedSequences.triggerChange();
   }
 
@@ -323,7 +322,6 @@ class SequencesDataSet {
       sequence._highlight = sequenceID;
       selectedSequences.push(sequence);
     }
-    console.log({ selectedSequences });
   }
 }
 
