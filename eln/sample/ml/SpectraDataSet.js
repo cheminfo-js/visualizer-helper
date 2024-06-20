@@ -272,8 +272,8 @@ const SpectraConfigs = {
         let spectra = sample.$content.spectra.chromatogram;
         spectra.forEach((spectrum) => {
           let info = [];
-          if (spectrum.experiment) info.push(spectrum.experiment);
           if (spectrum.analyzer) info.push(spectrum.analyzer);
+          if (spectrum.experiment) info.push(spectrum.experiment);
           spectrum.info = info.join(', ');
         });
         return spectra;
@@ -553,7 +553,8 @@ class SpectraDataSet {
     }
     let uuid = String(samples[0].id);
     let data = await this.roc.document(uuid, { varName: 'linkedSample' });
-    let spectra = this.spectraConfig.getSpectra(data);
+    let spectra = filterSpectraUsingInfo(this.spectraConfig.getSpectra(data));
+
     console.log({ spectra })
     API.createData('spectra', spectra);
   }
@@ -659,7 +660,7 @@ class SpectraDataSet {
     for (let tocEntry of tocSelected) {
       promises.push(
         this.roc.document(tocEntry.id).then(async (sample) => {
-          let spectra = this.spectraConfig.getSpectra(sample);
+          let spectra = filterSpectraUsingInfo(this.spectraConfig.getSpectra(sample));
           for (let spectrum of spectra) {
             if (spectrum.jcamp && spectrum.jcamp.filename) {
               await this.addSpectrumToSelected(
@@ -809,3 +810,19 @@ function recolor(spectraInDataset) {
 }
 
 module.exports = SpectraDataSet;
+
+function filterSpectraUsingInfo(spectra) {
+  let spectraInfoContains = API.getData('spectraInfoContains');
+  if (!spectraInfoContains) return spectra;
+  spectraInfoContains = spectraInfoContains.resurrect();
+  if (!spectraInfoContains) return spectra;
+  spectraInfoContains = spectraInfoContains.toLowerCase();
+  let filteredSpectra = [];
+  for (let spectrum of spectra) {
+    if (!spectrum.info) continue
+    if (spectrum.info.toLowerCase().includes(spectraInfoContains)) {
+      filteredSpectra.push(spectrum);
+    }
+  }
+  return filteredSpectra;
+}
