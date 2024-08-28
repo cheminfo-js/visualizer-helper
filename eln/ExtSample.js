@@ -1,5 +1,5 @@
-import API from 'src/util/api';
 import IDB from 'src/util/IDBKeyValue';
+import API from 'src/util/api';
 
 import ExpandableMolecule from './ExpandableMolecule';
 import MF from './MF';
@@ -16,46 +16,46 @@ class Sample {
     // make sure we don't copy attachment metadata
     const s = sample.$content
       ? {
-          $content: {
-            general: sample.$content.general,
-            spectra: {
-              nmr: [],
-              mass: [],
-              ir: [],
-              chromatogram: []
-            },
-            identifier: sample.$content.identifier,
-            stock: sample.$content.stock
-          }
+        $content: {
+          general: sample.$content.general,
+          spectra: {
+            nmr: [],
+            mass: [],
+            ir: [],
+            chromatogram: []
+          },
+          identifier: sample.$content.identifier,
+          stock: sample.$content.stock
         }
+      }
       : {
-          $content: {
-            general: {
-              title: '',
-              description: '',
-              mf: '',
-              molfile: ''
-            },
-            spectra: {
-              nmr: [],
-              mass: [],
-              ir: [],
-              chromatogram: []
-            },
-            image: []
-          }
-        };
+        $content: {
+          general: {
+            title: '',
+            description: '',
+            mf: '',
+            molfile: ''
+          },
+          spectra: {
+            nmr: [],
+            mass: [],
+            ir: [],
+            chromatogram: []
+          },
+          image: []
+        }
+      };
 
     this.sample = JSON.parse(JSON.stringify(s));
 
-    this.options = Object.assign({}, defaultOptions, options);
+    this.options = { ...defaultOptions, ...options };
     Object.assign(this.sample, this.options.sample);
     this._init();
   }
 
   _loadSample(sample) {
     this.sample = sample;
-    var sampleVar = API.getVar(this.options.varName);
+    let sampleVar = API.getVar(this.options.varName);
 
     API.setVariable('sampleCode', sampleVar, ['$id', 0]);
     API.setVariable('batchCode', sampleVar, ['$id', 1]);
@@ -87,7 +87,7 @@ class Sample {
     this.mf.fromMF();
 
     this.onChange = (event) => {
-      var jpathStr = event.jpath.join('.');
+      let jpathStr = event.jpath.join('.');
 
       if (jpathStr.replace(/\.\d+\..*/, '') === '$content.spectra.nmr') {
         this.nmr1dManager.updateIntegralOptions();
@@ -120,7 +120,7 @@ class Sample {
 
   async _init() {
     this._initialized = new Promise(async (resolve) => {
-      var sample;
+      let sample;
       if (this.options.trackId) {
         try {
           sample = await idb.get(this.options.trackId);
@@ -163,7 +163,7 @@ class Sample {
     }
     name = String(name);
     // maps name of variable to type of data
-    var types = {
+    let types = {
       droppedNmr: 'nmr',
       droppedIR: 'ir',
       droppedUV: 'uv',
@@ -177,10 +177,7 @@ class Sample {
       droppedDSC: 'differentialScanningCalorimetry',
       droppedHg: 'hgPorosimetry',
       droppedDCS: 'differentialCentrifugalSedimentation',
-      droppedXray: 'xray',
-      droppedXRD: 'xrd',
       droppedXRF: 'xrf',
-      droppedXPS: 'xps',
       droppedImage: 'image',
       droppedGenbank: 'genbank'
     };
@@ -192,7 +189,7 @@ class Sample {
     // Dropped data can be an array
     // Expecting format as from drag and drop module
     // we store the data in the view
-    var droppedDatas = API.getData(name);
+    let droppedDatas = API.getData(name);
     droppedDatas = droppedDatas.file || droppedDatas.str;
     for (let droppedData of droppedDatas) {
       if (!droppedData.filename.includes('.')) droppedData.filename += '.txt';
@@ -213,10 +210,7 @@ class Sample {
 
         for (let i = 1; i < converted.length; i++) {
           newData.push({
-            filename: droppedData.filename.replace(
-              '.' + extension,
-              '_' + i + '.jdx'
-            ),
+            filename: droppedData.filename.replace(/\.[^.]*$/, `_${i}.jdx`),
             mimetype: 'chemical/x-jcamp-dx',
             contentType: 'chemical/x-jcamp-dx',
             encoding: 'utf8',
@@ -225,7 +219,7 @@ class Sample {
         }
 
         droppedData.filename = droppedData.filename.replace(
-          '.' + extension,
+          `.${extension}`,
           '.jdx'
         );
         droppedData.mimetype = 'chemical/x-jcamp-dx';

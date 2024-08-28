@@ -5,17 +5,17 @@ import UI from 'src/util/ui';
 import Roc from '../rest-on-couch/Roc';
 
 import ExpandableMolecule from './ExpandableMolecule';
-import Nmr1dManager from './Nmr1dManager';
 import MF from './MF';
-import { createVar } from './jpaths';
-import elnPlugin from './libs/elnPlugin';
+import Nmr1dManager from './Nmr1dManager';
 import Sequence from './Sequence';
+import { createVar } from './jpaths';
 import convertToJcamp from './libs/convertToJcamp';
+import elnPlugin from './libs/elnPlugin';
 import { createTree } from './libs/jcampconverter';
 
 const DataObject = Datas.DataObject;
 
-var defaultOptions = {
+let defaultOptions = {
   varName: 'sample',
   track: false,
   bindChange: true,
@@ -23,9 +23,9 @@ var defaultOptions = {
 
 class Sample {
   constructor(couchDB, uuid, options = {}) {
-    this.options = Object.assign({}, defaultOptions, options);
+    this.options = { ...defaultOptions, ...options };
 
-    var roc = API.cache('roc');
+    let roc = API.cache('roc');
     if (!roc) {
       roc = new Roc({
         url: couchDB.url,
@@ -38,7 +38,7 @@ class Sample {
     this.roc = roc;
 
     if (options.onSync) {
-      var emitter = this.roc.getDocumentEventEmitter(uuid);
+      let emitter = this.roc.getDocumentEventEmitter(uuid);
       emitter.on('sync', () => options.onSync(true));
       emitter.on('unsync', () => options.onSync(false));
     }
@@ -127,7 +127,7 @@ Your local changes will be lost.</p>`;
   }
 
   createVariables() {
-    var sampleVar = API.getVar(this.options.varName);
+    let sampleVar = API.getVar(this.options.varName);
     createVar(sampleVar, 'sampleCode');
     createVar(sampleVar, 'batchCode');
     createVar(sampleVar, 'creationDate');
@@ -380,7 +380,7 @@ Your local changes will be lost.</p>`;
 
     // Dropped data can be an array
     // Expecting format as from drag and drop module
-    var droppedDatas = API.getData(variableName);
+    let droppedDatas = API.getData(variableName);
     droppedDatas = droppedDatas.file || droppedDatas.str;
     if (converters) {
       // a converter may generate many results
@@ -408,12 +408,9 @@ Your local changes will be lost.</p>`;
           }
           for (let i = 0; i < converted.length; i++) {
             if (typeof converted[i] === 'string') {
-              const extend = i > 0 ? '_' + (i + 1) : '';
+              const extend = i > 0 ? `_${i + 1}` : '';
               newData.push({
-                filename: droppedData.filename.replace(
-                  '.' + extension,
-                  extend + '.jdx',
-                ),
+                filename: droppedData.filename.replace(/\.[^.]*$/, `${extend}.jdx`),
                 mimetype: 'chemical/x-jcamp-dx',
                 contentType: 'chemical/x-jcamp-dx',
                 encoding: 'utf8',
@@ -423,6 +420,7 @@ Your local changes will be lost.</p>`;
               newData.push({ ...converted[i] });
             }
           }
+          debugger;
           droppedData.converted = true;
         }
       }
@@ -695,9 +693,9 @@ Your local changes will be lost.</p>`;
       case 'attachRaman':
       case 'attachPermeability':
       case 'attachMass': {
-        var tempType = action.name.replace('attach', '');
-        var type = tempType.charAt(0).toLowerCase() + tempType.slice(1);
-        var droppedDatas = action.value;
+        let tempType = action.name.replace('attach', '');
+        let type = tempType.charAt(0).toLowerCase() + tempType.slice(1);
+        let droppedDatas = action.value;
         droppedDatas = droppedDatas.file || droppedDatas.str;
         await this.attachFiles(droppedDatas, type);
         break;
