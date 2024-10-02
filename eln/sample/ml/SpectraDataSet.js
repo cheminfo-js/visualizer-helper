@@ -554,8 +554,6 @@ class SpectraDataSet {
     let uuid = String(samples[0].id);
     let data = await this.roc.document(uuid, { varName: 'linkedSample' });
     let spectra = filterSpectraUsingInfo(this.spectraConfig.getSpectra(data));
-
-    console.log({ spectra })
     API.createData('spectra', spectra);
   }
 

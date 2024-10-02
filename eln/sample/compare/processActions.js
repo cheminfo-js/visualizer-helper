@@ -49,9 +49,7 @@ async function processActions(action) {
       let blob = new Blob([text], {
         type: 'text/plain',
       });
-      fileSaver(blob, 'spectra.tsv');
-      break;
-
+      fileSaver(blob, analysis.label || 'spectra.tsv');
       break;
     }
     case 'setSpectrum': {
