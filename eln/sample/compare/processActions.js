@@ -52,6 +52,31 @@ async function processActions(action) {
       fileSaver(blob, analysis.label || 'spectra.tsv');
       break;
     }
+    case 'DownloadMatrix': {
+      const analysesManager = API.cache('analysesManager');
+      const selectedSpectra = API.getData('selectedSpectra');
+      const preferences = API.getData('preferences').resurrect();
+      const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
+      let ids = selectedSpectra
+        .filter((entry) => DataObject.resurrect(entry.display))
+        .map((entry) => String(entry.id));
+      let analyses = analysesManager.getAnalyses({ ids });
+      if (!analyses) {
+        console.error('No analysis found')
+      }
+
+      const text = ExtendedCommonSpectrum.toMatrix(analyses, {
+        selector: preferences.selector,
+        normalization: preferences.normalization,
+        endOfLine: '\n',
+        fieldSeparator: '\t',
+      });
+      let blob = new Blob([text], {
+        type: 'text/plain',
+      });
+      fileSaver(blob, analyses[0].label || 'spectra.tsv');
+      break;
+    }
     case 'setSpectrum': {
       const analysesManager = API.cache('analysesManager');
       let selectedSpectra = API.getData('selectedSpectra');
