@@ -32,6 +32,7 @@ export const filters = `
 			    <option value="rollingBallBaseline" data-options="">Rolling ball basline</option>
 
 			    <option value="ensureGrowing" data-options="value">Ensure growing X values</option>
+			    <option value="reverseIfNeeded" data-options="value">Ensure first X s smaller than last X</option>
 
 			    <option value="xFunction" data-options="function">Function on X</option>
 			    <option value="yFunction" data-options="function">Function on Y</option>

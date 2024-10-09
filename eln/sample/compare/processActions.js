@@ -2,6 +2,7 @@ import fileSaver from 'file-saver';
 import Datas from 'src/main/datas';
 import API from 'src/util/api';
 import Color from 'src/util/color';
+import UI from 'src/util/ui';
 
 import recalculateCharts from './recalculateCharts';
 import trackMove from './trackMove';
@@ -13,112 +14,116 @@ const colors = Color.getDistinctColorsAsString(nbColors);
 
 async function processActions(action) {
   if (!action || !action.name) return;
-  switch (action.name) {
-    case 'trackMove':
-      trackMove(action);
-      break;
-    case 'recalculateCharts':
-      recalculateCharts();
-      break;
-    case 'spectrumInfo':
-      const jcampInfo = await API.require('vh/eln/util/jcampInfo');
-      jcampInfo(action.value);
-      break;
-    case 'removeSpectrum': {
-      removeSpectrum(action);
-      break;
-    }
-    case 'DownloadTSV': {
-      const analysesManager = API.cache('analysesManager');
-      const selectedSpectra = API.getData('selectedSpectra');
-      const preferences = API.getData('preferences').resurrect();
-      const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
-      let ids = selectedSpectra
-        .filter((entry) => DataObject.resurrect(entry.display))
-        .map((entry) => String(entry.id));
-      let analysis = analysesManager.getAnalyses({ ids })[0];
-      if (!analysis) {
-        console.error('No analysis found')
+  try {
+    switch (action.name) {
+      case 'trackMove':
+        trackMove(action);
+        break;
+      case 'recalculateCharts':
+        recalculateCharts();
+        break;
+      case 'spectrumInfo':
+        const jcampInfo = await API.require('vh/eln/util/jcampInfo');
+        jcampInfo(action.value);
+        break;
+      case 'removeSpectrum': {
+        removeSpectrum(action);
+        break;
       }
+      case 'DownloadTSV': {
+        const analysesManager = API.cache('analysesManager');
+        const selectedSpectra = API.getData('selectedSpectra');
+        const preferences = API.getData('preferences').resurrect();
+        const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
+        let ids = selectedSpectra
+          .filter((entry) => DataObject.resurrect(entry.display))
+          .map((entry) => String(entry.id));
+        let analysis = analysesManager.getAnalyses({ ids })[0];
+        if (!analysis) {
+          console.error('No analysis found')
+        }
 
-      const text = ExtendedCommonSpectrum.toText(analysis, {
-        selector: preferences.selector,
-        endOfLine: '\n',
-        fieldSeparator: '\t',
-      });
-      let blob = new Blob([text], {
-        type: 'text/plain',
-      });
-      fileSaver(blob, analysis.label || 'spectra.tsv');
-      break;
-    }
-    case 'DownloadMatrix': {
-      const analysesManager = API.cache('analysesManager');
-      const selectedSpectra = API.getData('selectedSpectra');
-      const preferences = API.getData('preferences').resurrect();
-      const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
-      let ids = selectedSpectra
-        .filter((entry) => DataObject.resurrect(entry.display))
-        .map((entry) => String(entry.id));
-      let analyses = analysesManager.getAnalyses({ ids });
-      if (!analyses) {
-        console.error('No analysis found')
+        const text = ExtendedCommonSpectrum.toText(analysis, {
+          selector: preferences.selector,
+          endOfLine: '\n',
+          fieldSeparator: '\t',
+        });
+        let blob = new Blob([text], {
+          type: 'text/plain',
+        });
+        fileSaver(blob, analysis.label || 'spectra.tsv');
+        break;
       }
+      case 'DownloadMatrix': {
+        const analysesManager = API.cache('analysesManager');
+        const selectedSpectra = API.getData('selectedSpectra');
+        const preferences = API.getData('preferences').resurrect();
+        const ExtendedCommonSpectrum = API.cache('ExtendedCommonSpectrum');
+        let ids = selectedSpectra
+          .filter((entry) => DataObject.resurrect(entry.display))
+          .map((entry) => String(entry.id));
+        let analyses = analysesManager.getAnalyses({ ids });
+        if (!analyses) {
+          console.error('No analysis found')
+        }
 
-      const text = ExtendedCommonSpectrum.toMatrix(analyses, {
-        selector: preferences.selector,
-        normalization: preferences.normalization,
-        endOfLine: '\n',
-        fieldSeparator: '\t',
-      });
-      let blob = new Blob([text], {
-        type: 'text/plain',
-      });
-      fileSaver(blob, analyses[0].label || 'spectra.tsv');
-      break;
+        const text = ExtendedCommonSpectrum.toMatrix(analyses, {
+          selector: preferences.selector,
+          normalization: preferences.normalization,
+          endOfLine: '\n',
+          fieldSeparator: '\t',
+        });
+        let blob = new Blob([text], {
+          type: 'text/plain',
+        });
+        fileSaver(blob, analyses[0].label || 'spectra.tsv');
+        break;
+      }
+      case 'setSpectrum': {
+        const analysesManager = API.cache('analysesManager');
+        let selectedSpectra = API.getData('selectedSpectra');
+        // should only be used from the home page and the product is 'tocSample'
+        let tocSample = API.getData('tocSample');
+        analysesManager.analyses.splice(0);
+        selectedSpectra.length = 0;
+        let result = await addSpectrum(action, { toc: tocSample });
+        API.getData('selectedSpectra').triggerChange();
+        updateDistinctLabelUnits();
+        return result;
+      }
+      case 'addSample':
+        await addSample(action);
+        API.getData('selectedSpectra').triggerChange();
+        updateDistinctLabelUnits();
+        break;
+      case 'addSpectrum':
+        let result = await addSpectrum(action, {});
+        API.getData('selectedSpectra').triggerChange();
+        updateDistinctLabelUnits();
+        return result;
+      case 'hideSpectra':
+        hideSpectra();
+        break;
+      case 'hideAllSpectra':
+        hideAllSpectra();
+        break;
+      case 'removeAllSpectra':
+        removeAllSpectra();
+        break;
+      case 'showOnlySpectra':
+        showOnlySpectra();
+        break;
+      case 'showSpectra':
+        showSpectra();
+        break;
+      case 'showAllSpectra':
+        showAllSpectra();
+        break;
+      default:
+        console.error(`Action ${action.name} is not recognized`);
     }
-    case 'setSpectrum': {
-      const analysesManager = API.cache('analysesManager');
-      let selectedSpectra = API.getData('selectedSpectra');
-      // should only be used from the home page and the product is 'tocSample'
-      let tocSample = API.getData('tocSample');
-      analysesManager.analyses.splice(0);
-      selectedSpectra.length = 0;
-      let result = await addSpectrum(action, { toc: tocSample });
-      API.getData('selectedSpectra').triggerChange();
-      updateDistinctLabelUnits();
-      return result;
-    }
-    case 'addSample':
-      await addSample(action);
-      API.getData('selectedSpectra').triggerChange();
-      updateDistinctLabelUnits();
-      break;
-    case 'addSpectrum':
-      let result = await addSpectrum(action, {});
-      API.getData('selectedSpectra').triggerChange();
-      updateDistinctLabelUnits();
-      return result;
-    case 'hideSpectra':
-      hideSpectra();
-      break;
-    case 'hideAllSpectra':
-      hideAllSpectra();
-      break;
-    case 'removeAllSpectra':
-      removeAllSpectra();
-      break;
-    case 'showOnlySpectra':
-      showOnlySpectra();
-      break;
-    case 'showSpectra':
-      showSpectra();
-      break;
-    case 'showAllSpectra':
-      showAllSpectra();
-      break;
-    default:
-      console.error(`Action ${action.name} is not recognized`);
+  } catch (e) {
+    UI.showNotification(e.message, 'error');
   }
 }
 
