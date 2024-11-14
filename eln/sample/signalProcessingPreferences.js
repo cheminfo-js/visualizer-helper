@@ -19,6 +19,10 @@ export const filters = `
 			    <option value="divideBySD">Divide by SD</option>
 			    <option value="normed" data-options="value,normedAlgorithm">Normed</option>
 			    <option value="rescale" data-options="min,max">Rescale</option>
+			    <option value="setMinX" data-options="min">Set min X</option>
+			    <option value="setMaxX" data-options="max">Set max X</option>
+			    <option value="setMinY" data-options="min">Set min Y</option>
+			    <option value="setMaxY" data-options="max">Set max Y</option>
 			    
 			    <option value="firstDerivative" data-options="">First derivative</option>
 			    <option value="secondDerivative" data-options="">Second derivative</option>
