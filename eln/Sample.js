@@ -410,7 +410,10 @@ Your local changes will be lost.</p>`;
             if (typeof converted[i] === 'string') {
               const extend = i > 0 ? `_${i + 1}` : '';
               newData.push({
-                filename: droppedData.filename.replace(/\.[^.]*$/, `${extend}.jdx`),
+                filename: droppedData.filename.replace(
+                  /\.[^.]*$/,
+                  `${extend}.jdx`,
+                ),
                 mimetype: 'chemical/x-jcamp-dx',
                 contentType: 'chemical/x-jcamp-dx',
                 encoding: 'utf8',
@@ -420,7 +423,6 @@ Your local changes will be lost.</p>`;
               newData.push({ ...converted[i] });
             }
           }
-          debugger;
           droppedData.converted = true;
         }
       }
@@ -551,33 +553,37 @@ Your local changes will be lost.</p>`;
                   <table>
                   <tr>
                     <th>Kind</th>
-                    <td><input type="text" name="type" value="${info.type
-              }"></td>
+                    <td><input type="text" name="type" value="${
+                      info.type
+                    }"></td>
                   </tr>
                   <tr>
                     <th>Filename (ending with .jdx)</th>
-                    <td><input type="text" pattern=".*\\.jdx$" name="filename" size=40 value="${info.filename
-              }"></td>
+                    <td><input type="text" pattern=".*\\.jdx$" name="filename" size=40 value="${
+                      info.filename
+                    }"></td>
                   </tr>
                   <tr>
                     <th>xUnit (horizon axis)</th>
-                    ${info.xUnit instanceof Array
-                ? `<td><select name="xUnit">${info.xUnit.map(
-                  (xUnit) =>
-                    `<option value="${xUnit}">${xUnit}</option>`,
-                )}</select></td>`
-                : `<td><input type="text" name="xUnit" value="${info.xUnit}"></td>`
-              }
+                    ${
+                      info.xUnit instanceof Array
+                        ? `<td><select name="xUnit">${info.xUnit.map(
+                            (xUnit) =>
+                              `<option value="${xUnit}">${xUnit}</option>`,
+                          )}</select></td>`
+                        : `<td><input type="text" name="xUnit" value="${info.xUnit}"></td>`
+                    }
                   </tr>
                   <tr>
                   <th>yUnit (vectical axis)</th>
-                  ${info.yUnit instanceof Array
-                ? `<td><select name="yUnit">${info.yUnit.map(
-                  (yUnit) =>
-                    `<option value="${yUnit}">${yUnit}</option>`,
-                )}</select></td>`
-                : `<td><input type="text" name="yUnit" value="${info.yUnit}"></td>`
-              }
+                  ${
+                    info.yUnit instanceof Array
+                      ? `<td><select name="yUnit">${info.yUnit.map(
+                          (yUnit) =>
+                            `<option value="${yUnit}">${yUnit}</option>`,
+                        )}</select></td>`
+                      : `<td><input type="text" name="yUnit" value="${info.yUnit}"></td>`
+                  }
                 </tr>
                   </table>
                     <input type="submit" value="Submit"/>
@@ -735,7 +741,12 @@ Your local changes will be lost.</p>`;
       for (const file of files) {
         if (file.filename.match(/\.(jdx|dx)$/i)) {
           const tree = createTree(file.content, { flatten: true }).filter(
-            (spectrum) => spectrum.dataType.match(/NMR SPECTRUM/i),
+            (spectrum) =>
+              spectrum.dataType &&
+              spectrum.dataType
+                .toUpperCase()
+                .replaceAll(' ', '')
+                .match(/NMRSPECTRUM/i),
           );
           for (const entry of tree) {
             newFiles.push({
