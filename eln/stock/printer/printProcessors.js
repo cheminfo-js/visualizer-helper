@@ -146,7 +146,7 @@ define([
         suppressCIPParity: true,
         noStereoProblem: true,
         fontWeight: 'bold',
-        strokeWidth: 1.2,
+        strokeWidth: 1.1,
         factorTextSize: 1.4,
       },
     );
