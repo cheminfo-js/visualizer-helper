@@ -6,7 +6,7 @@ import Color from 'src/util/color';
 import UI from 'src/util/ui';
 import Versioning from 'src/util/versioning';
 
-import { createTree } from '../../libs/jcampconverter';
+import { convert, createTree } from '../../libs/jcampconverter';
 
 const SpectraConfigs = {
   IR: {
@@ -658,7 +658,9 @@ class SpectraDataSet {
     for (let tocEntry of tocSelected) {
       promises.push(
         this.roc.document(tocEntry.id).then(async (sample) => {
-          let spectra = filterSpectraUsingInfo(this.spectraConfig.getSpectra(sample));
+          let spectra = filterSpectraUsingInfo(
+            this.spectraConfig.getSpectra(sample),
+          );
           for (let spectrum of spectra) {
             if (spectrum.jcamp && spectrum.jcamp.filename) {
               await this.addSpectrumToSelected(
@@ -742,9 +744,11 @@ class SpectraDataSet {
           if (spectraInDataset.find((spectrum) => String(spectrum.id) === id)) {
             continue;
           }
+          const jcampPart = tree[i].jcamp;
           const newSpectrum = JSON.parse(JSON.stringify(spectrum));
           newSpectrum.id = id;
-          newSpectrum.jcamp.data = { value: tree[i].jcamp };
+          newSpectrum.meta = getMetaFromJCAMPDX(jcampPart);
+          newSpectrum.jcamp.data = { value: jcampPart };
           spectraInDataset.push(newSpectrum);
         }
       } else {
@@ -755,8 +759,13 @@ class SpectraDataSet {
         ) {
           return;
         }
+        const jcamp = await roc.getAttachment(
+          { _id: sampleID },
+          spectrum.jcamp.filename,
+        );
+        spectrum.meta = getMetaFromJCAMPDX(jcamp);
         spectrum.id = spectrumID;
-
+        spectrum.jcamp.data = { value: jcamp };
         spectraInDataset.push(spectrum);
       }
     }
@@ -817,10 +826,19 @@ function filterSpectraUsingInfo(spectra) {
   spectraInfoContains = spectraInfoContains.toLowerCase();
   let filteredSpectra = [];
   for (let spectrum of spectra) {
-    if (!spectrum.info) continue
+    if (!spectrum.info) continue;
     if (spectrum.info.toLowerCase().includes(spectraInfoContains)) {
       filteredSpectra.push(spectrum);
     }
   }
   return filteredSpectra;
+}
+
+function getMetaFromJCAMPDX(jcamp) {
+  const converted = convert(jcamp, {
+    withoutXY: true,
+    keepRecordsRegExp: /.*/,
+  });
+  if (converted.flatten && converted.flatten.length < 1) return {};
+  return { ...converted.flatten[0].info, ...converted.flatten[0].meta };
 }
