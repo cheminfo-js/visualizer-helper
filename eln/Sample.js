@@ -23,6 +23,8 @@ let defaultOptions = {
 
 class Sample {
   constructor(couchDB, uuid, options = {}) {
+    console.log('============================');
+    this.isSynced = false;
     this.options = { ...defaultOptions, ...options };
 
     let roc = API.cache('roc');
@@ -37,8 +39,11 @@ class Sample {
     }
     this.roc = roc;
 
+    let emitter = this.roc.getDocumentEventEmitter(uuid);
+    emitter.on('sync', () => (this.isSynced = true));
+    emitter.on('unsync', () => (this.isSynced = false));
+
     if (options.onSync) {
-      let emitter = this.roc.getDocumentEventEmitter(uuid);
       emitter.on('sync', () => options.onSync(true));
       emitter.on('unsync', () => options.onSync(false));
     }
@@ -737,7 +742,7 @@ Your local changes will be lost.</p>`;
 
     if (type === 'nmr') {
       const newFiles = [];
-      // we need some hacks for compositve JCAMP files to keep only NMR spectrum and no FID
+      // we need some hacks for composite JCAMP-DX files to keep only NMR spectrum and no FID
       for (const file of files) {
         if (file.filename.match(/\.(jdx|dx)$/i)) {
           const tree = createTree(file.content, { flatten: true }).filter(
