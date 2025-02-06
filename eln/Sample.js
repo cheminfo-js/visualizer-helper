@@ -23,7 +23,6 @@ let defaultOptions = {
 
 class Sample {
   constructor(couchDB, uuid, options = {}) {
-    console.log('============================');
     this.isSynced = false;
     this.options = { ...defaultOptions, ...options };
 
@@ -40,8 +39,12 @@ class Sample {
     this.roc = roc;
 
     let emitter = this.roc.getDocumentEventEmitter(uuid);
-    emitter.on('sync', () => (this.isSynced = true));
-    emitter.on('unsync', () => (this.isSynced = false));
+    emitter.on('sync', () => {
+      this.isSynced = true;
+    });
+    emitter.on('unsync', () => {
+      this.isSynced = false;
+    });
 
     if (options.onSync) {
       emitter.on('sync', () => options.onSync(true));
