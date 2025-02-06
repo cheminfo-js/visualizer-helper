@@ -715,11 +715,14 @@ Your local changes will be lost.</p>`;
         break;
       }
       case 'refresh': {
-        const ok = await UI.confirm(
-          'Are you sure you want to refresh? This will discard your local modifications.',
-        );
-        if (!ok) return;
-        this.unbindChange();
+        const { value = {} } = action;
+        if (!value.noConfirmation) {
+          const ok = await UI.confirm(
+            'Are you sure you want to refresh? This will discard your local modifications.',
+          );
+          if (!ok) return;
+        }
+
         this.expandableMolecule.unbindChange();
         await this.roc.discardLocal(this.sample);
         this._initializeObjects();
