@@ -657,6 +657,12 @@ Your local changes will be lost.</p>`;
       case 'explodeSequences':
         Sequence.explodeSequences(this.sample);
         break;
+      case 'pasteAnalysis':
+        await pasteAnalysis(this);
+        break;
+      case 'copyAnalysis':
+        await copyAnalysis(this.sample, action.value);
+        break;
       case 'calculateMFFromSequence':
         Sequence.calculateMFFromSequence(this.sample);
         break;
@@ -780,6 +786,122 @@ Your local changes will be lost.</p>`;
       await this.roc.attach(type, this.sample, data, options);
     }
   }
+}
+
+async function pasteAnalysis(sample) {
+  // need to check that the sample is sync otherwise no save !!!
+  if (!sample.isSynced) {
+    UI.dialog(
+      'The sample is currently being edited. Please save it first.',
+      'error',
+    );
+  }
+
+  let pasted;
+  try {
+    pasted = JSON.parse(await navigator.clipboard.readText());
+    if (!pasted || pasted.type !== '11871ff4-e464-11ef-b4ba-7e5598b597fb') {
+      throw new Error('');
+    }
+  } catch (e) {
+    UI.dialog(
+      'You first need to copy an analysis from another sample by clicking on the copy icon present on the analysis line.',
+    );
+  }
+
+  const existingAttachments = sample.sample._attachments;
+
+  const { data, jpath } = structuredClone(pasted);
+  const newAttachments = [];
+
+  for (const key in data) {
+    if (typeof data[key] === 'object' && data[key]._source) {
+      const source = data[key]._source;
+      delete data[key]._source;
+      // we need to load the files from dURL
+      const response = await fetch(source.dUrl, { credentials: 'include' });
+
+      const filename = getName(existingAttachments, data[key].filename);
+      data[key].filename = filename;
+      existingAttachments[filename] = {};
+      newAttachments.push({
+        content: await response.arrayBuffer(),
+        filename,
+        contentType: source.content_type,
+        mimetype: source.content_type,
+        encoding: 'buffer',
+      });
+    }
+  }
+
+  // where should I add the entry in the right table
+  const target = sample.sample.getChildSync(['$content', ...jpath]);
+  target.push(data);
+  target.triggerChange();
+
+  // time to save all the new attachments
+  if (newAttachments.length > 0) {
+    await sample.roc.addAttachment(sample.sample, newAttachments, {});
+    API.doAction('refresh', { noConfirmation: true });
+  }
+
+  function getName(existingAttachments, filename) {
+    console.log({ existingAttachments, filename });
+    if (!existingAttachments[filename]) {
+      return filename;
+    }
+    let i = 0;
+    do {
+      if (filename.includes('.')) {
+        const newName = filename.replace(/(.*)(\..*)/, '$1_' + i + '$2');
+        if (!existingAttachments[newName]) {
+          return newName;
+        }
+      } else {
+        return filename + '_' + i;
+      }
+      i++;
+    } while (i < 500);
+  }
+}
+
+async function copyAnalysis(sample, original) {
+  const cloned = JSON.parse(JSON.stringify(original));
+  // where is this event coming from ?
+  const jpath = [];
+  // temporary variable to go up in hierarchy
+  let current = original;
+  while ((current = current.__parent)) {
+    if (current.__name === '$content') break;
+    jpath.push(current.__name);
+  }
+  jpath.reverse();
+
+  const attachments = sample._attachments;
+
+  // we need to keep dUrl if available and add mimetype of the file
+  for (const key in cloned) {
+    if (typeof cloned[key] === 'object' && cloned[key].filename) {
+      if (original[key].dUrl) {
+        cloned[key]._source = {
+          dUrl: String(original[key].dUrl),
+          ...attachments[cloned[key].filename],
+          filename: cloned[key].filename,
+        };
+      }
+    }
+  }
+
+  const data = {
+    // just a random uuid
+    type: '11871ff4-e464-11ef-b4ba-7e5598b597fb',
+    jpath,
+    data: cloned,
+  };
+
+  await navigator.clipboard.writeText(JSON.stringify(data, undefined, 2));
+
+  UI.showNotification('Analysis copied to clipboard', 'success');
 }
 
 function updateSample(sample) {
