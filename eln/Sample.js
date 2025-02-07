@@ -809,7 +809,7 @@ async function pasteAnalysis(sample) {
     );
   }
 
-  const existingAttachments = sample.sample._attachments;
+  const existingAttachments = sample.sample._attachments || {};
 
   const { data, jpath } = structuredClone(pasted);
   const newAttachments = [];
