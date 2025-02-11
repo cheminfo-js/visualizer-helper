@@ -23,7 +23,7 @@ let defaultOptions = {
 
 class Sample {
   constructor(couchDB, uuid, options = {}) {
-    this.isSynced = false;
+    this.isSynced = true;
     this.options = { ...defaultOptions, ...options };
 
     let roc = API.cache('roc');
@@ -795,18 +795,29 @@ async function pasteAnalysis(sample) {
       'The sample is currently being edited. Please save it first.',
       'error',
     );
+    return;
   }
 
   let pasted;
   try {
-    pasted = JSON.parse(await navigator.clipboard.readText());
+    const clipboard = await navigator.clipboard.readText();
+    pasted = JSON.parse(clipboard);
     if (!pasted || pasted.type !== '11871ff4-e464-11ef-b4ba-7e5598b597fb') {
-      throw new Error('');
+      UI.dialog(
+        'You first need to copy an analysis from another sample by clicking on the copy icon present on the analysis line.',
+      );
+      return;
     }
   } catch (e) {
-    UI.dialog(
-      'You first need to copy an analysis from another sample by clicking on the copy icon present on the analysis line.',
-    );
+    if (e.name === 'NotAllowedError') {
+      UI.showNotification(
+        'Clipboard access denied, please try to paste again',
+        'warning',
+      );
+    } else {
+      UI.dialog(e.toString());
+    }
+    return;
   }
 
   const existingAttachments = sample.sample._attachments || {};
