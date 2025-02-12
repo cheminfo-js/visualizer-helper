@@ -848,13 +848,13 @@ async function pasteAnalysis(sample) {
   // where should I add the entry in the right table
   const target = sample.sample.getChildSync(['$content', ...jpath]);
   target.push(data);
-  target.triggerChange();
 
   // time to save all the new attachments
   if (newAttachments.length > 0) {
     await sample.roc.addAttachment(sample.sample, newAttachments, {});
-    API.doAction('refresh', { noConfirmation: true });
   }
+  await sample.roc.update(sample.sample);
+  API.doAction('refresh', { noConfirmation: true });
 
   function getName(existingAttachments, filename) {
     console.log({ existingAttachments, filename });
