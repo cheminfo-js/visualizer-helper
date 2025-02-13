@@ -819,6 +819,10 @@ async function pasteAnalysis(sample) {
     }
     return;
   }
+  if (sample.sample._id === pasted.data._parentID) {
+    UI.dialog('You can not paste an analysis from the same sample', 'error');
+    return;
+  }
 
   const existingAttachments = sample.sample._attachments || {};
 
@@ -902,6 +906,7 @@ async function copyAnalysis(sample, original) {
       }
     }
   }
+  cloned._parentID = sample._id;
 
   const data = {
     // just a random uuid
