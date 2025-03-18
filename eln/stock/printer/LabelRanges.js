@@ -81,7 +81,6 @@ function expandRanges(data) {
       if (currents[i] === undefined || currents[i] === '') {
         datum[field] = '';
       } else {
-        console.log(ranges);
         datum[field] = numeral(currents[i]).format(ranges[field].format);
       }
     }
@@ -105,7 +104,6 @@ function expandRanges(data) {
   const cols = [];
   const columns = Object.keys(toPrint[0] || {});
   for (const column of columns) {
-    console.log(column);
     if (!column.includes('_')) {
       cols.push({
         name: column,
