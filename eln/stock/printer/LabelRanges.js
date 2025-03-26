@@ -104,7 +104,7 @@ function expandRanges(data) {
   const cols = [];
   const columns = Object.keys(toPrint[0] || {});
   for (const column of columns) {
-    if (!column.includes('_')) {
+    if (!column.includes('_') && column !== 'labelNumber') {
       cols.push({
         name: column,
         jpath: [column],
