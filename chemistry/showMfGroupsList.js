@@ -8,7 +8,6 @@ import OCL from 'openchemlib/openchemlib-full';
 import MolecularFormula from '../eln/libs/MolecularFormula';
 
 module.exports = function showMfGroupsList(CustomMolecularFormula) {
-  console.log({ CustomMolecularFormula });
   const html = getHtml(CustomMolecularFormula);
   UI.dialog(html, {
     width: 1000,
@@ -27,7 +26,6 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
   groups.forEach((group) => {
     group.mfHtml = new MF(String(group.mf)).toHtml();
   });
-  console.log({ groups });
   let html = `
     <style>
       
