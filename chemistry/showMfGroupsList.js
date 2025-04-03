@@ -11,7 +11,7 @@ module.exports = function showMfGroupsList(CustomMolecularFormula) {
   console.log({ CustomMolecularFormula });
   const html = getHtml(CustomMolecularFormula);
   UI.dialog(html, {
-    width: 880,
+    width: 1000,
     height: 700,
     title: 'List of known groups',
   });
@@ -27,6 +27,7 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
   groups.forEach((group) => {
     group.mfHtml = new MF(String(group.mf)).toHtml();
   });
+  console.log({ groups });
   let html = `
     <style>
       
@@ -65,11 +66,16 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
             text-overflow:ellipsis;
         }
         #allGroups thead th:nth-child(5), #allGroups tbody td:nth-child(5) {
+            width: 100px;
+            max-width: 100px;
+            text-overflow:ellipsis;
+        }
+        #allGroups thead th:nth-child(6), #allGroups tbody td:nth-child(6) {
           width: 70px;
           max-width: 70px;
           text-overflow:ellipsis;
         }
-        #allGroups thead th:nth-child(6), #allGroups tbody td:nth-child(6) {
+        #allGroups thead th:nth-child(7), #allGroups tbody td:nth-child(7) {
           width: 250px;
           text-overflow:ellipsis;
         }
@@ -82,6 +88,7 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
                 <th>Symbol</th>
                 <th>Name</th>
                 <th>mf</th>
+                <th>em</th>
                 <th>Kind</th>
                 <th>One letter</th>
                 <th>Structure</th>
@@ -97,6 +104,7 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
                     <td>${group.mfHtml}<span style='display:none'>${
                   group.mf
                 }</span></td>
+                <td>${group.monoisotopicMass.toFixed(4)}</td>
                 <td>${group.kind}</td>
                 <td>${group.oneLetter ? group.oneLetter : ''}</td>
                     <td><span  style="zoom: 0.8">
@@ -139,6 +147,31 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
                 }
             }
         }
+        {
+          let table = document.getElementById('allGroups');
+          let headers = table.querySelectorAll('thead th');
+          let tbody = table.querySelector('tbody');
+          headers.forEach((header, index) => {
+              header.addEventListener('click', function () {
+                  let rows = Array.from(tbody.querySelectorAll('tr'));
+                  let isAscending = header.dataset.order === 'asc';
+                  header.dataset.order = isAscending ? 'desc' : 'asc';
+
+                  rows.sort((rowA, rowB) => {
+                      let cellA = rowA.children[index].textContent.trim();
+                      let cellB = rowB.children[index].textContent.trim();
+                      
+                      let a = parseFloat(cellA) || cellA.toLowerCase();
+                      let b = parseFloat(cellB) || cellB.toLowerCase();
+
+                      return isAscending ? (a > b ? 1 : -1) : (a < b ? 1 : -1);
+                  });
+
+                  tbody.innerHTML = '';
+                  rows.forEach(row => tbody.appendChild(row));
+              });
+          });
+      }
     </script>
 `;
   return html;
