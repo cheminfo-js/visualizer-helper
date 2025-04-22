@@ -1,10 +1,9 @@
 import CA from 'src/util/couchdbAttachments';
-
-import OCLE from '../eln/libs/OCLE';
+import { Molecule } from 'openchemlib/openchemlib-core';
 
 async function fetchData(
   query = undefined,
-  url = 'https://couch.cheminfo.org/cheminfo-public/668677b6432fb3fde76305cfe706856d'
+  url = 'https://couch.cheminfo.org/cheminfo-public/668677b6432fb3fde76305cfe706856d',
 ) {
   var ca = new CA(url);
 
@@ -25,7 +24,7 @@ async function fetchData(
       rn: parts[0],
       kind: parts[1],
       experiment: parts[2],
-      url: a.url
+      url: a.url,
     };
   });
 
@@ -39,25 +38,25 @@ async function fetchData(
     if (!data[file.rn]) {
       data[file.rn] = {
         rn: file.rn,
-        myResult: ''
+        myResult: '',
       };
     }
     var datum = data[file.rn];
     switch (file.kind) {
       case 'mol':
         datum.mol = { type: 'mol2d', url: file.url };
-        var molfile = await (await fetch(file.url)).text();
-        var molecule = OCLE.Molecule.fromMolfile(molfile);
+        const molfile = await (await fetch(file.url)).text();
+        const molecule = Molecule.fromMolfile(molfile);
         datum.oclCode = molecule.getIDCode();
         datum.id = datum.rn;
         datum.result = datum.oclCode;
         datum.mf = molecule.getMolecularFormula().formula;
         molecule.addImplicitHydrogens();
         datum.nbDiaH = molecule.getGroupedDiastereotopicAtomIDs({
-          atomLabel: 'H'
+          atomLabel: 'H',
         }).length;
         datum.nbDiaC = molecule.getGroupedDiastereotopicAtomIDs({
-          atomLabel: 'C'
+          atomLabel: 'C',
         }).length;
         datum.nbH = Number(datum.mf.replace(/.*H([0-9]+).*/, '$1'));
         datum.nbC = Number(datum.mf.replace(/.*C([0-9]+).*/, '$1'));

@@ -1,7 +1,9 @@
 import API from 'src/util/api';
 import UI from 'src/util/ui';
+import { OCL, OCLUtils } from './libs/OCLUtils';
 
-import OCLE from './libs/OCLE';
+const { Molecule } = OCL;
+const { toVisualizerMolfile } = OCLUtils;
 
 const noop = () => {
   /* noop */
@@ -20,17 +22,18 @@ class ExpandableMolecule {
     this.molfile = String(
       this.sample.getChildSync(['$content', 'general', 'molfile']) || '',
     );
-    this.idCode = OCLE.Molecule.fromMolfile(this.molfile).getIDCode();
+    this.idCode = Molecule.fromMolfile(this.molfile).getIDCode();
     this.expandedHydrogens = false;
     this.jsmeEditionMode = false;
     this.calculateDiastereotopicID = this.options.calculateDiastereotopicID;
-    this.maxDiastereotopicCalculationTime = this.options.maxDiastereotopicCalculationTime;
+    this.maxDiastereotopicCalculationTime =
+      this.options.maxDiastereotopicCalculationTime;
 
     this.onChange = (event) => {
       // is this really a modification ? or a loop event ...
       // need to compare former oclID with new oclID
 
-      var newMolecule = OCLE.Molecule.fromMolfile(`${event.target}`);
+      var newMolecule = Molecule.fromMolfile(`${event.target}`);
 
       var oclID = newMolecule.getIDCodeAndCoordinates();
       if (oclID.idCode !== this.idCode) {
@@ -125,7 +128,7 @@ class ExpandableMolecule {
     We create the view variable with or without expanded hydrogens
      */
   createViewVariable() {
-    var molecule = OCLE.Molecule.fromMolfile(this.molfile);
+    var molecule = Molecule.fromMolfile(this.molfile);
     let calculateDiastereotopicID = this.calculateDiastereotopicID;
     if (calculateDiastereotopicID) {
       // is it reasonnable to calculate the DiastereotopicID. We check the time it will take
@@ -144,12 +147,12 @@ class ExpandableMolecule {
     }
     if (this.expandedHydrogens) {
       molecule.addImplicitHydrogens();
-      let viewMolfileExpandedH = molecule.toVisualizerMolfile({
+      let viewMolfileExpandedH = toVisualizerMolfile(molecule, {
         diastereotopic: calculateDiastereotopicID,
       });
       API.createData('viewMolfileExpandedH', viewMolfileExpandedH);
     } else {
-      let viewMolfile = molecule.toVisualizerMolfile({
+      let viewMolfile = toVisualizerMolfile(molecule, {
         heavyAtomHydrogen: true,
         diastereotopic: calculateDiastereotopicID,
       });
