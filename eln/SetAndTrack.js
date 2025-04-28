@@ -3,11 +3,11 @@
 import API from 'src/util/api';
 import Versioning from 'src/util/versioning';
 import URI from 'uri/URI';
-import OCL from 'openchemlib/openchemlib-core';
+import OCL from 'openchemlib';
 
 async function track() {
   var sample = JSON.parse(
-    window.localStorage.getItem('external_cache') || '{}'
+    window.localStorage.getItem('external_cache') || '{}',
   );
   API.createData('nmr', []);
   API.createData('mass', []);

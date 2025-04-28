@@ -1,4 +1,4 @@
-import OCL from 'openchemlib/openchemlib-core';
+import OCL from 'openchemlib';
 import UI from 'src/util/ui';
 import _ from 'lodash';
 

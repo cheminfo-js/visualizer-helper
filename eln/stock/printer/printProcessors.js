@@ -4,7 +4,7 @@ define([
   'browserified/twig/twig',
   'canvg',
   '../../libs/Image',
-  'openchemlib/openchemlib-core',
+  'openchemlib',
 ], function (Datas, UI, twig, canvg, IJS, OCL) {
   IJS = IJS.default;
   const DataObject = Datas.DataObject;

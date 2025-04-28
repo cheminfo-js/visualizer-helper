@@ -1,12 +1,11 @@
-
-import OCL from 'openchemlib/openchemlib-core';
+import OCL from 'openchemlib';
 
 function Structure(roc) {
   return {
     async refresh(type) {
       const options = {
         key: 'structure',
-        varName: 'structures'
+        varName: 'structures',
       };
 
       if (type) {
@@ -37,27 +36,35 @@ function Structure(roc) {
         $owners: ['structureRW', 'structureR'],
         $content: {
           structureId: await getNextId(roc, 'structureId', prefix),
-          coordinates: ocl.coordinates
-        }
+          coordinates: ocl.coordinates,
+        },
       };
-      await roc.create(newEntry, Object.assign({
-        messages: {
-          409: 'Conflict: this structure already exists'
-        }
-      }, rocOptions));
+      await roc.create(
+        newEntry,
+        Object.assign(
+          {
+            messages: {
+              409: 'Conflict: this structure already exists',
+            },
+          },
+          rocOptions,
+        ),
+      );
       return newEntry;
     },
 
     async createAndGetId(molfile, type) {
       const ocl = getOcl(molfile, true);
       try {
-        const entry = await this._createFromOcl(ocl, type, { disableNotification: true });
+        const entry = await this._createFromOcl(ocl, type, {
+          disableNotification: true,
+        });
         return entry;
       } catch (e) {
         if (e.message === 'Conflict') {
           // try to get id
           const result = await roc.view('entryById', {
-            key: [ocl.idCode, type]
+            key: [ocl.idCode, type],
           });
           if (result.length) {
             return result[0];
@@ -67,8 +74,7 @@ function Structure(roc) {
         }
       }
       return null;
-    }
-
+    },
   };
 }
 
@@ -83,7 +89,7 @@ function getOcl(molfile, throwIfEmpty) {
 
 async function getNextId(roc, viewName, type) {
   const v = await roc.view(viewName, {
-    reduce: true
+    reduce: true,
   });
 
   if (!v.length || !v[0].value || !v[0].value[type]) {

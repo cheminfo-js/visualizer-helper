@@ -3,7 +3,7 @@ We retrieve some exercises for structural analysis
  */
 
 import UI from 'src/util/ui';
-import OCL from 'openchemlib/openchemlib-full';
+import OCL from 'openchemlib';
 
 import MolecularFormula from '../eln/libs/MolecularFormula';
 

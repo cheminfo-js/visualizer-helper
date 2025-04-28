@@ -1,5 +1,5 @@
 import CA from 'src/util/couchdbAttachments';
-import { Molecule } from 'openchemlib/openchemlib-core';
+import { Molecule } from 'openchemlib';
 
 async function fetchData(
   query = undefined,

@@ -1,6 +1,6 @@
 'use strict';
 
-import OCL from 'openchemlib/openchemlib-core';
+import OCL from 'openchemlib';
 
 // returns GHS information based on pubchem and a smiles
 

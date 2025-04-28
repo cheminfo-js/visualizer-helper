@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-import OCL from 'openchemlib/openchemlib-core';
+import OCL from 'openchemlib';
 
 // returns GHS information based on pubchem and a smiles
 
@@ -11,29 +11,31 @@ define(['src/util/ui', 'src/util/api'], function (UI, API) {
     return fromSMILES(smiles, options);
   }
 
-
   async function fromSMILES(smiles, options = {}) {
-    const { detailed = false } = options
+    const { detailed = false } = options;
 
-    const { Compound } = await API.require('https://www.lactame.com/lib/pubchem/0.2.0/pubchem.js');
+    const { Compound } = await API.require(
+      'https://www.lactame.com/lib/pubchem/0.2.0/pubchem.js',
+    );
     const compound = await Compound.fromSmiles(String(smiles));
     const compoundData = await compound.getData();
 
     const ghs = compoundData.ghs;
     const ghsFull = compoundData.getGHS();
 
-    const html = detailed ? await UI.renderTwig(ghsFullTemplate, { ghsFull }) : await UI.renderTwig(ghsTemplate, { ghs });
+    const html = detailed
+      ? await UI.renderTwig(ghsFullTemplate, { ghsFull })
+      : await UI.renderTwig(ghsTemplate, { ghs });
 
     UI.dialog(html, {
       width: 1000,
       height: 800,
-      title: 'GHS information'
+      title: 'GHS information',
     });
   }
 
   return { fromIDCode, fromSMILES };
 });
-
 
 const ghsTemplate = `
 <style>
@@ -215,4 +217,4 @@ const ghsFullTemplate = `
         {% endfor %}
     {% endif %}
 </div>
-`
+`;
