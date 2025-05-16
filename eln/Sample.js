@@ -746,6 +746,14 @@ Your local changes will be lost.</p>`;
     }
   }
 
+  // if we programmatically change the sample especially the molfile
+  // we need to call this method
+  refresh() {
+    this.expandableMolecule.unbindChange();
+    this._initializeObjects();
+    this.bindChange();
+  }
+
   async attachFiles(files, type, options) {
     if (!files || !type) return;
     if (!Array.isArray(files)) {
