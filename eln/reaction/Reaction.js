@@ -69,7 +69,7 @@ export async function load(uuid) {
 
   const overview = reaction._attachments
     ? reaction._attachments['overview.svg'] ||
-    reaction._attachments['overview.png']
+      reaction._attachments['overview.png']
     : undefined;
   if (overview) {
     API.createData('overviewImage', overview.url);
@@ -101,6 +101,18 @@ function updateEntry(entry) {
   }
   if (!entry.$content.meta) {
     entry.$content.meta = {};
+  }
+  // do we have the property reagents.X.partsByWeight
+  if (entry.$content.reagents) {
+    for (const reagent of entry.$content.reagents) {
+      if (!reagent.partsByWeight) {
+        if (reagent.g) {
+          reagent.partsByWeight = reagent.g;
+        } else {
+          reagent.partsByWeight = '';
+        }
+      }
+    }
   }
 }
 
