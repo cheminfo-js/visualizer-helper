@@ -292,13 +292,38 @@ define([
         .catch(handleError(this, options));
     }
 
+    async queryBySampleId(options) {
+      await this.__ready;
+      options = createOptions(options, 'getQuery');
+      let requestUrl = new URI(this.databaseUrl).segment(`_query/sampleById`);
+      addSearch(requestUrl, options);
+      requestUrl = requestUrl.normalize().href();
+
+      return superagent
+        .get(requestUrl)
+        .withCredentials()
+        .then((res) => {
+          if (res && res.body && res.status === 200) {
+            for (let i = 0; i < res.body.length; i++) {
+              res.body[i].document = {
+                type: 'object',
+                withCredentials: true,
+                url: `${this.entryUrl}/${res.body[i].id}`,
+              };
+            }
+          }
+          return res.body;
+        })
+        .then(handleSuccess(this, options))
+        .catch(handleError(this, options));
+    }
+
     async query(viewName, options) {
       await this.__ready;
       options = createOptions(options, 'getQuery');
       let requestUrl = new URI(this.databaseUrl).segment(`_query/${viewName}`);
       addSearch(requestUrl, options);
       requestUrl = requestUrl.normalize().href();
-      console.log({ requestUrl });
 
       return superagent
         .get(requestUrl)
