@@ -12,6 +12,8 @@ define([
      * @param {object} [options={}]
      * @param {string} [options.basename='']
      * @param {Array} [options.categories=[{value: 'chemical', description: 'Chemical'}]]
+     * @param {object} [options.customProperties={}]
+     * @param {string} [options.defaultTwig='']
      */
     constructor(couchDB, options = {}) {
       this.roc = new Roc({ ...couchDB, database: 'templates' });
@@ -21,6 +23,8 @@ define([
       this.categories = options.categories || [
         { value: 'chemical', description: 'Chemical' },
       ];
+      this.customProperties = options.customProperties || {};
+      this.defaultTwig = options.defaultTwig || '';
       this.refreshTemplates();
     }
 
@@ -44,7 +48,6 @@ define([
     }
 
     async createTemplate(options = {}) {
-      const { defaultTwig = '' } = options;
       const form = await UI.form(
         `
           <div>
@@ -87,13 +90,13 @@ define([
         $content: {
           title: '',
           description: '',
-          twig: defaultTwig,
-          script: '',
+          twig: this.defaultTwig,
           category: [
             {
               value: this.basename + form.category + '.' + form.name,
             },
           ],
+          ...this.customProperties,
         },
       };
 
