@@ -89,5 +89,5 @@ function formatExactMass(value) {
   result.push('Found');
   result.push(Number(accurate.value).toFixed(4));
 
-  return `${result.join(' ')}.`;
+  return `${result.join(' ')}`;
 }

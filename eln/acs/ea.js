@@ -21,7 +21,7 @@ export default function toHtml(value, options = {}) {
       let th = oneTheoretical.length ? oneTheoretical[0].ratio * 100 : 0;
       theoretical.push(`${element.toUpperCase()}, ${th.toFixed(2)}`);
       found.push(
-        `${element.toUpperCase()}, ${(value[field] * 100).toFixed(2)}`
+        `${element.toUpperCase()}, ${(value[field] * 100).toFixed(2)}`,
       );
     }
   }
@@ -29,7 +29,6 @@ export default function toHtml(value, options = {}) {
   result += theoretical.join('; ');
   result += '. Found: ';
   result += found.join('; ');
-  result += '.';
   return result;
 }
 
