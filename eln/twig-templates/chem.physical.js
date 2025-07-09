@@ -212,6 +212,8 @@ module.exports = `
                                         <option value="pentane">pentane</option>
                                         <option value="cyclohexane">cyclohexane</option>
                                         <option value="AcOEt">AcOEt</option>
+                                        <option value="Toluene">Toluene</option>
+                                        <option value="AcOH">AcOH</option>
                                     </select>
                                 </td>
                                 <td>
