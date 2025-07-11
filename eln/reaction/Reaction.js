@@ -30,19 +30,8 @@ export async function load(uuid) {
     varName: 'reaction',
     track: true,
   });
-  console.log({ reaction });
-  // small fix for missing seq in reagents
-  updateEntry(reaction);
 
-  if (reaction.$content.reagents) {
-    var maxID =
-      Math.max(...reaction.$content.reagents.map((r) => r.seq || 0)) + 1;
-    reaction.$content.reagents.forEach((r) => {
-      if (!r.seq) r.seq = maxID++;
-    });
-  }
-  // for compatibility reason we need to upgrade old status
-  Color.updateStatuses(reaction.$content.status);
+  updateEntry(reaction);
 
   var reactionVar = API.getVar('reaction');
   API.setVariable('reactionContent', reactionVar, ['$content']);
@@ -76,35 +65,41 @@ export async function load(uuid) {
   }
 }
 
-function updateEntry(entry) {
+function updateEntry(reaction) {
   // update all reaction format
-  if (entry.$content.procedure) {
-    let value = entry.$content.procedure;
+  if (reaction.$content.procedure) {
+    let value = reaction.$content.procedure;
     if (value && value.type === 'html') {
       value = value.value;
-      entry.$content.procedure = value;
+      reaction.$content.procedure = value;
     }
     if (value && value.includes('id="reagent_')) {
       value = value.replace(
         /<span id="reagent_([0-9]+)">([^<]*)<\/span>/g,
         '<a href="#reagent_$1">$2</a>',
       );
-      entry.$content.procedure = value;
+      reaction.$content.procedure = value;
     }
   }
-  if (entry.$content.keywords && !entry.$content.meta) {
-    entry.$content.meta = {};
-    for (let keyword of entry.$content.keywords) {
-      entry.$content.meta[keyword.kind] = keyword.value;
+  if (reaction.$content.keywords && !reaction.$content.meta) {
+    reaction.$content.meta = {};
+    for (let keyword of reaction.$content.keywords) {
+      reaction.$content.meta[keyword.kind] = keyword.value;
     }
-    delete entry.$content.keywords;
+    delete reaction.$content.keywords;
   }
-  if (!entry.$content.meta) {
-    entry.$content.meta = {};
+  if (!reaction.$content.meta) {
+    reaction.$content.meta = {};
   }
-  // do we have the property reagents.X.partsByWeight
-  if (entry.$content.reagents) {
-    for (const reagent of entry.$content.reagents) {
+  if (reaction.$content.reagents) {
+    let maxID =
+      Math.max(...reaction.$content.reagents.map((r) => r.seq || 0)) + 1;
+    reaction.$content.reagents.forEach((r) => {
+      if (!r.seq) r.seq = maxID++;
+    });
+
+    // do we have the property reagents.X.partsByWeight
+    for (const reagent of reaction.$content.reagents) {
       if (!reagent.partsByWeight) {
         if (reagent.g) {
           reagent.partsByWeight = reagent.g;
@@ -114,6 +109,24 @@ function updateEntry(entry) {
       }
     }
   }
+
+  if (reaction.$content.products) {
+    let maxID =
+      Math.max(...reaction.$content.products.map((p) => p.seq || 0)) + 1;
+    reaction.$content.products.forEach((p) => {
+      if (!p.seq) p.seq = maxID++;
+    });
+
+    // do we have the property reagents.X.partsByWeight
+    for (const product of reaction.$content.products) {
+      if (!product.kind) {
+        product.kind = 'pure';
+      }
+    }
+  }
+
+  // for compatibility reason we need to upgrade old status
+  Color.updateStatuses(reaction.$content.status);
 }
 
 export async function loadViewPreferences() {
