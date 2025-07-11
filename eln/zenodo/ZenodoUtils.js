@@ -131,11 +131,11 @@ export function getReadmeForDeposition(dep) {
       '',
       `**This version's DOI:** https://doi.org/${meta.prereserve_doi.doi}`,
       '',
-      `**All version's DOI:** https://doi.org/${dep.conceptdoi}`,
-      '',
     );
   }
-  md.push('');
+  if (dep.conceptdoi) {
+    md.push(`**All version's DOI:** https://doi.org/${dep.conceptdoi}`, '');
+  }
 
   md.push(
     `## Dataset Information`,
@@ -207,7 +207,7 @@ export function getReadmeForDeposition(dep) {
       '',
       'If you use this dataset in your research, please cite it as:',
       '',
-      `> ${authors}. \`*${title}*\`. Zenodo, ${year}. https://doi.org/${generalDOI}.`,
+      `> ${authors}. &#96;*${title}*&#96;. Zenodo, ${year}. https://doi.org/${generalDOI}.`,
     );
 
     if (dep.links && dep.links.parent_doi) {
