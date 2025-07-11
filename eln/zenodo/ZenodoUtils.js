@@ -155,9 +155,9 @@ export function getReadmeForDeposition(dep) {
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     for (const [i, c] of meta.creators.entries()) {
       md.push(
-        `- [**${c.name}**${
-          c.affiliation ? ` (${c.affiliation}) - ${c.role}` : ''
-        }](${c.orcid ? `https://orcid.org/${c.orcid}` : ''})`,
+        `- [**${c.name}**${c.affiliation ? ` (${c.affiliation})` : ''}](${
+          c.orcid ? `https://orcid.org/${c.orcid}` : ''
+        })`,
       );
     }
   } else {
@@ -167,9 +167,9 @@ export function getReadmeForDeposition(dep) {
     md.push('', `## Contributors`);
     for (const [i, c] of meta.contributors.entries()) {
       md.push(
-        `- [**${c.name}**${c.affiliation ? ` (${c.affiliation})` : ''}](${
-          c.orcid ? `https://orcid.org/${c.orcid}` : ''
-        })`,
+        `- [**${c.name}**${
+          c.affiliation ? ` (${c.affiliation}) - ${c.role}` : ''
+        }](${c.orcid ? `https://orcid.org/${c.orcid}` : ''})`,
       );
     }
   } else {
