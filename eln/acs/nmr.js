@@ -5,7 +5,11 @@ export default function toHTML(value) {
   if (value && value.range) {
     const ranges = new SD.Ranges(value.range);
     let nucleus = '1H';
-    if (!Array.isArray(value.nucleus)) nucleus = [value.nucleus];
+    if (Array.isArray(value.nucleus)) {
+      nucleus = value.nucleus[0];
+    } else if (value.nucleus) {
+      nucleus = value.nucleus;
+    }
     acsString += ranges.getACS({
       nucleus,
       solvent: value.solvent,
