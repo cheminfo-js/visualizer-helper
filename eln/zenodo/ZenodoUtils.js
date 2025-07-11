@@ -125,48 +125,17 @@ export function getReadmeForDeposition(dep) {
 
   md.push(`# ${meta.title || dep.title || 'Research Dataset'}`);
 
-  if (meta.prereserve_doi && meta.prereserve_doi.doi) {
-    md.push('', `**DOI:** https://doi.org/${meta.prereserve_doi.doi}`, '');
-  }
-
-  if (Array.isArray(meta.creators) && meta.creators.length > 0) {
-    const authorList = meta.creators
-      .map((c) => {
-        let authorStr = c.name;
-        if (c.affiliation) {
-          authorStr += ` (${c.affiliation})`;
-        }
-        if (c.orcid) {
-          authorStr += ` [ORCID: ${c.orcid}]`;
-        }
-        return authorStr;
-      })
-      .join(', ');
-
-    md.push(`**Authors:** ${authorList}`, '');
-  }
-
-  if (meta.publication_date) {
-    md.push(`**Publication Date:** ${meta.publication_date}`);
-  }
-
-  if (meta.license) {
-    md.push(`**License:** ${meta.license}`);
-  }
-
-  if (meta.access_right) {
+  const generalDOI = dep.conceptdoi || meta.prereserve_doi.doi || '';
+  if (generalDOI) {
     md.push(
-      `**Access:** ${
-        meta.access_right.charAt(0).toUpperCase() + meta.access_right.slice(1)
-      } access`,
+      '',
+      `**This version's DOI:** https://doi.org/${meta.prereserve_doi.doi}`,
+      '',
+      `**All version's DOI:** https://doi.org/${dep.conceptdoi}`,
+      '',
     );
   }
-
   md.push('');
-
-  if (meta.description) {
-    md.push(`## Abstract`, '', meta.description, '');
-  }
 
   md.push(
     `## Dataset Information`,
@@ -186,26 +155,41 @@ export function getReadmeForDeposition(dep) {
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     for (const [i, c] of meta.creators.entries()) {
       md.push(
+        `- [**${c.name}**${
+          c.affiliation ? ` (${c.affiliation}) - ${c.role}` : ''
+        }](${c.orcid ? `https://orcid.org/${c.orcid}` : ''})`,
+      );
+    }
+  } else {
+    md.push('_No creators listed._');
+  }
+  if (Array.isArray(meta.contributors) && meta.contributors.length > 0) {
+    md.push('', `## Contributors`);
+    for (const [i, c] of meta.contributors.entries()) {
+      md.push(
         `- [**${c.name}**${c.affiliation ? ` (${c.affiliation})` : ''}](${
           c.orcid ? `https://orcid.org/${c.orcid}` : ''
         })`,
       );
     }
   } else {
-    md.push('_No creators listed._');
+    md.push('', `## Contributors`, '_No contributors listed._');
   }
+
   md.push('', `## Links`);
   if (dep.links && typeof dep.links === 'object') {
-    if (dep.links.html) md.push(`- [Zenodo Page](${dep.links.html})`);
-    if (dep.links.self) md.push(`- [API Resource](${dep.links.self})`);
-    if (dep.links.bucket) md.push(`- [Bucket](${dep.links.bucket})`);
+    if (dep.links.latest_html)
+      md.push(`- [Zenodo Page](${dep.links.latest_html})`);
+    if (dep.links.latest) md.push(`- [API Resource](${dep.links.latest})`);
   }
   md.push('', `## Files`);
   if (Array.isArray(dep.files) && dep.files.length > 0) {
     md.push(`| Filename | Size | Checksum |`, `|----------|------|----------|`);
     for (const f of dep.files) {
       md.push(
-        `| ${f.filename} | ${formatBytes(f.filesize)} | \`${f.checksum}\` |`,
+        `| [${f.filename}](${f.links.downloads}) | ${formatBytes(
+          f.filesize,
+        )} | \`${f.checksum}\` |`,
       );
     }
   } else {
@@ -214,9 +198,7 @@ export function getReadmeForDeposition(dep) {
   md.push('');
 
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
-    const year = meta.publication_date
-      ? new Date(meta.publication_date).getFullYear()
-      : new Date().getFullYear();
+    const year = meta.publication_date;
     const authors = meta.creators.map((c) => c.name).join(', ');
     const title = meta.title || dep.title || 'Research Dataset';
 
@@ -225,11 +207,11 @@ export function getReadmeForDeposition(dep) {
       '',
       'If you use this dataset in your research, please cite it as:',
       '',
-      `${authors} (${year}). *${title}*. Zenodo.`,
+      `> ${authors}. \`*${title}*\`. Zenodo, ${year}. https://doi.org/${generalDOI}.`,
     );
 
-    if (meta.prereserve_doi && meta.prereserve_doi.doi) {
-      md.push(` https://doi.org/${meta.prereserve_doi.doi}`);
+    if (dep.links && dep.links.parent_doi) {
+      md.push(dep.links.parent_doi);
     }
 
     md.push('');
