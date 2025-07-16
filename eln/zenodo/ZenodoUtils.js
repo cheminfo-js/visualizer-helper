@@ -190,9 +190,9 @@ export function getReadmeForDeposition(dep) {
     md.push(`| Filename | Size | Checksum |`, `|----------|------|----------|`);
     for (const f of dep.files) {
       md.push(
-        `| [${f.filename}](${f.links.downloads}) | ${formatBytes(
-          f.filesize,
-        )} | \`${f.checksum}\` |`,
+        `| [${f.filename}](${f.links.self}) | ${formatBytes(f.filesize)} | \`${
+          f.checksum
+        }\` |`,
       );
     }
   } else {
