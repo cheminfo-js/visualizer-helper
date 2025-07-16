@@ -129,12 +129,15 @@ export function getReadmeForDeposition(dep) {
   if (generalDOI) {
     md.push(
       '',
-      `**This version's DOI:** https://doi.org/${meta.prereserve_doi.doi}`,
+      `**This version's DOI:** [https://doi.org/${meta.prereserve_doi.doi}](https://doi.org/${meta.prereserve_doi.doi})`,
       '',
     );
   }
   if (dep.conceptdoi) {
-    md.push(`**All version's DOI:** https://doi.org/${dep.conceptdoi}`, '');
+    md.push(
+      `**All version's DOI:** [https://doi.org/${dep.conceptdoi}](https://doi.org/${dep.conceptdoi})`,
+      '',
+    );
   }
 
   md.push(
