@@ -187,7 +187,10 @@ export function getReadmeForDeposition(dep) {
   }
   md.push('', `## Files`);
   if (Array.isArray(dep.files) && dep.files.length > 0) {
-    md.push(`| Filename | Size | Checksum |`, `|----------|------|----------|`);
+    md.push(
+      `| Filename | Size | Checksum (md5) |`,
+      `|----------|------|----------------|`,
+    );
     for (const f of dep.files) {
       md.push(
         `| [${f.filename}](${f.links.self}) | ${formatBytes(f.filesize)} | \`${
