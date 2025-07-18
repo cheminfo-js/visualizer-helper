@@ -175,7 +175,10 @@ export function getReadmeForDeposition(deposition) {
 
   md.push(`# ${meta.title || deposition.title || 'Research Dataset'}`);
 
-  const generalDOI = deposition.conceptdoi || meta.prereserve_doi?.doi || '';
+  const generalDOI =
+    deposition.conceptdoi ||
+    (meta.prereserve_doi && meta.prereserve_doi.doi) ||
+    '';
   if (generalDOI) {
     md.push(
       '',
