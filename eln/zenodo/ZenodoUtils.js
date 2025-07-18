@@ -23,7 +23,7 @@ export function getReadmeForSample(
   }
 
   md.push(
-    `# 'Analytical Characterization of Chemical Compound for ${depositionUrl}'`,
+    `# Analytical Characterization of Chemical Compound for [Zenodo Deposition](${depositionUrl})`,
     '',
   );
 
