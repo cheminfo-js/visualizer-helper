@@ -108,14 +108,35 @@ export function getReadmeForSample(
     const summary = `
 ### Analytical Data Availability
 
-| Analytical Method | Data Available | File Format |
-|-------------------|----------------|-------------|
-| **Infrared (IR)** | ${spectra.ir ? '✓' : '✗'} |  |
-| **NMR** | ${spectra.nmr ? '✓' : '✗'} | 
-| **Chromatography** | ${spectra.chromatogram ? '✓' : '✗'} |
 `;
 
     md.push(summary);
+
+    const spectraHeader = {
+      method: 'Analytical Method',
+      available: 'Data Available',
+      format: 'File Format',
+    };
+
+    const spectraRows = [
+      {
+        method: '**Infrared (IR)**',
+        available: spectra.ir ? '✓' : '✗',
+        format: '',
+      },
+      {
+        method: '**NMR**',
+        available: spectra.nmr ? '✓' : '✗',
+        format: '',
+      },
+      {
+        method: '**Chromatography**',
+        available: spectra.chromatogram ? '✓' : '✗',
+        format: '',
+      },
+    ];
+
+    md.push(getMDTable(spectraHeader, spectraRows));
   }
 
   if (general.molfile) {
@@ -146,18 +167,21 @@ export function getReadmeForDeposition(dep) {
     );
   }
 
+  const infoHeader = { field: 'Field', value: 'Value' };
+  const infoRows = [
+    { field: '**Deposition ID**', value: dep.id || 'N/A' },
+    { field: '**State**', value: dep.state || 'N/A' },
+    { field: '**Access Right**', value: meta.access_right || 'N/A' },
+    { field: '**License**', value: meta.license || 'N/A' },
+    { field: '**Upload Type**', value: meta.upload_type || 'N/A' },
+    { field: '**Publisher**', value: meta.imprint_publisher || 'N/A' },
+    { field: '**Publication Date**', value: meta.publication_date || 'N/A' },
+  ];
+
   md.push(
     `## Dataset Information`,
     '',
-    `| Field         | Value |`,
-    `|-------------- |-------|`,
-    `| **Deposition ID** | ${dep.id || 'N/A'} |`,
-    `| **State**         | ${dep.state || 'N/A'} |`,
-    `| **Access Right**  | ${meta.access_right || 'N/A'} |`,
-    `| **License**       | ${meta.license || 'N/A'} |`,
-    `| **Upload Type**   | ${meta.upload_type || 'N/A'} |`,
-    `| **Publisher**     | ${meta.imprint_publisher || 'N/A'} |`,
-    `| **Publication Date** | ${meta.publication_date || 'N/A'} |`,
+    getMDTable(infoHeader, infoRows),
     '',
     `## Creators`,
   );
@@ -193,17 +217,21 @@ export function getReadmeForDeposition(dep) {
   }
   md.push('', `## Files`);
   if (Array.isArray(dep.files) && dep.files.length > 0) {
-    md.push(
-      `| Filename | Size | Checksum (md5) |`,
-      `|----------|------|----------------|`,
-    );
-    for (const f of dep.files) {
-      md.push(
-        `| [${f.filename}](${f.links.self}) | ${formatBytes(f.filesize)} | \`${
-          f.checksum
-        }\` |`,
-      );
-    }
+    // Build the header and rows for the files table
+    const filesHeader = {
+      filename: 'Filename',
+      filesize: 'Size',
+      checksum: 'Checksum',
+    };
+
+    const filesRows = dep.files.map((f) => ({
+      filename: `[${f.filename}](${f.links.downloads})`,
+      filesize: formatBytes(f.filesize),
+      checksum: `\`${f.checksum}\``,
+    }));
+
+    // Append the table to your md array
+    md.push(getMDTable(filesHeader, filesRows));
   } else {
     md.push('_No files uploaded._');
   }
@@ -263,4 +291,57 @@ function formatBytes(bytes) {
   const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
+}
+
+/**
+ *
+ * @param {Record<string, string>} header
+ * @param {Array<Record<string, any>>} rows
+ * @returns
+ */
+export function getMDTable(header, rows) {
+  const keys = Object.keys(header); // ['name', 'surname']
+  const labels = Object.values(header); // ['Firstname', 'Lastname']
+
+  // Prepare all rows: first row is the header labels, followed by data rows as arrays of strings
+  const allRows = [
+    labels,
+    ...rows.map((row) =>
+      keys.map((k) => {
+        const val = row[k];
+        return val != null ? String(val) : '';
+      }),
+    ),
+  ];
+
+  // Compute max width for each column
+  const colWidths = keys.map((_, i) =>
+    Math.max(...allRows.map((row) => row[i].length)),
+  );
+
+  // Helper to pad strings (left-align)
+  const pad = (str, len) => str + ' '.repeat(len - str.length);
+
+  // Build header row
+  const headerRow =
+    '| ' +
+    labels.map((label, i) => pad(label, colWidths[i])).join(' | ') +
+    ' |';
+
+  // Build divider row (---)
+  const dividerRow =
+    '|-' + colWidths.map((w) => '-'.repeat(w)).join('-|-') + '-|';
+
+  // Build data rows
+  const dataRows = rows.map(
+    (row) =>
+      '| ' +
+      keys
+        .map((k, i) => pad(row[k] != null ? String(row[k]) : '', colWidths[i]))
+        .join(' | ') +
+      ' |',
+  );
+
+  // Join all parts
+  return [headerRow, dividerRow, ...dataRows].join('\n');
 }
