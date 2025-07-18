@@ -200,6 +200,23 @@ export function getReadmeForDeposition(dep) {
   }
   md.push('');
 
+  if (
+    Array.isArray(meta.related_identifiers) &&
+    meta.related_identifiers.length > 0
+  ) {
+    md.push(`## Related Identifiers`, '');
+    md.push('This dataset is related to the following identifiers:');
+    for (const rel of meta.related_identifiers) {
+      const relType = rel.resource_type || 'unknown';
+      const relId = rel.identifier || 'N/A';
+      const cites = rel.cites || '';
+      const scheme = rel.scheme || 'unknown';
+      md.push(`- **${relType}**: [${scheme}:${relId}](${relId}) ${cites}`);
+    }
+  } else {
+    md.push(`## Related Identifiers`, '_No related identifiers._');
+  }
+
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     const year = meta.publication_date;
     const authors = meta.creators.map((c) => c.name).join(', ');
