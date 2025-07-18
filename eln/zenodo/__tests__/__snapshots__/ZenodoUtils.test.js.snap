@@ -1,0 +1,101 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Readme for deposition 1`] = `
+"# 'Analytical Characterization of Chemical Compound for https://zenodo.org/'
+
+**Compound Name:** Benzoic acid
+
+## Compound Information
+
+| Property              | Value          |
+|-----------------------|----------------|
+| **Molecular Formula** | C7H6O2         |
+| **Molecular Weight**  | 122.12 g·mol⁻¹ |
+| **Exact Mass**        | 122.0368 Da    |
+
+
+
+### Analytical Data Availability
+
+| Analytical Method  | Data Available |
+|--------------------|----------------|
+| **NMR**            | ✓              |
+| **Mass spectra**   | ✓              |
+| **IR spectrum**    | ✓              |
+| **Chromatography** | ✓              |
+
+\`\`\`Cc1ccccc1.O=[Mn](=O)(=O)[O-].[K+]>>O=C(O)c1ccccc1
+Actelion Java MolfileCreator 1.0
+
+  9  9  0  0  0  0  0  0  0  0999 V2000
+    5.4491   -7.8228    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1500   -7.0787    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1500   -5.5787    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8509   -7.8345    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.5518   -7.0906    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8509   -9.3344    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.2527   -7.8464    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.5518  -10.0904    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.2527   -9.3463    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  2  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  4  5  2  0  0  0  0
+  4  6  1  0  0  0  0
+  5  7  1  0  0  0  0
+  6  8  2  0  0  0  0
+  7  9  2  0  0  0  0
+  8  9  1  0  0  0  0
+M  END
+\`\`\`"
+`;
+
+exports[`Readme for sample 1`] = `
+"# 'Analytical Characterization of Chemical Compound for https://zenodo.org/'
+
+**Compound Name:** Benzoic acid
+
+## Compound Information
+
+| Property              | Value          |
+|-----------------------|----------------|
+| **Molecular Formula** | C7H6O2         |
+| **Molecular Weight**  | 122.12 g·mol⁻¹ |
+| **Exact Mass**        | 122.0368 Da    |
+
+
+
+### Analytical Data Availability
+
+| Analytical Method  | Data Available |
+|--------------------|----------------|
+| **NMR**            | ✓              |
+| **Mass spectra**   | ✓              |
+| **IR spectrum**    | ✓              |
+| **Chromatography** | ✓              |
+
+\`\`\`Cc1ccccc1.O=[Mn](=O)(=O)[O-].[K+]>>O=C(O)c1ccccc1
+Actelion Java MolfileCreator 1.0
+
+  9  9  0  0  0  0  0  0  0  0999 V2000
+    5.4491   -7.8228    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1500   -7.0787    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    4.1500   -5.5787    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8509   -7.8345    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.5518   -7.0906    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    2.8509   -9.3344    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.2527   -7.8464    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    1.5518  -10.0904    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.2527   -9.3463    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  2  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  4  5  2  0  0  0  0
+  4  6  1  0  0  0  0
+  5  7  1  0  0  0  0
+  6  8  2  0  0  0  0
+  7  9  2  0  0  0  0
+  8  9  1  0  0  0  0
+M  END
+\`\`\`"
+`;

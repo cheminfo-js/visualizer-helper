@@ -44,60 +44,83 @@ export function getReadmeForSample(
     md.push(`${general.description}`, '');
   }
 
+  // Define the header
+  const compoundInfoHeader = {
+    property: 'Property',
+    value: 'Value',
+  };
+
+  // Collect rows conditionally
+  const compoundInfoRows = [];
+
+  if (general.mf) {
+    compoundInfoRows.push({
+      property: '**Molecular Formula**',
+      value: general.mf,
+    });
+  }
+  if (general.mw) {
+    compoundInfoRows.push({
+      property: '**Molecular Weight**',
+      value: `${general.mw.toFixed(2)} g·mol⁻¹`,
+    });
+  }
+  if (general.em) {
+    compoundInfoRows.push({
+      property: '**Exact Mass**',
+      value: `${general.em.toFixed(4)} Da`,
+    });
+  }
+
+  // Push the section with the formatted table
   md.push(
     `## Compound Information`,
     '',
-    `| Property | Value |`,
-    `|----------|-------|`,
+    getMDTable(compoundInfoHeader, compoundInfoRows),
+    '',
   );
-
-  if (general.mf) {
-    md.push(`| **Molecular Formula** | ${general.mf} |`);
-  }
-
-  if (general.mw) {
-    md.push(`| **Molecular Weight** | ${general.mw} g·mol⁻¹ |`);
-  }
-
-  if (general.em) {
-    md.push(`| **Exact Mass** | ${general.em} Da |`);
-  }
 
   md.push('');
 
-  const hasPhysicalData =
-    bps.length > 0 || mps.length > 0 || densities.length > 0;
+  if (bps.length > 0 || mps.length > 0 || densities.length > 0) {
+    const propertiesHeader = {
+      property: 'Property',
+      value: 'Value',
+      conditions: 'Conditions',
+    };
 
-  if (hasPhysicalData) {
-    md.push(
-      `## Physical Properties`,
-      '',
-      `| Property | Value | Conditions |`,
-      `|----------|-------|------------|`,
-    );
-    for (const bp of bps) {
-      md.push(
-        `| **Boiling Point** | ${bp.low}${
+    const propertiesRows = [
+      ...bps.map((bp) => ({
+        property: '**Boiling Point**',
+        value: `${bp.low}${
           bp.high !== undefined && bp.high !== bp.low ? ' - ' + bp.high : ''
-        } °C | ${bp.pressure || 'Standard atmospheric pressure'} |`,
-      );
-    }
-    for (const mp of mps) {
-      md.push(
-        `| **Melting Point** | ${mp.low}${
+        } °C`,
+        conditions: bp.pressure || 'Standard atmospheric pressure',
+      })),
+      ...mps.map((mp) => ({
+        property: '**Melting Point**',
+        value: `${mp.low}${
           mp.high !== undefined && mp.high !== mp.low ? ' - ' + mp.high : ''
-        } °C | |`,
-      );
-    }
-    for (const density of densities) {
-      md.push(
-        `| **Density** | ${density.low}${
+        } °C`,
+        conditions: '',
+      })),
+      ...densities.map((density) => ({
+        property: '**Density**',
+        value: `${density.low}${
           density.high !== undefined && density.high !== density.low
             ? ' - ' + density.high
             : ''
-        } g·cm⁻³ | |`,
-      );
-    }
+        } g·cm⁻³`,
+        conditions: '',
+      })),
+    ];
+
+    md.push(
+      `## Physical Properties`,
+      '',
+      getMDTable(propertiesHeader, propertiesRows),
+      '',
+    );
 
     md.push('');
   }
@@ -107,7 +130,6 @@ export function getReadmeForSample(
   if (hasSpectralData) {
     const summary = `
 ### Analytical Data Availability
-
 `;
 
     md.push(summary);
@@ -115,28 +137,29 @@ export function getReadmeForSample(
     const spectraHeader = {
       method: 'Analytical Method',
       available: 'Data Available',
-      format: 'File Format',
     };
 
     const spectraRows = [
       {
-        method: '**Infrared (IR)**',
-        available: spectra.ir ? '✓' : '✗',
-        format: '',
-      },
-      {
         method: '**NMR**',
         available: spectra.nmr ? '✓' : '✗',
-        format: '',
+      },
+      {
+        method: '**Mass spectra**',
+        available: spectra.mass ? '✓' : '✗',
+      },
+      {
+        method: '**IR spectrum**',
+        available: spectra.ir ? '✓' : '✗',
       },
       {
         method: '**Chromatography**',
         available: spectra.chromatogram ? '✓' : '✗',
-        format: '',
       },
     ];
 
     md.push(getMDTable(spectraHeader, spectraRows));
+    md.push('');
   }
 
   if (general.molfile) {
@@ -146,13 +169,13 @@ export function getReadmeForSample(
   return md.join('\n');
 }
 
-export function getReadmeForDeposition(dep) {
+export function getReadmeForDeposition(deposition) {
   const md = [];
-  const meta = dep.metadata || {};
+  const meta = deposition.metadata || {};
 
-  md.push(`# ${meta.title || dep.title || 'Research Dataset'}`);
+  md.push(`# ${meta.title || deposition.title || 'Research Dataset'}`);
 
-  const generalDOI = dep.conceptdoi || meta.prereserve_doi.doi || '';
+  const generalDOI = deposition.conceptdoi || meta.prereserve_doi?.doi || '';
   if (generalDOI) {
     md.push(
       '',
@@ -160,17 +183,17 @@ export function getReadmeForDeposition(dep) {
       '',
     );
   }
-  if (dep.conceptdoi) {
+  if (deposition.conceptdoi) {
     md.push(
-      `**All version's DOI:** [https://doi.org/${dep.conceptdoi}](https://doi.org/${dep.conceptdoi})`,
+      `**All version's DOI:** [https://doi.org/${deposition.conceptdoi}](https://doi.org/${deposition.conceptdoi})`,
       '',
     );
   }
 
   const infoHeader = { field: 'Field', value: 'Value' };
   const infoRows = [
-    { field: '**Deposition ID**', value: dep.id || 'N/A' },
-    { field: '**State**', value: dep.state || 'N/A' },
+    { field: '**Deposition ID**', value: deposition.id || 'N/A' },
+    { field: '**State**', value: deposition.state || 'N/A' },
     { field: '**Access Right**', value: meta.access_right || 'N/A' },
     { field: '**License**', value: meta.license || 'N/A' },
     { field: '**Upload Type**', value: meta.upload_type || 'N/A' },
@@ -184,6 +207,7 @@ export function getReadmeForDeposition(dep) {
     getMDTable(infoHeader, infoRows),
     '',
     `## Creators`,
+    '',
   );
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     for (const [i, c] of meta.creators.entries()) {
@@ -197,7 +221,7 @@ export function getReadmeForDeposition(dep) {
     md.push('_No creators listed._');
   }
   if (Array.isArray(meta.contributors) && meta.contributors.length > 0) {
-    md.push('', `## Contributors`);
+    md.push('', `## Contributors`, '');
     for (const [i, c] of meta.contributors.entries()) {
       md.push(
         `- [**${c.name}**${
@@ -206,17 +230,18 @@ export function getReadmeForDeposition(dep) {
       );
     }
   } else {
-    md.push('', `## Contributors`, '_No contributors listed._');
+    md.push('', `## Contributors`, '', '_No contributors listed._');
   }
 
-  md.push('', `## Links`);
-  if (dep.links && typeof dep.links === 'object') {
-    if (dep.links.latest_html)
-      md.push(`- [Zenodo Page](${dep.links.latest_html})`);
-    if (dep.links.latest) md.push(`- [API Resource](${dep.links.latest})`);
+  md.push('', `## Links`, '');
+  if (deposition.links && typeof deposition.links === 'object') {
+    if (deposition.links.latest_html)
+      md.push(`- [Zenodo Page](${deposition.links.latest_html})`);
+    if (deposition.links.latest)
+      md.push(`- [API Resource](${deposition.links.latest})`);
   }
-  md.push('', `## Files`);
-  if (Array.isArray(dep.files) && dep.files.length > 0) {
+  md.push('', `## Files`, '');
+  if (Array.isArray(deposition.files) && deposition.files.length > 0) {
     // Build the header and rows for the files table
     const filesHeader = {
       filename: 'Filename',
@@ -224,7 +249,7 @@ export function getReadmeForDeposition(dep) {
       checksum: 'Checksum',
     };
 
-    const filesRows = dep.files.map((f) => ({
+    const filesRows = deposition.files.map((f) => ({
       filename: `[${f.filename}](${f.links.downloads})`,
       filesize: formatBytes(f.filesize),
       checksum: `\`${f.checksum}\``,
@@ -251,13 +276,13 @@ export function getReadmeForDeposition(dep) {
       md.push(`- **${relType}**: [${scheme}:${relId}](${relId}) ${cites}`);
     }
   } else {
-    md.push(`## Related Identifiers`, '_No related identifiers._');
+    md.push(`## Related Identifiers`, '', '_No related identifiers._', '');
   }
 
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     const year = meta.publication_date;
     const authors = meta.creators.map((c) => c.name).join(', ');
-    const title = meta.title || dep.title || 'Research Dataset';
+    const title = meta.title || deposition.title || 'Research Dataset';
 
     md.push(
       `## Citation`,
@@ -267,8 +292,8 @@ export function getReadmeForDeposition(dep) {
       `> ${authors}. &#96;*${title}*&#96;. Zenodo, ${year}. https://doi.org/${generalDOI}.`,
     );
 
-    if (dep.links && dep.links.parent_doi) {
-      md.push(dep.links.parent_doi);
+    if (deposition.links && deposition.links.parent_doi) {
+      md.push(deposition.links.parent_doi);
     }
 
     md.push('');

@@ -1,0 +1,107 @@
+{
+  "created": "2025-07-18T13:46:27.256643+00:00",
+  "modified": "2025-07-18T13:46:27.691080+00:00",
+  "id": 292705,
+  "conceptrecid": "292217",
+  "doi": "10.5072/zenodo.292705",
+  "conceptdoi": "10.5072/zenodo.292217",
+  "doi_url": "https://doi.org/10.5072/zenodo.292705",
+  "metadata": {
+    "title": "Dataset",
+    "doi": "10.5072/zenodo.292705",
+    "publication_date": "2025-07-18",
+    "description": "<h1>Dataset</h1>\n<p><strong>This version's DOI:</strong> <a href=\"https://doi.org/10.5281/zenodo.292218\">https://doi.org/10.5281/zenodo.292218</a></p>\n<h2>Dataset Information</h2>\n<table>\n<thead>\n<tr>\n<th>Field</th>\n<th>Value</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Deposition ID</strong></td>\n<td>292218</td>\n</tr>\n<tr>\n<td><strong>State</strong></td>\n<td>unsubmitted</td>\n</tr>\n<tr>\n<td><strong>Access Right</strong></td>\n<td>open</td>\n</tr>\n<tr>\n<td><strong>License</strong></td>\n<td>cc-zero</td>\n</tr>\n<tr>\n<td><strong>Upload Type</strong></td>\n<td>dataset</td>\n</tr>\n<tr>\n<td><strong>Publisher</strong></td>\n<td>Zenodo</td>\n</tr>\n<tr>\n<td><strong>Publication Date</strong></td>\n<td>2025-07-18</td>\n</tr>\n</tbody>\n</table>\n<h2>Creators</h2>\n<ul>\n<li><a href=\"https://orcid.org/0009-0002-9377-2271\"><strong>Lupin, Arsène</strong> (Swiss Federal Institute of Technology in Lausanne)</a></li>\n</ul>\n<h2>Contributors</h2>\n<p><em>No contributors listed.</em></p>\n<h2>Links</h2>\n<h2>Files</h2>\n<table>\n<thead>\n<tr>\n<th>Filename</th>\n<th>Size</th>\n<th>Checksum</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><a href=\"https://sandbox.zenodo.org/api/deposit/depositions/292218/files/6d8b8b10-a562-4353-b372-9585e82bb115\">2.zip</a></td>\n<td>11.51 MB</td>\n<td><code>a2dc395858b2964e612d639ff576740a</code></td>\n</tr>\n<tr>\n<td><a href=\"https://sandbox.zenodo.org/api/deposit/depositions/292218/files/27fc3d07-549a-4caf-bb9f-cc0bb962ff71\">toc.json</a></td>\n<td>28.04 KB</td>\n<td><code>b28bca03e7cf18da902c718e6cf3207a</code></td>\n</tr>\n<tr>\n<td><a href=\"https://sandbox.zenodo.org/api/deposit/depositions/292218/files/3f93ecd6-cf17-44db-8dd5-86b1561a76ee\">3.zip</a></td>\n<td>11.98 MB</td>\n<td><code>89e048cd38bf5cda911170f7dc3c3c14</code></td>\n</tr>\n<tr>\n<td><a href=\"https://sandbox.zenodo.org/api/deposit/depositions/292218/files/485e5e2c-a37e-457f-affa-0853173e1edb\">1.zip</a></td>\n<td>11.52 MB</td>\n<td><code>9f0a6d2c8e853cc89dfc20230362a356</code></td>\n</tr>\n</tbody>\n</table>\n<h2>Citation</h2>\n<p>If you use this dataset in your research, please cite it as:</p>\n<blockquote>\n  <p>Lupin, Arsène. &#96;<em>Dataset</em>&#96;. Zenodo, 2025-07-18. https://doi.org/10.5281/zenodo.292218.</p>\n</blockquote>\n\n\n<p><em>Dataset documentation generated automatically on 2025-07-18</em></p>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Lupin, Arsène",
+        "affiliation": "Swiss Federal Institute of Technology in Lausanne",
+        "orcid": "0009-0002-9377-2271"
+      }
+    ],
+    "license": "cc-zero",
+    "imprint_publisher": "Zenodo",
+    "upload_type": "dataset",
+    "prereserve_doi": {
+      "doi": "10.5281/zenodo.292705",
+      "recid": 292705
+    }
+  },
+  "title": "Dataset",
+  "links": {
+    "self": "https://sandbox.zenodo.org/api/records/292705",
+    "html": "https://sandbox.zenodo.org/records/292705",
+    "doi": "https://doi.org/10.5072/zenodo.292705",
+    "parent_doi": "https://doi.org/10.5072/zenodo.292217",
+    "badge": "https://sandbox.zenodo.org/badge/doi/10.5072%2Fzenodo.292705.svg",
+    "conceptbadge": "https://sandbox.zenodo.org/badge/doi/10.5072%2Fzenodo.292217.svg",
+    "files": "https://sandbox.zenodo.org/api/records/292705/files",
+    "bucket": "https://sandbox.zenodo.org/api/files/901eb69b-3c77-4db5-b155-1aa0b5489c86",
+    "latest_draft": "https://sandbox.zenodo.org/api/deposit/depositions/292705",
+    "latest_draft_html": "https://sandbox.zenodo.org/deposit/292705",
+    "publish": "https://sandbox.zenodo.org/api/deposit/depositions/292705/actions/publish",
+    "edit": "https://sandbox.zenodo.org/api/deposit/depositions/292705/actions/edit",
+    "discard": "https://sandbox.zenodo.org/api/deposit/depositions/292705/actions/discard",
+    "newversion": "https://sandbox.zenodo.org/api/deposit/depositions/292705/actions/newversion",
+    "record": "https://sandbox.zenodo.org/api/records/292705",
+    "record_html": "https://sandbox.zenodo.org/record/292705",
+    "latest": "https://sandbox.zenodo.org/api/records/292705/versions/latest",
+    "latest_html": "https://sandbox.zenodo.org/records/292705/latest"
+  },
+  "record_id": 292705,
+  "owner": 44657,
+  "files": [
+    {
+      "id": "6d8b8b10-a562-4353-b372-9585e82bb115",
+      "filename": "2.zip",
+      "filesize": 12072866,
+      "checksum": "a2dc395858b2964e612d639ff576740a",
+      "links": {
+        "self": "https://sandbox.zenodo.org/api/records/292705/files/6d8b8b10-a562-4353-b372-9585e82bb115",
+        "download": "https://sandbox.zenodo.org/api/records/292705/draft/files/2.zip/content"
+      }
+    },
+    {
+      "id": "27fc3d07-549a-4caf-bb9f-cc0bb962ff71",
+      "filename": "toc.json",
+      "filesize": 28715,
+      "checksum": "b28bca03e7cf18da902c718e6cf3207a",
+      "links": {
+        "self": "https://sandbox.zenodo.org/api/records/292705/files/27fc3d07-549a-4caf-bb9f-cc0bb962ff71",
+        "download": "https://sandbox.zenodo.org/api/records/292705/draft/files/toc.json/content"
+      }
+    },
+    {
+      "id": "3f93ecd6-cf17-44db-8dd5-86b1561a76ee",
+      "filename": "3.zip",
+      "filesize": 12557293,
+      "checksum": "89e048cd38bf5cda911170f7dc3c3c14",
+      "links": {
+        "self": "https://sandbox.zenodo.org/api/records/292705/files/3f93ecd6-cf17-44db-8dd5-86b1561a76ee",
+        "download": "https://sandbox.zenodo.org/api/records/292705/draft/files/3.zip/content"
+      }
+    },
+    {
+      "id": "485e5e2c-a37e-457f-affa-0853173e1edb",
+      "filename": "1.zip",
+      "filesize": 12079599,
+      "checksum": "9f0a6d2c8e853cc89dfc20230362a356",
+      "links": {
+        "self": "https://sandbox.zenodo.org/api/records/292705/files/485e5e2c-a37e-457f-affa-0853173e1edb",
+        "download": "https://sandbox.zenodo.org/api/records/292705/draft/files/1.zip/content"
+      }
+    },
+    {
+      "id": "0f4c454a-b579-433c-90e5-4b1061be0305",
+      "filename": "README.md",
+      "filesize": 1564,
+      "checksum": "07237cf5531db23948df2a1a22ca3701",
+      "links": {
+        "self": "https://sandbox.zenodo.org/api/records/292705/files/0f4c454a-b579-433c-90e5-4b1061be0305",
+        "download": "https://sandbox.zenodo.org/api/records/292705/draft/files/README.md/content"
+      }
+    }
+  ],
+  "state": "done",
+  "submitted": true
+}

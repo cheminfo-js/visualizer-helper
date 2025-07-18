@@ -1,4 +1,18 @@
-import { getMDTable } from '../ZenodoUtils';
+import {
+  getReadmeForDeposition,
+  getMDTable,
+  getReadmeForSample,
+} from '../ZenodoUtils';
+import { join } from 'path';
+import { readFileSync } from 'fs';
+
+const samples = JSON.parse(
+  readFileSync(join(import.meta.dirname, 'samples.json'), 'utf8'),
+);
+
+const deposition = JSON.parse(
+  readFileSync(join(import.meta.dirname, 'deposition.json'), 'utf8'),
+);
 
 test('MD Table Generation', () => {
   const header = { name: 'Name', age: 'Age' };
@@ -32,4 +46,18 @@ test('Longer header', () => {
 | Bob       | Designer   |`;
   const result = getMDTable(header, rows);
   expect(result).toBe(expected);
+});
+test('Readme for sample', () => {
+  const sample = samples[0];
+  const result = getReadmeForSample(sample);
+  expect(result).toBeDefined();
+  expect(result).toMatchSnapshot();
+});
+
+test('Readme for deposition', () => {
+  const sample = samples[0];
+  const result = getReadmeForDeposition(deposition);
+  console.log(result);
+  expect(result).toBeDefined();
+  //  expect(result).toMatchSnapshot();
 });

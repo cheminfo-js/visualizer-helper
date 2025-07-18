@@ -1,0 +1,1242 @@
+[
+  {
+    "_id": "cd7a8a1b620ec0e07cfcfdd47b8d618a",
+    "_rev": "20-9b6ebfd5857909be17b19c6baf1ff08c",
+    "$type": "entry",
+    "$id": ["LRI-S13.4", "recrystallisation"],
+    "$kind": "sample",
+    "$owners": [
+      "abc",
+      "ch.epfl.sb.isic.isic-ge",
+      "klm",
+      "ch.epfl.isic.isic-ge.mass",
+      "def"
+    ],
+    "$content": {
+      "general": {
+        "molfile": "Cc1ccccc1.O=[Mn](=O)(=O)[O-].[K+]>>O=C(O)c1ccccc1\nActelion Java MolfileCreator 1.0\n\n  9  9  0  0  0  0  0  0  0  0999 V2000\n    5.4491   -7.8228    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    4.1500   -7.0787    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    4.1500   -5.5787    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8509   -7.8345    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.5518   -7.0906    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.8509   -9.3344    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.2527   -7.8464    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.5518  -10.0904    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.2527   -9.3463    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  4  5  2  0  0  0  0\n  4  6  1  0  0  0  0\n  5  7  1  0  0  0  0\n  6  8  2  0  0  0  0\n  7  9  2  0  0  0  0\n  8  9  1  0  0  0  0\nM  END\n",
+        "ocl": {
+          "value": "didD@@QInUxV`@@@",
+          "coordinates": "!Bb@K~@Hc}b@K~_xc}bOw~_p",
+          "index": [
+            -787606512, 1073750016, 268439552, 16777472, -2147483648, 0, 262144,
+            0, 2048, 0, 0, 1073741824, -1610612736, 4096, 0, 98316
+          ]
+        },
+        "mf": "C7H6O2",
+        "mw": 122.12160565011796,
+        "em": 122.03677943252,
+        "description": "",
+        "title": "",
+        "name": [
+          {
+            "value": "Benzoic acid",
+            "language": "en"
+          }
+        ],
+        "keyword": [
+          {
+            "kind": "caption",
+            "color": "#FFFFFFFF",
+            "value": "1"
+          }
+        ],
+        "meta": {},
+        "sequence": "",
+        "kind": ""
+      },
+      "physical": {},
+      "stock": {
+        "purity": "100%",
+        "quantity": "3g"
+      },
+      "spectra": {
+        "chromatogram": [
+          {
+            "instrument": "Shimadzu GC-2010 Plus, Shimadzu GCMS-QP2010 Ultra",
+            "experiment": "gcms",
+            "analyzer": "ms",
+            "$modificationDate": 1752072080144,
+            "reference": "lri-s134_recrystallisation_b14b8497",
+            "$creationDate": 1752072080231,
+            "cdf": {
+              "filename": "spectra/chromatogram/lrisse_lri-s134_recrystallisation_b14b8497.CDF"
+            }
+          }
+        ],
+        "cyclicVoltammetry": [],
+        "differentialCentrifugalSedimentation": [],
+        "differentialScanningCalorimetry": [],
+        "dls": [],
+        "elementalAnalysis": [],
+        "hgPorosimetry": [],
+        "icp": [],
+        "ir": [
+          {
+            "peak": [
+              {
+                "wavenumber": 1679,
+                "absorbance": 0.768250008992163,
+                "transmittance": 0.17051005363464178,
+                "kind": "S",
+                "_highlight": 0.9594817705321381
+              },
+              {
+                "wavenumber": 1602,
+                "absorbance": 0.31077598653409166,
+                "transmittance": 0.4889044761657664,
+                "kind": "m",
+                "_highlight": 0.19216220075165735
+              },
+              {
+                "wavenumber": 1585,
+                "absorbance": 0.28160849975079305,
+                "transmittance": 0.5228673219680732,
+                "kind": "m",
+                "_highlight": 0.5803252350710267
+              },
+              {
+                "wavenumber": 2552,
+                "absorbance": 0.2015651738486529,
+                "transmittance": 0.6286875009536678,
+                "kind": "m",
+                "_highlight": 0.9538335652840352
+              },
+              {
+                "wavenumber": 2672,
+                "absorbance": 0.18014870128596705,
+                "transmittance": 0.6604672670364312,
+                "kind": "m",
+                "_highlight": 0.044540469278238515
+              },
+              {
+                "wavenumber": 2832,
+                "absorbance": 0.18743239446976087,
+                "transmittance": 0.6494827270507745,
+                "kind": "m",
+                "_highlight": 0.359914328956605
+              },
+              {
+                "wavenumber": 3001,
+                "absorbance": 0.14867928734635533,
+                "transmittance": 0.7101019620895311,
+                "kind": "w",
+                "_highlight": 0.9507432647297838
+              },
+              {
+                "wavenumber": 3071,
+                "absorbance": 0.15533170210473082,
+                "transmittance": 0.6993076801299974,
+                "kind": "w",
+                "_highlight": 0.8363801432242551
+              }
+            ],
+            "$modificationDate": 1752068151059,
+            "reference": "2025.03.19_65-85-0_2f27d9a8",
+            "$creationDate": 1752068151160,
+            "jcamp": {
+              "filename": "spectra/ir/ad6364563a67_2025.03.19_2f27d9a8.jdx"
+            },
+            "_parentID": "ad6364563a67766014df0e064855e016"
+          }
+        ],
+        "isotherm": [],
+        "iv": [],
+        "mass": [
+          {
+            "injection": "GC",
+            "ionisation": "EI",
+            "mode": "positive",
+            "analyzer": "QqQ",
+            "instrument": "Thermo TSQ 8000 Evo",
+            "report": "Same as 20.4?",
+            "$modificationDate": 1752072336712,
+            "reference": "LRI-S13.4_recrystallisation_9258b57d",
+            "$creationDate": 1752072336832,
+            "jcamp": {
+              "filename": "spectra/mass/lrisse_LRI-S13.4_recrystallisation_9258b57d.jdx",
+              "dUrl": "https://eln.epfl.ch/roc/db/eln/entry/cd7a8a1b620ec0e07cfcfdd47b8d618a/spectra%2Fmass%2Flrisse_LRI-S13.4_recrystallisation_9258b57d.jdx"
+            },
+            "accurate": {},
+            "peak": [
+              {
+                "mass": 163.034706,
+                "intensity": 100,
+                "_highlight": 0.3555064689645957
+              },
+              {
+                "mass": 77.078054,
+                "intensity": 16.821960272215783,
+                "_highlight": 0.24901758148031472
+              }
+            ]
+          },
+          {
+            "accurate": {
+              "mf": "C7H5O2",
+              "modification": "-",
+              "value": 121.0294
+            },
+            "experiment": "Accurate mass",
+            "injection": "direct",
+            "ionisation": "ESI",
+            "mode": "positive",
+            "analyzer": "QTOF",
+            "instrument": "Waters Vion QTOF",
+            "$modificationDate": 1752147024916,
+            "reference": "LRI-S13.4_recrystallisation_39494e4d",
+            "$creationDate": 1752147025048,
+            "jcamp": {
+              "filename": "spectra/mass/lrisse_LRI-S13.4_recrystallisation_39494e4d.jdx"
+            }
+          }
+        ],
+        "nmr": [
+          {
+            "dimension": 1,
+            "nucleus": ["1H"],
+            "isFid": false,
+            "isFt": true,
+            "isComplex": true,
+            "title": "refe_1d_1H_zg CDCl3 /opt/ lrisse 6",
+            "solvent": "CDCl3",
+            "pulse": "zg30",
+            "experiment": "1d",
+            "temperature": -21.61473,
+            "frequency": 400.082470494,
+            "type": "NMR SPECTRUM",
+            "probe": "Z108618_0487 (PA BBO 400S1 BBF-H-D-05 Z PLUS",
+            "acquisitionMode": 0,
+            "expno": 10,
+            "date": "2025-07-08T13:54:09.000Z",
+            "$modificationDate": 1751983258042,
+            "reference": "2025.03.19_65-85-0.10.0e3373b7",
+            "$creationDate": 1751983258008,
+            "jcampFID": {
+              "filename": "spectra/nmr/2025.03.19_65-85-0.10.0e3373b7.fid.jdx"
+            },
+            "range": [
+              {
+                "from": 7.4746597645118955,
+                "to": 7.554479762838726,
+                "integral": 2.02958,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "t",
+                    "j": [
+                      {
+                        "coupling": 7.896111164178365,
+                        "multiplicity": "t"
+                      }
+                    ],
+                    "delta": 7.51456976367531,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.31726823907710056"]
+              },
+              {
+                "from": 7.618110874836326,
+                "to": 7.6842533141087035,
+                "integral": 0.98778,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "m",
+                    "delta": 7.640797748461223,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.5697695786744751"]
+              },
+              {
+                "from": 8.139032045512604,
+                "to": 8.193864736057474,
+                "integral": 1.98264,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "m",
+                    "delta": 8.162322765983298,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.4632348807095136"]
+              }
+            ],
+            "jcamp": {
+              "filename": "spectra/nmr/2025.03.19_65-85-0.10.0e3373b7.jdx"
+            },
+            "_parentID": "ad6364563a67766014df0e064855e016"
+          }
+        ],
+        "oan": [],
+        "pelletHardness": [],
+        "permeability": [],
+        "raman": [],
+        "thermogravimetricAnalysis": [],
+        "uv": [],
+        "voidVolume": [],
+        "xps": [],
+        "xray": [],
+        "xrd": [],
+        "xrf": []
+      },
+      "biology": {
+        "nucleic": []
+      },
+      "image": [],
+      "video": []
+    },
+    "$lastModification": "abc",
+    "$modificationDate": 1752147024875,
+    "$creationDate": 1751983506928,
+    "_attachments": {
+      "spectra/nmr/2025.03.19_65-85-0.10.0e3373b7.fid.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 2,
+        "digest": "md5-WomtMiLF9mZ6KHqunzmviQ==",
+        "length": 217172,
+        "stub": true
+      },
+      "spectra/nmr/2025.03.19_65-85-0.10.0e3373b7.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 2,
+        "digest": "md5-g/SCWoT3oE96r4xzQqKYoQ==",
+        "length": 877368,
+        "stub": true
+      },
+      "spectra/ir/ad6364563a67_2025.03.19_2f27d9a8.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 9,
+        "digest": "md5-LyfZqItrMomiRmb3bsa7qA==",
+        "length": 45528,
+        "stub": true
+      },
+      "spectra/chromatogram/lrisse_lri-s134_recrystallisation_b14b8497.CDF": {
+        "content_type": "application/x-netcdf",
+        "revpos": 13,
+        "digest": "md5-sUuEl/fdRI1gezjYRDriWg==",
+        "length": 24869948,
+        "stub": true
+      },
+      "spectra/mass/lrisse_LRI-S13.4_recrystallisation_9258b57d.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 15,
+        "digest": "md5-kli1fRJmepItKdKBW/ld8w==",
+        "length": 5457,
+        "stub": true
+      },
+      "spectra/mass/lrisse_LRI-S13.4_recrystallisation_39494e4d.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 20,
+        "digest": "md5-OUlOTW+NpTnRPrIclTygLw==",
+        "length": 2515,
+        "stub": true
+      }
+    },
+    "kind": "sample"
+  },
+  {
+    "_id": "eedd3473ceb3df4108e06e61cb60d603",
+    "_rev": "29-0f45c31a9e5f9d1f6494ee8580110da2",
+    "$type": "entry",
+    "$id": ["LRI-S20.4", "distillation"],
+    "$kind": "sample",
+    "$owners": [
+      "abc",
+      "ch.epfl.sb.isic.isic-ge",
+      "klm",
+      "ch.epfl.isic.isic-ge.mass",
+      "def",
+      "ch.epfl.isic.isic-ge.ea",
+      "hei"
+    ],
+    "$content": {
+      "general": {
+        "molfile": "\nActelion Java MolfileCreator 1.0\n\n 14 14  0  0  0  0  0  0  0  0999 V2000\n   -0.2528    1.9164    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2528    3.4164    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5518    4.1664    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8509    3.4164    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8509    1.9164    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5518    1.1664    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1500    1.1664    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1500    4.1664    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.4490    1.9164    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1500   -0.3336    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.4490    3.4164    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.1500    5.6664    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.7480    4.1664    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.7480    1.1664    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0  0  0  0\n  2  3  1  0  0  0  0\n  3  4  2  0  0  0  0\n  4  5  1  0  0  0  0\n  5  6  2  0  0  0  0\n  6  1  1  0  0  0  0\n  5  7  1  0  0  0  0\n  4  8  1  0  0  0  0\n  7  9  1  0  0  0  0\n  7 10  2  0  0  0  0\n  8 11  1  0  0  0  0\n  8 12  2  0  0  0  0\n 11 13  1  0  0  0  0\n  9 14  1  0  0  0  0\nM  END\n",
+        "ocl": {
+          "value": "dg\\B@@Q]rJISQJHr[TDCD@@",
+          "coordinates": "!B?`Bw@h`Bm?w~@Hc}mpJH@h`B?`Bw?Xc}mpH",
+          "index": [
+            -112315120, 1108353536, 269488132, 25167104, -2139095040, 12288,
+            17039360, -2113928960, 152569856, 0, 17825792, 1208034304,
+            -1610612736, 134221824, 4194304, 8388608
+          ]
+        },
+        "mf": "C10H10O4",
+        "mw": 194.18438620518336,
+        "em": 194.05790880057998,
+        "description": "",
+        "title": "",
+        "name": [
+          {
+            "value": "Dimethyl phthalate",
+            "language": "en"
+          },
+          {
+            "value": "Dimethyl benzene-1,2-dicarboxylate",
+            "language": "en"
+          }
+        ],
+        "keyword": [
+          {
+            "kind": "caption",
+            "color": "#FFFFFFFF",
+            "value": "2"
+          }
+        ],
+        "meta": {},
+        "sequence": "",
+        "kind": ""
+      },
+      "physical": {
+        "bp": [
+          {
+            "low": 282,
+            "high": 284,
+            "pressure": 760,
+            "doi": ""
+          }
+        ],
+        "nd": [
+          {
+            "low": 1.515,
+            "temperature": 20,
+            "doi": ""
+          }
+        ],
+        "density": [
+          {
+            "low": 1.19,
+            "temperature": 20,
+            "doi": ""
+          }
+        ],
+        "rf": [
+          {
+            "solvent": [
+              {
+                "name": "hexane",
+                "part": 6
+              },
+              {
+                "name": "AcOEt",
+                "part": 1
+              }
+            ],
+            "plate": "silica",
+            "low": 0.3,
+            "doi": ""
+          }
+        ],
+        "mp": [
+          {
+            "low": 2,
+            "doi": ""
+          }
+        ]
+      },
+      "stock": {
+        "purity": "100%",
+        "quantity": "11.096g"
+      },
+      "spectra": {
+        "chromatogram": [
+          {
+            "instrument": "Shimadzu GC-2010 Plus, Shimadzu GCMS-QP2010 Ultra",
+            "experiment": "gcms",
+            "analyzer": "ms",
+            "$modificationDate": 1752072084885,
+            "reference": "lri-s204_distillation_2a23fa02",
+            "$creationDate": 1752072084991,
+            "cdf": {
+              "filename": "spectra/chromatogram/lrisse_lri-s204_distillation_2a23fa02.CDF"
+            },
+            "peak": [],
+            "defaultTrace": "bpc"
+          }
+        ],
+        "cyclicVoltammetry": [],
+        "differentialCentrifugalSedimentation": [],
+        "differentialScanningCalorimetry": [],
+        "dls": [],
+        "elementalAnalysis": [],
+        "hgPorosimetry": [],
+        "icp": [],
+        "ir": [
+          {
+            "peak": [
+              {
+                "wavenumber": 1600,
+                "absorbance": 0.07592974535504003,
+                "transmittance": 0.8395957946777256,
+                "kind": "w"
+              },
+              {
+                "wavenumber": 1687,
+                "absorbance": 0.08470626203019292,
+                "transmittance": 0.8227989673614416,
+                "kind": "w"
+              },
+              {
+                "wavenumber": 1720,
+                "absorbance": 0.8369247985731058,
+                "transmittance": 0.14557111263274994,
+                "kind": "S"
+              },
+              {
+                "wavenumber": 1739,
+                "absorbance": 0.31735916996931,
+                "transmittance": 0.4815493822097728,
+                "kind": "m"
+              },
+              {
+                "wavenumber": 2953,
+                "absorbance": 0.05625700413757936,
+                "transmittance": 0.8785024881362823,
+                "kind": "w"
+              }
+            ],
+            "$modificationDate": 1752066952363,
+            "reference": "131-11-3_2025.05.02_149f1991",
+            "$creationDate": 1752066952456,
+            "jcamp": {
+              "filename": "spectra/ir/92f1904724d3_131-11-3_149f1991.jdx"
+            },
+            "_parentID": "92f1904724d347ce5e896a74353bf831"
+          }
+        ],
+        "isotherm": [],
+        "iv": [],
+        "mass": [
+          {
+            "injection": "GC",
+            "ionisation": "EI",
+            "mode": "positive",
+            "analyzer": "QqQ",
+            "instrument": "Thermo TSQ 8000 Evo",
+            "$modificationDate": 1752072106656,
+            "reference": "LRI-S20.4_distillation_6f6864df",
+            "$creationDate": 1752072106753,
+            "jcamp": {
+              "filename": "spectra/mass/lrisse_LRI-S20.4_distillation_6f6864df.jdx"
+            },
+            "accurate": {},
+            "peak": [
+              {
+                "mass": 194.068787,
+                "intensity": 28.83567449655223,
+                "_highlight": 0.5823589457578879
+              },
+              {
+                "mass": 196.088959,
+                "intensity": 0.3988716343792501,
+                "_highlight": 0.7465850494675047
+              },
+              {
+                "mass": 195.07988,
+                "intensity": 3.122747655394817,
+                "_highlight": 0.6616102692345299
+              }
+            ]
+          },
+          {
+            "accurate": {
+              "mf": "C10H10O4",
+              "modification": "Na+",
+              "value": 217.04765142009057
+            },
+            "experiment": "Accurate mass",
+            "injection": "direct",
+            "ionisation": "ESI",
+            "mode": "positive",
+            "analyzer": "QTOF",
+            "instrument": "Waters XEVO G2-S QTOF",
+            "$modificationDate": 1752072925313,
+            "reference": "LRI-S20.4_distillation_1a2ade72",
+            "$creationDate": 1752072925474,
+            "jcamp": {
+              "filename": "spectra/mass/lrisse_LRI-S20.4_distillation_1a2ade72.jdx"
+            },
+            "peak": [
+              {
+                "mass": 163.0393,
+                "intensity": 81.52974504249292,
+                "_highlight": 0.5665437795230668
+              },
+              {
+                "mass": 217.0482,
+                "intensity": 100,
+                "_highlight": 0.471470836359836
+              }
+            ]
+          }
+        ],
+        "nmr": [
+          {
+            "dimension": 1,
+            "nucleus": ["1H"],
+            "isFid": false,
+            "isFt": true,
+            "isComplex": true,
+            "title": "refe_1d_1H_zg CDCl3 /opt/ lrisse 5",
+            "solvent": "CDCl3",
+            "pulse": "zg30",
+            "experiment": "1d",
+            "temperature": -21.61473,
+            "frequency": 400.082470494,
+            "type": "NMR SPECTRUM",
+            "probe": "Z108618_0487 (PA BBO 400S1 BBF-H-D-05 Z PLUS",
+            "acquisitionMode": 0,
+            "expno": 11,
+            "date": "2025-07-08T14:46:48.000Z",
+            "$modificationDate": 1751986825604,
+            "reference": "131-11-3_2025.05.02.11.7d1b0ce7",
+            "$creationDate": 1751986825558,
+            "jcampFID": {
+              "filename": "spectra/nmr/131-11-3_2025.05.02.11.7d1b0ce7.fid.jdx",
+              "dUrl": "https://eln.epfl.ch/roc/db/eln/entry/eedd3473ceb3df4108e06e61cb60d603/spectra%2Fnmr%2F131-11-3_2025.05.02.11.7d1b0ce7.fid.jdx"
+            },
+            "range": [
+              {
+                "from": 3.9108549881729706,
+                "to": 3.953028041701905,
+                "integral": 6.0176,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "s",
+                    "delta": 3.9319415149374377,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.5951303981417061"]
+              },
+              {
+                "from": 7.530749929410488,
+                "to": 7.59060670949137,
+                "integral": 2.01316,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "m",
+                    "delta": 7.560985024365221,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.4013896401310638"]
+              },
+              {
+                "from": 7.716543456329207,
+                "to": 7.776718228325594,
+                "integral": 1.96924,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "m",
+                    "delta": 7.746888417928018,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.17662847610789678"]
+              }
+            ],
+            "jcamp": {
+              "filename": "spectra/nmr/131-11-3_2025.05.02.11.7d1b0ce7.jdx",
+              "dUrl": "https://eln.epfl.ch/roc/db/eln/entry/eedd3473ceb3df4108e06e61cb60d603/spectra%2Fnmr%2F131-11-3_2025.05.02.11.7d1b0ce7.jdx"
+            },
+            "_parentID": "92f1904724d347ce5e896a74353bf831"
+          },
+          {
+            "dimension": 1,
+            "nucleus": ["13C"],
+            "isFid": false,
+            "isFt": true,
+            "isComplex": true,
+            "title": "refe_1d_13C_zg_{1H} CDCl3 /opt/ lrisse 16",
+            "solvent": "CDCl3",
+            "pulse": "zgpg30",
+            "experiment": "1d",
+            "temperature": 299.7224,
+            "frequency": 100.61126202156,
+            "type": "NMR SPECTRUM",
+            "probe": "Z108618_0487 (PA BBO 400S1 BBF-H-D-05 Z PLUS",
+            "acquisitionMode": 0,
+            "expno": 13,
+            "date": "2025-07-09T10:04:36.000Z",
+            "$modificationDate": 1752056412949,
+            "reference": "131-11-3_2025.05.02.13.12028098",
+            "$creationDate": 1752056412906,
+            "jcampFID": {
+              "filename": "spectra/nmr/131-11-3_2025.05.02.13.12028098.fid.jdx",
+              "dUrl": "https://eln.epfl.ch/roc/db/eln/entry/eedd3473ceb3df4108e06e61cb60d603/spectra%2Fnmr%2F131-11-3_2025.05.02.13.12028098.fid.jdx"
+            },
+            "jcamp": {
+              "filename": "spectra/nmr/131-11-3_2025.05.02.13.12028098.jdx",
+              "dUrl": "https://eln.epfl.ch/roc/db/eln/entry/eedd3473ceb3df4108e06e61cb60d603/spectra%2Fnmr%2F131-11-3_2025.05.02.13.12028098.jdx"
+            },
+            "_parentID": "92f1904724d347ce5e896a74353bf831",
+            "range": [
+              {
+                "from": 167.95777,
+                "to": 168.13276,
+                "integral": 0.42526,
+                "signal": [
+                  {
+                    "nbAtoms": 0,
+                    "diaID": [],
+                    "multiplicity": "s",
+                    "kind": "",
+                    "remark": "",
+                    "delta": 168.04527
+                  }
+                ]
+              },
+              {
+                "from": 131.8654,
+                "to": 132.0404,
+                "integral": 0.81173,
+                "signal": [
+                  {
+                    "nbAtoms": 0,
+                    "diaID": [],
+                    "multiplicity": "s",
+                    "kind": "",
+                    "remark": "",
+                    "delta": 131.9529
+                  }
+                ]
+              },
+              {
+                "from": 131.03419,
+                "to": 131.20918,
+                "integral": 2.92777,
+                "signal": [
+                  {
+                    "nbAtoms": 0,
+                    "diaID": [],
+                    "multiplicity": "s",
+                    "kind": "",
+                    "remark": "",
+                    "delta": 131.12168
+                  }
+                ]
+              },
+              {
+                "from": 128.78115,
+                "to": 128.99989,
+                "integral": 3.23991,
+                "signal": [
+                  {
+                    "nbAtoms": 0,
+                    "diaID": [],
+                    "multiplicity": "s",
+                    "kind": "",
+                    "remark": "",
+                    "delta": 128.89052
+                  }
+                ]
+              },
+              {
+                "from": 52.53512,
+                "to": 52.75386,
+                "integral": 2.59533,
+                "signal": [
+                  {
+                    "nbAtoms": 0,
+                    "diaID": [],
+                    "multiplicity": "s",
+                    "kind": "",
+                    "remark": "",
+                    "delta": 52.64449
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "oan": [],
+        "pelletHardness": [],
+        "permeability": [],
+        "raman": [],
+        "thermogravimetricAnalysis": [],
+        "uv": [],
+        "voidVolume": [],
+        "xps": [],
+        "xray": [],
+        "xrd": [],
+        "xrf": []
+      },
+      "biology": {
+        "nucleic": []
+      },
+      "image": [],
+      "video": []
+    },
+    "$lastModification": "klm",
+    "$modificationDate": 1752655426198,
+    "$creationDate": 1752044681442,
+    "_attachments": {
+      "spectra/nmr/131-11-3_2025.05.02.11.7d1b0ce7.fid.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 2,
+        "digest": "md5-UKL6GCzMEUYp+0wPA9RH4g==",
+        "length": 242839,
+        "stub": true
+      },
+      "spectra/nmr/131-11-3_2025.05.02.11.7d1b0ce7.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 2,
+        "digest": "md5-a97Ba2Kbbe/PUbMy7RkRlg==",
+        "length": 730387,
+        "stub": true
+      },
+      "spectra/nmr/131-11-3_2025.05.02.13.12028098.fid.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 13,
+        "digest": "md5-zrs64cwymsP7e0w66lbtCw==",
+        "length": 288674,
+        "stub": true
+      },
+      "spectra/nmr/131-11-3_2025.05.02.13.12028098.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 13,
+        "digest": "md5-Da4NFAcQsuNWUMLrggrkGQ==",
+        "length": 559821,
+        "stub": true
+      },
+      "spectra/ir/92f1904724d3_131-11-3_149f1991.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 15,
+        "digest": "md5-FJ8ZkWQh1kB3qF1ERBT2kg==",
+        "length": 45526,
+        "stub": true
+      },
+      "spectra/chromatogram/lrisse_lri-s204_distillation_2a23fa02.CDF": {
+        "content_type": "application/x-netcdf",
+        "revpos": 19,
+        "digest": "md5-KiP6Akrm766Ske+HjFgA4g==",
+        "length": 24114904,
+        "stub": true
+      },
+      "spectra/mass/lrisse_LRI-S20.4_distillation_6f6864df.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 21,
+        "digest": "md5-b2hk3/ALosVW5gHGNFfV9Q==",
+        "length": 8777,
+        "stub": true
+      },
+      "spectra/mass/lrisse_LRI-S20.4_distillation_1a2ade72.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 23,
+        "digest": "md5-Girecm8mWz79yppj+lQ7bw==",
+        "length": 1510,
+        "stub": true
+      }
+    },
+    "kind": "sample"
+  },
+  {
+    "_id": "610a09ffa16d6b3d717a7c86a9b1ea8e",
+    "_rev": "21-e8fcb0f7cea1dfaa485a75328aaa0ede",
+    "$type": "entry",
+    "$id": ["LRI-S1.4", "flash"],
+    "$kind": "sample",
+    "$owners": [
+      "abc",
+      "ch.epfl.sb.isic.isic-ge",
+      "ch.epfl.isic.isic-ge.mass",
+      "klm",
+      "def"
+    ],
+    "$content": {
+      "general": {
+        "molfile": "Nc1ccccc1.CC(=O)Cl.[Na+].CC(=O)[O-].CC(=O)O>>CC(=O)Nc1ccccc1\nActelion Java MolfileCreator 1.0\n\n 10 10  0  0  0  0  0  0  0  0999 V2000\n   -5.2431    1.2096    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.9442    1.9653    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.6454    1.2214    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.9442    3.4649    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3465    1.9771    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0476    1.2332    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3465    3.4767    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2512    1.9889    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0476    4.2325    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2512    3.4885    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0  0  0  0\n  2  3  1  0  0  0  0\n  2  4  1  0  0  0  0\n  3  5  1  0  0  0  0\n  5  6  2  0  0  0  0\n  5  7  1  0  0  0  0\n  6  8  1  0  0  0  0\n  7  9  2  0  0  0  0\n  8 10  2  0  0  0  0\n  9 10  1  0  0  0  0\nM  END\n",
+        "ocl": {
+          "value": "deVH@DAIgeQej@@@@",
+          "coordinates": "!BbOvH@oy?bOvH@oy?bOvH?_y?",
+          "index": [
+            -112807656, 307298561, 65664, 0, -2147483648, 262144, 2621456,
+            134217728, 32, 0, 262144, 18432, 0, 262144, 0, 524352
+          ]
+        },
+        "mf": "C8H9NO",
+        "mw": 135.16346209614807,
+        "em": 135.06841391407002,
+        "description": "",
+        "title": "",
+        "name": [
+          {
+            "value": "N-Phenylacetamide",
+            "language": "en"
+          },
+          {
+            "value": "Acetanilide",
+            "language": "en"
+          }
+        ],
+        "keyword": [
+          {
+            "kind": "caption",
+            "color": "#FFFFFFFF",
+            "value": "3"
+          }
+        ],
+        "meta": {},
+        "sequence": "",
+        "kind": ""
+      },
+      "physical": {},
+      "stock": {
+        "purity": "100%",
+        "quantity": "1.21g"
+      },
+      "spectra": {
+        "chromatogram": [
+          {
+            "instrument": "Shimadzu GC-2010 Plus, Shimadzu GCMS-QP2010 Ultra",
+            "experiment": "gcms",
+            "analyzer": "ms",
+            "$modificationDate": 1752072075159,
+            "reference": "lri-s14_flash_5c25bfa4",
+            "$creationDate": 1752072075263,
+            "cdf": {
+              "filename": "spectra/chromatogram/lrisse_lri-s14_flash_5c25bfa4.CDF"
+            }
+          }
+        ],
+        "cyclicVoltammetry": [],
+        "differentialCentrifugalSedimentation": [],
+        "differentialScanningCalorimetry": [],
+        "dls": [],
+        "elementalAnalysis": [],
+        "hgPorosimetry": [],
+        "icp": [],
+        "ir": [
+          {
+            "peak": [
+              {
+                "wavenumber": 1620,
+                "absorbance": 0.04455535479388214,
+                "transmittance": 0.902494668960562,
+                "kind": "w",
+                "_highlight": 0.5836713204735351
+              },
+              {
+                "wavenumber": 1648,
+                "absorbance": 0.060203288463630274,
+                "transmittance": 0.8705559968948273,
+                "kind": "m",
+                "_highlight": 0.14251194802921152
+              },
+              {
+                "wavenumber": 1662,
+                "absorbance": 0.10119759462091606,
+                "transmittance": 0.7921408414840616,
+                "kind": "S",
+                "_highlight": 0.49921176529617695
+              },
+              {
+                "wavenumber": 3060,
+                "absorbance": 0.02560890617150656,
+                "transmittance": 0.9427381753921409,
+                "kind": "w",
+                "_highlight": 0.9853084867554476
+              },
+              {
+                "wavenumber": 3136,
+                "absorbance": 0.02585676039820302,
+                "transmittance": 0.9422003030776878,
+                "kind": "w",
+                "_highlight": 0.5933184717187262
+              },
+              {
+                "wavenumber": 3195,
+                "absorbance": 0.02811935465419417,
+                "transmittance": 0.9373043775558374,
+                "kind": "w",
+                "_highlight": 0.7784348337902568
+              },
+              {
+                "wavenumber": 3259,
+                "absorbance": 0.03871015602461325,
+                "transmittance": 0.9147235155105495,
+                "kind": "w",
+                "_highlight": 0.9425854244788519
+              },
+              {
+                "wavenumber": 3294,
+                "absorbance": 0.04683661832740391,
+                "transmittance": 0.8977664709091093,
+                "kind": "m",
+                "_highlight": 0.47912279361679366
+              }
+            ],
+            "$modificationDate": 1752067644371,
+            "reference": "2025.07.04-LRI-S1.4_103-84-4_8240cc34",
+            "$creationDate": 1752067644456,
+            "jcamp": {
+              "filename": "spectra/ir/486e1f57543a_2025.07.04_8240cc34.jdx",
+              "dUrl": "https://eln.epfl.ch/roc/db/eln/entry/610a09ffa16d6b3d717a7c86a9b1ea8e/spectra%2Fir%2F486e1f57543a_2025.07.04_8240cc34.jdx"
+            },
+            "_parentID": "486e1f57543a986a4923988a9202479d"
+          }
+        ],
+        "isotherm": [],
+        "iv": [],
+        "mass": [
+          {
+            "experiment": "Full scan",
+            "injection": "GC",
+            "ionisation": "EI",
+            "mode": "positive",
+            "analyzer": "QqQ",
+            "instrument": "Thermo TSQ 8000 Evo",
+            "report": "Your compound at 12.56",
+            "$modificationDate": 1752072054266,
+            "reference": "LRI-S1.4_flash_f5a4d0f7",
+            "$creationDate": 1752072054367,
+            "jcamp": {
+              "filename": "spectra/mass/lrisse_LRI-S1.4_flash_f5a4d0f7.jdx"
+            }
+          },
+          {
+            "accurate": {
+              "mf": "C8H9NO",
+              "modification": "H+",
+              "value": 136.07535142009056
+            },
+            "experiment": "Accurate mass",
+            "injection": "direct",
+            "ionisation": "ESI",
+            "mode": "positive",
+            "analyzer": "QTOF",
+            "instrument": "Waters XEVO G2-S QTOF",
+            "$modificationDate": 1752072771049,
+            "reference": "LRI-S1.4_flash_7e5a957b",
+            "$creationDate": 1752072771188,
+            "jcamp": {
+              "filename": "spectra/mass/lrisse_LRI-S1.4_flash_7e5a957b.jdx"
+            }
+          }
+        ],
+        "nmr": [
+          {
+            "dimension": 1,
+            "nucleus": ["1H"],
+            "isFid": false,
+            "isFt": true,
+            "isComplex": true,
+            "title": "refe_1d_1H_zg CDCl3 /opt/ lrisse 1",
+            "solvent": "CDCl3",
+            "pulse": "zg30",
+            "experiment": "1d",
+            "temperature": -21.61473,
+            "frequency": 400.082470494,
+            "type": "NMR SPECTRUM",
+            "probe": "Z108618_0487 (PA BBO 400S1 BBF-H-D-05 Z PLUS",
+            "acquisitionMode": 0,
+            "expno": 10,
+            "date": "2025-07-04T11:32:08.000Z",
+            "$modificationDate": 1751629243107,
+            "reference": "2025.07.04-LRI-S1.4_103-84-4.10.d8404da7",
+            "$creationDate": 1751629243079,
+            "jcampFID": {
+              "filename": "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.10.d8404da7.fid.jdx"
+            },
+            "range": [
+              {
+                "from": 2.1811485898121905,
+                "to": 2.2251552543641253,
+                "integral": 2.9317,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "s",
+                    "delta": 2.203151922088158,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.5470876195960254"]
+              },
+              {
+                "from": 7.102866177374084,
+                "to": 7.172543396247983,
+                "integral": 1.12612,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "m",
+                    "delta": 7.133272630451067,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.4914350459325929"]
+              },
+              {
+                "from": 7.3,
+                "to": 7.389520700635998,
+                "integral": 2.1968,
+                "signal": [
+                  {
+                    "kind": "solvent",
+                    "multiplicity": "m",
+                    "delta": 7.343059316860529,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.10908544486558969"]
+              },
+              {
+                "from": 7.483951668320357,
+                "to": 7.5553147166421075,
+                "integral": 1.96205,
+                "signal": [
+                  {
+                    "kind": "signal",
+                    "multiplicity": "d",
+                    "j": [
+                      {
+                        "coupling": 7.275331461929454,
+                        "multiplicity": "d"
+                      }
+                    ],
+                    "delta": 7.519633192481232,
+                    "diaID": []
+                  }
+                ],
+                "_highlight": ["0.7483317797811115"]
+              },
+              {
+                "from": 7.17622907836199,
+                "integral": 0.78333,
+                "signal": [
+                  {
+                    "multiplicity": "br s",
+                    "j": [],
+                    "delta": 7.22,
+                    "diaID": []
+                  }
+                ],
+                "to": 7.26,
+                "_highlight": ["0.236537395471353"]
+              }
+            ],
+            "jcamp": {
+              "filename": "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.10.d8404da7.jdx"
+            },
+            "_parentID": "486e1f57543a986a4923988a9202479d"
+          },
+          {
+            "dimension": 1,
+            "nucleus": ["13C"],
+            "isFid": false,
+            "isFt": true,
+            "isComplex": true,
+            "title": "refe_1d_13C_zg_{1H} CDCl3 /opt/ lrisse 2",
+            "solvent": "CDCl3",
+            "pulse": "zgpg30",
+            "experiment": "1d",
+            "temperature": 299.6092,
+            "frequency": 100.61126202156,
+            "type": "NMR SPECTRUM",
+            "probe": "Z108618_0487 (PA BBO 400S1 BBF-H-D-05 Z PLUS",
+            "acquisitionMode": 0,
+            "expno": 11,
+            "date": "2025-07-09T09:45:53.000Z",
+            "$modificationDate": 1752055210582,
+            "reference": "2025.07.04-LRI-S1.4_103-84-4.11.1cf5659a",
+            "$creationDate": 1752055210543,
+            "jcampFID": {
+              "filename": "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.11.1cf5659a.fid.jdx"
+            },
+            "jcamp": {
+              "filename": "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.11.1cf5659a.jdx"
+            },
+            "_parentID": "486e1f57543a986a4923988a9202479d"
+          }
+        ],
+        "oan": [],
+        "pelletHardness": [],
+        "permeability": [],
+        "raman": [],
+        "thermogravimetricAnalysis": [],
+        "uv": [],
+        "voidVolume": [],
+        "xps": [],
+        "xray": [],
+        "xrd": [],
+        "xrf": []
+      },
+      "biology": {
+        "nucleic": []
+      },
+      "image": [],
+      "video": []
+    },
+    "$lastModification": "abc",
+    "$modificationDate": 1752072771021,
+    "$creationDate": 1751966509322,
+    "_attachments": {
+      "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.10.d8404da7.fid.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 2,
+        "digest": "md5-KP+fsZPJCGHrrHfTHWiKOg==",
+        "length": 216814,
+        "stub": true
+      },
+      "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.10.d8404da7.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 2,
+        "digest": "md5-HHzLBbWfTZER4HkVjalYug==",
+        "length": 927396,
+        "stub": true
+      },
+      "spectra/ir/486e1f57543a_2025.07.04_8240cc34.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 11,
+        "digest": "md5-gkDMNHWA8SHyhimXAcczbQ==",
+        "length": 45528,
+        "stub": true
+      },
+      "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.11.1cf5659a.fid.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 13,
+        "digest": "md5-E1djytXK6wKyBw5h270Pmg==",
+        "length": 284583,
+        "stub": true
+      },
+      "spectra/nmr/2025.07.04-LRI-S1.4_103-84-4.11.1cf5659a.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 13,
+        "digest": "md5-QGJqq/H4vm3OiAYafjcuJQ==",
+        "length": 581301,
+        "stub": true
+      },
+      "spectra/mass/lrisse_LRI-S1.4_flash_f5a4d0f7.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 17,
+        "digest": "md5-9aTQ9zzdeSqnbKUN/ot7wA==",
+        "length": 9252,
+        "stub": true
+      },
+      "spectra/chromatogram/lrisse_lri-s14_flash_5c25bfa4.CDF": {
+        "content_type": "application/x-netcdf",
+        "revpos": 19,
+        "digest": "md5-XCW/pOlhpCZjyAl/DknuKA==",
+        "length": 24661040,
+        "stub": true
+      },
+      "spectra/mass/lrisse_LRI-S1.4_flash_7e5a957b.jdx": {
+        "content_type": "chemical/x-jcamp-dx",
+        "revpos": 21,
+        "digest": "md5-flqVe9MvpeUM/Xlmc/DHaQ==",
+        "length": 1698,
+        "stub": true
+      }
+    },
+    "kind": "sample"
+  }
+]
