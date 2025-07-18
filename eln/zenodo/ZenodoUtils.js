@@ -1,4 +1,7 @@
-export function getReadmeForSample(sample) {
+export function getReadmeForSample(
+  sample,
+  depositionUrl = 'https://zenodo.org/',
+) {
   sample = JSON.parse(JSON.stringify(sample));
 
   const md = [];
@@ -19,7 +22,10 @@ export function getReadmeForSample(sample) {
     }
   }
 
-  md.push(`# ${'Analytical Characterization of Chemical Compound'}`, '');
+  md.push(
+    `# 'Analytical Characterization of Chemical Compound for ${depositionUrl}'`,
+    '',
+  );
 
   if (names.length > 0) {
     const compoundName = names.join('; ');
