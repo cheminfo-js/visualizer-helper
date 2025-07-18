@@ -243,9 +243,9 @@ export function getReadmeForDeposition(dep) {
   md.push(
     `---`,
     '',
-    `*Dataset documentation generated automatically on ${
+    `*Dataset generated automatically on ${
       new Date().toISOString().split('T')[0]
-    }*`,
+    }* using the [Zenodo NPM Library](https://github.com/cheminfo/zenodo)`,
   );
 
   return md.join('\n');
