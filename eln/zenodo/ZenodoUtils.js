@@ -399,12 +399,7 @@ function getAdditionalDescription(description) {
   for (const h2 of h2Elements) {
     if (h2.textContent && h2.textContent.trim() === 'Additional Description') {
       const next = h2.nextElementSibling;
-      if (
-        next &&
-        next.tagName.toLowerCase() === 'p' &&
-        next.textContent &&
-        next.textContent.trim() === 'No additional description provided.'
-      ) {
+      if (next && next.tagName.toLowerCase() === 'p' && next.textContent) {
         outputHTML = next.outerHTML;
       }
       break;
