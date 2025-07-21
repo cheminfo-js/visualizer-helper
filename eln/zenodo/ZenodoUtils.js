@@ -236,6 +236,18 @@ export function getReadmeForDeposition(deposition) {
     md.push('', `## Contributors`, '', '_No contributors listed._');
   }
 
+  if (meta.description) {
+    md.push('', `## Additional Description`, '', meta.description, '');
+  } else {
+    md.push(
+      '',
+      `## Additional Description`,
+      '',
+      '_No additional description provided._',
+      '',
+    );
+  }
+
   md.push('', `## Links`, '');
   if (deposition.links && typeof deposition.links === 'object') {
     if (deposition.links.latest_html)
