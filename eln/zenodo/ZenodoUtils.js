@@ -237,7 +237,10 @@ export function getReadmeForDeposition(deposition) {
   }
 
   if (meta.description) {
-    md.push('', `## Additional Description`, '', meta.description, '');
+    const description = !meta.description.startsWith('<h1>')
+      ? meta.description
+      : getAdditionalDescription(meta.description);
+    md.push('', `## Additional Description`, '', description, '');
   } else {
     md.push(
       '',
@@ -384,4 +387,29 @@ export function getMDTable(header, rows) {
 
   // Join all parts
   return [headerRow, dividerRow, ...dataRows].join('\n');
+}
+
+function getAdditionalDescription(description) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(description, 'text/html');
+
+  const h2Elements = doc.querySelectorAll('h2');
+  let outputHTML = '';
+
+  for (const h2 of h2Elements) {
+    if (h2.textContent && h2.textContent.trim() === 'Additional Description') {
+      const next = h2.nextElementSibling;
+      if (
+        next &&
+        next.tagName.toLowerCase() === 'p' &&
+        next.textContent &&
+        next.textContent.trim() === 'No additional description provided.'
+      ) {
+        outputHTML = next.outerHTML;
+      }
+      break;
+    }
+  }
+
+  console.log(outputHTML);
 }
