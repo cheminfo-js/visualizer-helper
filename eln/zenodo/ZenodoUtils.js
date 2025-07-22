@@ -253,10 +253,15 @@ export function getReadmeForDeposition(deposition) {
 
   if (deposition.links && typeof deposition.links === 'object') {
     md.push('', `## Links`, '');
-    if (deposition.links.latest_html)
-      md.push(`- [Zenodo Page](${deposition.links.latest_html})`);
-    if (deposition.links.latest)
-      md.push(`- [API Resource](${deposition.links.latest})`);
+    const latestHTML =
+      deposition.links.latest_html || deposition.links.latest_draft_html;
+    const latestAPI = deposition.links.latest || deposition.links.latest_draft;
+    if (latestHTML) {
+      md.push(`- [Zenodo Page](${latestHTML})`);
+    }
+    if (latestAPI) {
+      md.push(`- [API Resource](${latestAPI})`);
+    }
   }
   md.push('', `## Files`, '');
   if (Array.isArray(deposition.files) && deposition.files.length > 0) {
