@@ -251,8 +251,8 @@ export function getReadmeForDeposition(deposition) {
     );
   }
 
-  md.push('', `## Links`, '');
   if (deposition.links && typeof deposition.links === 'object') {
+    md.push('', `## Links`, '');
     if (deposition.links.latest_html)
       md.push(`- [Zenodo Page](${deposition.links.latest_html})`);
     if (deposition.links.latest)
