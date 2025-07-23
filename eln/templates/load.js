@@ -53,8 +53,10 @@ async function fetchPublicAndLink(categories) {
   if (!Array.isArray(categories)) categories = [categories];
   var templates = [];
   for (let category of categories) {
-    let startkey = escape(JSON.stringify(['admin@cheminfo.org', category]));
-    let endkey = escape(
+    let startkey = encodeURIComponent(
+      JSON.stringify(['admin@cheminfo.org', category]),
+    );
+    let endkey = encodeURIComponent(
       JSON.stringify(['admin@cheminfo.org', `${category}\uFFFF`]),
     );
 
