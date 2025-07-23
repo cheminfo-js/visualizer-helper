@@ -297,7 +297,7 @@ export function getReadmeForDeposition(deposition) {
       const cites = rel.relation || '';
       const scheme = rel.scheme || 'unknown';
       md.push(
-        `- This publication -> ${cites} -> **${relType}**: ${scheme}: [${relId}](${relId})`,
+        `- This publication -> ${cites} -> **${relType}**: ${scheme}: [${relId}](https://doi.org/${relId})`,
       );
     }
   } else {
