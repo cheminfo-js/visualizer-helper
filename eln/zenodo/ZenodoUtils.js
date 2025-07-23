@@ -294,9 +294,11 @@ export function getReadmeForDeposition(deposition) {
     for (const rel of meta.related_identifiers) {
       const relType = rel.resource_type || 'unknown';
       const relId = rel.identifier || 'N/A';
-      const cites = rel.cites || '';
+      const cites = rel.relation || '';
       const scheme = rel.scheme || 'unknown';
-      md.push(`- **${relType}**: [${scheme}:${relId}](${relId}) ${cites}`);
+      md.push(
+        `- This publication -> ${cites} -> **${relType}**: ${scheme}: [${relId}](${relId})`,
+      );
     }
   } else {
     md.push(`## Related Identifiers`, '', '_No related identifiers._', '');
