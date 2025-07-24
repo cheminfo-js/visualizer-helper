@@ -789,7 +789,7 @@ define([
       try {
         for (let i = 0; i < attachments.length; i++) {
           let attachment = attachments[i];
-          if (!this._processAttachment(type, attachment)) return null;
+          if (!(await this._processAttachment(type, attachment))) return null;
         }
         entry = await this.get(entry, { fromCache: true, fallback: true });
         const addAttachmentOptions = createOptions(options, 'addAttachment');
@@ -816,7 +816,7 @@ define([
       var attachOptions = createOptions(options, 'attach');
 
       try {
-        const ok = this._processAttachment(type, attachment);
+        const ok = await this._processAttachment(type, attachment);
         if (!ok) return null;
 
         entry = await this.get(entry, { fromCache: true, fallback: true });
