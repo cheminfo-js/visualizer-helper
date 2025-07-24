@@ -273,7 +273,7 @@ export function getReadmeForDeposition(deposition) {
     };
 
     const filesRows = deposition.files.map((f) => ({
-      filename: `[${f.filename}](${f.links.downloads})`,
+      filename: `[${f.filename}](${f.links.download})`,
       filesize: formatBytes(f.filesize),
       checksum: `\`${f.checksum}\``,
     }));
