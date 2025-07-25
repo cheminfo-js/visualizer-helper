@@ -169,7 +169,9 @@ export function getReadmeForSample(
   return md.join('\n');
 }
 
-export function getReadmeForDeposition(deposition) {
+export function getReadmeForDeposition(ZenodoDeposition) {
+  const deposition = ZenodoDeposition.value || ZenodoDeposition;
+  const host = ZenodoDeposition.zenodo.host || 'zenodo.org';
   const md = [];
   const meta = deposition.metadata || {};
 
@@ -192,6 +194,11 @@ export function getReadmeForDeposition(deposition) {
       '',
     );
   }
+
+  md.push(
+    `**Explore data interactively:** [https://fair.cheminfo.org/${host}/v1/${deposition.id}](https://fair.cheminfo.org/${host}/v1/${deposition.id})`,
+    '',
+  );
 
   const infoHeader = { field: 'Field', value: 'Value' };
   const infoRows = [
