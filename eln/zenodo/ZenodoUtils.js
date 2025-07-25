@@ -196,7 +196,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
   }
 
   md.push(
-    `**Explore data interactively:** [https://fair.cheminfo.org/${host}/v1/${deposition.id}](https://fair.cheminfo.org/${host}/v1/${deposition.id})`,
+    `**Explore data interactively:** [https://fair.cheminfo.org/v1/${host}/${deposition.id}](https://fair.cheminfo.org/v1/${host}/${deposition.id})`,
     '',
   );
 
