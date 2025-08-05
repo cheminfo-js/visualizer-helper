@@ -284,7 +284,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     };
 
     const filesRows = files.map((f) => ({
-      filename: `[${f.key}](${f.links.self})`,
+      filename: `[${f.key}](${deposition.links.self}/${f.key})`,
       filesize: formatBytes(f.size),
       checksum: `\`${f.checksum}\``,
     }));
