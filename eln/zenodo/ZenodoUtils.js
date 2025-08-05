@@ -274,7 +274,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     }
   }
   md.push('', `## Files`, '');
-  const files = Object.values(deposition.value.files.entries);
+  const files = Object.values(deposition.files.entries);
   if (Array.isArray(files) && files.length > 0) {
     // Build the header and rows for the files table
     const filesHeader = {
