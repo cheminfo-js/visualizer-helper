@@ -177,20 +177,16 @@ export function getReadmeForDeposition(ZenodoDeposition) {
 
   md.push(`# ${meta.title || deposition.title || 'Research Dataset'}`);
 
-  const generalDOI =
-    deposition.conceptdoi ||
-    (meta.prereserve_doi && meta.prereserve_doi.doi) ||
-    '';
-  if (generalDOI) {
+  if (deposition.links && deposition.links.doi) {
     md.push(
       '',
-      `**This version's DOI:** [https://doi.org/${meta.prereserve_doi.doi}](https://doi.org/${meta.prereserve_doi.doi})`,
+      `**This version's DOI:** [${deposition.links.doi}](${deposition.links.doi})`,
       '',
     );
   }
-  if (deposition.conceptdoi) {
+  if (deposition.links && deposition.links.parent_doi) {
     md.push(
-      `**All version's DOI:** [https://doi.org/${deposition.conceptdoi}](https://doi.org/${deposition.conceptdoi})`,
+      `**All version's DOI:** [${deposition.links.parent_doi}](${deposition.links.parent_doi})`,
       '',
     );
   }
@@ -203,11 +199,11 @@ export function getReadmeForDeposition(ZenodoDeposition) {
   const infoHeader = { field: 'Field', value: 'Value' };
   const infoRows = [
     { field: '**Deposition ID**', value: deposition.id || 'N/A' },
-    { field: '**State**', value: deposition.state || 'N/A' },
-    { field: '**Access Right**', value: meta.access_right || 'N/A' },
-    { field: '**License**', value: meta.license || 'N/A' },
-    { field: '**Upload Type**', value: meta.upload_type || 'N/A' },
-    { field: '**Publisher**', value: meta.imprint_publisher || 'N/A' },
+    { field: '**State**', value: deposition.status || 'N/A' },
+    { field: '**Access Right**', value: meta.access.record || 'N/A' },
+    { field: '**License**', value: meta.license.id || 'N/A' },
+    { field: '**Upload Type**', value: meta.resource_type.title || 'N/A' },
+    { field: '**Publisher**', value: meta.publisher || 'N/A' },
     { field: '**Publication Date**', value: meta.publication_date || 'N/A' },
   ];
 
@@ -222,8 +218,12 @@ export function getReadmeForDeposition(ZenodoDeposition) {
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     for (const [i, c] of meta.creators.entries()) {
       md.push(
-        `- [**${c.name}**${c.affiliation ? ` (${c.affiliation})` : ''}](${
-          c.orcid ? `https://orcid.org/${c.orcid}` : ''
+        `- [**${c.person_or_org.name}**${
+          c.affiliations[0].name ? ` (${c.affiliations[0].name})` : ''
+        }](${
+          c.orcid
+            ? `https://orcid.org/${c.person_or_org.identifiers[0].identifier}`
+            : ''
         })`,
       );
     }
@@ -234,9 +234,15 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     md.push('', `## Contributors`, '');
     for (const [i, c] of meta.contributors.entries()) {
       md.push(
-        `- [**${c.name}**${
-          c.affiliation ? ` (${c.affiliation}) - ${c.role}` : ''
-        }](${c.orcid ? `https://orcid.org/${c.orcid}` : ''})`,
+        `- [**${c.person_or_org.name}**${
+          c.affiliations[0].name
+            ? ` (${c.affiliations[0].name}) - ${c.role}`
+            : ''
+        }](${
+          c.orcid
+            ? `https://orcid.org/${c.person_or_org.identifiers[0].identifier}`
+            : ''
+        })`,
       );
     }
   } else {
@@ -260,28 +266,26 @@ export function getReadmeForDeposition(ZenodoDeposition) {
 
   if (deposition.links && typeof deposition.links === 'object') {
     md.push('', `## Links`, '');
-    const latestHTML =
-      deposition.links.latest_html || deposition.links.latest_draft_html;
-    const latestAPI = deposition.links.latest || deposition.links.latest_draft;
-    if (latestHTML) {
-      md.push(`- [Zenodo Page](${latestHTML})`);
+    if (deposition.links.self_html) {
+      md.push(`- [Zenodo Page](${deposition.links.self_html})`);
     }
-    if (latestAPI) {
-      md.push(`- [API Resource](${latestAPI})`);
+    if (deposition.links.self) {
+      md.push(`- [API Resource](${deposition.links.self})`);
     }
   }
   md.push('', `## Files`, '');
-  if (Array.isArray(deposition.files) && deposition.files.length > 0) {
+  const files = Object.values(deposition.value.files.entries);
+  if (Array.isArray(files) && files.length > 0) {
     // Build the header and rows for the files table
     const filesHeader = {
       filename: 'Filename',
       filesize: 'Size',
-      checksum: 'Checksum',
+      checksum: 'Checksum (md5)',
     };
 
-    const filesRows = deposition.files.map((f) => ({
-      filename: `[${f.filename}](${f.links.download})`,
-      filesize: formatBytes(f.filesize),
+    const filesRows = files.map((f) => ({
+      filename: `[${f.key}](${f.links.self})`,
+      filesize: formatBytes(f.size),
       checksum: `\`${f.checksum}\``,
     }));
 
@@ -299,9 +303,9 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     md.push(`## Related Identifiers`, '');
     md.push('This dataset is related to the following identifiers:');
     for (const rel of meta.related_identifiers) {
-      const relType = rel.resource_type || 'unknown';
+      const relType = rel.resource_type.id || 'unknown';
       const relId = rel.identifier || 'N/A';
-      const cites = rel.relation || '';
+      const cites = rel.relation_type.id || '';
       const scheme = rel.scheme || 'unknown';
       md.push(
         `- This publication -> ${cites} -> **${relType}**: ${scheme}: [${relId}](https://doi.org/${relId})`,
@@ -313,7 +317,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
 
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     const year = meta.publication_date;
-    const authors = meta.creators.map((c) => c.name).join(', ');
+    const authors = meta.creators.map((c) => c.person_or_org.name).join(', ');
     const title = meta.title || deposition.title || 'Research Dataset';
 
     md.push(
