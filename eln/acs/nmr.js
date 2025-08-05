@@ -1,4 +1,5 @@
 import { rangesToACS } from '../libs/nmrProcessing';
+import SD from '../libs/SD';
 
 const defaultFormats = {
   h: {
