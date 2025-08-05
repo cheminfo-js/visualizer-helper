@@ -325,7 +325,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
       '',
       'If you use this dataset in your research, please cite it as:',
       '',
-      `> ${authors}. &#96;*${title}*&#96;. Zenodo, ${year}. https://doi.org/${generalDOI}.`,
+      `> ${authors}. &#96;*${title}*&#96;. Zenodo, ${year}. ${deposition.links.doi}.`,
     );
 
     if (deposition.links && deposition.links.parent_doi) {
