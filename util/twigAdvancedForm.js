@@ -51,7 +51,7 @@
 define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
   $,
   API,
-  Module
+  Module,
 ) {
   console.log('START');
 
@@ -63,12 +63,12 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       .closest('[data-module-id]')
       .attr('data-module-id');
     var module = Module.getModules().find(
-      (m) => `${m.getId()}` === `${moduleId}`
+      (m) => `${m.getId()}` === `${moduleId}`,
     );
     var ips = module.vars_in().filter((v) => v.rel === 'form');
     if (ips.length === 0) {
       throw new Error(
-        'The twig module does not have variable in of type "form"'
+        'The twig module does not have variable in of type "form"',
       );
     }
     var variableName = ips[0].name;
@@ -81,7 +81,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       {
         getId() {
           return moduleId + variableName;
-        }
+        },
       },
       function (newData) {
         newData.currentPromise.then(() => {
@@ -91,14 +91,14 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
               console.log(
                 'The variable',
                 variableName,
-                'does not exist yet. We will load it.'
+                'does not exist yet. We will load it.',
               );
             }
             data = API.getData(variableName);
             updateTwig();
           }
         });
-      }
+      },
     );
 
     // we will initialise the form
@@ -132,7 +132,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
                 #${divID} .removeRow:before {content: "-"; cursor: pointer;}
                 #${divID} :focus {box-shadow: 0 0 2px 2px rgba(81, 203, 238, 1);}
                 #${divID} td, #extendedForm th {vertical-align: top;}
-            </style>`
+            </style>`,
     );
 
     function handleDataRepeat(index, row) {
@@ -211,9 +211,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
         }
         var repeatName = $(element).attr('data-repeat');
         if (repeatName) jpath.unshift(...repeatName.split('.'));
-        element = $(element)
-          .parent()
-          .closest('[data-repeat]');
+        element = $(element).parent().closest('[data-repeat]');
       }
       return jpath;
     }
@@ -237,13 +235,31 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
                 var name = element.attr(attr);
                 name = name.replace(search, replace);
                 element.attr(attr, name);
-              }
+              },
             );
         }
       });
     }
 
     function getBase(element) {
+      var tr = element.find('tr[data-repeat]').first();
+      if (tr.length > 0) {
+        var dataRepeat = tr.attr('data-repeat');
+        var dataIndex = tr.attr('data-index') || '0';
+
+        if (dataRepeat) {
+          var base = dataRepeat;
+          if (options.debug) {
+            console.log('Using data-repeat as base:', base);
+          }
+          return {
+            base: base,
+            index: dataIndex,
+          };
+        }
+      }
+
+      // Fallback to the old method if no data-repeat found
       var names = [];
       element.find('[name]').each(function (index, element) {
         names.push($(element).attr('name'));
@@ -254,7 +270,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       names.sort();
       return {
         base: names[0].replace(/(.*)\.([0-9]+).*/, '$1'),
-        index: names[0].replace(/(.*)\.([0-9]+).*/, '$2')
+        index: names[0].replace(/(.*)\.([0-9]+).*/, '$2'),
       };
     }
 
