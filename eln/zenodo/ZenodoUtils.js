@@ -202,7 +202,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     { field: '**State**', value: deposition.status || 'N/A' },
     { field: '**Access Right**', value: deposition.access.record || 'N/A' },
     { field: '**License**', value: meta.rights[0].id || 'N/A' },
-    { field: '**Upload Type**', value: meta.resource_type.title || 'N/A' },
+    { field: '**Upload Type**', value: meta.resource_type.title.en || 'N/A' },
     { field: '**Publisher**', value: meta.publisher || 'N/A' },
     { field: '**Publication Date**', value: meta.publication_date || 'N/A' },
   ];
@@ -219,7 +219,9 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     for (const [i, c] of meta.creators.entries()) {
       md.push(
         `- [**${c.person_or_org.name}**${
-          c.affiliations[0].name ? ` (${c.affiliations[0].name})` : ''
+          c.affiliations[0].name
+            ? ` (${c.affiliations[0].name}) - ${c.role.title.en}`
+            : ''
         }](${
           c.orcid
             ? `https://orcid.org/${c.person_or_org.identifiers[0].identifier}`
@@ -236,7 +238,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
       md.push(
         `- [**${c.person_or_org.name}**${
           c.affiliations[0].name
-            ? ` (${c.affiliations[0].name}) - ${c.role}`
+            ? ` (${c.affiliations[0].name}) - ${c.role.title.en}`
             : ''
         }](${
           c.orcid
@@ -284,7 +286,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     };
 
     const filesRows = files.map((f) => ({
-      filename: `[${f.key}](${deposition.links.self}/${f.key})`,
+      filename: `[${f.key}](${deposition.links.self}/files/${f.key})`,
       filesize: formatBytes(f.size),
       checksum: `\`${f.checksum}\``,
     }));
@@ -305,7 +307,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     for (const rel of meta.related_identifiers) {
       const relType = rel.resource_type.id || 'unknown';
       const relId = rel.identifier || 'N/A';
-      const cites = rel.relation_type.id || '';
+      const cites = rel.relation_type.title.en || '';
       const scheme = rel.scheme || 'unknown';
       md.push(
         `- This publication -> ${cites} -> **${relType}**: ${scheme}: [${relId}](https://doi.org/${relId})`,
