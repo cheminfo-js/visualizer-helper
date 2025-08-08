@@ -199,8 +199,6 @@ export function getReadmeForDeposition(ZenodoDeposition) {
   const infoHeader = { field: 'Field', value: 'Value' };
   const infoRows = [
     { field: '**Deposition ID**', value: deposition.id || 'N/A' },
-    { field: '**State**', value: deposition.status || 'N/A' },
-    { field: '**Access Right**', value: deposition.access.record || 'N/A' },
     { field: '**License**', value: meta.rights[0].id || 'N/A' },
     { field: '**Upload Type**', value: meta.resource_type.title.en || 'N/A' },
     { field: '**Publisher**', value: meta.publisher || 'N/A' },
