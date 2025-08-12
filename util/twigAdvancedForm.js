@@ -242,24 +242,6 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
     }
 
     function getBase(element) {
-      var tr = element.find('tr[data-repeat]').first();
-      if (tr.length > 0) {
-        var dataRepeat = tr.attr('data-repeat');
-        var dataIndex = tr.attr('data-index') || '0';
-
-        if (dataRepeat) {
-          var base = dataRepeat;
-          if (options.debug) {
-            console.log('Using data-repeat as base:', base);
-          }
-          return {
-            base: base,
-            index: dataIndex,
-          };
-        }
-      }
-
-      // Fallback to the old method if no data-repeat found
       var names = [];
       element.find('[name]').each(function (index, element) {
         names.push($(element).attr('name'));
