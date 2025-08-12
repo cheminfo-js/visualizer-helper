@@ -19,9 +19,9 @@
  *           <th>Kind</th>
  *           <th>Firstname</th>
  *           <th>Lastname</th>
- *           <th>Nationalities</th>
+ *           <th>Affiliations</th>
  *       </tr>
- *       <tr data-repeat='authors'>
+ *       <tr data-repeat='creators'>
  *           <td>
  *               <select data-field='kind'>
  *                   <option value=''></option>
@@ -37,9 +37,9 @@
  *           </td>
  *           <td>
  *               <table>
- *                    <tr data-repeat='nationalities'>
+ *                    <tr data-repeat='affiliations'>
  *                       <td>
- *                           <input placeholder="Nationality" type='text' size=10 data-field=''>
+ *                           <input placeholder="Affiliation" type='text' size=10 data-field='name'>
  *                       </td>
  *                   </tr>
  *               </table>
@@ -73,8 +73,14 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
     }
     var variableName = ips[0].name;
     var data;
+    var isUpdating = false; // Flag to prevent cascading updates
+
+    // Configuration for single-item arrays (always use index 0)
+    // Can be set via options.singleItemArrays or detected automatically
+    var singleItemArrays = options.singleItemArrays || [];
 
     if (options.debug) console.log('variableName:', variableName);
+    if (options.debug) console.log('singleItemArrays:', singleItemArrays);
 
     var variable = API.getVar(variableName);
     variable.listen(
@@ -95,6 +101,9 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
               );
             }
             data = API.getData(variableName);
+            updateTwig();
+          } else if (!isUpdating) {
+            if (options.debug) console.log('Data changed, updating twig...');
             updateTwig();
           }
         });
@@ -135,6 +144,28 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
             </style>`,
     );
 
+    function isSingleItemArray(dataRepeat, isNested) {
+      if (!isNested) return false;
+
+      if (singleItemArrays.includes(dataRepeat)) {
+        return true;
+      }
+
+      var nestedTable = dom
+        .find(`tr[data-repeat="${dataRepeat}"]`)
+        .closest('table');
+      if (nestedTable.attr('data-single-item') === 'true') {
+        return true;
+      }
+
+      var repeatElement = dom.find(`tr[data-repeat="${dataRepeat}"]`);
+      if (repeatElement.attr('data-single-item') === 'true') {
+        return true;
+      }
+
+      return false;
+    }
+
     function handleDataRepeat(index, row) {
       row = $(row);
       var jpath = getJpath(row);
@@ -142,14 +173,21 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       var table = row.closest('table');
       var length = 0;
       var empty = false;
+
+      var isNested = row.closest('table').closest('[data-repeat]').length > 0;
+
+      var dataRepeat = row.attr('data-repeat');
+      var singleItem = isSingleItemArray(dataRepeat, isNested);
+
       if (!variable || variable.length === 0) {
         length = 1;
         empty = true;
       } else if (Array.isArray(variable)) {
-        length = variable.length;
+        length = singleItem ? 1 : variable.length;
       } else {
         console.log('Wrong variable type', variable);
       }
+
       for (var i = 0; i < length; i++) {
         var currentRow;
         if (i === 0) {
@@ -158,8 +196,9 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
           currentRow = row.clone();
           table.append(currentRow);
         }
-        currentRow.attr('data-index', i);
-        renameRow(currentRow, jpath, i, empty);
+        var actualIndex = singleItem ? 0 : i;
+        currentRow.attr('data-index', actualIndex);
+        renameRow(currentRow, jpath, actualIndex, empty);
       }
       rename(table);
     }
@@ -223,8 +262,19 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       var base = getBase(tbody).base;
       var search = new RegExp(`${base}.[0-9]+`);
       var rows = tbody.children('tr:has(td)');
+
+      var isNested = tbody.closest('[data-repeat]').length > 0;
+      var dataRepeat = rows.first().attr('data-repeat');
+      var singleItem = isSingleItemArray(dataRepeat, isNested);
+
       rows.each(function (rowIndex, row) {
-        var replace = `${base}.${rowIndex}`;
+        var actualIndex = singleItem ? 0 : rowIndex;
+        var replace = `${base}.${actualIndex}`;
+
+        if (!singleItem) {
+          $(row).attr('data-index', actualIndex);
+        }
+
         for (var attr of ['name', 'name-empty']) {
           $(row)
             .find(`[${attr}]`)
@@ -242,6 +292,23 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
     }
 
     function getBase(element) {
+      var tr = element.find('tr[data-repeat]').first();
+      if (tr.length > 0) {
+        var dataRepeat = tr.attr('data-repeat');
+        var dataIndex = tr.attr('data-index') || '0';
+
+        if (dataRepeat) {
+          var base = dataRepeat;
+          if (options.debug) {
+            console.log('Using data-repeat as base:', base);
+          }
+          return {
+            base: base,
+            index: dataIndex,
+          };
+        }
+      }
+
       var names = [];
       element.find('[name]').each(function (index, element) {
         names.push($(element).attr('name'));
@@ -270,7 +337,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
         .addEventListener('mouseover', function (event) {
           var target = $(event.target);
           if (target.attr('name-empty')) {
-            console.log('Empty', target.attr('name'));
+            console.log('Empty', target.attr('name-empty'));
           }
         });
     }
@@ -293,63 +360,168 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
     document.getElementById(divID).addEventListener('input', changeInputFct);
 
     document.getElementById(divID).addEventListener('click', function (event) {
+      // Prevent any clicks during updates
+      if (isUpdating) {
+        if (options.debug) console.log('Ignoring click during update');
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        return;
+      }
+
       var from = event.target;
       var table = $(from).closest('tbody');
       var tr = $(from).closest('tr');
-      switch (from.className) {
-        case 'form-button addRow':
-        case 'addRow':
-          // if we try to add a row we should check if
-          // there is already an empty one
-          var empties = table
-            .children('tr')
-            .children('td:not(:has(table))')
-            .find('[name-empty]');
-          if (empties.length > 0) {
-            empties[0].focus();
-            return;
+
+      var isNested = table.closest('[data-repeat]').length > 0;
+      var dataRepeat = tr.attr('data-repeat');
+      var singleItem = isSingleItemArray(dataRepeat, isNested);
+
+      var hasAddClass =
+        $(from).hasClass('addRow') || $(from).hasClass('form-button addRow');
+      var hasRemoveClass =
+        $(from).hasClass('removeRow') ||
+        $(from).hasClass('form-button removeRow');
+
+      if (hasAddClass) {
+        if (singleItem) {
+          console.log(
+            'Cannot add rows in single-item arrays - only one item allowed',
+          );
+          return;
+        }
+
+        var empties = table
+          .children('tr')
+          .children('td:not(:has(table))')
+          .find('[name-empty]');
+        if (empties.length > 0) {
+          empties[0].focus();
+          return;
+        }
+        var clone = tr.clone();
+        clone.find('select, input, textarea').val('');
+        clone.find('tr:not(:first-child)').remove();
+        var fields = clone.find('[name]');
+        // rename attribute 'name' to 'name-empty'
+        fields.each((index, element) => {
+          $(element).attr('name-empty', $(element).attr('name'));
+          $(element).removeAttr('name');
+        });
+        table.append(clone);
+        clone.find('[name-empty]')[0].focus();
+        rename(table);
+      } else if (hasRemoveClass) {
+        if (singleItem) {
+          console.log(
+            'Cannot remove rows in single-item arrays - one item must remain',
+          );
+          tr.find('select, input, textarea').val('');
+          return;
+        }
+
+        isUpdating = true;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        var dataRepeat = tr.attr('data-repeat');
+        var currentRowIndex = 0;
+        tr.prevAll('tr[data-repeat="' + dataRepeat + '"]').each(function () {
+          currentRowIndex++;
+        });
+
+        if (options.debug) {
+          console.log(
+            'Removing row with data-repeat:',
+            dataRepeat,
+            'at current position:',
+            currentRowIndex,
+          );
+        }
+
+        var dataRemoved = false;
+        if (dataRepeat) {
+          var data = API.getData(variableName);
+
+          var fullJpath = getJpath(tr);
+          if (options.debug) {
+            console.log('Full jpath for removal:', fullJpath);
           }
-          var clone = tr.clone();
-          clone.find('select, input, textarea').val('');
-          clone.find('tr:not(:first-child)').remove();
-          var fields = clone.find('[name]');
-          // rename attribute 'name' to 'name-empty'
-          fields.each((index, element) => {
+
+          if (fullJpath.length > 0) {
+            var arrayPath = fullJpath.slice(0, -1);
+            var itemIndex = parseInt(fullJpath[fullJpath.length - 1]);
+
+            if (options.debug) {
+              console.log(
+                'Array path:',
+                arrayPath,
+                'Item index to remove:',
+                itemIndex,
+              );
+            }
+
+            var arrayVariable = data.getChildSync(arrayPath);
+
+            if (
+              Array.isArray(arrayVariable) &&
+              itemIndex >= 0 &&
+              itemIndex < arrayVariable.length
+            ) {
+              if (options.debug) {
+                console.log(
+                  'Array before removal:',
+                  arrayVariable.length,
+                  'items',
+                );
+                console.log(
+                  'Removing item:',
+                  JSON.stringify(arrayVariable[itemIndex]),
+                );
+              }
+              arrayVariable.splice(itemIndex, 1);
+              dataRemoved = true;
+              if (options.debug) {
+                console.log(
+                  'Successfully removed item from array, now has:',
+                  arrayVariable.length,
+                  'items',
+                );
+              }
+            } else {
+              if (options.debug) {
+                console.log(
+                  'Could not find array or invalid index:',
+                  arrayVariable,
+                  itemIndex,
+                );
+              }
+            }
+          }
+        }
+
+        if (table.children('tr:has(td)').length > 1) {
+          tr.remove();
+        } else {
+          tr.find('select, input, textarea').val('');
+          tr.find('tr:not(:first-child)').remove();
+          tr.find('[name]').each((index, element) => {
             $(element).attr('name-empty', $(element).attr('name'));
             $(element).removeAttr('name');
           });
-          table.append(clone);
-          clone.find('[name-empty]')[0].focus();
-          rename(table);
-          break;
-        case 'form-button removeRow':
-        case 'removeRow':
-          var base = getBase(tr);
-          if (base) {
-            var jpath = base.base.split('.');
-            var data = API.getData(variableName);
-            var variable = data.getChildSync(jpath);
-            variable.splice(base.index, 1);
-            data.triggerChange();
-          }
-          // need to throw an event to remove this entry
-          if (table.children('tr:has(td)').length > 1) {
-            tr.remove();
-          } else {
-            tr.find('select, input, textarea').val('');
-            tr.find('tr:not(:first-child)').remove();
-            tr.find('[name]').each((index, element) => {
-              $(element).attr('name-empty', $(element).attr('name'));
-              $(element).removeAttr('name');
-            });
-            tr.find('[name-empty]')[0].focus();
-          }
-          rename(table);
-          break;
-        case '':
-          break;
-        default:
-          throw new Error(`Unexpected class name: ${from.className}`);
+          var firstEmpty = tr.find('[name-empty]')[0];
+          if (firstEmpty) firstEmpty.focus();
+        }
+        rename(table);
+
+        if (dataRemoved) {
+          var data = API.getData(variableName);
+          data.triggerChange();
+        }
+
+        setTimeout(() => {
+          isUpdating = false;
+          if (options.debug) console.log('Reset updating flag');
+        }, 500);
       }
     });
   }
