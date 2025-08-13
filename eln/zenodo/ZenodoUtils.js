@@ -215,14 +215,22 @@ export function getReadmeForDeposition(ZenodoDeposition) {
   );
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
     for (const [i, c] of meta.creators.entries()) {
+      const identifiers = c.person_or_org.identifiers || [];
+      if (identifiers.length === 0) {
+        identifiers.push({ scheme: 'orcid', identifier: '' });
+      }
+      const affiliations = c.affiliations || [];
+      if (affiliations.length === 0) {
+        affiliations.push({ name: '' });
+      }
       md.push(
         `- [**${c.person_or_org.name}**${
-          c.affiliations[0].name
-            ? ` (${c.affiliations[0].name}) - ${c.role.title.en}`
+          affiliations[0].name
+            ? ` (${affiliations[0].name}) - ${c.role.title.en}`
             : ''
         }](${
-          c.orcid
-            ? `https://orcid.org/${c.person_or_org.identifiers[0].identifier}`
+          identifiers[0].scheme === 'orcid'
+            ? `https://orcid.org/${identifiers[0].identifier}`
             : ''
         })`,
       );
