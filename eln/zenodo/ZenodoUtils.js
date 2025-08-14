@@ -437,3 +437,46 @@ function getAdditionalDescription(description) {
 
   console.log(outputHTML);
 }
+
+export function getKeywordsForDeposition(samples) {
+  const keywords = [];
+  keywords.push(
+    { subject: 'SciPeaks' },
+    { subject: 'Molecules characterization' },
+    { subject: 'Dataset of chemicals' },
+  );
+  for (const sample of samples) {
+    console.log(sample);
+    if (sample.$content && sample.$content.spectra) {
+      if (
+        sample.$content.spectra.nmr &&
+        sample.$content.spectra.nmr.length > 0
+      ) {
+        keywords.push(
+          { subject: 'NMR Spectrum' },
+          { subject: 'Nuclear Magnetic Resonance' },
+        );
+      }
+      if (sample.$content.spectra.ir && sample.$content.spectra.ir.length > 0) {
+        keywords.push({ subject: 'IR Spectrum' }, { subject: 'Infrared' });
+      }
+      if (sample.$content.spectra.uv && sample.$content.spectra.uv.length > 0) {
+        keywords.push({ subject: 'UV Spectrum' }, { subject: 'Ultra-violet' });
+      }
+      if (
+        sample.$content.spectra.mass &&
+        sample.$content.spectra.mass.length > 0
+      ) {
+        keywords.push({ subject: 'Mass Spectrum' });
+      }
+      if (sample._attachments && sample._attachments.length > 0) {
+        for (const key of Object.keys(sample._attachments) || []) {
+          if (key.endsWith('.dx')) {
+            keywords.push({ subject: 'JCAMP-DX' });
+          }
+        }
+      }
+    }
+  }
+  return keywords;
+}
