@@ -205,6 +205,21 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     { field: '**Publication Date**', value: meta.publication_date || 'N/A' },
   ];
 
+  if (meta.description) {
+    const description = !meta.description.startsWith('<h1>')
+      ? meta.description
+      : getAdditionalDescription(meta.description);
+    md.push('', `## Additional Description`, '', description, '');
+  } else {
+    md.push(
+      '',
+      `## Additional Description`,
+      '',
+      '_No additional description provided._',
+      '',
+    );
+  }
+
   md.push(
     `## Dataset Information`,
     '',
@@ -257,19 +272,14 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     md.push('', `## Contributors`, '', '_No contributors listed._');
   }
 
-  if (meta.description) {
-    const description = !meta.description.startsWith('<h1>')
-      ? meta.description
-      : getAdditionalDescription(meta.description);
-    md.push('', `## Additional Description`, '', description, '');
-  } else {
-    md.push(
-      '',
-      `## Additional Description`,
-      '',
-      '_No additional description provided._',
-      '',
-    );
+  if (Array.isArray(meta.funding) && meta.funding.length > 0) {
+    md.push('', `## Funding`, '');
+    for (const fund of meta.funding) {
+      const funder = fund.funder.name || 'Unknown Funder';
+      const award = fund.award.title.en || 'No Award Number';
+      const acronym = fund.award.acronym ? `(${fund.award.acronym})` : '';
+      md.push(`- **${funder}** ${acronym}: ${award}`);
+    }
   }
 
   if (deposition.links && typeof deposition.links === 'object') {
