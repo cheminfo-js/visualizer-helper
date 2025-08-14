@@ -278,7 +278,8 @@ export function getReadmeForDeposition(ZenodoDeposition) {
       md.push(`- [Zenodo Page](${deposition.links.self_html})`);
     }
     if (deposition.links.self) {
-      md.push(`- [API Resource](${deposition.links.self})`);
+      const publishedLink = deposition.links.self.replace('/draft', '');
+      md.push(`- [API Resource](${publishedLink})`);
     }
   }
   md.push('', `## Files`, '');
@@ -291,8 +292,10 @@ export function getReadmeForDeposition(ZenodoDeposition) {
       checksum: 'Checksum (md5)',
     };
 
+    // remove draft from the link
+    const publishedLink = deposition.links.self.replace('/draft', '');
     const filesRows = files.map((f) => ({
-      filename: `[${f.key}](${deposition.links.self}/files/${f.key}/content)`,
+      filename: `[${f.key}](${publishedLink}/files/${f.key}/content)`,
       filesize: formatBytes(f.size),
       checksum: `\`${f.checksum}\``,
     }));
