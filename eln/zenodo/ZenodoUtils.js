@@ -449,8 +449,6 @@ function getAdditionalDescription(description) {
       break;
     }
   }
-
-  console.log(outputHTML);
 }
 
 export function getKeywordsForDeposition(samples) {
@@ -459,7 +457,6 @@ export function getKeywordsForDeposition(samples) {
   keywords.add('Molecules characterization');
   keywords.add('Dataset of chemicals');
   for (const sample of samples) {
-    console.log(sample);
     if (sample.$content && sample.$content.spectra) {
       if (
         sample.$content.spectra.nmr &&
