@@ -177,21 +177,16 @@ export function getReadmeForDeposition(ZenodoDeposition) {
 
   md.push(`# ${meta.title || deposition.title || 'Research Dataset'}`);
 
-  if (deposition.links && deposition.links.doi) {
-    md.push(
-      '',
-      `**This version's DOI:** [${deposition.links.doi}](${deposition.links.doi})`,
-      '',
-    );
+  const doi =
+    deposition.links && deposition.links.doi ? deposition.links.doi : '';
+  if (doi) {
+    md.push('', `**This version's DOI:** [${doi}](${doi})`, '');
   }
 
   const parentDOI =
     deposition.links && deposition.links.parent_doi
       ? deposition.links.parent_doi
-      : deposition.links.doi.replace(
-          /(\d+)(?!.*\d)/,
-          (match) => Number(match) - 1,
-        );
+      : doi.replace(/(\d+)(?!.*\d)/, (match) => Number(match) - 1);
   if (parentDOI) {
     md.push(`**All version's DOI:** [${parentDOI}](${parentDOI})`, '');
   }
