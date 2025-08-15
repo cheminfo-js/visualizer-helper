@@ -184,11 +184,16 @@ export function getReadmeForDeposition(ZenodoDeposition) {
       '',
     );
   }
-  if (deposition.links && deposition.links.parent_doi) {
-    md.push(
-      `**All version's DOI:** [${deposition.links.parent_doi}](${deposition.links.parent_doi})`,
-      '',
-    );
+
+  const parentDOI =
+    deposition.links && deposition.links.parent_doi
+      ? deposition.links.parent_doi
+      : deposition.links.doi.replace(
+          /(\d+)(?!.*\d)/,
+          (match) => Number(match) - 1,
+        );
+  if (parentDOI) {
+    md.push(`**All version's DOI:** [${parentDOI}](${parentDOI})`, '');
   }
 
   md.push(
