@@ -450,9 +450,9 @@ function getAdditionalDescription(description) {
 
 export function getKeywordsForDeposition(samples) {
   const keywords = new Set();
-  keywords.add({ subject: 'SciPeaks' });
-  keywords.add({ subject: 'Molecules characterization' });
-  keywords.add({ subject: 'Dataset of chemicals' });
+  keywords.add('SciPeaks');
+  keywords.add('Molecules characterization');
+  keywords.add('Dataset of chemicals');
   for (const sample of samples) {
     console.log(sample);
     if (sample.$content && sample.$content.spectra) {
@@ -460,31 +460,31 @@ export function getKeywordsForDeposition(samples) {
         sample.$content.spectra.nmr &&
         sample.$content.spectra.nmr.length > 0
       ) {
-        keywords.add({ subject: 'NMR Spectrum' });
-        keywords.add({ subject: 'Nuclear Magnetic Resonance' });
+        keywords.add('NMR Spectrum');
+        keywords.add('Nuclear Magnetic Resonance');
       }
       if (sample.$content.spectra.ir && sample.$content.spectra.ir.length > 0) {
-        keywords.add({ subject: 'IR Spectrum' });
-        keywords.add({ subject: 'Infrared' });
+        keywords.add('IR Spectrum');
+        keywords.add('Infrared');
       }
       if (sample.$content.spectra.uv && sample.$content.spectra.uv.length > 0) {
-        keywords.add({ subject: 'UV Spectrum' });
-        keywords.add({ subject: 'Ultra-violet' });
+        keywords.add('UV Spectrum');
+        keywords.add('Ultra-violet');
       }
       if (
         sample.$content.spectra.mass &&
         sample.$content.spectra.mass.length > 0
       ) {
-        keywords.add({ subject: 'Mass Spectrum' });
+        keywords.add('Mass Spectrum');
       }
       if (sample._attachments && sample._attachments.length > 0) {
         for (const key of Object.keys(sample._attachments) || []) {
           if (key.endsWith('.dx')) {
-            keywords.add({ subject: 'JCAMP-DX' });
+            keywords.add('JCAMP-DX');
           }
         }
       }
     }
   }
-  return keywords;
+  return Array.from(keywords).map((subject) => ({ subject }));
 }
