@@ -449,12 +449,10 @@ function getAdditionalDescription(description) {
 }
 
 export function getKeywordsForDeposition(samples) {
-  const keywords = [];
-  keywords.push(
-    { subject: 'SciPeaks' },
-    { subject: 'Molecules characterization' },
-    { subject: 'Dataset of chemicals' },
-  );
+  const keywords = new Set();
+  keywords.add({ subject: 'SciPeaks' });
+  keywords.add({ subject: 'Molecules characterization' });
+  keywords.add({ subject: 'Dataset of chemicals' });
   for (const sample of samples) {
     console.log(sample);
     if (sample.$content && sample.$content.spectra) {
@@ -462,27 +460,27 @@ export function getKeywordsForDeposition(samples) {
         sample.$content.spectra.nmr &&
         sample.$content.spectra.nmr.length > 0
       ) {
-        keywords.push(
-          { subject: 'NMR Spectrum' },
-          { subject: 'Nuclear Magnetic Resonance' },
-        );
+        keywords.add({ subject: 'NMR Spectrum' });
+        keywords.add({ subject: 'Nuclear Magnetic Resonance' });
       }
       if (sample.$content.spectra.ir && sample.$content.spectra.ir.length > 0) {
-        keywords.push({ subject: 'IR Spectrum' }, { subject: 'Infrared' });
+        keywords.add({ subject: 'IR Spectrum' });
+        keywords.add({ subject: 'Infrared' });
       }
       if (sample.$content.spectra.uv && sample.$content.spectra.uv.length > 0) {
-        keywords.push({ subject: 'UV Spectrum' }, { subject: 'Ultra-violet' });
+        keywords.add({ subject: 'UV Spectrum' });
+        keywords.add({ subject: 'Ultra-violet' });
       }
       if (
         sample.$content.spectra.mass &&
         sample.$content.spectra.mass.length > 0
       ) {
-        keywords.push({ subject: 'Mass Spectrum' });
+        keywords.add({ subject: 'Mass Spectrum' });
       }
       if (sample._attachments && sample._attachments.length > 0) {
         for (const key of Object.keys(sample._attachments) || []) {
           if (key.endsWith('.dx')) {
-            keywords.push({ subject: 'JCAMP-DX' });
+            keywords.add({ subject: 'JCAMP-DX' });
           }
         }
       }
