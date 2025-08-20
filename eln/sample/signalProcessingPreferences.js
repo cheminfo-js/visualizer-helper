@@ -14,12 +14,15 @@ export const filters = `
 		line-height: 1.5;
 		max-width: 700px;
 	}
+	#processingFilters .info-icon {
+		font-size: 0.8em;
+		color: #666;
+		cursor: help;
+		margin-left: 5px;
+	}
 </style>
 <div id="processingFilters">
-<h1>Processing filters</h1>
-<div class="explanation">
-	By using filters, you can improve your results by reducing variation between samples. This may include baseline correction, X-axis shifts, Y-axis rescaling, and other adjustments.
-</div>
+<h1>Processing filters <span class="info-icon" title="By using filters, you can improve your results by reducing variation between samples. This may include baseline correction, X-axis shifts, Y-axis rescaling, and other adjustments.">❔</span></h1>
 <table>
 	<tr>
 		<th></th>
@@ -77,11 +80,7 @@ export const filters = `
 		</td>
 	</tr>
 </table>
-<h1>Normalization</h1>
-<div class="explanation">
-	Data may differ because they are acquired on different instruments or with varying acquisition parameters.
-  The options below allow you to normalize the range and the number of points, as well as add exclusion zones that are not useful for comparison.
-</div>
+<h1>Normalization <span class="info-icon" title="Data may differ because they are acquired on different instruments or with varying acquisition parameters. The options below allow you to normalize the range and the number of points, as well as add exclusion zones that are not useful for comparison.">❔</span></h1>
 <table>
 <tr>
 	<th align="left">Apply normalization:</th>
@@ -149,5 +148,14 @@ export const filters = `
 			optionsElement.find('select[placeholder=' + key + ']').show();
 		}
 	}
+	
+	// Initialize tooltips
+	$(document).ready(function() {
+		$('.info-icon').tooltip({
+			position: { my: "left+15 center", at: "right center" },
+			show: { delay: 200 },
+			hide: { delay: 100 }
+		});
+	});
 </script>
 `;
