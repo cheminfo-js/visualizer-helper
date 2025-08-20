@@ -84,7 +84,7 @@ export const filters = `
 </div>
 <table>
 <tr>
-	<th align="left">Apply normalization selection:</th>
+	<th align="left">Apply normalization:</th>
 	<td>
 		<input type="checkbox" name="normalization.applyRangeSelectionFirst" value="true" id="applyBefore">
 		<label for="applyBefore">Before filters</label>
