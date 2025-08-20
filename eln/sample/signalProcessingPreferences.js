@@ -94,9 +94,9 @@ export const filters = `
 	<th align="left">Apply range selection:</th>
 	<td>
 		<input type="radio" name="normalization.applyRangeSelectionFirst" value="true"id="applyBefore">
-		<label for="applyBefore">Apply before filters</label><br>
+		<label for="applyBefore">Before filters</label><br>
 		<input type="radio" name="normalization.applyRangeSelectionFirst" value="false" id="applyAfter">
-		<label for="applyAfter">Apply after filters</label>
+		<label for="applyAfter">After filters</label>
 	</td>
 </tr>
 <tr>
