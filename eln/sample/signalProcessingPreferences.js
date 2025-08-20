@@ -84,6 +84,13 @@ export const filters = `
 </div>
 <table>
 <tr>
+	<th align="left">Apply normalization selection:</th>
+	<td>
+		<input type="checkbox" name="normalization.applyRangeSelectionFirst" value="true" id="applyBefore">
+		<label for="applyBefore">Before filters</label>
+	</td>
+</tr>
+<tr>
 	<th align="left">Range:</th>
 	<td>
 		from: <input type="number" name="normalization.from" step="any"> -
@@ -91,12 +98,9 @@ export const filters = `
 	</td>
 </tr>
 <tr>
-	<th align="left">Apply range selection:</th>
+	<th align="left">Number of points:</th>
 	<td>
-		<input type="radio" name="normalization.applyRangeSelectionFirst" value="true"id="applyBefore">
-		<label for="applyBefore">Before filters</label><br>
-		<input type="radio" name="normalization.applyRangeSelectionFirst" value="false" id="applyAfter">
-		<label for="applyAfter">After filters</label>
+		<input type='text' name='normalization.numberOfPoints'>
 	</td>
 </tr>
 <tr>
@@ -129,12 +133,7 @@ export const filters = `
 	</td>
 </tr>
 -->
-<tr>
-	<th align="left">Number of points:</th>
-	<td>
-		<input type='text' name='normalization.numberOfPoints'>
-	</td>
-</tr>
+
 </table>
 <script>
 	function updateOptions(source) {
