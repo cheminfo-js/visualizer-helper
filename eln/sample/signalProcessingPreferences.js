@@ -6,23 +6,17 @@ export const filters = `
 		border-bottom: 1px solid #ccc;
 		font-weight: 600;
 	}
-	#processingFilters .explanation {
-		margin-bottom: 1em;
-		color: #444;
-		font-size: 1em;
-		font-style: italic;
-		line-height: 1.5;
-		max-width: 700px;
-	}
 	#processingFilters .info-icon {
-		font-size: 0.8em;
+		font-size: 1em;
 		color: #666;
 		cursor: help;
 		margin-left: 5px;
 	}
+	
+
 </style>
 <div id="processingFilters">
-<h1>Processing filters <span class="info-icon" title="By using filters, you can improve your results by reducing variation between samples. This may include baseline correction, X-axis shifts, Y-axis rescaling, and other adjustments.">❔</span></h1>
+<h1>Processing filters <span class="info-icon" title="By using filters, you can improve your results by reducing variation between samples. This may include baseline correction, X-axis shifts, Y-axis rescaling, and other adjustments."><i class="far fa-question-circle"></i></span></h1>
 <table>
 	<tr>
 		<th></th>
@@ -80,7 +74,7 @@ export const filters = `
 		</td>
 	</tr>
 </table>
-<h1>Normalization <span class="info-icon" title="Data may differ because they are acquired on different instruments or with varying acquisition parameters. The options below allow you to normalize the range and the number of points, as well as add exclusion zones that are not useful for comparison.">❔</span></h1>
+<h1>Normalization <span class="info-icon" title="Data may differ because they are acquired on different instruments or with varying acquisition parameters. The options below allow you to normalize the range and the number of points, as well as add exclusion zones that are not useful for comparison."><i class="far fa-question-circle"></i></span></h1>
 <table>
 <tr>
 	<th align="left">Apply normalization:</th>
