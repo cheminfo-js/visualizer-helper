@@ -71,15 +71,17 @@ function updateEntry(reaction) {
     let value = reaction.$content.procedure;
     if (value && value.type === 'html') {
       value = value.value;
-      reaction.$content.procedure = value;
     }
     if (value && value.includes('id="reagent_')) {
       value = value.replace(
         /<span id="reagent_([0-9]+)">([^<]*)<\/span>/g,
         '<a href="#reagent_$1">$2</a>',
       );
-      reaction.$content.procedure = value;
     }
+    // we need to replace all &nbsp; and ascii 160 to space
+    value = value.replaceAll('&nbsp;', ' ');
+    value = value.replaceAll(String.fromCharCode(160), ' ');
+    reaction.$content.procedure = value;
   }
   if (reaction.$content.keywords && !reaction.$content.meta) {
     reaction.$content.meta = {};
