@@ -11,7 +11,7 @@ import Sequence from './Sequence';
 import { createVar } from './jpaths';
 import convertToJcamp from './libs/convertToJcamp';
 import elnPlugin from './libs/elnPlugin';
-import { createTree } from './libs/jcampconverter';
+import { splitJcamp } from './sample/splitJcamp';
 
 const DataObject = Datas.DataObject;
 
@@ -757,23 +757,7 @@ Your local changes will be lost.</p>`;
       // we need some hacks for composite JCAMP-DX files to keep only NMR spectrum and no FID
       for (const file of files) {
         if (file.filename.match(/\.(jdx|dx)$/i)) {
-          const tree = createTree(file.content, { flatten: true }).filter(
-            (spectrum) =>
-              spectrum.dataType &&
-              spectrum.dataType
-                .toUpperCase()
-                .replaceAll(' ', '')
-                .match(/NMRSPECTRUM/i),
-          );
-          for (const entry of tree) {
-            newFiles.push({
-              content: entry.jcamp,
-              contentType: file.contentType,
-              filename: file.filename.replace(/fid.jdx/i, 'jdx'),
-              mimetype: file.mimetype,
-              encoding: 'text',
-            });
-          }
+          newFiles.push(...splitJcamp(file));
         } else {
           newFiles.push(file);
         }
