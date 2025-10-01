@@ -19,8 +19,8 @@ async function processAction(actionName, actionValue) {
     case 'changeStatus':
       {
         let request = API.getData('request');
-        var newStatus = await askNewStatus(request);
-        await prependStatus(request, newStatus);
+        var newStatusObject = await askNewStatus(request);
+        await prependStatus(request, newStatusObject);
         request.triggerChange();
         API.doAction('refreshRequests');
       }
@@ -79,11 +79,11 @@ async function refreshRequests(options) {
 }
 
 async function bulkChangeStatus(selected) {
-  var newStatus = await askNewStatus();
+  var newStatusObject = await askNewStatus();
   for (var requestToc of selected) {
     var request = await roc.document(String(requestToc.id));
     ensureStatus(request);
-    await prependStatus(request, newStatus);
+    await prependStatus(request, newStatusObject);
   }
 }
 
@@ -93,14 +93,16 @@ function ensureStatus(request) {
 }
 
 async function askNewStatus(request) {
-  var currentStatusCode = '';
+  const preferences = localStorage.getItem('eln-request-preferences');
+  const { operator = '' } = preferences ? JSON.parse(preferences) : {};
+  let currentStatusCode = '';
   if (request) {
     ensureStatus(request);
     let status = request.$content.status;
     currentStatusCode = status.length > 0 ? String(status[0].status) : '';
   }
-  var statusArray = Status.getStatusArray();
-  var currentStatus = -1;
+  const statusArray = Status.getStatusArray();
+  let currentStatus = -1;
   statusArray.forEach((item, i) => {
     if (String(currentStatusCode) === item.code) currentStatus = i;
   });
@@ -108,37 +110,60 @@ async function askNewStatus(request) {
     currentStatus++;
   }
 
-  let newStatus = await UI.form(
-    `
-        <style>
+  let newStatusObject = await UI.form(
+    `   <style>
             #status {
                 zoom: 1.5;
             }
         </style>
         <div id='status'>
-            <b>Please select the new status</b>
+            <b>Please select the new status and options</b>
             <p>&nbsp;</p>
             <form>
-                <select name="status">
+                <table>
+                <tr><td>New status:</td><td><select name="status">
                     ${statusArray.map(
                       (item, i) =>
                         `<option value="${i}" ${
                           i === currentStatus ? 'selected' : ''
                         }>${item.description}</option>`,
                     )}
-                </select>
+                </select></td></tr>
+                <tr><td>Operator (email):</td><td><input type="text" name="operator" placeholder="Operator" value="${operator}"/></td></tr>
+                <tr><td>Nb hours:</td><td><input type="number" name="hours" placeholder="Hours" /></td></tr>
+                <tr><td>Comments:</td><td><textarea name="comments" placeholder="Comments" cols="40" rows="5"></textarea></td></tr>
+                </table>
                 <input type="submit" value="Submit"/>
             </form>
         </div>
     `,
     {},
+    {
+      dialog: {
+        width: 500,
+        height: 400,
+        title: 'Change Request Status',
+      },
+    },
   );
-  return statusArray[newStatus.status].code;
+  // we save the operator in the preferences
+  localStorage.setItem(
+    'eln-request-preferences',
+    JSON.stringify({ operator: newStatusObject.operator }),
+  );
+  return {
+    code: statusArray[newStatusObject.status].code,
+    operator: newStatusObject.operator,
+    hours: newStatusObject.hours,
+    comments: newStatusObject.comments,
+  };
 }
 
-async function prependStatus(request, newStatus) {
+async function prependStatus(request, newStatusObject) {
+  const { code, ...meta } = newStatusObject;
   request.$content.status.unshift({
-    status: Number(newStatus),
+    ...meta,
+    status: Number(code),
     date: Date.now(),
   });
   await roc.update(request);
