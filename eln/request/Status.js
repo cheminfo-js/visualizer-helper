@@ -7,7 +7,7 @@ TypeRenderer.addType('requeststatus', {
     let color = Status.getStatusColor(val);
     $element.css('background-color', color);
     $element.html(label);
-  }
+  },
 });
 
 const Status = {};
@@ -21,7 +21,7 @@ const status = {
   40: { description: 'Processing', color: '#0074D9' },
   50: { description: 'Finished', color: '#01FF70' },
   80: { description: 'Error', color: '#FF4136' },
-  90: { description: 'Cancelled', color: '#AAAAAA' }
+  90: { description: 'Cancelled', color: '#AAAAAA' },
 };
 
 Status.status = status;
@@ -30,12 +30,13 @@ Status.getStatusArray = function getStatusArray() {
   var statusArray = Object.keys(status).map((key) => ({
     code: key,
     description: status[key].description,
-    color: status[key].color
+    color: status[key].color,
   }));
   return statusArray;
 };
 
 Status.getStatus = function getStatus(code) {
+  code = Number(code);
   if (status[code]) {
     return status[code];
   }
@@ -43,11 +44,13 @@ Status.getStatus = function getStatus(code) {
 };
 
 Status.getStatusDescription = function getStatusDescription(code) {
+  code = Number(code);
   if (!status[code]) return 'Status does not exist';
   return status[code].description;
 };
 
 Status.getStatusColor = function getStatusColor(code) {
+  code = Number(code);
   if (!status[code]) return '#FFFFFF';
   return status[code].color;
 };
