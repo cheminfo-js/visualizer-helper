@@ -53,11 +53,11 @@ async function processAction(actionName, actionValue) {
 async function requestFromScan(scan) {
   var request = await requestManager.getRequest(scan);
   if (!request) {
-    API.createData('request', {});
+    await API.createData('request', {});
     return;
   }
 
-  API.createData('request', request);
+  await API.createData('request', request);
   let requestVar = await API.getVar('request');
   API.setVariable('status', requestVar, ['$content', 'status']);
 }
