@@ -24,6 +24,7 @@ async function processAction(actionName, actionValue) {
           return;
         }
         const newStatusObject = await askNewStatus(request);
+        if (!newStatusObject) return;
         await prependStatus(request, newStatusObject);
         request.triggerChange();
         API.doAction('refreshRequests');
@@ -84,6 +85,7 @@ async function refreshRequests(options) {
 
 async function bulkChangeStatus(selected) {
   var newStatusObject = await askNewStatus();
+  if (!newStatusObject) return;
   for (var requestToc of selected) {
     var request = await roc.document(String(requestToc.id));
     ensureStatus(request);
@@ -150,6 +152,9 @@ async function askNewStatus(request) {
       },
     },
   );
+  if (!newStatusObject) {
+    return;
+  }
   // we save the operator in the preferences
   localStorage.setItem(
     'eln-request-preferences',
