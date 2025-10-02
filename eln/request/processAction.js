@@ -18,8 +18,12 @@ async function processAction(actionName, actionValue) {
       break;
     case 'changeStatus':
       {
-        let request = API.getData('request');
-        var newStatusObject = await askNewStatus(request);
+        const request = API.getData('request');
+        if (!request || !request.$content) {
+          UI.showNotification('No request selected', 'error');
+          return;
+        }
+        const newStatusObject = await askNewStatus(request);
         await prependStatus(request, newStatusObject);
         request.triggerChange();
         API.doAction('refreshRequests');
