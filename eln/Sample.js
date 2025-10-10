@@ -297,7 +297,7 @@ Your local changes will be lost.</p>`;
    * @param {string} variableName
    * @param {boolean} askType
    * @param {object} options
-   * @param {string} [options.customMetadata]
+   * @param {object} [options.customMetadata]
    * @param {boolean} [options.autoJcamp] - converts automatically tsv, txt and csv to jcamp
    * @param {boolean} [options.converters] - callback to convert some files based on their kind (extension)
    * @param {boolean} [options.autoKind] - callback to determine automatically kind

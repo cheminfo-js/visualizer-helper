@@ -16,6 +16,9 @@ async function processAction(actionName, actionValue) {
     case 'requestFromUUID':
       requestFromScan(actionValue);
       break;
+    case 'deleteActivity':
+      deleteActivity(actionValue);
+      break;
     case 'changeStatus':
       {
         const request = API.getData('request');
@@ -29,6 +32,8 @@ async function processAction(actionName, actionValue) {
         request.triggerChange();
         API.doAction('refreshRequests');
       }
+      break;
+    case 'deleteActivity':
       break;
     case 'createForm':
       createForm();
@@ -47,6 +52,20 @@ async function processAction(actionName, actionValue) {
       break;
     default:
       throw Error(`the action "${actionValue}" is unknown`);
+  }
+}
+
+async function deleteActivity(activity) {
+  const ok = await UI.confirm('Are you sure you want to delete this activity?');
+  if (!ok) return;
+  const status = API.getData('status');
+  const roc = API.cache('roc');
+  const request = API.getData('request');
+  const position = status.indexOf(activity);
+  if (position >= 0) {
+    status.splice(position, 1);
+    status.triggerChange();
+    await roc.update(request);
   }
 }
 
