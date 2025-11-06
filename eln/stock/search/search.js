@@ -8,7 +8,7 @@ import epfl from './epfl';
 const defaultOptions = {
   chemexper: true,
   chemspider: true,
-  epfl: false
+  epfl: false,
 };
 
 module.exports = {
@@ -30,10 +30,20 @@ module.exports = {
       const rocPromise = roc
         .view('entryByKindAndId', {
           startkey: ['sample', [term]],
-          endkey: ['sample', [`${term}\ufff0`, {}]]
+          endkey: ['sample', [`${term}\ufff0`, {}]],
         })
         .then((data) => {
+          console.log(data);
           data.forEach((d) => {
+            const status =
+              d.$content &&
+              d.$content.stock &&
+              d.$content.stock.history &&
+              d.$content.stock.history[0]
+                ? d.$content.stock.history[0]
+                : {};
+            const { location } = status;
+
             let names = [];
             // we start with the title
             if (d.$content.general && d.$content.general.title) {
@@ -50,11 +60,13 @@ module.exports = {
             d.id = d._id;
             d.source = 'sample';
             d.names = _.uniq(names);
+            d.location = location;
           });
           return data;
         });
       sources.push({ promise: rocPromise });
     }
+
     return ui
       .choose(sources, {
         autoSelect: options.autoSelect,
@@ -63,7 +75,7 @@ module.exports = {
         returnRow: true,
         dialog: {
           width: 1000,
-          height: 800
+          height: 800,
         },
         columns: [
           {
@@ -78,10 +90,13 @@ module.exports = {
                         {% for n in names %}
                             <tr><td>{{ n }}</td></tr>
                         {% endfor %}
+                        {% if location %}
+                            <tr><td><b style="color: darkgreen;">{{ location }}</b></td></tr>
+                        {% endif %}
                         </table>
                         </div>
-                    `
-            }
+                    `,
+            },
           },
           {
             id: 'cas',
@@ -89,36 +104,36 @@ module.exports = {
             jpath: ['$content', 'identifier'],
             rendererOptions: {
               forceType: 'object',
-              twig: listTemplate('cas', '.value')
+              twig: listTemplate('cas', '.value'),
             },
-            maxWidth: 100
+            maxWidth: 100,
           },
           {
             id: 'molfile',
             name: 'molfile',
             jpath: ['$content', 'general', 'molfile'],
             rendererOptions: {
-              forceType: 'mol2d'
+              forceType: 'mol2d',
             },
-            maxWidth: 250
+            maxWidth: 250,
           },
           {
             id: 'source',
             name: 'source',
             field: 'source',
-            maxWidth: 70
-          }
+            maxWidth: 70,
+          },
         ],
         idField: 'id',
         slick: {
-          rowHeight: 150
-        }
+          rowHeight: 150,
+        },
       })
       .catch(function (e) {
         console.error(e); // eslint-disable-line no-console
         ui.showNotification('search failed', 'error');
       });
-  }
+  },
 };
 
 function listTemplate(val, prop) {
