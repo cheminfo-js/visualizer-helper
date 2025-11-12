@@ -173,82 +173,20 @@ export async function loadViewPreferences() {
 
 export async function selectProduct(reactionRXN) {
   const rxn = OCL.Reaction.fromRxn(reactionRXN + '');
-  const products = [];
+  const rows = [];
   for (let i = 0; i < rxn.getProducts(); i++) {
     const product = rxn.getProduct(i);
-    products.push({
-      molecule: product,
-      molfile: product.toMolfile(),
-      mf: OCLUtils.getMF(product).mf,
-      kind: 'pure',
-    });
+    const row = getRowFromMolecule(product);
+    row.kind = 'pure';
+    rows.push(row);
   }
 
-  const reactants = [];
   for (let i = 0; i < rxn.getReactants(); i++) {
     const reactant = rxn.getReactant(i);
-    reactants.push({
-      molecule: reactant,
-      molfile: reactant.toMolfile(),
-      mf: OCLUtils.getMF(reactant).mf,
-      kind: 'starting material',
-    });
-  }
-
-  const rows = [];
-  for (let product of products) {
-    const row = {};
-    row.mf = product.mf;
-    row.kind = product.kind;
-    const mfInfo = new MolecularFormula.MF(String(row.mf)).getInfo();
-    row.mw = mfInfo.mass;
-    row.em = mfInfo.monoisotopicMass;
-    if (product.molfile) {
-      const molecule = OCL.Molecule.fromMolfile(product.molfile);
-      row.ocl = molecule.getIDCodeAndCoordinates();
-      row.ocl.index = molecule.getIndex();
-      row.molfile = product.molfile;
-    }
+    const row = getRowFromMolecule(reactant);
+    row.kind = 'starting material';
     rows.push(row);
   }
-
-  // we add the combination of all the products
-  if (rows.length > 1) {
-    let totalRow = {
-      mf: rows.map((p) => p.mf).join(' . '),
-      mw: rows.reduce((sum, p) => (sum += p.mw), 0),
-      em: rows.reduce((sum, p) => (sum += p.em), 0),
-      kind: 'pure',
-    };
-    let molecule = OCL.Molecule.fromMolfile(rows[0].molfile);
-    for (let i = 1; i < rows.length; i++) {
-      const row = rows[i];
-      let moleculeToAdd = OCL.Molecule.fromMolfile(rows[i].molfile);
-      molecule.addMolecule(moleculeToAdd);
-      molecule.inventCoordinates();
-      totalRow.molfile = molecule.toMolfile();
-      totalRow.ocl = molecule.getIDCodeAndCoordinates();
-      totalRow.ocl.index = molecule.getIndex();
-    }
-    rows.push(totalRow);
-  }
-
-  for (let reactant of reactants) {
-    const row = {};
-    row.mf = reactant.mf;
-    row.kind = reactant.kind;
-    const mfInfo = new MolecularFormula.MF(String(row.mf)).getInfo();
-    row.mw = mfInfo.mass;
-    row.em = mfInfo.monoisotopicMass;
-    if (reactant.molfile) {
-      var molecule = OCL.Molecule.fromMolfile(reactant.molfile);
-      row.ocl = molecule.getIDCodeAndCoordinates();
-      row.ocl.index = molecule.getIndex();
-      row.molfile = reactant.molfile;
-    }
-    rows.push(row);
-  }
-
   if (rows.length === 0) {
     return;
   } else if (rows.length === 1) {
@@ -295,4 +233,32 @@ export async function selectProduct(reactionRXN) {
     if (!selected) return;
     return rows[selected.id];
   }
+}
+
+function getRowFromMolecule(molecule) {
+  const row = {};
+  const mf = OCLUtils.getMF(molecule).mf;
+  row.mf = mf;
+  const mfInfo = new MolecularFormula.MF(String(mf)).getInfo();
+  row.mw = mfInfo.mass;
+  row.em = mfInfo.monoisotopicMass;
+
+  const ocl = molecule.getIDCodeAndCoordinates();
+
+  row.ocl = {
+    value: ocl.idCode,
+    coordinates: ocl.coordinates,
+  };
+  Object.defineProperty(row.ocl, 'index', {
+    enumerable: false,
+    value: molecule.getIndex(),
+    writable: true,
+  });
+
+  Object.defineProperty(row, 'molfile', {
+    enumerable: false,
+    value: molecule.toMolfileV3(),
+    writable: true,
+  });
+  return row;
 }
