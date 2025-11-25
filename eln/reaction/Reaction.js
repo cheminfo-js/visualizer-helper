@@ -171,7 +171,8 @@ export async function loadViewPreferences() {
   API.setVariable('defaultMetas', userViewPrefsVar, ['defaultMetas']);
 }
 
-export async function selectProduct(reactionRXN) {
+export async function selectProduct(reactionRXN, options = {}) {
+  const { allowEmpty = false } = options;
   const rxn = OCL.Reaction.fromRxn(reactionRXN + '');
   const rows = [];
   for (let i = 0; i < rxn.getProducts(); i++) {
@@ -185,6 +186,12 @@ export async function selectProduct(reactionRXN) {
     const reactant = rxn.getReactant(i);
     const row = getRowFromMolecule(reactant);
     row.kind = 'starting material';
+    rows.push(row);
+  }
+  if (allowEmpty) {
+    const emptyMolecule = OCL.Molecule.fromSmiles('');
+    const row = getRowFromMolecule(emptyMolecule);
+    row.kind = 'crude';
     rows.push(row);
   }
   if (rows.length === 0) {
