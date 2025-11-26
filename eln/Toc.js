@@ -96,6 +96,17 @@ class Toc {
       });
   }
 
+  async initializeReactionFilter(options = {}) {
+    this.initializeSampleFilter({
+      ...{
+        twigVarName: 'reactionFilterTwig',
+        varName: 'reactionFilter',
+        cookieName: 'eln-default-reaction-filter',
+      },
+      ...options,
+    });
+  }
+
   async initializeSampleFilter(options = {}) {
     const {
       twigVarName = 'sampleFilterTwig',
