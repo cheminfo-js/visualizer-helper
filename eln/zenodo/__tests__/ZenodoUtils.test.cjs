@@ -1,18 +1,18 @@
-import {
-  getReadmeForDeposition,
-  getMDTable,
-  getReadmeForSample,
-} from '../ZenodoUtils';
-import { join } from 'path';
-import { readFileSync } from 'fs';
+'use strict';
+
+const {join} = require('path');
+const {readFileSync} = require('fs');
+
+const {getMDTable, getReadmeForDeposition, getReadmeForSample,} = require('../ZenodoUtils');
 
 const samples = JSON.parse(
-  readFileSync(join(import.meta.dirname, 'samples.json'), 'utf8'),
+  readFileSync(join(__dirname, 'samples.json'), 'utf8'),
 );
 
 const deposition = JSON.parse(
-  readFileSync(join(import.meta.dirname, 'deposition.json'), 'utf8'),
+  readFileSync(join(__dirname, 'deposition.json'), 'utf8'),
 );
+
 
 test('MD Table Generation', () => {
   const header = { name: 'Name', age: 'Age' };
@@ -55,9 +55,7 @@ test('Readme for sample', () => {
 });
 
 test('Readme for deposition', () => {
-  const sample = samples[0];
   const result = getReadmeForDeposition(deposition);
-  console.log(result);
   expect(result).toBeDefined();
   //  expect(result).toMatchSnapshot();
 });
