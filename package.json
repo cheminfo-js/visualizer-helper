@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/cheminfo-js/visualizer-helper#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
     "babel-plugin-transform-es2015-modules-amd-if-required": "^1.0.4",
     "eslint": "^9.39.2",
     "eslint-config-zakodium": "^18.0.0",
