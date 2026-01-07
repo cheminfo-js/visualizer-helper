@@ -1,7 +1,7 @@
 import { stratify } from 'd3-hierarchy';
-import treeUtil from 'src/util/tree';
 import _ from 'lodash';
 import Datas from 'src/main/datas';
+import treeUtil from 'src/util/tree';
 
 const DataObject = Datas.DataObject;
 

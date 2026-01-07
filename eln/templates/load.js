@@ -14,9 +14,9 @@ module.exports = async function load(categories, options = {}) {
 
   // we check if roc is already defined, in this case
   // we will check if the templates database exists
-  var roc = API.cache('roc');
+  let roc = API.cache('roc');
 
-  var templates;
+  let templates;
   if (roc) {
     await fetch(`${roc.url}/db/templates/_query/template?key=abcdef`)
       .then(async (result) => {
@@ -51,7 +51,7 @@ module.exports = async function load(categories, options = {}) {
 // https://www.cheminfo.org/couch/templates-public/_design/customApp/_view/template?reduce=false&startkey=%5B%22admin@cheminfo.org%22%2C%22org.cheminfo%22%5D&endkey=%5B%22admin@cheminfo.org%22%2C%22org.cheminfo.default%22%5D
 async function fetchPublicAndLink(categories) {
   if (!Array.isArray(categories)) categories = [categories];
-  var templates = [];
+  let templates = [];
   for (let category of categories) {
     let startkey = encodeURIComponent(
       JSON.stringify(['admin@cheminfo.org', category]),
@@ -79,7 +79,7 @@ async function fetchPublicAndLink(categories) {
 }
 
 async function fetchAndLink(url = 'https://mydb.cheminfo.org', categories) {
-  var templates = [];
+  let templates = [];
   for (let category of categories) {
     let startkey = category;
     let endkey = `${category}\uFFFF`;

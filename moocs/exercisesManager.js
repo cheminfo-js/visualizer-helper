@@ -39,9 +39,9 @@ define(['src/util/api'], function (API) {
     // This objects allows to manage exercises
     function loadExercises(allExercises, options = {}) {
       // need to check is we have some cookie that contains the existing exercises
-      var state = loadState(options.cookieName);
-      var myResults = state.myResults;
-      var selectedExercises;
+      let state = loadState(options.cookieName);
+      let myResults = state.myResults;
+      let selectedExercises;
       if (state.selectedExercises.length !== options.numberExercises) {
         // need to recreate a serie
         allExercises.sort(() => Math.random() - 0.5);
@@ -62,7 +62,7 @@ define(['src/util/api'], function (API) {
       return API.createData('exercises', selectedExercises).then(function (exercises) {
         exercises.onChange(function (evt) {
           if (evt.target.__name === 'myResult') {
-            var target = evt.target.__parent;
+            let target = evt.target.__parent;
             if (target) {
               myResults[target.id] = target.myResult;
             }

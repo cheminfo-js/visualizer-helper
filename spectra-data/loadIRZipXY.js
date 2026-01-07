@@ -5,13 +5,13 @@ define(['src/util/api'], function (API) {
     const superagent = await API.require('superagent');
     const xyParser = await API.require('https://www.lactame.com/lib/xy-parser/1.3.0/xy-parser.min.js');
     const SD = await API.require('https://www.lactame.com/lib/spectra-data/3.0.7/spectra-data.min.js');
-    var jszip = new JSZip();
-    var spectraDataSet = [];
+    let jszip = new JSZip();
+    let spectraDataSet = [];
     for (let zipURL of zipURLs) {
       let zipFiles = await superagent.get(zipURL)
         .withCredentials()
         .responseType('blob');
-      var zip = await jszip.loadAsync(zipFiles.body);
+      let zip = await jszip.loadAsync(zipFiles.body);
       let filesToProcess = Object.keys(zip.files).filter((filename) => filename.match(/\.[0-9]+$/));
       for (const filename of filesToProcess) {
         let fileData = await zip.files[filename].async('string');

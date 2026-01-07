@@ -12,15 +12,15 @@ if ((typeof IframeBridge) !== 'undefined') {
 
 function onMessage(data) {
   if (data.type === 'tab.data') {
-    var couchDB = data.message.couchDB;
+    let couchDB = data.message.couchDB;
     if (!couchDB) {
       console.error('couchDB configuration was not passed'); // eslint-disable-line no-console
       return;
     }
-    var uuid = data.message.uuid;
+    let uuid = data.message.uuid;
     API.cache('couchDB', couchDB);
     API.cache('uuid', uuid);
-    var roc = new Roc(couchDB);
+    let roc = new Roc(couchDB);
     API.cache('roc', roc);
     API.doAction('rocInit');
   }

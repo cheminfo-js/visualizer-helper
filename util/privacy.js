@@ -12,9 +12,9 @@ define(['src/util/ui'], function (UI) {
       }
     } = options;
 
-    var prefs = JSON.parse(localStorage.getItem(cookieName) || '{}');
+    let prefs = JSON.parse(localStorage.getItem(cookieName) || '{}');
     if (!prefs.validation || !prefs.validation.isValidated) {
-      var result = await UI.confirm(message, agree, notAgree, dialogOptions);
+      let result = await UI.confirm(message, agree, notAgree, dialogOptions);
 
       if (!result) {
         document.body.innerHTML = '';

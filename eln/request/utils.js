@@ -3,12 +3,12 @@ import Datas from 'src/main/datas';
 const DataBoolean = Datas.DataBoolean;
 
 export function convertParametersToSchema(parameters) {
-  var props = {};
+  let props = {};
 
-  for (var i = 0; i < parameters.length; i++) {
-    var param = parameters[i];
+  for (let i = 0; i < parameters.length; i++) {
+    let param = parameters[i];
     if (param.variable) {
-      var def = {
+      let def = {
         type: 'string',
         name: String(param.variable)
       };
@@ -25,9 +25,9 @@ export function convertParametersToSchema(parameters) {
       if (param.readonly) {
         def.readonly = DataBoolean.cast(param.readonly);
       }
-      var type = (param.type ? `${param.type}` : 'string').toLowerCase();
+      let type = (param.type ? `${param.type}` : 'string').toLowerCase();
       def.type = type;
-      var converter = getConverter(type);
+      let converter = getConverter(type);
       if (param.default) {
         def.default = converter(String(param.default));
       }
@@ -44,8 +44,8 @@ export function convertParametersToSchema(parameters) {
 }
 
 export function getSchemaFromExperiment(experiment) {
-  var schema;
-  var custom = experiment.customOnde;
+  let schema;
+  let custom = experiment.customOnde;
   if (custom && String(custom)) {
     schema = JSON.parse(String(custom));
   } else {

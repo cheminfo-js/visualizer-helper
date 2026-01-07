@@ -1,7 +1,7 @@
 'use strict';
 
-const {join} = require('path');
 const {readFileSync} = require('fs');
+const {join} = require('path');
 
 const {getMDTable, getReadmeForDeposition, getReadmeForSample,} = require('../ZenodoUtils');
 

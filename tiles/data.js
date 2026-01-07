@@ -1,4 +1,4 @@
-var tiles = [
+let tiles = [
   {
     label: 'General', // this is my first tab
     tiles: [

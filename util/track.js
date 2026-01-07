@@ -13,8 +13,8 @@ define(['jquery', 'src/util/api', 'src/util/versioning'], function (
   Versioning
 ) {
   function track(cookieName, defaultValue, options = {}) {
-    var varName = options.varName || cookieName;
-    var data = API.getData(varName);
+    let varName = options.varName || cookieName;
+    let data = API.getData(varName);
     _defaultValue = defaultValue;
     if (data) return Promise.resolve(data);
     data = {};
@@ -36,7 +36,7 @@ define(['jquery', 'src/util/api', 'src/util/versioning'], function (
     }
 
     return API.createData(varName, data).then(function (result) {
-      var mainData = Versioning.getData();
+      let mainData = Versioning.getData();
 
       result.resetValue = () => {
         Object.keys(_defaultValue).forEach((key) => {

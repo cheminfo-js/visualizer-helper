@@ -3,7 +3,7 @@ import translateDNA from '../biology/translateDNA';
 import MolecularFormula from './libs/MolecularFormula';
 
 function explodeSequences(sample) {
-  var sequencePeptidic = getFirstPeptide(sample);
+  let sequencePeptidic = getFirstPeptide(sample);
 
   if (sequencePeptidic && sequencePeptidic.sequence) {
     sequencePeptidic.sequence = MolecularFormula.Peptide.sequenceToMF(
@@ -11,7 +11,7 @@ function explodeSequences(sample) {
     );
   }
 
-  var sequenceNucleic = getFirstNucleotide(sample);
+  let sequenceNucleic = getFirstNucleotide(sample);
   if (sequenceNucleic && sequenceNucleic.sequence) {
     sequenceNucleic.sequence = MolecularFormula.Nucleotide.sequenceToMF(
       String(sequenceNucleic.sequence),
@@ -256,9 +256,9 @@ const sequencesInformationTwigTemplate = `<style>
 </div>`;
 
 module.exports = {
-  calculateMFFromSequence,
   calculateMFFromNucleic,
   calculateMFFromPeptidic,
+  calculateMFFromSequence,
   explodeSequences,
   getFirstNucleotide,
   getFirstPeptide,

@@ -15,7 +15,7 @@ define(['src/util/api'], function (API) {
       strokeColor = 'red'
     } = options;
 
-    var annotations = [];
+    let annotations = [];
 
     for (let datum of data) {
       annotations.push({

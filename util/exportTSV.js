@@ -10,13 +10,13 @@ define(['src/util/ui'], function (UI) {
       keys = Object.keys(items[0])
     } = options;
 
-    var results = [];
+    let results = [];
 
     results.push(keys.join('\t'));
 
-    for (var item of items) {
-      var line = [];
-      for (var key of keys) {
+    for (let item of items) {
+      let line = [];
+      for (let key of keys) {
         line.push(item[key]);
       }
       results.push(line.join('\t'));

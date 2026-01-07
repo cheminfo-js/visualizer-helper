@@ -1,8 +1,8 @@
 import API from 'src/util/api';
 import UI from 'src/util/ui';
 
-import { OCL, OCLUtils } from './libs/OCLUtils';
 import MolecularFormula from './libs/MolecularFormula';
+import { OCL, OCLUtils } from './libs/OCLUtils';
 
 class MF {
   constructor(sample) {
@@ -21,7 +21,7 @@ class MF {
           this.setCanonizedMF(mfInfo.mf);
           this.previousEMMF = mfInfo.monoisotopicMass;
         } catch (e) {
-          // eslint-disable-next-line no-console
+           
           this.setCanonizedMF('');
           console.log('Could not parse MF: ', mf);
         }
@@ -30,16 +30,14 @@ class MF {
   }
 
   getIsotopicDistributionInstance(options) {
-    options = Object.assign(
-      {},
-      {
-        ionizations: '+',
+    options = {
+      
+      ionizations: '+',
         fwhm: 0.01,
         maxLines: 5000,
-        minY: 1e-8
-      },
-      options
-    );
+        minY: 1e-8,
+      ...options
+    };
     return new MolecularFormula.IsotopicDistribution(this.getMF(), options);
   }
 
@@ -58,7 +56,7 @@ class MF {
   }
 
   fromMolfile() {
-    var mfInfo = this._mfInfoFromMolfile();
+    let mfInfo = this._mfInfoFromMolfile();
     if (mfInfo && this.previousEMMolfile !== mfInfo.monoisotopicMass) {
       this.previousEMMolfile = mfInfo.monoisotopicMass;
       this.setMF(mfInfo.mf);
@@ -70,10 +68,10 @@ class MF {
   }
 
   _mfInfoFromMolfile() {
-    var molfile = this.getMolfile();
+    let molfile = this.getMolfile();
     if (molfile) {
-      var molecule = OCL.Molecule.fromMolfile(molfile);
-      var mf = OCLUtils.getMF(molecule).parts.join(' . ');
+      let molecule = OCL.Molecule.fromMolfile(molfile);
+      let mf = OCLUtils.getMF(molecule).parts.join(' . ');
       try {
         let mfInfo = new MolecularFormula.MF(mf).getInfo();
         mfInfo.mf = mf;
@@ -122,7 +120,7 @@ class MF {
         this.setCanonizedMF('');
         return;
       }
-      var mfInfo = new MolecularFormula.MF(this.getMF()).getInfo();
+      let mfInfo = new MolecularFormula.MF(this.getMF()).getInfo();
       if (this.previousEMMF !== mfInfo.monoisotopicMass) {
         this.previousEMMF = mfInfo.monoisotopicMass;
         this.setCanonizedMF(mfInfo.mf);
@@ -139,16 +137,16 @@ class MF {
   }
 
   _mfColor() {
-    var existingMF = this.getMF();
-    var molfile = this.getMolfile();
+    let existingMF = this.getMF();
+    let molfile = this.getMolfile();
     if (molfile) {
-      var molecule = OCL.Molecule.fromMolfile(molfile);
-      var mf = molecule.getMolecularFormula().formula;
-      var existingMW = existingMF
+      let molecule = OCL.Molecule.fromMolfile(molfile);
+      let mf = molecule.getMolecularFormula().formula;
+      let existingMW = existingMF
         ? new MolecularFormula.MF(existingMF).getInfo().mw
         : 0;
 
-      var newMW = mf ? new MolecularFormula.MF(mf).getInfo().mw : 0;
+      let newMW = mf ? new MolecularFormula.MF(mf).getInfo().mw : 0;
       if (newMW !== existingMW) {
         API.createData('mfBGColor', 'pink');
       } else {

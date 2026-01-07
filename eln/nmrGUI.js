@@ -1,4 +1,4 @@
-var options1D = {
+let options1D = {
   type: 'rect',
   line: 0,
   lineLabel: 1,
@@ -14,7 +14,7 @@ var options1D = {
   fromToc: false
 };
 
-var options2D = {
+let options2D = {
   type: 'rect',
   labelColor: 'red',
   strokeColor: 'red',
@@ -92,13 +92,13 @@ function ensureRangesHighlight(ranges) {
 }
 
 function annotations1D(ranges, optionsG) {
-  var options = Object.assign({}, options1D, optionsG);
+  let options = { ...options1D, ...optionsG};
   let { height, line, dy = [0, 0], y } = options;
-  var annotations = [];
+  let annotations = [];
 
-  for (var i = 0; i < ranges.length; i++) {
-    var currentRange = ranges[i];
-    var annotation = {};
+  for (let i = 0; i < ranges.length; i++) {
+    let currentRange = ranges[i];
+    let annotation = {};
     annotation.info = ranges[i];
 
     annotations.push(annotation);
@@ -194,11 +194,11 @@ function annotations1D(ranges, optionsG) {
 }
 
 function annotations2D(zones, optionsG) {
-  var options = Object.assign({}, options2D, optionsG);
-  var annotations = [];
-  for (var k = zones.length - 1; k >= 0; k--) {
-    var signal = zones[k];
-    var annotation = {};
+  let options = { ...options2D, ...optionsG};
+  let annotations = [];
+  for (let k = zones.length - 1; k >= 0; k--) {
+    let signal = zones[k];
+    let annotation = {};
     annotation.type = options.type;
     annotation._highlight = signal._highlight;
     if (!annotation._highlight || annotation._highlight.length === 0) {
@@ -238,4 +238,4 @@ function annotations2D(zones, optionsG) {
   return annotations;
 }
 
-export { annotations2D, annotations1D, ensureRangesHighlight };
+export { annotations1D, annotations2D, ensureRangesHighlight };

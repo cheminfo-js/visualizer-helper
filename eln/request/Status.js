@@ -5,8 +5,8 @@ TypeRenderer.addType('requeststatus', {
   toscreen($element, val) {
     let label = Status.getStatusDescription(val);
     let color = Status.getStatusColor(val);
-    $element.css('background-color', color + '');
-    $element.html(label + '');
+    $element.css('background-color', `${color  }`);
+    $element.html(`${label  }`);
   },
 });
 
@@ -27,7 +27,7 @@ const status = {
 Status.status = status;
 
 Status.getStatusArray = function getStatusArray() {
-  var statusArray = Object.keys(status).map((key) => ({
+  let statusArray = Object.keys(status).map((key) => ({
     code: key,
     description: status[key].description,
     color: status[key].color,

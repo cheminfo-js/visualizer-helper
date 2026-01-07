@@ -1,18 +1,18 @@
-import CA from 'src/util/couchdbAttachments';
 import { Molecule } from 'openchemlib';
+import CA from 'src/util/couchdbAttachments';
 
 async function fetchData(
   query = undefined,
   url = 'https://couch.cheminfo.org/cheminfo-public/668677b6432fb3fde76305cfe706856d',
 ) {
-  var ca = new CA(url);
+  let ca = new CA(url);
 
-  var files = await ca.fetchList();
+  let files = await ca.fetchList();
   files = files.filter((a) => a.filename.match('upload'));
 
   files = files.map((a) => {
-    var filename = a.filename.replace('upload/', '');
-    var parts;
+    let filename = a.filename.replace('upload/', '');
+    let parts;
     if (filename.match(/.*\.mol/)) {
       parts = [filename.replace(/\..*/, ''), 'mol'];
     } else {
@@ -20,7 +20,7 @@ async function fetchData(
       parts = filename.split('_');
     }
     return {
-      filename: filename,
+      filename,
       rn: parts[0],
       kind: parts[1],
       experiment: parts[2],
@@ -32,16 +32,16 @@ async function fetchData(
 
   // we combine the files based on some filters
 
-  var data = {};
+  let data = {};
 
-  for (var file of files) {
+  for (let file of files) {
     if (!data[file.rn]) {
       data[file.rn] = {
         rn: file.rn,
         myResult: '',
       };
     }
-    var datum = data[file.rn];
+    let datum = data[file.rn];
     switch (file.kind) {
       case 'mol':
         datum.mol = { type: 'mol2d', url: file.url };
@@ -104,12 +104,12 @@ async function fetchData(
     }
   }
 
-  var results = [];
+  let results = [];
 
-  for (var key of Object.keys(data)) {
+  for (let key of Object.keys(data)) {
     results.push(data[key]);
   }
-  var counter = 1;
+  let counter = 1;
   results.forEach((a) => {
     a.number = counter++;
   });

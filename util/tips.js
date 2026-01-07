@@ -6,8 +6,8 @@ define([
 ], function (API, yamlParser, UI, getViewInfo) {
   let baseUrl = require.s.contexts._.config.baseUrl;
 
-  let tipsURL = baseUrl + '../../docs/tips/';
-  let pagesURL = baseUrl + '../../docs/pages/';
+  let tipsURL = `${baseUrl  }../../docs/tips/`;
+  let pagesURL = `${baseUrl  }../../docs/pages/`;
   let minDelayBetweenTips = 4 * 3600 * 1000;
 
   async function showTips(info) {

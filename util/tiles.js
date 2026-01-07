@@ -133,7 +133,7 @@ define(['jquery'], function ($) {
 
   return function (div, options) {
     let lineCount = 0;
-    options = Object.assign({}, defaultOptions, options);
+    options = { ...defaultOptions, ...options};
     const { tiles } = options;
     const $div = $(`#${div}`);
     $div.empty();

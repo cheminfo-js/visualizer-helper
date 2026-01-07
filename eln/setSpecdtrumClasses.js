@@ -21,9 +21,9 @@ define(['src/util/ui', 'lodash'], function (UI, _) {
   function setspectrumCategories(record, allCategories) {
     let selectedCategories = categories;
 
-    var entrysample = { group: {} };
+    let entrysample = { group: {} };
     owners.forEach((group) => (entrysample.group[group] = true));
-    var data = { allGroups };
+    let data = { allGroups };
     return UI.form(
       `
   <div>

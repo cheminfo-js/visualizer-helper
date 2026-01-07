@@ -6,9 +6,9 @@ define(['src/util/api', 'lodash'], function (API, _) {
       comparator = _.isEqual
     } = options;
 
-    var data = API.getData(varName);
+    let data = API.getData(varName);
     if (data) return Promise.resolve(data);
-    var localValue = [];
+    let localValue = [];
     try {
       localValue = JSON.parse(window.localStorage.getItem(localName)) || [];
       if (!Array.isArray(localValue)) {

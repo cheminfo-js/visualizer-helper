@@ -14,11 +14,11 @@ export default function recalculateCharts() {
   ) {
     //escape regexp
     preferences.selector.y.label =
-      '/' +
+      `/${ 
       preferences.selector.y.labels
         .map((label) => label.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'))
-        .join('|') +
-      '/i';
+        .join('|') 
+      }/i`;
     delete preferences.selector.y.labels;
   }
 

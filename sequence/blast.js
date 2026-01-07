@@ -48,7 +48,7 @@ module.exports = function (url) {
       .post(`${url}/makeblastdb`)
       .send({ seq: toSend });
     return {
-      sequences: sequences,
+      sequences,
       database: res.body.database
     };
   }

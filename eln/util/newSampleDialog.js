@@ -1,9 +1,9 @@
 define(['src/util/ui', 'lodash'], function (ui, _) {
   return async function createSample(roc, allGroups) {
     const storageKey = 'eln-new-sample-default-groups';
-    var entrysample = { $content: {} };
-    var data = { allGroups };
-    var toFill = { group: {} };
+    let entrysample = { $content: {} };
+    let data = { allGroups };
+    let toFill = { group: {} };
     const allGroupNames = allGroups.map((g) => g.name);
     let groupPref = localStorage.getItem(storageKey);
     groupPref = groupPref ? JSON.parse(groupPref) : [];

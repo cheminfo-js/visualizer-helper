@@ -5,7 +5,7 @@ define(['src/util/color'], function (Color) {
       if (x.length !== y.length || y.length === 0) {
         throw new Error('Invalid data length');
       }
-      var chart = {
+      let chart = {
         data: [],
         axis: [
           {
@@ -17,11 +17,11 @@ define(['src/util/color'], function (Color) {
         ]
       };
 
-      var species = Object.keys(y[0]);
-      var colors = Color.getDistinctColors(species.length);
+      let species = Object.keys(y[0]);
+      let colors = Color.getDistinctColors(species.length);
 
       for (var i = 0; i < species.length; i++) {
-        var data = {};
+        let data = {};
         chart.data.push(data);
         // eslint-disable-next-line no-loop-func
         data.y = y.map((y) => {

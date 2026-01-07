@@ -24,7 +24,7 @@ const templateOptions = {
 };
 
 const template = (options) => {
-  options = Object.assign({}, templateOptions, options);
+  options = { ...templateOptions, ...options};
   return `
         {% set p = parsed %}
         {% set features = parsed.features %}
@@ -67,7 +67,7 @@ export function getFeatureTypes(parsedGb) {
 }
 
 export async function getSvgString(parsedGb, options) {
-  // eslint-disable-next-line no-undef
+   
   options = DataObject.resurrect(options);
   const svg = await getSvg(parsedGb, options);
   return $('<div>')
@@ -82,7 +82,7 @@ export async function getSvg(parsedGb, options) {
 
   const render = tmpl.renderAsync({
     parsed: parsedGb,
-    options: options
+    options
   });
   render.render();
   return compile(render.html);
@@ -90,7 +90,7 @@ export async function getSvg(parsedGb, options) {
 
 async function compile(val) {
   return new Promise(function (resolve) {
-    var $injector = self.angular.injector(['ng', 'angularplasmid']);
+    let $injector = self.angular.injector(['ng', 'angularplasmid']);
     $injector.invoke(function ($rootScope, $compile) {
       const svg = $compile(String(val))($rootScope);
       // TODO: why is this setTimeout needed

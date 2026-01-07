@@ -1,17 +1,21 @@
 import API from 'src/util/api';
-import elnPlugin from '../libs/elnPlugin';
-import Roc from '../../rest-on-couch/Roc';
-import Color from './color';
 import UI from 'src/util/ui';
-import { OCL, OCLUtils } from '../libs/OCLUtils';
+
+import Roc from '../../rest-on-couch/Roc';
 import MolecularFormula from '../libs/MolecularFormula';
+import { OCL, OCLUtils } from '../libs/OCLUtils';
+import elnPlugin from '../libs/elnPlugin';
+
+import Color from './color';
+
+
 
 export async function load(uuid) {
   const couchUrl = API.cache('couchUrl');
   const database = API.cache('database');
   const roc = new Roc({
     url: couchUrl,
-    database: database,
+    database,
     kind: 'reaction',
     processor: elnPlugin,
   });
@@ -36,7 +40,7 @@ export async function load(uuid) {
 
   updateEntry(reaction);
 
-  var reactionVar = API.getVar('reaction');
+  let reactionVar = API.getVar('reaction');
   API.setVariable('reactionContent', reactionVar, ['$content']);
   API.setVariable('reagents', reactionVar, ['$content', 'reagents']);
   API.setVariable('reactionRXN', reactionVar, ['$content', 'reactionRXN']);
@@ -173,7 +177,7 @@ export async function loadViewPreferences() {
 
 export async function selectProduct(reactionRXN, options = {}) {
   const { allowEmpty = false } = options;
-  const rxn = OCL.Reaction.fromRxn(reactionRXN + '');
+  const rxn = OCL.Reaction.fromRxn(`${reactionRXN  }`);
   const rows = [];
   for (let i = 0; i < rxn.getProducts(); i++) {
     const product = rxn.getProduct(i);
@@ -195,12 +199,12 @@ export async function selectProduct(reactionRXN, options = {}) {
     rows.push(row);
   }
   if (rows.length === 0) {
-    return;
+    
   } else if (rows.length === 1) {
     return rows[0];
   } else {
     const chooseList = [];
-    for (var i = 0; i < rows.length; i++) {
+    for (let i = 0; i < rows.length; i++) {
       chooseList.push({
         row: rows[i],
         mf: rows[i].mf,

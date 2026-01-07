@@ -26,7 +26,7 @@ define(['src/util/ui', './getViewInfo'], function (UI, getViewInfo) {
       options._id === undefined ? await getViewInfo() : { _id: options._id };
     if (!info._id) return;
 
-    const response = await fetch(`${pagesURL + info._id + '/'}`, {
+    const response = await fetch(`${`${pagesURL + info._id  }/`}`, {
       method: 'HEAD'
     });
     if (response.status !== 200) return;
@@ -43,7 +43,7 @@ define(['src/util/ui', './getViewInfo'], function (UI, getViewInfo) {
       UI.dialog(
         `
             <iframe frameBorder="0" width="100%" height="100%" allowfullscreen="true"
-            src="${pagesURL + info._id + '/'}">
+            src="${`${pagesURL + info._id  }/`}">
         `,
         { width: 950, height: 800, title: 'Information about the page' }
       ).css('overflow', 'hidden');

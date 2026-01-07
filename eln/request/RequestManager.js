@@ -47,7 +47,7 @@ export default class RequestManager {
     }
     request.$content.status.unshift({
       date: Date.now(),
-      status: status
+      status
     });
     await this.roc.update(request, muteSuccess);
   }

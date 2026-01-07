@@ -70,7 +70,7 @@ function formatExactMass(value) {
   experiment.push('m/z:');
   result.push(experiment.join(' '));
 
-  var modificationMF = new MolecularFormula.MF(
+  let modificationMF = new MolecularFormula.MF(
     modificationInfo.mf.replace(/\(.*/, ''),
   ).toHtml();
   if (modificationMF) {
@@ -79,7 +79,7 @@ function formatExactMass(value) {
     result.push(`[M]${getCharge(modificationInfo.charge)}`);
   }
   result.push('Calcd for');
-  var mf = mfInfo.mf
+  let mf = mfInfo.mf
     .replace(/\(.*/, '')
     .replace(/([^+-])([0-9]+)/g, '$1<sub>$2</sub>');
 

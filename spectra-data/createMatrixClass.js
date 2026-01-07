@@ -1,7 +1,7 @@
 
 define(['src/util/api'], function (API) {
   return async function createMatrixClass(classURL, spectraDataSet, options = {}) {
-    options = Object.assign({}, { delimiter: ',', header: true, debug: false }, options);
+    options = { delimiter: ',', header: true, debug: false, ...options};
     const Papa = await API.require('components/papa-parse/papaparse.min');
     const superagent = await API.require('superagent');
     let classFile = await superagent.get(classURL)
@@ -13,8 +13,8 @@ define(['src/util/api'], function (API) {
     meta.forEach((a) => {
       metaIndex[a.filename] = a;
     });
-    var withOutClass = [];
-    var dataClass = new Array(spectraDataSet.length);
+    let withOutClass = [];
+    let dataClass = new Array(spectraDataSet.length);
     let i = dataClass.length;
     while (i--) {
       dataClass[i] = new Array(2).fill(-1);
@@ -27,6 +27,6 @@ define(['src/util/api'], function (API) {
         vector[index.class] = 1;
       }
     }
-    return { dataClass: dataClass, withOutClass: withOutClass };
+    return { dataClass, withOutClass };
   };
 });

@@ -1,7 +1,7 @@
-import superagent from 'superagent';
-import util from 'src/util/util';
-import ui from 'src/util/ui';
 import _ from 'lodash';
+import ui from 'src/util/ui';
+import util from 'src/util/util';
+import superagent from 'superagent';
 
 // example: http://stock-isic.epfl.ch/searchstock?for=json&bl=100&search=Field10.11%3D123456&bottle=123456
 
@@ -19,10 +19,10 @@ module.exports = {
           ui.showNotification('No results in reference DB', 'warn');
           return Promise.resolve([]);
         }
-        var list = [];
-        for (var i = 0; i < result.length; i++) {
+        let list = [];
+        for (let i = 0; i < result.length; i++) {
           if (result[i] && result[i].value) {
-            var val = result[i].value;
+            let val = result[i].value;
             val.code = val.catalogID;
             list.push({
               id: i,

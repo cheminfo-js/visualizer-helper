@@ -1,7 +1,7 @@
-import superagent from 'superagent';
-import util from 'src/util/util';
-import ui from 'src/util/ui';
 import _ from 'lodash';
+import ui from 'src/util/ui';
+import util from 'src/util/util';
+import superagent from 'superagent';
 
 module.exports = {
   search(term) {

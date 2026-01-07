@@ -9,14 +9,14 @@ define([
   const MINUTE = 60 * SECOND;
   const LIMIT = 11 * MINUTE;
   return async function (opts) {
-    var printerRoc,
+    let printerRoc,
       formatsRoc,
       printServerRoc,
       printers,
       printFormats,
       printServers,
       allIds;
-    var onlineServers, onlinePrinters;
+    let onlineServers, onlinePrinters;
 
     const exports = {
       getDBPrinters() {
@@ -182,9 +182,9 @@ define([
       },
 
       async getTypes(...args) {
-        var formats = await exports.getFormats.apply(null, args);
-        var s = new Set();
-        for (var format of formats) {
+        let formats = await exports.getFormats.apply(null, args);
+        let s = new Set();
+        for (let format of formats) {
           s.add(String(format.$content.type));
         }
         return Array.from(s);

@@ -3,8 +3,8 @@ import UI from 'src/util/ui';
 
 import Status from './Status';
 
-var roc;
-var requestManager;
+let roc;
+let requestManager;
 
 async function processAction(actionName, actionValue) {
   roc = this.roc;
@@ -70,7 +70,7 @@ async function deleteActivity(activity) {
 }
 
 async function requestFromScan(scan) {
-  var request = await requestManager.getRequest(scan);
+  let request = await requestManager.getRequest(scan);
   if (!request) {
     await API.createData('request', {});
     return;
@@ -82,7 +82,7 @@ async function requestFromScan(scan) {
 }
 
 async function refreshRequests(options) {
-  var queryOptions = {
+  let queryOptions = {
     sort: (a, b) => b.value.status.date - a.value.status.date,
   };
   if (String(options.group) === 'mine') {
@@ -91,11 +91,11 @@ async function refreshRequests(options) {
     queryOptions.groups = [String(options.group)];
   }
   if (String(options.status) !== 'any') {
-    var statusCode = Status.getStatusCode(String(options.status));
+    let statusCode = Status.getStatusCode(String(options.status));
     queryOptions.startkey = [statusCode];
     queryOptions.endkey = [statusCode];
   }
-  var results = await roc.query('analysisRequestByKindAndStatus', queryOptions);
+  let results = await roc.query('analysisRequestByKindAndStatus', queryOptions);
   results.forEach((result) => {
     result.color = Status.getStatusColor(Number(result.value.status.status));
   });
@@ -103,10 +103,10 @@ async function refreshRequests(options) {
 }
 
 async function bulkChangeStatus(selected) {
-  var newStatusObject = await askNewStatus();
+  let newStatusObject = await askNewStatus();
   if (!newStatusObject) return;
-  for (var requestToc of selected) {
-    var request = await roc.document(String(requestToc.id));
+  for (let requestToc of selected) {
+    let request = await roc.document(String(requestToc.id));
     ensureStatus(request);
     await prependStatus(request, newStatusObject);
   }
@@ -198,16 +198,16 @@ async function prependStatus(request, newStatusObject) {
 }
 
 async function createForm() {
-  var groups = (await roc.getGroupMembership()).map((g) => g.name);
-  var possibleGroups = ['mine'].concat(groups);
-  var defaultGroup = window.localStorage.getItem('eln-default-sample-group');
+  let groups = (await roc.getGroupMembership()).map((g) => g.name);
+  let possibleGroups = ['mine'].concat(groups);
+  let defaultGroup = window.localStorage.getItem('eln-default-sample-group');
   if (possibleGroups.indexOf(defaultGroup) === -1) {
     defaultGroup = 'all';
   }
-  var possibleStatus = ['any'].concat(
+  let possibleStatus = ['any'].concat(
     Status.getStatusArray().map((s) => s.description),
   );
-  var schema = {
+  let schema = {
     type: 'object',
     properties: {
       group: {

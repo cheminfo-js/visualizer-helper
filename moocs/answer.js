@@ -1,11 +1,11 @@
 
 define(['mathjs'], function (mathjs) {
-  var exports = {};
+  let exports = {};
 
   exports.isCorrect = function (sol, ans, options) {
     sol = String(sol);
     ans = String(ans);
-    options = Object.assign({}, options);
+    options = { ...options};
     // Absolute error
     // if no units, same units as answer
     options.relativeError = Number(options.relativeError);
@@ -73,22 +73,22 @@ define(['mathjs'], function (mathjs) {
 });
 
 function isCorrect(sol, ans, options) {
-  var absoluteError = options.absoluteError !== undefined && !isNaN(options.absoluteError) ? options.absoluteError : null;
-  var relativeError = options.relativeError !== undefined && !isNaN(options.relativeError) ? options.relativeError : null;
-  var order = getOrder(sol, ans);
+  let absoluteError = options.absoluteError !== undefined && !isNaN(options.absoluteError) ? options.absoluteError : null;
+  let relativeError = options.relativeError !== undefined && !isNaN(options.relativeError) ? options.relativeError : null;
+  let order = getOrder(sol, ans);
   if (relativeError !== null) {
     if (Math.abs(sol - ans) > relativeError * sol) {
       return {
         correct: false,
         reason: 'wrong answer (within relative error)',
-        order: order
+        order
       };
     }
   }
 
   if (absoluteError !== null) {
     absoluteError = Math.abs(absoluteError);
-    var err = Math.abs(sol - ans);
+    let err = Math.abs(sol - ans);
     if (err > absoluteError) {
       return {
         correct: false,
@@ -130,6 +130,6 @@ function isCorrect(sol, ans, options) {
 }
 
 function getOrder(sol, ans) {
-  var ratio = ans / sol;
+  let ratio = ans / sol;
   return Math.round(Math.log10(ratio));
 }

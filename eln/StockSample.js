@@ -16,12 +16,12 @@ class Sample {
       },
     };
 
-    this.options = Object.assign({}, defaultOptions, options);
+    this.options = { ...defaultOptions, ...options};
     this._init();
   }
 
   _loadSample() {
-    var sampleVar = API.getVar(this.options.varName);
+    let sampleVar = API.getVar(this.options.varName);
 
     API.setVariable('sampleCode', sampleVar, ['$id', 0]);
     API.setVariable('batchCode', sampleVar, ['$id', 1]);
@@ -43,7 +43,7 @@ class Sample {
     this.mf.fromMF();
 
     this.onChange = (event) => {
-      var jpathStr = event.jpath.join('.');
+      let jpathStr = event.jpath.join('.');
 
       if (jpathStr.replace(/\.\d+\..*/, '') === '$content.spectra.nmr') {
         this.nmr1dManager.updateIntegralOptions();

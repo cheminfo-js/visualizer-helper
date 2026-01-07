@@ -1,7 +1,7 @@
-let trackThrottle;
-
-import API from 'src/util/api';
 import _ from 'lodash';
+import API from 'src/util/api';
+
+let trackThrottle;
 
 export default function trackMove(action) {
   if (!trackThrottle) {

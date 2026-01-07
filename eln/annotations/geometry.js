@@ -39,6 +39,6 @@ function lineAnnotation(point1, point2, options = {}) {
 
 
 module.exports = {
-  pointAnnotation,
   lineAnnotation,
+  pointAnnotation,
 }

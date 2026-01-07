@@ -12,7 +12,7 @@ module.exports = function checkRights(
   if (!rights) return defaultValue;
   if (!usernames) return false;
   if (!Array.isArray(usernames)) usernames = [usernames];
-  var alloweds = rights.split(/[ ,;\r\n]+/).filter((a) => a);
+  let alloweds = rights.split(/[ ,;\r\n]+/).filter((a) => a);
 
   for (let allowed of alloweds) {
     let isRegExp = false;
@@ -25,9 +25,7 @@ module.exports = function checkRights(
       if (!username) continue;
       if (isRegExp) {
         if (username.match(regexp)) return true;
-      } else {
-        if (username.toLowerCase() === allowed.toLowerCase()) return true;
-      }
+      } else if (username.toLowerCase() === allowed.toLowerCase()) {return true;}
     }
   }
   return false;

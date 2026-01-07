@@ -2,8 +2,8 @@
 We retrieve some exercises for structural analysis
  */
 
-import UI from 'src/util/ui';
 import OCL from 'openchemlib';
+import UI from 'src/util/ui';
 
 import MolecularFormula from '../eln/libs/MolecularFormula';
 
@@ -108,7 +108,7 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
                     <td><span  style="zoom: 0.8">
                     ${
                       group.ocl && group.ocl.value.length > 2
-                        ? "<img src='data:image/svg+xml;base64," +
+                        ? `<img src='data:image/svg+xml;base64,${ 
                           btoa(
                             OCL.Molecule.fromIDCode(
                               group.ocl.value,
@@ -121,8 +121,8 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
                               suppressESR: true,
                               noStereoProblem: true,
                             }),
-                          ) +
-                          "'>"
+                          ) 
+                          }'>`
                         : ''
                     }
                     </span></td>

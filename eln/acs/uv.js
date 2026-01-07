@@ -14,7 +14,7 @@ function toHTML(value, options = {}) {
 
 // UV (nm): 1955w, 1881w, 1807w, 1614m, 1500S, 1454m
 function format1(value) {
-  var acsString = '';
+  let acsString = '';
   if (value && value.peak) {
     acsString += 'UV (nm): ';
     acsString += value.peak
@@ -26,7 +26,7 @@ function format1(value) {
 
 // UV (nm) 2929 (w), 3521 (w), 3016 (w), 3065 (w), 2853 (w), 1766S, 1495 (w),
 function format2(value) {
-  var acsString = '';
+  let acsString = '';
   if (value && value.peak) {
     acsString += 'UV (nm) ';
     acsString += value.peak

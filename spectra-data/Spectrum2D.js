@@ -78,7 +78,7 @@ export class Spectrum2D {
       Math.abs(this.minMax.minZ),
     );
     let range = getRange(
-      this.median * 3 * Math.pow(2, zoomLevel),
+      this.median * 3 * 2**zoomLevel,
       max,
       nbLevels,
       2,
@@ -89,7 +89,7 @@ export class Spectrum2D {
 
     const contours = this.conrec.drawContour({
       levels: range,
-      timeout: timeout,
+      timeout,
     });
     return {
       minX: this.minMax.minX,
@@ -113,10 +113,10 @@ function getRange(min, max, length, exp) {
     let factors = [];
     factors[0] = 0;
     for (let i = 1; i <= length; i++) {
-      factors[i] = factors[i - 1] + (exp - 1) / Math.pow(exp, i);
+      factors[i] = factors[i - 1] + (exp - 1) / exp**i;
     }
     const lastFactor = factors[length];
-    var result = new Array(length);
+    let result = new Array(length);
     for (let i = 0; i < length; i++) {
       result[i] = (max - min) * (1 - factors[i + 1] / lastFactor) + min;
     }

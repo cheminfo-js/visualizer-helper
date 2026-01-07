@@ -1,7 +1,7 @@
 
 import chemspider from 'https://www.lactame.com/lib/chemspider-json-api/1.0.0/chemspider-json-api.min.js';
-import util from 'src/util/util';
 import _ from 'lodash';
+import util from 'src/util/util';
 
 module.exports = {
   search(term) {
@@ -20,7 +20,7 @@ module.exports = {
 
 
 function fromChemspider(chemspider) {
-  var entry = {
+  let entry = {
     $content: {
       general: {
         molfile: chemspider.Mol,

@@ -9,8 +9,8 @@ import elnPlugin from '../libs/elnPlugin';
  * @return {Array<object>}
  */
 export function appendedDragAndDrop(experimentalFiles, targetName) {
-  var target = API.getData(targetName);
-  var newTarget = false;
+  let target = API.getData(targetName);
+  let newTarget = false;
   if (!target) {
     target = [];
     newTarget = true;
@@ -20,23 +20,23 @@ export function appendedDragAndDrop(experimentalFiles, targetName) {
     experimentalFiles = [experimentalFiles];
   }
 
-  for (var file of experimentalFiles) {
+  for (let file of experimentalFiles) {
     if (file.filename && String(file.filename) !== '') {
       // handle from drag and drop
-      var property = elnPlugin.util.getTargetProperty(String(file.filename));
+      let property = elnPlugin.util.getTargetProperty(String(file.filename));
       if (property !== 'file') {
         target.push({ [property]: file });
       } else if (String(file.encoding) === 'text') {
         target.push({ text: file });
       } else {
-        target.push({ file: file });
+        target.push({ file });
       }
     } else {
       var type;
       if (String(file.encoding) === 'text') {
         type = getTargetType(String(file.content));
       } else {
-        var first = firstCharacters(String(file.content));
+        let first = firstCharacters(String(file.content));
         type = getTargetType(first);
       }
 
@@ -68,12 +68,12 @@ function getTargetType(content) {
 
 // https://stackoverflow.com/questions/36487636/javascript-convert-array-buffer-to-string
 function firstCharacters(arrayBuffer, len = 3) {
-  var byteArray = new Uint8Array(arrayBuffer);
-  var str = '';
-  var charCode = 0;
-  var numBytes = 0;
-  for (var i = 0; i < len; ++i) {
-    var v = byteArray[i];
+  let byteArray = new Uint8Array(arrayBuffer);
+  let str = '';
+  let charCode = 0;
+  let numBytes = 0;
+  for (let i = 0; i < len; ++i) {
+    let v = byteArray[i];
     if (numBytes > 0) {
       // 2 bit determining that this is a tailing byte + 6 bit of payload
       if ((charCode & 192) === 192) {

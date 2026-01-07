@@ -1,5 +1,5 @@
 function toAnnotations(peaks, options = {}) {
-  var {
+  let {
     fillColor = 'green',
     strokeColor = 'red',
     yPosition = undefined,
@@ -20,13 +20,13 @@ function toAnnotations(peaks, options = {}) {
       shouldRefresh = true;
     }
 
-    var annotation = {
+    let annotation = {
       line: 1,
       _highlight: [peak._highlight],
       type: 'rect',
-      strokeColor: strokeColor,
+      strokeColor,
       strokeWidth: 0,
-      fillColor: fillColor,
+      fillColor,
     };
     annotation.label = [
       {

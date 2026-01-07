@@ -3,7 +3,7 @@ define(['src/util/ui', 'lodash'], function (UI, _) {
     const groups = JSON.parse(JSON.stringify(allGroups));
     const groupNames = groups.map((group) => group.name);
     // we will also take the current groups from the record
-    const owners = DataObject.resurrect(record.$owners).slice(1); // eslint-disable-line
+    const owners = DataObject.resurrect(record.$owners).slice(1);  
     const groupsToAdd = _.difference(owners, groupNames);
     for (let group of groupsToAdd) {
       groups.push({ name: group });

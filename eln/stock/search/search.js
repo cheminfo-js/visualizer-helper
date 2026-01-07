@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import ui from 'src/util/ui';
 
-import chemspider from './chemspider';
 import chemexper from './chemexper';
+import chemspider from './chemspider';
 import epfl from './epfl';
 
 const defaultOptions = {
@@ -12,11 +12,11 @@ const defaultOptions = {
 };
 
 module.exports = {
-  chemspider: chemspider,
-  chemexper: chemexper,
-  epfl: epfl,
+  chemspider,
+  chemexper,
+  epfl,
   choose(term, options) {
-    options = Object.assign({}, defaultOptions, options);
+    options = { ...defaultOptions, ...options};
     const sources = [];
     if (options.epfl) {
       sources.push({ promise: epfl.search(term) });

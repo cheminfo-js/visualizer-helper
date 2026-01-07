@@ -12,25 +12,25 @@ export async function preferencesFactory(id, options) {
 
   const kind = 'viewPreferences';
 
-  var roc = new Roc({
-    url: url,
-    database: database,
-    kind: kind
+  let roc = new Roc({
+    url,
+    database,
+    kind
   });
 
-  var user = await roc.getUser();
+  let user = await roc.getUser();
   id += `_${user.username}`;
 
-  var existing = (await roc.view('entryByKindAndId', { key: [kind, id] }))[0];
-  var preferenceRoc;
-  var rocOptions = {
+  let existing = (await roc.view('entryByKindAndId', { key: [kind, id] }))[0];
+  let preferenceRoc;
+  let rocOptions = {
     varName: name,
     track: true
   };
   if (existing) {
     preferenceRoc = await roc.document(existing._id, rocOptions);
   } else {
-    var created = await roc.create({
+    let created = await roc.create({
       $id: id,
       $content: initial,
       $kind: kind
@@ -38,7 +38,7 @@ export async function preferencesFactory(id, options) {
     preferenceRoc = await roc.document(created._id, rocOptions);
   }
 
-  var viewPreferences = new Preference(roc, preferenceRoc);
+  let viewPreferences = new Preference(roc, preferenceRoc);
 
   await API.cache(name, viewPreferences);
   return viewPreferences;
