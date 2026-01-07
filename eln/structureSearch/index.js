@@ -1,10 +1,10 @@
 import API from 'src/util/api';
 
-import { OCL, OCLUtils } from '../libs/OCLUtils';
+import {OCL, OCLUtils} from '../libs/OCLUtils';
 
 function waitImmediate() {
   return new Promise((resolve) => {
-    setImmediate(resolve);
+    window.setImmediate(resolve);
   });
 }
 

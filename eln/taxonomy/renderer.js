@@ -1,9 +1,8 @@
 import TypeRenderer from 'src/util/typerenderer';
 
 
-import { createTaxonomyTree } from '../../../../../../../../lib//mass-tools/7.8.2/mass-tools';
+import {createTaxonomyTree} from '../../../../../../../../lib/mass-tools/7.8.2/mass-tools';
 import * as TreeSVG from '../../../../../../../../lib/react-tree-svg/0.1.1/react-tree-svg';
-
 
 
 export function add() {
