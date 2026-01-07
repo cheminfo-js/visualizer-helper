@@ -1,4 +1,3 @@
-
 import API from 'src/util/api';
 
 import Roc from '../rest-on-couch/Roc';
@@ -35,12 +34,11 @@ function onDataFocus(dataId, tabId, type) {
       else if (type === 'cache') data = API.cache(dataId);
       IB.postMessage('tab.message', {
         id: tabId,
-        message: data
+        message: data,
       });
     }
   };
 }
-
 
 module.exports = {
   rocInit() {
@@ -64,8 +62,8 @@ module.exports = {
         id: tabId,
         message: {
           event,
-          data
-        }
+          data,
+        },
       });
     });
   },
@@ -87,7 +85,7 @@ module.exports = {
   sendMessage(tabId, data) {
     IB.postMessage('tab.message', {
       id: tabId,
-      message: data
+      message: data,
     });
-  }
+  },
 };

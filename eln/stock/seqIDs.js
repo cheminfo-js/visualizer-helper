@@ -1,7 +1,7 @@
 module.exports = {
   async getNextID(roc, prefix) {
     let v = await roc.view('sampleId', {
-      reduce: true
+      reduce: true,
     });
 
     if (!v.length || !v[0].value || !v[0].value[prefix]) {
@@ -14,7 +14,7 @@ module.exports = {
     let check = getCheckDigit(nextID);
     let nextIDStr = String(nextID);
     return `${prefix}-${'0'.repeat(6 - nextIDStr.length)}${nextIDStr}-${check}`;
-  }
+  },
 };
 
 function getCheckDigit(number) {

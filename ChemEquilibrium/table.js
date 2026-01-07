@@ -1,4 +1,3 @@
-
 module.exports = function getTable(sol) {
   let result = [];
   result.push(`x\t${sol.species.join('\t')}`);

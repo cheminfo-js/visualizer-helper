@@ -8,8 +8,6 @@ import elnPlugin from '../libs/elnPlugin';
 
 import Color from './color';
 
-
-
 export async function load(uuid) {
   const couchUrl = API.cache('couchUrl');
   const database = API.cache('database');
@@ -177,7 +175,7 @@ export async function loadViewPreferences() {
 
 export async function selectProduct(reactionRXN, options = {}) {
   const { allowEmpty = false } = options;
-  const rxn = OCL.Reaction.fromRxn(`${reactionRXN  }`);
+  const rxn = OCL.Reaction.fromRxn(`${reactionRXN}`);
   const rows = [];
   for (let i = 0; i < rxn.getProducts(); i++) {
     const product = rxn.getProduct(i);
@@ -199,7 +197,6 @@ export async function selectProduct(reactionRXN, options = {}) {
     rows.push(row);
   }
   if (rows.length === 0) {
-    
   } else if (rows.length === 1) {
     return rows[0];
   } else {

@@ -1,4 +1,3 @@
-
 define(function () {
   function toTypedUrl(documents, couchUrl, database) {
     if (!Array.isArray(documents)) throw new Error('Array expected');

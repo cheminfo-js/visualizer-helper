@@ -17,7 +17,7 @@ define([
     lookup[chars.charCodeAt(i)] = i;
   }
   return {
-    async twig (printFormat, data, options) {
+    async twig(printFormat, data, options) {
       if (printFormat.customFields && printFormat.customFields.length) {
         if (options.creation) {
           printFormat.customFields.forEach((field) => {
@@ -73,9 +73,12 @@ define([
     const renderingScale = printFormat.molfileOptions.renderingScale || 1;
     const width = Math.ceil(printFormat.molfileOptions.width / 8) * 8;
     const height = Math.ceil(printFormat.molfileOptions.height / 8) * 8;
-    const molfileOptions = { ...printFormat.molfileOptions, width,
+    const molfileOptions = {
+      ...printFormat.molfileOptions,
+      width,
       height,
-      renderingScale,};
+      renderingScale,
+    };
     let image = await getMolImage(data.molfile, molfileOptions);
     image = image.invert(); // Why do we need to invert here but not when encoding in BMP?
     const hexa = await dataToHexa(image.data);
@@ -130,7 +133,7 @@ define([
       width: 100,
     };
     const renderingScale = options.renderingScale || 1;
-    options = { ...defaultMolOptions, ...options};
+    options = { ...defaultMolOptions, ...options };
     if (!options.height) options.height = options.width;
     const mol = OCL.Molecule.fromMolfile(molfile);
     const svgString = mol.toSVG(

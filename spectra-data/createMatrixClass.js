@@ -1,14 +1,21 @@
-
 define(['src/util/api'], function (API) {
-  return async function createMatrixClass(classURL, spectraDataSet, options = {}) {
-    options = { delimiter: ',', header: true, debug: false, ...options};
+  return async function createMatrixClass(
+    classURL,
+    spectraDataSet,
+    options = {},
+  ) {
+    options = { delimiter: ',', header: true, debug: false, ...options };
     const Papa = await API.require('components/papa-parse/papaparse.min');
     const superagent = await API.require('superagent');
-    let classFile = await superagent.get(classURL)
+    let classFile = await superagent
+      .get(classURL)
       .withCredentials()
       .responseType('text');
     if (options.debug) console.log('classFile', classFile); // eslint-disable-line no-console
-    let meta = Papa.parse(classFile.text, { delimiter: options.delimiter, header: options.header }).data;
+    let meta = Papa.parse(classFile.text, {
+      delimiter: options.delimiter,
+      header: options.header,
+    }).data;
     let metaIndex = {};
     meta.forEach((a) => {
       metaIndex[a.filename] = a;

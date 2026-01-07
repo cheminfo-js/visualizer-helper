@@ -9,12 +9,12 @@ define(['src/util/color'], function (Color) {
         data: [],
         axis: [
           {
-            label: options.xLabel || ''
+            label: options.xLabel || '',
           },
           {
-            label: options.yLabel || ''
-          }
-        ]
+            label: options.yLabel || '',
+          },
+        ],
       };
 
       let species = Object.keys(y[0]);
@@ -37,10 +37,10 @@ define(['src/util/color'], function (Color) {
         data.yAxis = 1;
         data.defaultStyle = {
           lineColor: colors[i],
-          lineWidth: 1
+          lineWidth: 1,
         };
       }
       return chart;
-    }
+    },
   };
 });

@@ -154,10 +154,10 @@ class Nmr1dManager {
             API.createData('blackNMR2d', null);
           }
         } else if (action.value.jcamp) {
-            API.createData('blackNMR1d', action.value.jcamp.data);
-          } else {
-            API.createData('blackNMR1d', null);
-          }
+          API.createData('blackNMR1d', action.value.jcamp.data);
+        } else {
+          API.createData('blackNMR1d', null);
+        }
         break;
       }
       case 'executePeakPicking': {
@@ -301,14 +301,14 @@ class Nmr1dManager {
       if (filename && this.spectra[filename]) {
         var spectrum = this.spectra[filename];
       } else if (jcamp) {
-          jcamp = String(jcamp.get());
-          spectrum = NMR.fromJcamp(jcamp);
-          if (filename) {
-            this.spectra[filename] = spectrum;
-          }
-        } else {
-          spectrum = new NMR();
+        jcamp = String(jcamp.get());
+        spectrum = NMR.fromJcamp(jcamp);
+        if (filename) {
+          this.spectra[filename] = spectrum;
         }
+      } else {
+        spectrum = new NMR();
+      }
       return spectrum;
     });
   }

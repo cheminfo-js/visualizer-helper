@@ -1,4 +1,6 @@
-define(['https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f7eb/jschannel.js'], function () {
+define([
+  'https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f7eb/jschannel.js',
+], function () {
   let initialized = false;
   function init(options) {
     if (initialized) return;
@@ -6,7 +8,7 @@ define(['https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f
 
     options = options || {};
     let state = {
-      a: 1
+      a: 1,
     };
     let channel;
 
@@ -17,7 +19,7 @@ define(['https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f
       channel = self.Channel.build({
         window: window.parent,
         origin: '*',
-        scope: 'JSInput'
+        scope: 'JSInput',
       });
 
       channel.bind('getGrade', options.getGrade || getGrade);

@@ -100,16 +100,15 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
                     <td>${group.symbol}</td>
                     <td>${group.name}</td>
                     <td>${group.mfHtml}<span style='display:none'>${
-                  group.mf
-                }</span></td>
+                      group.mf
+                    }</span></td>
                 <td>${group.monoisotopicMass.toFixed(4)}</td>
                 <td>${group.kind}</td>
                 <td>${group.oneLetter ? group.oneLetter : ''}</td>
                     <td><span  style="zoom: 0.8">
                     ${
                       group.ocl && group.ocl.value.length > 2
-                        ? `<img src='data:image/svg+xml;base64,${ 
-                          btoa(
+                        ? `<img src='data:image/svg+xml;base64,${btoa(
                             OCL.Molecule.fromIDCode(
                               group.ocl.value,
                               group.ocl.coordinates,
@@ -121,8 +120,7 @@ function getHtml(CustomMolecularFormula = MolecularFormula) {
                               suppressESR: true,
                               noStereoProblem: true,
                             }),
-                          ) 
-                          }'>`
+                          )}'>`
                         : ''
                     }
                     </span></td>

@@ -5,7 +5,9 @@ export function getFiltered(data, selection, keys) {
   return data.filter(function (d) {
     loop1: for (let i = 0; i < selection.length; i++) {
       for (let j = 0; j < keys.length; j++) {
-        if (String(d[keys[j]]) !== String(selection[i][keys[j]])) continue loop1;
+        if (String(d[keys[j]]) !== String(selection[i][keys[j]])) {
+          continue loop1;
+        }
       }
       return true;
     }
@@ -24,13 +26,13 @@ export function matchDistribution(posSeq, negSeq, useNtSeq) {
     fn = getMatchDistribution;
   } else {
     posSeq = posSeq.map(function (seq) {
-      return (new Nt.Seq()).read(seq);
+      return new Nt.Seq().read(seq);
     });
     negSeq = negSeq.map(function (seq) {
-      return (new Nt.Seq()).read(seq);
+      return new Nt.Seq().read(seq);
     });
     primerSet = primerSet.map(function (p) {
-      return (new Nt.Seq()).read(p);
+      return new Nt.Seq().read(p);
     });
     fn = getMatchDistributionNtSeq;
   }
@@ -109,12 +111,12 @@ function getMatchDistribution(primer, sequences) {
     distribution[best.mismatches]++;
   });
 
-
   distribution = distribution.map((d) => {
     return d / bestMatches.length;
   });
   return {
-    distribution, bestMatches
+    distribution,
+    bestMatches,
   };
 }
 

@@ -25,6 +25,6 @@ module.exports = function showMfHelp() {
   UI.dialog(html, {
     width: 500,
     height: 400,
-    title: 'HELP: entering a molecular formula'
+    title: 'HELP: entering a molecular formula',
   });
 };

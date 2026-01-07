@@ -18,10 +18,7 @@ define(['superagent', 'uri/URI'], function (superagent, URI) {
     }
 
     async print(id, printData) {
-      const url = new URI(this.url)
-        .segment('pstprnt')
-        .normalize()
-        .href();
+      const url = new URI(this.url).segment('pstprnt').normalize().href();
 
       return superagent
         .post(url)

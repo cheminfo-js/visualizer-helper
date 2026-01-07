@@ -6,7 +6,7 @@ export function explodeNucleic(nucleic) {
     for (let j = 0; j < seq.length; j++) {
       result.push({
         ...otherFeatures,
-        seq: seq[j]
+        seq: seq[j],
       });
     }
   }

@@ -11,7 +11,7 @@ function waitImmediate() {
 module.exports = {
   async buildDatabase(dropped, options = {}) {
     const moleculesDB = new OCLUtils.MoleculesDB(OCL, {
-      computeProperties: options.computeProperties
+      computeProperties: options.computeProperties,
     });
     const date = Date.now();
     let onStep;
@@ -35,5 +35,5 @@ module.exports = {
       API.stopLoading('mol');
     }
     return moleculesDB;
-  }
+  },
 };

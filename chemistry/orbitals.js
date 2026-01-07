@@ -1,5 +1,6 @@
-
-define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8145c522b71fc9c872cb0bcae49a/dist/snap.svg-min.js'], function (Snap) {
+define([
+  'https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8145c522b71fc9c872cb0bcae49a/dist/snap.svg-min.js',
+], function (Snap) {
   let exports = {};
 
   let defaultOptions = {
@@ -13,16 +14,14 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
     rectMargin: 10,
     spinOuterMarginRatio: 1 / 4,
     arrowStrokeWidth: 3,
-    arrowHeadSize: 3
+    arrowHeadSize: 3,
   };
-
 
   let paper, svg, svgModifier;
 
-
   // Create svg
   function createSvg(electronicConfiguration, opts) {
-    opts = { ...defaultOptions, ...opts};
+    opts = { ...defaultOptions, ...opts };
 
     // User defined
     let width = opts.width;
@@ -44,9 +43,24 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
     let sSpace = (drawHeight - levelHeight) / 6;
     let labelOffset = rectHeight + fontSize + 5;
     let columnOffset = (drawWidth - 16 * rectWidth - 12 * rectMargin) / 3;
-    let pOffset = [sSpace / 4, null, sSpace * 5 - sSpace / 3, rectWidth + columnOffset];
-    let dOffset = [2 * sSpace / 4, null, sSpace * 3 - sSpace / 3, 4 * rectWidth + 2 * rectMargin + 2 * columnOffset];
-    let fOffset = [-1 / 4 * sSpace, null, 3 / 4 * sSpace, 9 * rectWidth + 6 * rectMargin + 3 * columnOffset];
+    let pOffset = [
+      sSpace / 4,
+      null,
+      sSpace * 5 - sSpace / 3,
+      rectWidth + columnOffset,
+    ];
+    let dOffset = [
+      (2 * sSpace) / 4,
+      null,
+      sSpace * 3 - sSpace / 3,
+      4 * rectWidth + 2 * rectMargin + 2 * columnOffset,
+    ];
+    let fOffset = [
+      (-1 / 4) * sSpace,
+      null,
+      (3 / 4) * sSpace,
+      9 * rectWidth + 6 * rectMargin + 3 * columnOffset,
+    ];
     let spinOuterMargin = rectWidth * spinOuterMarginRatio;
     let spinInnerMargin = rectWidth * (1 - 2 * spinOuterMarginRatio);
 
@@ -73,33 +87,40 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
       }
 
       if (group) {
-        paper.path(p).attr({
-          style: 'marker-end: url(#svgarrow);',
-          strokeWidth: arrowStrokeWidth,
-          stroke: '#000000',
-          dataClass: 'spin'
-        }).appendTo(group);
+        paper
+          .path(p)
+          .attr({
+            style: 'marker-end: url(#svgarrow);',
+            strokeWidth: arrowStrokeWidth,
+            stroke: '#000000',
+            dataClass: 'spin',
+          })
+          .appendTo(group);
       }
     }
 
     function drawRect(posx, posy, id) {
       let rectId = getRectId(id);
-      paper.g().attr({
-        transform: `translate(${posx},${posy})`,
-        id: `g${rectId}`
-      }).rect(0, 0, rectWidth, rectHeight).attr({
-        fill: 'white',
-        stroke: 'grey',
-        strokeWidth: 1,
-        id: rectId,
-        class: 'elecRect'
-      });
+      paper
+        .g()
+        .attr({
+          transform: `translate(${posx},${posy})`,
+          id: `g${rectId}`,
+        })
+        .rect(0, 0, rectWidth, rectHeight)
+        .attr({
+          fill: 'white',
+          stroke: 'grey',
+          strokeWidth: 1,
+          id: rectId,
+          class: 'elecRect',
+        });
 
       svgModifier.push({
         selector: `#${rectId}`,
         info: {
-          quanticNumbers: getQuanticNumbers(id)
-        }
+          quanticNumbers: getQuanticNumbers(id),
+        },
       });
     }
 
@@ -107,34 +128,42 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
       paper.text(posx, posy, text).attr({
         fontSize,
         textAnchor: 'middle',
-        dataTest: 'abc'
+        dataTest: 'abc',
       });
     }
 
     svgModifier = [];
     paper = Snap(width, height);
 
-    paper.path('M 0 0 L 10 4 L 0 8 z').marker(0, 0, arrowHeadSize, arrowHeadSize, 1, 4).attr({
-      id: 'svgarrow',
-      viewBox: '0 0 10 8'
-    });
+    paper
+      .path('M 0 0 L 10 4 L 0 8 z')
+      .marker(0, 0, arrowHeadSize, arrowHeadSize, 1, 4)
+      .attr({
+        id: 'svgarrow',
+        viewBox: '0 0 10 8',
+      });
 
     let i, j, x, y, label;
-
 
     // s
     for (i = 0; i < 7; i++) {
       label = `${7 - i}s`;
       let w = drawHeight - levelHeight;
-      drawRect(leftRightMargin, i * w / 6 + topBottomMargin, `${label}1`);
-      drawText(leftRightMargin + rectWidth / 2, i * w / 6 + labelOffset, label);
+      drawRect(leftRightMargin, (i * w) / 6 + topBottomMargin, `${label}1`);
+      drawText(
+        leftRightMargin + rectWidth / 2,
+        (i * w) / 6 + labelOffset,
+        label,
+      );
     }
-
 
     // p
     for (i = 0; i < 6; i++) {
       label = `${7 - i}p`;
-      y = topBottomMargin + pOffset[0] + (i - 1) * (drawHeight - pOffset[0] - (drawHeight - pOffset[2])) / 4;
+      y =
+        topBottomMargin +
+        pOffset[0] +
+        ((i - 1) * (drawHeight - pOffset[0] - (drawHeight - pOffset[2]))) / 4;
       for (j = 0; j < 3; j++) {
         x = leftRightMargin + pOffset[3] + j * (rectWidth + rectMargin);
         drawRect(x, y, label + (j + 1));
@@ -146,7 +175,10 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
     // d
     for (i = 0; i < 4; i++) {
       label = `${6 - i}d`;
-      y = topBottomMargin + dOffset[0] + (i - 1) * (drawHeight - dOffset[0] - (drawHeight - dOffset[2])) / 2;
+      y =
+        topBottomMargin +
+        dOffset[0] +
+        ((i - 1) * (drawHeight - dOffset[0] - (drawHeight - dOffset[2]))) / 2;
       for (j = 0; j < 5; j++) {
         x = leftRightMargin + dOffset[3] + j * (rectWidth + rectMargin);
         drawRect(x, y, label + (j + 1));
@@ -158,7 +190,10 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
     // f
     for (i = 0; i < 2; i++) {
       label = `${5 - i}f`;
-      y = topBottomMargin + fOffset[0] + i * (drawHeight - fOffset[0] - (drawHeight - fOffset[2]));
+      y =
+        topBottomMargin +
+        fOffset[0] +
+        i * (drawHeight - fOffset[0] - (drawHeight - fOffset[2]));
       for (j = 0; j < 7; j++) {
         x = leftRightMargin + fOffset[3] + j * (rectWidth + rectMargin);
         drawRect(x, y, label + (j + 1));
@@ -173,7 +208,6 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
     paper.remove();
   }
 
-
   // utils
   function getRectId(elConfig) {
     let q = getQuanticNumbers(elConfig);
@@ -186,12 +220,11 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
       let m = o.match(/^(\d\w)(\d+)/);
       return {
         layer: m[1],
-        electrons: +m[2]
+        electrons: +m[2],
       };
     });
     return elConfig;
   }
-
 
   function getQuanticNumbers(elConfig) {
     elConfig = elConfig.split(' ');
@@ -219,7 +252,7 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
     }
 
     let num = l * 2 + 1;
-    m = (m - 1) % num - l;
+    m = ((m - 1) % num) - l;
     return { l, m, n };
   }
 
@@ -249,7 +282,6 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
     return Math.floor(electron / num) === 0 ? 1 : -1;
   }
 
-
   exports.getSvg = function (...args) {
     createSvg(args);
     return svg;
@@ -263,4 +295,3 @@ define(['https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8
 
   return exports;
 });
-

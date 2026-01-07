@@ -48,7 +48,7 @@ export class ModulePrefsManager {
     });
 
     const forceTypeChoices = Renderer.getList()
-      .map((k) => `${k  }:${  k}`)
+      .map((k) => `${k}:${k}`)
       .join(';');
 
     const result = await UI.editTable(cols, {

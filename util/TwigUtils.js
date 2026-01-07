@@ -13,7 +13,7 @@ export async function twigToDoc(moduleID, options = {}) {
   let canvasesCopy = domCopy.querySelectorAll('canvas');
   for (let i = 0; i < canvases.length; i++) {
     const png = canvases[i].toDataURL('image/png');
-    canvasesCopy[i].parentElement.innerHTML = `<img src="${  png  }" />`;
+    canvasesCopy[i].parentElement.innerHTML = `<img src="${png}" />`;
   }
 
   let svgs = div.querySelectorAll('svg');
@@ -54,8 +54,8 @@ export async function twigToDoc(moduleID, options = {}) {
 
   await Promise.all(promises);
 
-  const blob = new Blob([`<html>${  domCopy.innerHTML  }</html>`], {
-    type: 'text/html'
+  const blob = new Blob([`<html>${domCopy.innerHTML}</html>`], {
+    type: 'text/html',
   });
   fileSaver(blob, filename);
 }

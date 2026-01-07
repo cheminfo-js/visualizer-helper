@@ -93,7 +93,7 @@ define([
           twig: this.defaultTwig,
           category: [
             {
-              value: `${this.basename + form.category  }.${  form.name}`,
+              value: `${this.basename + form.category}.${form.name}`,
             },
           ],
           ...this.customProperties,

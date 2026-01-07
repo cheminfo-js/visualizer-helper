@@ -1,4 +1,3 @@
-
 /*
 Example:
 exportTSV(myArray, {keys:['surface','volume]}
@@ -6,9 +5,7 @@ exportTSV(myArray, {keys:['surface','volume]}
 
 define(['src/util/ui'], function (UI) {
   function exportTSV(items, options = {}) {
-    const {
-      keys = Object.keys(items[0])
-    } = options;
+    const { keys = Object.keys(items[0]) } = options;
 
     let results = [];
 
@@ -22,15 +19,13 @@ define(['src/util/ui'], function (UI) {
       results.push(line.join('\t'));
     }
 
-    UI.showCode(
-      {
-        mode: 'text',
-        content: results.join('\r\n'),
-        title: 'Export ROIs as a tab-delimited text (copy / paste to spreadsheet)'
-      }
-    );
+    UI.showCode({
+      mode: 'text',
+      content: results.join('\r\n'),
+      title:
+        'Export ROIs as a tab-delimited text (copy / paste to spreadsheet)',
+    });
   }
 
   return exportTSV;
 });
-

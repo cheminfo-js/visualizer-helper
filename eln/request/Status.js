@@ -5,8 +5,8 @@ TypeRenderer.addType('requeststatus', {
   toscreen($element, val) {
     let label = Status.getStatusDescription(val);
     let color = Status.getStatusColor(val);
-    $element.css('background-color', `${color  }`);
-    $element.html(`${label  }`);
+    $element.css('background-color', `${color}`);
+    $element.html(`${label}`);
   },
 });
 

@@ -1,9 +1,8 @@
-
 import API from 'src/util/api';
 
 import Roc from '../rest-on-couch/Roc';
 
-if ((typeof IframeBridge) !== 'undefined') {
+if (typeof IframeBridge !== 'undefined') {
   self.IframeBridge.onMessage(onMessage);
   self.IframeBridge.ready();
 } else {

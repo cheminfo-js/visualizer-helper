@@ -7,7 +7,7 @@ Checks if one of the usernames is part of the rights list
 module.exports = function checkRights(
   usernames,
   rights = '',
-  defaultValue = false
+  defaultValue = false,
 ) {
   if (!rights) return defaultValue;
   if (!usernames) return false;
@@ -25,7 +25,9 @@ module.exports = function checkRights(
       if (!username) continue;
       if (isRegExp) {
         if (username.match(regexp)) return true;
-      } else if (username.toLowerCase() === allowed.toLowerCase()) {return true;}
+      } else if (username.toLowerCase() === allowed.toLowerCase()) {
+        return true;
+      }
     }
   }
   return false;

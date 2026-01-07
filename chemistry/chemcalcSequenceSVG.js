@@ -1,6 +1,6 @@
 define([
   'https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8145c522b71fc9c872cb0bcae49a/dist/snap.svg-min.js',
-  './sequenceSplitter'
+  './sequenceSplitter',
 ], function (Snap, sequenceSplitter) {
   function getSVG(sequence, analysisResult, options) {
     const {
@@ -12,7 +12,7 @@ define([
       labelFontFamily = 'Verdana',
       labelSize = 8,
       verticalShiftForTerminalAnnotations = 20,
-      showLabels = true
+      showLabels = true,
     } = options;
 
     let residues = [];
@@ -31,7 +31,7 @@ define([
       text.attr({
         'font-family': labelFontFamily,
         'font-weight': 'bold',
-        'font-size': 12
+        'font-size': 12,
       });
       let textWidth = text.node.getBoundingClientRect().width;
       xPos += textWidth;
@@ -49,7 +49,7 @@ define([
         line,
         usedSlots: [],
         topPosition: 0,
-        bottomPosition: 0
+        bottomPosition: 0,
       });
       xPos += spaceBetweenResidues;
       xOld = xPos;
@@ -141,7 +141,7 @@ define([
       text.attr({
         'font-family': labelFontFamily,
         'font-weight': 'bold',
-        'font-size': 12
+        'font-size': 12,
       });
     });
 
@@ -196,7 +196,7 @@ define([
             residue.xTo + spaceBetweenResidues / 2,
             residue.y,
             residue.xTo + spaceBetweenResidues / 2,
-            residue.y - 8
+            residue.y - 8,
           );
           line.attr({ stroke: result.color, 'stroke-width': strokeWidth });
           if (nTerminal) {
@@ -204,13 +204,13 @@ define([
               residue.xTo + spaceBetweenResidues / 2,
               residue.y,
               residue.xTo + spaceBetweenResidues / 2 - 5,
-              residue.y + 5
+              residue.y + 5,
             );
             line.attr({ stroke: result.color, 'stroke-width': strokeWidth });
             drawLabel(
               result,
               residue.xTo + spaceBetweenResidues / 2 - 15,
-              residue.y + 12 + residue.bottomPosition * labelSize
+              residue.y + 12 + residue.bottomPosition * labelSize,
             );
             residue.bottomPosition++;
           } else {
@@ -218,13 +218,13 @@ define([
               residue.xTo + spaceBetweenResidues / 2,
               residue.y - 8,
               residue.xTo + spaceBetweenResidues / 2 + 5,
-              residue.y - 13
+              residue.y - 13,
             );
             line.attr({ stroke: result.color, 'stroke-width': strokeWidth });
             drawLabel(
               result,
               residue.xTo + spaceBetweenResidues / 2,
-              residue.y - 15 - residue.topPosition * labelSize
+              residue.y - 15 - residue.topPosition * labelSize,
             );
             residue.topPosition++;
           }
@@ -242,20 +242,20 @@ define([
         fill: result.textColor,
         'font-family': labelFontFamily,
         'font-weight': 'bold',
-        'font-size': labelSize
+        'font-size': labelSize,
       });
       let textWidth = text.node.getBoundingClientRect().width + 3;
       text = paper.text(x + textWidth, y - labelSize / 2, charge);
       text.attr({
         fill: result.textColor,
         'font-family': labelFontFamily,
-        'font-size': labelSize / 2
+        'font-size': labelSize / 2,
       });
       text = paper.text(x + textWidth, y, similarity);
       text.attr({
         fill: result.textColor,
         'font-family': labelFontFamily,
-        'font-size': labelSize / 2
+        'font-size': labelSize / 2,
       });
     }
 
@@ -288,11 +288,11 @@ define([
             drawLine.attr({
               onmouseover: 'mouseOver(evt)',
               onmouseout: 'mouseOut(evt)',
-              id: `line${fromResidue.nTer}-${toResidue.nTer}`
+              id: `line${fromResidue.nTer}-${toResidue.nTer}`,
             });
             drawLine.attr({
               stroke: result.color,
-              'stroke-width': strokeWidth
+              'stroke-width': strokeWidth,
             });
 
             drawLabel(result, (fromX + toX) / 2 - 10, y - 2);
@@ -330,7 +330,7 @@ define([
      // ]]>
     `;
       let scriptElement = paper.el('script', {
-        type: 'application/ecmascript'
+        type: 'application/ecmascript',
       });
       scriptElement.node.textContent = script;
     }

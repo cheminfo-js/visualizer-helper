@@ -1,4 +1,3 @@
-
 /*
 In the general preferences you should put something like:
 require(['TrackOptions'], function(TrackOptions) {
@@ -26,15 +25,15 @@ define([], function () {
             myAnswers[target.id] = target.myResult;
           }
           break;
-          }
+        }
         case 'exercises': {
           if (!options.keepAnswers) {
             myAnswers = {};
           }
           break;
-          }
+        }
         default:
-                    // throw new Error(`Unexpected target: ${evt.target.__name}`);
+        // throw new Error(`Unexpected target: ${evt.target.__name}`);
       }
       window.localStorage.setItem(cookieName, JSON.stringify(myAnswers));
     });

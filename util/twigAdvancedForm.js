@@ -425,7 +425,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
 
         var dataRepeat = tr.attr('data-repeat');
         let currentRowIndex = 0;
-        tr.prevAll(`tr[data-repeat="${  dataRepeat  }"]`).each(function () {
+        tr.prevAll(`tr[data-repeat="${dataRepeat}"]`).each(function () {
           currentRowIndex++;
         });
 
@@ -488,12 +488,12 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
                 );
               }
             } else if (options.debug) {
-                console.log(
-                  'Could not find array or invalid index:',
-                  arrayVariable,
-                  itemIndex,
-                );
-              }
+              console.log(
+                'Could not find array or invalid index:',
+                arrayVariable,
+                itemIndex,
+              );
+            }
           }
         }
 

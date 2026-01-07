@@ -18,7 +18,7 @@ const defaultOptions = {
 
 class ExpandableMolecule {
   constructor(sample, options) {
-    this.options = { ...defaultOptions, ...options};
+    this.options = { ...defaultOptions, ...options };
     this.sample = sample;
     this.molfile = String(
       this.sample.getChildSync(['$content', 'general', 'molfile']) || '',

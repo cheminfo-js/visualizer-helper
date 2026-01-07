@@ -1,6 +1,6 @@
 define([
   'https://www.lactame.com/lib/chemcalc/3.0.6/chemcalc.js',
-  'https://www.lactame.com/lib/ml/1.0.0/ml.js'
+  'https://www.lactame.com/lib/ml/1.0.0/ml.js',
 ], function (CC, ml) {
   let exports = {};
   exports.findCoefficients = function (reagents, products) {

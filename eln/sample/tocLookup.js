@@ -15,28 +15,28 @@ module.exports = {
         returnRow: true,
         dialog: {
           width: 1000,
-          height: 800
+          height: 800,
         },
         columns: [
           {
             id: 'code',
             name: 'Code',
             jpath: ['key', '0'],
-            maxWidth: 100
+            maxWidth: 100,
           },
           {
             id: 'batch',
             name: 'Batch',
             jpath: ['key', '1'],
-            maxWidth: 100
+            maxWidth: 100,
           },
           {
             id: 'names',
             name: 'names',
             jpath: ['names'],
             rendererOptions: {
-              forceType: 'html'
-            }
+              forceType: 'html',
+            },
           },
 
           {
@@ -44,21 +44,21 @@ module.exports = {
             name: 'Molecule',
             jpath: ['value', 'ocl'],
             rendererOptions: {
-              forceType: 'oclid'
+              forceType: 'oclid',
             },
-            maxWidth: 400
-          }
+            maxWidth: 400,
+          },
         ],
         idField: 'id',
         slick: {
-          rowHeight: 150
-        }
+          rowHeight: 150,
+        },
       })
       .catch(function (e) {
         console.error(e); // eslint-disable-line no-console
         ui.showNotification('search failed', 'error');
       });
-  }
+  },
 };
 
 function listTemplate(val, prop) {

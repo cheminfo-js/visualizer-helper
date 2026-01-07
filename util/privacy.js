@@ -5,11 +5,11 @@ define(['src/util/ui'], function (UI) {
         Please note that in order to use this view data WILL BE SUBMITTED to our servers !
     `,
       agree = 'I agree',
-      notAgree = 'I don\'t agree',
+      notAgree = "I don't agree",
       dialogOptions = {
         width: 800,
-        title: 'Privacy information'
-      }
+        title: 'Privacy information',
+      },
     } = options;
 
     let prefs = JSON.parse(localStorage.getItem(cookieName) || '{}');
@@ -22,7 +22,7 @@ define(['src/util/ui'], function (UI) {
 
       prefs.validation = {
         isValidated: result,
-        date: (new Date()).getTime()
+        date: new Date().getTime(),
       };
       localStorage.setItem(cookieName, JSON.stringify(prefs));
     }

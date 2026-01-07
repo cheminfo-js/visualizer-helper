@@ -39,15 +39,12 @@ function Structure(roc) {
           coordinates: ocl.coordinates,
         },
       };
-      await roc.create(
-        newEntry,
-        {
-          messages: {
-              409: 'Conflict: this structure already exists',
-            },
-          ...rocOptions,
+      await roc.create(newEntry, {
+        messages: {
+          409: 'Conflict: this structure already exists',
         },
-      );
+        ...rocOptions,
+      });
       return newEntry;
     },
 

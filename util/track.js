@@ -10,7 +10,7 @@ let _defaultValue;
 define(['jquery', 'src/util/api', 'src/util/versioning'], function (
   $,
   API,
-  Versioning
+  Versioning,
 ) {
   function track(cookieName, defaultValue, options = {}) {
     let varName = options.varName || cookieName;

@@ -384,8 +384,8 @@ define([
           eventEmitter: new EventEmitter(),
         };
       } else if (!eventEmitters[uuid].eventEmitter) {
-          eventEmitters[uuid].eventEmitter = new EventEmitter();
-        }
+        eventEmitters[uuid].eventEmitter = new EventEmitter();
+      }
       return eventEmitters[uuid].eventEmitter;
     }
 
@@ -1323,12 +1323,11 @@ define([
 
   function createOptions(options, type, custom) {
     let messages = {
-      
       ...defaultOptions.messages,
       ...messagesByType[type],
-      ...options && options.messages,
+      ...(options && options.messages),
     };
-    options = { ...defaultOptions, ...options, ...custom};
+    options = { ...defaultOptions, ...options, ...custom };
     if (messages) options.messages = messages;
     options.type = type;
     return options;

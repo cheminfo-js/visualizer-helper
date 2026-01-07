@@ -7,7 +7,7 @@ export async function preferencesFactory(id, options) {
     name = 'viewPreferences',
     url = undefined,
     database = 'eln',
-    initial = []
+    initial = [],
   } = options;
 
   const kind = 'viewPreferences';
@@ -15,7 +15,7 @@ export async function preferencesFactory(id, options) {
   let roc = new Roc({
     url,
     database,
-    kind
+    kind,
   });
 
   let user = await roc.getUser();
@@ -25,7 +25,7 @@ export async function preferencesFactory(id, options) {
   let preferenceRoc;
   let rocOptions = {
     varName: name,
-    track: true
+    track: true,
   };
   if (existing) {
     preferenceRoc = await roc.document(existing._id, rocOptions);
@@ -33,7 +33,7 @@ export async function preferencesFactory(id, options) {
     let created = await roc.create({
       $id: id,
       $content: initial,
-      $kind: kind
+      $kind: kind,
     });
     preferenceRoc = await roc.document(created._id, rocOptions);
   }

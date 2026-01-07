@@ -47,19 +47,19 @@ define([
       // var user = await this.roc.getUser();
       const queryOptions = key
         ? {
-          key: ['userAnalysisResults', this.viewID, sampleID, key],
-        }
+            key: ['userAnalysisResults', this.viewID, sampleID, key],
+          }
         : {
-          startkey: ['userAnalysisResults', this.viewID, sampleID, '\u0000'],
-          endkey: ['userAnalysisResults', this.viewID, sampleID, '\uffff'],
-        };
+            startkey: ['userAnalysisResults', this.viewID, sampleID, '\u0000'],
+            endkey: ['userAnalysisResults', this.viewID, sampleID, '\uffff'],
+          };
       queryOptions.mine = false;
 
       const entries = await this.roc.query('userAnalysisToc', queryOptions);
       /* if (sampleID) {
         return entries.filter((entry) => entry.$id[2].match(/^[0-9a-f]{32}$/i));
       }*/
-      console.log({ entries })
+      console.log({ entries });
       return entries;
     }
 
@@ -106,7 +106,7 @@ define([
         if (!entry._id) entry._id = entry.id;
         entry = await this.roc.get(entry);
         entry.$content = meta;
-        console.log({ entry })
+        console.log({ entry });
         await this.roc.update(entry);
       } else {
         entry = await this.roc.create({

@@ -43,7 +43,7 @@ class Toc {
    */
   constructor(roc, options = {}) {
     this.roc = roc;
-    this.options = { ...defaultOptions, ...options};
+    this.options = { ...defaultOptions, ...options };
   }
 
   setFilter(filter) {
@@ -66,7 +66,7 @@ class Toc {
       endkey,
       key,
       descending,
-    } = { ...this.options, ...options};
+    } = { ...this.options, ...options };
     let mine = 0;
     let groups = '';
     group = String(group);
@@ -151,7 +151,7 @@ class Toc {
 Group: <select name="group">
 <option value='all'>All</option>
 <option value='mine'>Mine</option>
-${groups.map((group) => `<option value="${  group  }">${  group  }</option>`)}
+${groups.map((group) => `<option value="${group}">${group}</option>`)}
 </select>
 </div>
 <div>&nbsp;</div>

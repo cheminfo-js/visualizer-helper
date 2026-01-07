@@ -13,7 +13,7 @@ export default class RequestManager {
     this.roc = new Roc({
       url: couchDB.url,
       database: couchDB.database,
-      kind: 'analysisRequest'
+      kind: 'analysisRequest',
     });
     this.sampleRoc = options.sampleRoc || null;
     this.servicesRoc = options.servicesRoc || null;
@@ -47,7 +47,7 @@ export default class RequestManager {
     }
     request.$content.status.unshift({
       date: Date.now(),
-      status
+      status,
     });
     await this.roc.update(request, muteSuccess);
   }
@@ -69,16 +69,16 @@ export default class RequestManager {
         productId: sample.$id,
         analysis: {
           kind,
-          data
+          data,
         },
         status: [
           {
             date: Date.now(),
-            status: 10
-          }
-        ]
+            status: 10,
+          },
+        ],
       },
-      $owners: groups
+      $owners: groups,
     };
 
     return this.roc.create(requestObject, disableNotification);
@@ -99,11 +99,11 @@ export default class RequestManager {
           status: [
             {
               date: Date.now(),
-              status: 10
-            }
-          ]
+              status: 10,
+            },
+          ],
         },
-        $owners: [req.kind]
+        $owners: [req.kind],
       };
       await this.roc.create(requestObject, muteSuccess);
     }

@@ -12,7 +12,7 @@ define(['src/util/api'], function (API) {
       bottom = '20px',
       highlight = (datum) => datum._highlight,
       fillColor = 'red',
-      strokeColor = 'red'
+      strokeColor = 'red',
     } = options;
 
     let annotations = [];
@@ -27,13 +27,16 @@ define(['src/util/api'], function (API) {
           {
             x: typeof to === 'function' ? to(datum) : to,
             y: typeof bottom === 'function' ? bottom(datum) : bottom,
-          }
+          },
         ],
         type: 'rect',
-        fillColor: typeof fillColor === 'function' ? fillColor(datum) : fillColor,
-        strokeColor: typeof strokeColor === 'function' ? strokeColor(datum) : strokeColor,
-        _highlight: typeof highlight === 'function' ? highlight(datum) : highlight,
-        info: datum
+        fillColor:
+          typeof fillColor === 'function' ? fillColor(datum) : fillColor,
+        strokeColor:
+          typeof strokeColor === 'function' ? strokeColor(datum) : strokeColor,
+        _highlight:
+          typeof highlight === 'function' ? highlight(datum) : highlight,
+        info: datum,
       });
     }
     API.createData(variableName, annotations);

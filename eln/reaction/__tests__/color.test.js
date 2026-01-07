@@ -9,7 +9,7 @@ test('Reaction status color', () => {
   expect(form).toMatch('<option value="50" selected>');
   expect(Color.getNextStatus(30)).toBe(40);
   expect(
-    Color.getColorFromReaction({ $content: { status: [{ code: 50 }] } })
+    Color.getColorFromReaction({ $content: { status: [{ code: 50 }] } }),
   ).toBe('rgba(206,224,227,1)');
   let statuses = [{ code: 'started' }, { code: 'finished' }];
   Color.updateStatuses(statuses);

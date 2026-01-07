@@ -20,11 +20,11 @@ const templateOptions = {
         .purple {fill:rgb(192,64,192)}
         .blue {fill:rgb(64,192,192)}
         .green {fill:rgb(64,192,64)}
-        .gold {fill:rgb(192,128,64)}`
+        .gold {fill:rgb(192,128,64)}`,
 };
 
 const template = (options) => {
-  options = { ...templateOptions, ...options};
+  options = { ...templateOptions, ...options };
   return `
         {% set p = parsed %}
         {% set features = parsed.features %}
@@ -67,22 +67,19 @@ export function getFeatureTypes(parsedGb) {
 }
 
 export async function getSvgString(parsedGb, options) {
-   
   options = DataObject.resurrect(options);
   const svg = await getSvg(parsedGb, options);
-  return $('<div>')
-    .append(svg)
-    .html();
+  return $('<div>').append(svg).html();
 }
 
 export async function getSvg(parsedGb, options) {
   const tmpl = Twig.twig({
-    data: template(templateOptions)
+    data: template(templateOptions),
   });
 
   const render = tmpl.renderAsync({
     parsed: parsedGb,
-    options
+    options,
   });
   render.render();
   return compile(render.html);

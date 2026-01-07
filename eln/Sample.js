@@ -852,12 +852,12 @@ async function pasteAnalysis(sample) {
     let i = 0;
     do {
       if (filename.includes('.')) {
-        const newName = filename.replace(/(.*)(\..*)/, `$1_${  i  }$2`);
+        const newName = filename.replace(/(.*)(\..*)/, `$1_${i}$2`);
         if (!existingAttachments[newName]) {
           return newName;
         }
       } else {
-        return `${filename  }_${  i}`;
+        return `${filename}_${i}`;
       }
       i++;
     } while (i < 500);

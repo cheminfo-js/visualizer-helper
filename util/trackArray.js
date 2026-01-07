@@ -3,7 +3,7 @@ define(['src/util/api', 'lodash'], function (API, _) {
     const {
       varName = localName,
       appendDefault = true,
-      comparator = _.isEqual
+      comparator = _.isEqual,
     } = options;
 
     let data = API.getData(varName);
@@ -16,7 +16,7 @@ define(['src/util/api', 'lodash'], function (API, _) {
       }
       if (localValue.length === 0 || appendDefault) {
         localValue = localValue.concat(
-          JSON.parse(JSON.stringify(defaultValue))
+          JSON.parse(JSON.stringify(defaultValue)),
         );
         localValue = _.uniqWith(localValue, comparator);
       }

@@ -6,7 +6,6 @@ module.exports = async function loadTwig(category, options = {}) {
   const { variableName = 'twigTemplate' } = options;
 
   try {
-     
     let templates = DataObject(await load(category));
     let twigTemplate = await templates.getChild([
       '0',

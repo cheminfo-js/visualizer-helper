@@ -1,8 +1,7 @@
-
 module.exports = {
   async getNextId(roc, viewName, type) {
     const v = await roc.view(viewName, {
-      reduce: true
+      reduce: true,
     });
 
     if (!v.length || !v[0].value || !v[0].value[type]) {
@@ -14,7 +13,7 @@ module.exports = {
     let nextID = current + 1;
     return numberToId(nextID, type);
   },
-  numberToId
+  numberToId,
 };
 
 function numberToId(num, type) {

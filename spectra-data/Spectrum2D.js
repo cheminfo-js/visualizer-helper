@@ -77,12 +77,7 @@ export class Spectrum2D {
       Math.abs(this.minMax.maxZ),
       Math.abs(this.minMax.minZ),
     );
-    let range = getRange(
-      this.median * 3 * 2**zoomLevel,
-      max,
-      nbLevels,
-      2,
-    );
+    let range = getRange(this.median * 3 * 2 ** zoomLevel, max, nbLevels, 2);
     if (negative) {
       range = range.map((value) => -value);
     }
@@ -113,7 +108,7 @@ function getRange(min, max, length, exp) {
     let factors = [];
     factors[0] = 0;
     for (let i = 1; i <= length; i++) {
-      factors[i] = factors[i - 1] + (exp - 1) / exp**i;
+      factors[i] = factors[i - 1] + (exp - 1) / exp ** i;
     }
     const lastFactor = factors[length];
     let result = new Array(length);

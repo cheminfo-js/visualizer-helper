@@ -17,7 +17,7 @@ let defaultOptions = {
 
 class BioReaction {
   constructor(couchDB, uuid, options) {
-    this.options = { ...defaultOptions, ...options};
+    this.options = { ...defaultOptions, ...options };
 
     let roc = API.cache('roc');
     if (!roc) {

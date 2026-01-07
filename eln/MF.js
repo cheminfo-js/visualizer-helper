@@ -21,7 +21,6 @@ class MF {
           this.setCanonizedMF(mfInfo.mf);
           this.previousEMMF = mfInfo.monoisotopicMass;
         } catch (e) {
-           
           this.setCanonizedMF('');
           console.log('Could not parse MF: ', mf);
         }
@@ -31,12 +30,11 @@ class MF {
 
   getIsotopicDistributionInstance(options) {
     options = {
-      
       ionizations: '+',
-        fwhm: 0.01,
-        maxLines: 5000,
-        minY: 1e-8,
-      ...options
+      fwhm: 0.01,
+      maxLines: 5000,
+      minY: 1e-8,
+      ...options,
     };
     return new MolecularFormula.IsotopicDistribution(this.getMF(), options);
   }
@@ -87,7 +85,7 @@ class MF {
 
   getMF() {
     return String(
-      this.sample.getChildSync(['$content', 'general', 'mf']) || ''
+      this.sample.getChildSync(['$content', 'general', 'mf']) || '',
     );
   }
 

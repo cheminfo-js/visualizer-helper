@@ -1,11 +1,10 @@
-
 define(['mathjs'], function (mathjs) {
   let exports = {};
 
   exports.isCorrect = function (sol, ans, options) {
     sol = String(sol);
     ans = String(ans);
-    options = { ...options};
+    options = { ...options };
     // Absolute error
     // if no units, same units as answer
     options.relativeError = Number(options.relativeError);
@@ -31,7 +30,7 @@ define(['mathjs'], function (mathjs) {
         if (isNaN(ans)) {
           return {
             correct: false,
-            reason: 'did not expect units in answer'
+            reason: 'did not expect units in answer',
           };
         } else {
           return isCorrect(sol, ans, options);
@@ -39,7 +38,7 @@ define(['mathjs'], function (mathjs) {
       } else {
         return {
           correct: false,
-          reason: `in solution: ${e.message}`
+          reason: `in solution: ${e.message}`,
         };
       }
     }
@@ -50,14 +49,14 @@ define(['mathjs'], function (mathjs) {
     } catch (e) {
       return {
         correct: false,
-        reason: `in answer: ${e.message}`
+        reason: `in answer: ${e.message}`,
       };
     }
 
     if (!solUnit.equalBase(ansUnit)) {
       return {
         correct: false,
-        reason: 'answer has wrong units'
+        reason: 'answer has wrong units',
       };
     } else {
       sol = solUnit.toNumber(solU);
@@ -73,15 +72,21 @@ define(['mathjs'], function (mathjs) {
 });
 
 function isCorrect(sol, ans, options) {
-  let absoluteError = options.absoluteError !== undefined && !isNaN(options.absoluteError) ? options.absoluteError : null;
-  let relativeError = options.relativeError !== undefined && !isNaN(options.relativeError) ? options.relativeError : null;
+  let absoluteError =
+    options.absoluteError !== undefined && !isNaN(options.absoluteError)
+      ? options.absoluteError
+      : null;
+  let relativeError =
+    options.relativeError !== undefined && !isNaN(options.relativeError)
+      ? options.relativeError
+      : null;
   let order = getOrder(sol, ans);
   if (relativeError !== null) {
     if (Math.abs(sol - ans) > relativeError * sol) {
       return {
         correct: false,
         reason: 'wrong answer (within relative error)',
-        order
+        order,
       };
     }
   }
@@ -93,13 +98,16 @@ function isCorrect(sol, ans, options) {
       return {
         correct: false,
         reason: 'wrong answer (within absolute error)',
-        order
+        order,
       };
     } else {
       return {
         correct: true,
-        reason: relativeError === null ? 'correct answer (within absolute error)' : 'correct answer (within relative and absolute error)',
-        order
+        reason:
+          relativeError === null
+            ? 'correct answer (within absolute error)'
+            : 'correct answer (within relative and absolute error)',
+        order,
       };
     }
   }
@@ -108,7 +116,7 @@ function isCorrect(sol, ans, options) {
     return {
       correct: true,
       reason: 'correct answer (within relative error)',
-      order
+      order,
     };
   }
 
@@ -116,13 +124,13 @@ function isCorrect(sol, ans, options) {
     return {
       correct: false,
       reason: 'wrong answer (not equal)',
-      order
+      order,
     };
   } else {
     return {
       correct: true,
       reason: 'correct answer (is equal)',
-      order
+      order,
     };
   }
 

@@ -47,19 +47,19 @@ define(['src/util/api'], function (API) {
           {
             x: datum.from,
             y: 0,
-            dy: '2px'
+            dy: '2px',
           },
           {
             x: datum.to,
             y: 0,
-            dy: '-2px'
-          }
+            dy: '-2px',
+          },
         ],
         type: 'rect',
         fillColor: color,
         strokeColor: color,
         _highlight: datum._highlight,
-        info: datum
+        info: datum,
       });
     }
     API.createData(annotationName, annotations);

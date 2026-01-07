@@ -128,12 +128,12 @@ define(['jquery'], function ($) {
     header: (tile) => tile.header,
     footer: (tile) => tile.footer,
     title: (tile) => tile.title,
-    icon: (tile) => tile.icon
+    icon: (tile) => tile.icon,
   };
 
   return function (div, options) {
     let lineCount = 0;
-    options = { ...defaultOptions, ...options};
+    options = { ...defaultOptions, ...options };
     const { tiles } = options;
     const $div = $(`#${div}`);
     $div.empty();
@@ -152,9 +152,7 @@ define(['jquery'], function ($) {
       if ($(event.target).hasClass('cell')) {
         $el = $(event.target);
       } else {
-        $el = $(event.target)
-          .parents('.cell')
-          .first();
+        $el = $(event.target).parents('.cell').first();
       }
       let idx = $el.attr('data-idx');
       const tile = tiles[idx];
@@ -187,17 +185,18 @@ define(['jquery'], function ($) {
                     <div class='content'>
                         <div class='header'>${header || ''}</div>
                         ${
-  icon
-    ? `<div class="${iconType} ${icon} icon main huge"></div>`
-    : `<div class="title main ${size}">${title ||
-                                ''}</div>`
-}
+                          icon
+                            ? `<div class="${iconType} ${icon} icon main huge"></div>`
+                            : `<div class="title main ${size}">${
+                                title || ''
+                              }</div>`
+                        }
                         <div class="footer">${footer || ''}</div>
                         ${
-  ribbon
-    ? `<div class="ribbon-wrapper"><div class="ribbon beta">${ribbon}</div></div>`
-    : ''
-}
+                          ribbon
+                            ? `<div class="ribbon-wrapper"><div class="ribbon beta">${ribbon}</div></div>`
+                            : ''
+                        }
                     </div>
                 </div>
         `);
@@ -205,16 +204,16 @@ define(['jquery'], function ($) {
       $el.css({
         color: options.color(tile),
         backgroundColor: options.backgroundColor(tile),
-        cursor: active && options.isLink(tile) ? 'pointer' : 'inherit'
+        cursor: active && options.isLink(tile) ? 'pointer' : 'inherit',
       });
 
       $el.attr({
-        'data-idx': idx
+        'data-idx': idx,
       });
       if (newTabLink && active && href) {
         return $el
           .wrap(
-            `<a href="${href}" target="_blank" style="text-decoration: none; color: initial;" />`
+            `<a href="${href}" target="_blank" style="text-decoration: none; color: initial;" />`,
           )
           .parent();
       }

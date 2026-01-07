@@ -1,4 +1,3 @@
-
 const sequenceSplitterTest = require('../sequenceSplitter');
 
 test('AAA', () => {

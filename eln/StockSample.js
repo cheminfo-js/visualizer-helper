@@ -16,7 +16,7 @@ class Sample {
       },
     };
 
-    this.options = { ...defaultOptions, ...options};
+    this.options = { ...defaultOptions, ...options };
     this._init();
   }
 
@@ -102,29 +102,29 @@ class Sample {
     if (general) {
       this.sample.setChildSync(
         ['$content', 'general', 'description'],
-        general.description
+        general.description,
       );
       this.sample.setChildSync(['$content', 'general', 'name'], general.name);
     }
     if (identifier) {
       this.sample.setChildSync(
         ['$content', 'identifier', 'cas'],
-        identifier.cas
+        identifier.cas,
       );
     }
     if (stock) {
       this.sample.setChildSync(
         ['$content', 'stock', 'catalogNumber'],
-        stock.catalogNumber
+        stock.catalogNumber,
       );
       this.sample.setChildSync(
         ['$content', 'stock', 'quantity'],
-        stock.quantity
+        stock.quantity,
       );
       this.sample.setChildSync(['$content', 'general', 'purity'], stock.purity);
       this.sample.setChildSync(
         ['$content', 'stock', 'supplier'],
-        stock.supplier
+        stock.supplier,
       );
     }
   }

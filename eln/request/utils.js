@@ -10,7 +10,7 @@ export function convertParametersToSchema(parameters) {
     if (param.variable) {
       let def = {
         type: 'string',
-        name: String(param.variable)
+        name: String(param.variable),
       };
       props[param.variable] = def;
       if (param.label) {
@@ -39,7 +39,7 @@ export function convertParametersToSchema(parameters) {
 
   return {
     type: 'object',
-    properties: props
+    properties: props,
   };
 }
 
@@ -74,40 +74,40 @@ function castBool(val) {
 export function getServiceAndSetTree(services, sets) {
   const treeSets = {
     label: 'Sets',
-    children: sets.map(formatSet)
+    children: sets.map(formatSet),
   };
 
   const treeServices = {
     label: 'Services',
-    children: services.map(formatService)
+    children: services.map(formatService),
   };
 
   return {
-    children: [treeSets, treeServices]
+    children: [treeSets, treeServices],
   };
 }
 
 function formatSet(theset) {
   return {
     label: theset.$content.name,
-    info: theset
+    info: theset,
   };
 }
 
 function formatService(service) {
   return {
     label: `${service.$content.name} (${service.$id})`,
-    children: service.$content.instruments.map(formatInstrument)
+    children: service.$content.instruments.map(formatInstrument),
   };
   function formatInstrument(instrument) {
     return {
       label: instrument.name,
-      children: instrument.experiments.map(formatExperiment)
+      children: instrument.experiments.map(formatExperiment),
     };
     function formatExperiment(experiment) {
       return {
         label: experiment.name,
-        info: { service, instrument, experiment }
+        info: { service, instrument, experiment },
       };
     }
   }

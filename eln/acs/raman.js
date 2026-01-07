@@ -33,7 +33,7 @@ function format2(value) {
       .map(
         (a) =>
           Math.round(a.wavenumber) +
-          (a.kind ? ` (${a.kind.toLowerCase()})` : '')
+          (a.kind ? ` (${a.kind.toLowerCase()})` : ''),
       )
       .join(', ');
   }

@@ -16,7 +16,7 @@ module.exports = {
   chemexper,
   epfl,
   choose(term, options) {
-    options = { ...defaultOptions, ...options};
+    options = { ...defaultOptions, ...options };
     const sources = [];
     if (options.epfl) {
       sources.push({ promise: epfl.search(term) });

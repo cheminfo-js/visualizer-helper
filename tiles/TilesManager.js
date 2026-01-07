@@ -30,7 +30,7 @@ class TilesManager {
 
 function repaint(divID, tiles, options) {
   let lineCount = 0;
-  const $div = $(`#${  divID}`);
+  const $div = $(`#${divID}`);
   console.log($div);
 
   $div.empty();

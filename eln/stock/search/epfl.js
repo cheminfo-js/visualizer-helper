@@ -10,8 +10,8 @@ module.exports = {
     return superagent
       .get(
         `http://stock-isic.epfl.ch/searchstock?for=json&bl=100&search=Field10.11%3D${encodeURIComponent(
-          term
-        )}`
+          term,
+        )}`,
       )
       .then(function (result) {
         result = result.body && result.body.entry;
@@ -27,7 +27,7 @@ module.exports = {
             list.push({
               id: i,
               name: val && val.iupac && val.iupac[0] ? val.iupac[0].value : '',
-              row: val
+              row: val,
             });
           }
         }
@@ -45,9 +45,9 @@ module.exports = {
               ? Number(b.$content.identifier.cas[0].value.replace(/-/g, ''))
               : Number.MAX_SAFE_INTEGER;
           return rn1 - rn2;
-        })
+        }),
       );
-  }
+  },
 };
 
 function fromExpereact(expereact) {
@@ -64,23 +64,23 @@ function fromExpereact(expereact) {
         molfile: mol && mol[0] && mol[0].value.value,
         description: expereact.name,
         name: expereact.row.iupac,
-        mf
+        mf,
       },
       identifier: {
-        cas
+        cas,
       },
       stock: {
-        catalogNumber: expereact.row.code
+        catalogNumber: expereact.row.code,
       },
       physical: {
         density: expereact.row.density,
         mp: expereact.row.mp,
-        bp: expereact.row.bp
-      }
+        bp: expereact.row.bp,
+      },
     },
     id: util.getNextUniqueId(true),
     names: _.uniq([expereact.name, ...expereact.row.iupac.map((i) => i.value)]),
-    source: 'reference'
+    source: 'reference',
   };
 }
 

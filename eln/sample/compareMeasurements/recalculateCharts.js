@@ -13,12 +13,9 @@ export default function recalculateCharts() {
     preferences.selector.y.labels
   ) {
     //escape regexp
-    preferences.selector.y.label =
-      `/${ 
-      preferences.selector.y.labels
-        .map((label) => label.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'))
-        .join('|') 
-      }/i`;
+    preferences.selector.y.label = `/${preferences.selector.y.labels
+      .map((label) => label.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'))
+      .join('|')}/i`;
     delete preferences.selector.y.labels;
   }
 

@@ -44,13 +44,15 @@ define(['src/util/ui', 'lodash'], function (ui, _) {
       {
         twig: data,
         dialog: {
-          width: 500
-        }
-      }
+          width: 500,
+        },
+      },
     );
     if (!result || !result.code || result.batch == null) return undefined;
 
-    const selected = Object.keys(result.group).filter((key) => result.group[key]);
+    const selected = Object.keys(result.group).filter(
+      (key) => result.group[key],
+    );
 
     entrysample.$id = [result.code, result.batch];
     entrysample.$owners = selected;

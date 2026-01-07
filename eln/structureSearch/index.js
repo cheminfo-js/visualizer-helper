@@ -1,6 +1,6 @@
 import API from 'src/util/api';
 
-import {OCL, OCLUtils} from '../libs/OCLUtils';
+import { OCL, OCLUtils } from '../libs/OCLUtils';
 
 function waitImmediate() {
   return new Promise((resolve) => {
@@ -11,7 +11,7 @@ function waitImmediate() {
 module.exports = {
   async buildDatabase(tocData, options = {}) {
     const moleculesDB = new OCLUtils.MoleculesDB(OCL, {
-      computeProperties: options.calculateProperties
+      computeProperties: options.calculateProperties,
     });
     const date = Date.now();
     for (let i = 0; i < tocData.length; i++) {
@@ -32,5 +32,5 @@ module.exports = {
       API.stopLoading('mol');
     }
     return moleculesDB;
-  }
+  },
 };

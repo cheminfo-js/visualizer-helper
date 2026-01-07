@@ -20,7 +20,7 @@ define(['../util/getViewInfo'], function (getViewInfo) {
       if (!user || !user.username) return undefined;
       let firstEntry = (
         await this.roc.view('entryByOwnerAndId', {
-          key: [user.username, ['userViewPrefs', prefID]]
+          key: [user.username, ['userViewPrefs', prefID]],
         })
       )[0];
       return firstEntry;
@@ -36,7 +36,7 @@ define(['../util/getViewInfo'], function (getViewInfo) {
         return this.roc.create({
           $id: ['userViewPrefs', prefID],
           $content: value,
-          $kind: 'userViewPrefs'
+          $kind: 'userViewPrefs',
         });
       }
     }

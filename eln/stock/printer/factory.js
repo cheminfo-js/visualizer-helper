@@ -8,10 +8,10 @@ module.exports = function (opts, cb) {
   if (typeof IframeBridge !== 'undefined') {
     self.IframeBridge.onMessage(async function (data) {
       if (data.type === 'tab.data') {
-        let optsCopy = { ...opts};
+        let optsCopy = { ...opts };
         if (data.message.printer && data.message.printer.couchDB) {
           optsCopy.proxy = data.message.printer.proxy;
-          const options = { ...data.message.printer.couchDB, ...optsCopy};
+          const options = { ...data.message.printer.couchDB, ...optsCopy };
           let p = await printer(options);
           cb(p, data.message.printer);
         }

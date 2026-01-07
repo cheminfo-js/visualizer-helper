@@ -8,14 +8,14 @@ async function getMolecules(mf) {
   searchParams.set('fields', 'data.iupac,data.ocl');
   searchParams.set('limit', '50000');
 
-  let response = await fetch(`${pubchemURL}${  searchParams.toString()}`);
+  let response = await fetch(`${pubchemURL}${searchParams.toString()}`);
   let results = await response.json();
   console.log(results.data);
   return results.data;
 }
 
 module.exports = {
-  choose (mf) {
+  choose(mf) {
     let promise = getMolecules(mf);
     return ui
       .choose([{ promise }], {

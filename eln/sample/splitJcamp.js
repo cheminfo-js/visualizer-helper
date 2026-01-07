@@ -50,7 +50,7 @@ export function splitJcamp(file) {
       newFiles.push({
         content: group.fid.jcamp,
         contentType: 'chemical/x-jcamp-dx',
-        filename: `${baseFilename  }.${  group.md5  }.fid.jdx`,
+        filename: `${baseFilename}.${group.md5}.fid.jdx`,
         mimetype: 'chemical/x-jcamp-dx',
         encoding: 'text',
       });
@@ -59,7 +59,7 @@ export function splitJcamp(file) {
       newFiles.push({
         content: group.spectrum.jcamp,
         contentType: 'chemical/x-jcamp-dx',
-        filename: `${baseFilename  }.${  group.md5  }.jdx`,
+        filename: `${baseFilename}.${group.md5}.jdx`,
         mimetype: 'chemical/x-jcamp-dx',
         encoding: 'text',
       });

@@ -1,4 +1,3 @@
-
 define(['src/util/api'], function (API) {
   async function exercisesManager(action, allExercises, options) {
     switch (action) {
@@ -25,16 +24,16 @@ define(['src/util/api'], function (API) {
       }
     }
 
-
     function loadState(cookieName) {
-      return JSON.parse(window.localStorage.getItem(cookieName)
-                || '{"selectedExercises":[],"myResults":{}}');
+      return JSON.parse(
+        window.localStorage.getItem(cookieName) ||
+          '{"selectedExercises":[],"myResults":{}}',
+      );
     }
 
     function saveState(cookieName, state) {
       window.localStorage.setItem(cookieName, JSON.stringify(state));
     }
-
 
     // This objects allows to manage exercises
     function loadExercises(allExercises, options = {}) {
@@ -48,29 +47,32 @@ define(['src/util/api'], function (API) {
         selectedExercises = allExercises.slice(0, options.numberExercises);
       } else {
         // we need to reload the exercises based on the cookie
-        selectedExercises = allExercises.filter((a) => state.selectedExercises.includes(a.id));
+        selectedExercises = allExercises.filter((a) =>
+          state.selectedExercises.includes(a.id),
+        );
       }
       selectedExercises.forEach((a) => {
         if (state.myResults[a.id]) a.myResult = state.myResults[a.id];
       });
 
-
       state.selectedExercises = selectedExercises.map((a) => a.id);
 
       saveState(options.cookieName, state);
 
-      return API.createData('exercises', selectedExercises).then(function (exercises) {
-        exercises.onChange(function (evt) {
-          if (evt.target.__name === 'myResult') {
-            let target = evt.target.__parent;
-            if (target) {
-              myResults[target.id] = target.myResult;
+      return API.createData('exercises', selectedExercises).then(
+        function (exercises) {
+          exercises.onChange(function (evt) {
+            if (evt.target.__name === 'myResult') {
+              let target = evt.target.__parent;
+              if (target) {
+                myResults[target.id] = target.myResult;
+              }
+              saveState(options.cookieName, state);
             }
-            saveState(options.cookieName, state);
-          }
-        });
-        return exercises;
-      });
+          });
+          return exercises;
+        },
+      );
     }
   }
 

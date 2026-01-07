@@ -1,9 +1,13 @@
 'use strict';
 
-const {readFileSync} = require('fs');
-const {join} = require('path');
+const { readFileSync } = require('fs');
+const { join } = require('path');
 
-const {getMDTable, getReadmeForDeposition, getReadmeForSample,} = require('../ZenodoUtils');
+const {
+  getMDTable,
+  getReadmeForDeposition,
+  getReadmeForSample,
+} = require('../ZenodoUtils');
 
 const samples = JSON.parse(
   readFileSync(join(__dirname, 'samples.json'), 'utf8'),
@@ -12,7 +16,6 @@ const samples = JSON.parse(
 const deposition = JSON.parse(
   readFileSync(join(__dirname, 'deposition.json'), 'utf8'),
 );
-
 
 test('MD Table Generation', () => {
   const header = { name: 'Name', age: 'Age' };

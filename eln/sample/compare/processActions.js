@@ -40,7 +40,7 @@ async function processActions(action) {
           .map((entry) => String(entry.id));
         let analysis = analysesManager.getAnalyses({ ids })[0];
         if (!analysis) {
-          console.error('No analysis found')
+          console.error('No analysis found');
         }
 
         const text = ExtendedCommonSpectrum.toText(analysis, {
@@ -64,7 +64,7 @@ async function processActions(action) {
           .map((entry) => String(entry.id));
         let analyses = analysesManager.getAnalyses({ ids });
         if (!analyses) {
-          console.error('No analysis found')
+          console.error('No analysis found');
         }
 
         const text = ExtendedCommonSpectrum.toMatrix(analyses, {
@@ -190,11 +190,10 @@ async function addSpectrum(action, options = {}) {
     }
 
     if (action.value.jcampTime && action.value.jcampTime.filename) {
-      jcamp +=
-        `\n${await API.cache('roc').getAttachment(
-          { _id: sampleUUID },
-          action.value.jcampTime.filename,
-        )}`;
+      jcamp += `\n${await API.cache('roc').getAttachment(
+        { _id: sampleUUID },
+        action.value.jcampTime.filename,
+      )}`;
     }
   }
 

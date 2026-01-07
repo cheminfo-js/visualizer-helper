@@ -1,4 +1,3 @@
-
 define(['src/util/ui'], function (UI) {
   function showUserInfo(user) {
     let html = '';
@@ -24,14 +23,12 @@ define(['src/util/ui'], function (UI) {
             </tr>`;
     }
 
-
     if (user.lastName) {
       html += `<tr>
                 <th>Lastname</th>
                 <td>${user.lastName}</td>
             </tr>`;
     }
-
 
     if (user.groupName) {
       html += `<tr>
@@ -46,7 +43,6 @@ define(['src/util/ui'], function (UI) {
                 <td>${user.phoneNumber}</td>
             </tr>`;
     }
-
 
     if (user.roomNumber) {
       html += `<tr>
@@ -72,14 +68,12 @@ define(['src/util/ui'], function (UI) {
     html += '</table>';
     html += '</div>';
 
-
     UI.dialog(html, {
       width: 800,
       height: 400,
-      title: 'Logged in user information'
+      title: 'Logged in user information',
     });
   }
 
   return showUserInfo;
 });
-
