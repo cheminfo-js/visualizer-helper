@@ -5,23 +5,23 @@ define(['src/util/color'], function (Color) {
       if (x.length !== y.length || y.length === 0) {
         throw new Error('Invalid data length');
       }
-      var chart = {
+      let chart = {
         data: [],
         axis: [
           {
-            label: options.xLabel || ''
+            label: options.xLabel || '',
           },
           {
-            label: options.yLabel || ''
-          }
-        ]
+            label: options.yLabel || '',
+          },
+        ],
       };
 
-      var species = Object.keys(y[0]);
-      var colors = Color.getDistinctColors(species.length);
+      let species = Object.keys(y[0]);
+      let colors = Color.getDistinctColors(species.length);
 
       for (var i = 0; i < species.length; i++) {
-        var data = {};
+        let data = {};
         chart.data.push(data);
         // eslint-disable-next-line no-loop-func
         data.y = y.map((y) => {
@@ -37,10 +37,10 @@ define(['src/util/color'], function (Color) {
         data.yAxis = 1;
         data.defaultStyle = {
           lineColor: colors[i],
-          lineWidth: 1
+          lineWidth: 1,
         };
       }
       return chart;
-    }
+    },
   };
 });

@@ -1,9 +1,9 @@
 define(['src/util/ui', 'lodash'], function (ui, _) {
   return async function createSample(roc, allGroups) {
     const storageKey = 'eln-new-sample-default-groups';
-    var entrysample = { $content: {} };
-    var data = { allGroups };
-    var toFill = { group: {} };
+    let entrysample = { $content: {} };
+    let data = { allGroups };
+    let toFill = { group: {} };
     const allGroupNames = allGroups.map((g) => g.name);
     let groupPref = localStorage.getItem(storageKey);
     groupPref = groupPref ? JSON.parse(groupPref) : [];
@@ -44,13 +44,15 @@ define(['src/util/ui', 'lodash'], function (ui, _) {
       {
         twig: data,
         dialog: {
-          width: 500
-        }
-      }
+          width: 500,
+        },
+      },
     );
     if (!result || !result.code || result.batch == null) return undefined;
 
-    const selected = Object.keys(result.group).filter((key) => result.group[key]);
+    const selected = Object.keys(result.group).filter(
+      (key) => result.group[key],
+    );
 
     entrysample.$id = [result.code, result.batch];
     entrysample.$owners = selected;

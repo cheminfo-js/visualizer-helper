@@ -16,12 +16,12 @@ class Sample {
       },
     };
 
-    this.options = Object.assign({}, defaultOptions, options);
+    this.options = { ...defaultOptions, ...options };
     this._init();
   }
 
   _loadSample() {
-    var sampleVar = API.getVar(this.options.varName);
+    let sampleVar = API.getVar(this.options.varName);
 
     API.setVariable('sampleCode', sampleVar, ['$id', 0]);
     API.setVariable('batchCode', sampleVar, ['$id', 1]);
@@ -43,7 +43,7 @@ class Sample {
     this.mf.fromMF();
 
     this.onChange = (event) => {
-      var jpathStr = event.jpath.join('.');
+      let jpathStr = event.jpath.join('.');
 
       if (jpathStr.replace(/\.\d+\..*/, '') === '$content.spectra.nmr') {
         this.nmr1dManager.updateIntegralOptions();
@@ -102,29 +102,29 @@ class Sample {
     if (general) {
       this.sample.setChildSync(
         ['$content', 'general', 'description'],
-        general.description
+        general.description,
       );
       this.sample.setChildSync(['$content', 'general', 'name'], general.name);
     }
     if (identifier) {
       this.sample.setChildSync(
         ['$content', 'identifier', 'cas'],
-        identifier.cas
+        identifier.cas,
       );
     }
     if (stock) {
       this.sample.setChildSync(
         ['$content', 'stock', 'catalogNumber'],
-        stock.catalogNumber
+        stock.catalogNumber,
       );
       this.sample.setChildSync(
         ['$content', 'stock', 'quantity'],
-        stock.quantity
+        stock.quantity,
       );
       this.sample.setChildSync(['$content', 'general', 'purity'], stock.purity);
       this.sample.setChildSync(
         ['$content', 'stock', 'supplier'],
-        stock.supplier
+        stock.supplier,
       );
     }
   }

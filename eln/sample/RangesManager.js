@@ -46,20 +46,20 @@ export class RangesManager {
         updateHighlight = true;
         Object.defineProperty(range, '_highlight', {
           enumerable: false,
-          value: Math.random()
+          value: Math.random(),
         });
       }
       if (range.to) {
         let annotation = {
           position: [
             { x: range.from, y: '15px' },
-            { x: range.to, y: '20px' }
+            { x: range.to, y: '20px' },
           ],
           type: 'rect',
           fillColor: range.color || 'red',
           strokeColor: range.color || 'red',
           _highlight: [range._highlight],
-          info: range
+          info: range,
         };
         if (range.label) {
           annotation.label = [
@@ -70,9 +70,9 @@ export class RangesManager {
               color: range.color || 'red',
               position: {
                 x: (range.from + range.to) / 2,
-                y: '10px'
-              }
-            }
+                y: '10px',
+              },
+            },
           ];
         }
         annotations.push(annotation);
@@ -85,11 +85,11 @@ export class RangesManager {
       annotations.push({
         position: [
           { x: this.currentRange.from, y: '15px' },
-          { x: track.xClosest, y: '20px' }
+          { x: track.xClosest, y: '20px' },
         ],
         type: 'rect',
         fillColor: 'green',
-        strokeColor: 'green'
+        strokeColor: 'green',
       });
     }
     API.createData('rangeAnnotations', annotations);

@@ -134,10 +134,10 @@ function getForm(currentStatus) {
 module.exports = {
   STATUS,
   getColor,
-  getLabel,
-  getForm,
-  getNextStatus,
   getColorFromReaction,
+  getForm,
+  getLabel,
+  getNextStatus,
   updateStatus,
   updateStatuses,
 };

@@ -1,6 +1,6 @@
 define([
   'https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8145c522b71fc9c872cb0bcae49a/dist/snap.svg-min.js',
-  './sequenceSplitter'
+  './sequenceSplitter',
 ], function (Snap, sequenceSplitter) {
   function getSVG(sequence, analysisResult, options) {
     const {
@@ -12,28 +12,28 @@ define([
       labelFontFamily = 'Verdana',
       labelSize = 8,
       verticalShiftForTerminalAnnotations = 20,
-      showLabels = true
+      showLabels = true,
     } = options;
 
-    var residues = [];
-    var mfParts = sequenceSplitter(sequence);
-    var results = JSON.parse(JSON.stringify(analysisResult));
+    let residues = [];
+    let mfParts = sequenceSplitter(sequence);
+    let results = JSON.parse(JSON.stringify(analysisResult));
 
-    var xPos = leftRightBorders;
-    var xOld = xPos;
+    let xPos = leftRightBorders;
+    let xOld = xPos;
 
-    var line = 0;
+    let line = 0;
     // we create a temporary paper in order to get the width of the text blocs
-    var tempPaper = Snap(1000, 40);
-    for (var i = 0; i < mfParts.length; i++) {
-      var part = mfParts[i];
-      var text = tempPaper.text(xPos, 20, part);
+    let tempPaper = Snap(1000, 40);
+    for (let i = 0; i < mfParts.length; i++) {
+      let part = mfParts[i];
+      let text = tempPaper.text(xPos, 20, part);
       text.attr({
         'font-family': labelFontFamily,
         'font-weight': 'bold',
-        'font-size': 12
+        'font-size': 12,
       });
-      var textWidth = text.node.getBoundingClientRect().width;
+      let textWidth = text.node.getBoundingClientRect().width;
       xPos += textWidth;
       if (xPos > width - leftRightBorders) {
         xOld = leftRightBorders;
@@ -49,7 +49,7 @@ define([
         line,
         usedSlots: [],
         topPosition: 0,
-        bottomPosition: 0
+        bottomPosition: 0,
       });
       xPos += spaceBetweenResidues;
       xOld = xPos;
@@ -59,9 +59,9 @@ define([
     // we calculate all the lines based on the results
     for (let result of results) {
       // internal fragment ?
-      var parts = result.type.split(/(?=[a-z])/);
-      var firstPart = parts[0];
-      var secondPart = parts[1];
+      let parts = result.type.split(/(?=[a-z])/);
+      let firstPart = parts[0];
+      let secondPart = parts[1];
 
       if ('abc'.indexOf(firstPart.charAt(0)) > -1) {
         // n-terminal fragment
@@ -115,40 +115,40 @@ define([
 
     // for each line (internal fragment) we calculate the vertical position
     // where it should be drawn as well and the maximal number of lines
-    var maxNumberLines = 0;
-    for (var result of results) {
+    let maxNumberLines = 0;
+    for (let result of results) {
       if (result.internal) {
         result.slot = assignSlot(result.from, result.to);
         if (result.slot > maxNumberLines) maxNumberLines = result.slot;
       }
     }
 
-    var rowHeight =
+    let rowHeight =
       verticalShiftForTerminalAnnotations +
       spaceBetweenInteralLines * (maxNumberLines + 6);
-    var height =
+    let height =
       rowHeight * (line + 1) + 50 + verticalShiftForTerminalAnnotations;
 
     // We start to create the SVG and create the paper
-    var paper = Snap(width, height);
+    let paper = Snap(width, height);
 
     addScript(paper);
 
     residues.forEach(function (residue) {
       residue.y = (residue.line + 1) * rowHeight;
-      var text = paper.text(residue.xFrom, residue.y, residue.label);
+      let text = paper.text(residue.xFrom, residue.y, residue.label);
       text.attr({ id: `residue-${residue.nTer}` });
       text.attr({
         'font-family': labelFontFamily,
         'font-weight': 'bold',
-        'font-size': 12
+        'font-size': 12,
       });
     });
 
     drawInternals();
     drawTerminals();
 
-    var svg = paper
+    let svg = paper
       .toString()
       .replace(/>/g, '>\r')
       .replace(/&amp;/g, '&')
@@ -160,14 +160,14 @@ define([
     // we need to define the height of the line.
     // we need to find a height that is not yet used.
     function assignSlot(from, to) {
-      var used = {};
-      for (var i = from; i < to; i++) {
-        var residue = residues[i];
+      let used = {};
+      for (let i = from; i < to; i++) {
+        let residue = residues[i];
         residue.usedSlots.forEach(function (usedSlot, index) {
           used[index] = true;
         });
       }
-      var counter = 0;
+      let counter = 0;
       while (true) {
         if (!used[counter]) {
           break;
@@ -181,9 +181,9 @@ define([
     }
 
     function drawTerminals() {
-      for (var result of results) {
+      for (let result of results) {
         var residue;
-        var nTerminal = false;
+        let nTerminal = false;
         if (result.fromNTerm) {
           residue = residues[result.to];
           nTerminal = true;
@@ -196,7 +196,7 @@ define([
             residue.xTo + spaceBetweenResidues / 2,
             residue.y,
             residue.xTo + spaceBetweenResidues / 2,
-            residue.y - 8
+            residue.y - 8,
           );
           line.attr({ stroke: result.color, 'stroke-width': strokeWidth });
           if (nTerminal) {
@@ -204,13 +204,13 @@ define([
               residue.xTo + spaceBetweenResidues / 2,
               residue.y,
               residue.xTo + spaceBetweenResidues / 2 - 5,
-              residue.y + 5
+              residue.y + 5,
             );
             line.attr({ stroke: result.color, 'stroke-width': strokeWidth });
             drawLabel(
               result,
               residue.xTo + spaceBetweenResidues / 2 - 15,
-              residue.y + 12 + residue.bottomPosition * labelSize
+              residue.y + 12 + residue.bottomPosition * labelSize,
             );
             residue.bottomPosition++;
           } else {
@@ -218,13 +218,13 @@ define([
               residue.xTo + spaceBetweenResidues / 2,
               residue.y - 8,
               residue.xTo + spaceBetweenResidues / 2 + 5,
-              residue.y - 13
+              residue.y - 13,
             );
             line.attr({ stroke: result.color, 'stroke-width': strokeWidth });
             drawLabel(
               result,
               residue.xTo + spaceBetweenResidues / 2,
-              residue.y - 15 - residue.topPosition * labelSize
+              residue.y - 15 - residue.topPosition * labelSize,
             );
             residue.topPosition++;
           }
@@ -234,41 +234,41 @@ define([
 
     function drawLabel(result, x, y) {
       if (!showLabels) return;
-      var label = result.type;
-      var similarity = Math.round(result.similarity);
-      var charge = result.charge > 0 ? `+${result.charge}` : result.charge;
-      var text = paper.text(x, y, label);
+      let label = result.type;
+      let similarity = Math.round(result.similarity);
+      let charge = result.charge > 0 ? `+${result.charge}` : result.charge;
+      let text = paper.text(x, y, label);
       text.attr({
         fill: result.textColor,
         'font-family': labelFontFamily,
         'font-weight': 'bold',
-        'font-size': labelSize
+        'font-size': labelSize,
       });
-      var textWidth = text.node.getBoundingClientRect().width + 3;
+      let textWidth = text.node.getBoundingClientRect().width + 3;
       text = paper.text(x + textWidth, y - labelSize / 2, charge);
       text.attr({
         fill: result.textColor,
         'font-family': labelFontFamily,
-        'font-size': labelSize / 2
+        'font-size': labelSize / 2,
       });
       text = paper.text(x + textWidth, y, similarity);
       text.attr({
         fill: result.textColor,
         'font-family': labelFontFamily,
-        'font-size': labelSize / 2
+        'font-size': labelSize / 2,
       });
     }
 
     function drawInternals() {
-      for (var result of results) {
+      for (let result of results) {
         if (result.internal) {
-          var fromResidue = residues[result.from + 1];
-          var toResidue = residues[result.to];
+          let fromResidue = residues[result.from + 1];
+          let toResidue = residues[result.to];
           // var charge = result.charge > 0 ? '+' + result.charge : result.charge;
           // var label = result.type + ' (' + charge + ', ' + Math.round(result.similarity) + '%)';
           // we need to check on how many lines we are
           var fromX, toX, y;
-          for (var line = fromResidue.line; line <= toResidue.line; line++) {
+          for (let line = fromResidue.line; line <= toResidue.line; line++) {
             y =
               -10 -
               result.slot * spaceBetweenInteralLines +
@@ -284,15 +284,15 @@ define([
             } else {
               toX = width - 1;
             }
-            var drawLine = paper.line(fromX, y, toX, y);
+            let drawLine = paper.line(fromX, y, toX, y);
             drawLine.attr({
               onmouseover: 'mouseOver(evt)',
               onmouseout: 'mouseOut(evt)',
-              id: `line${fromResidue.nTer}-${toResidue.nTer}`
+              id: `line${fromResidue.nTer}-${toResidue.nTer}`,
             });
             drawLine.attr({
               stroke: result.color,
-              'stroke-width': strokeWidth
+              'stroke-width': strokeWidth,
             });
 
             drawLabel(result, (fromX + toX) / 2 - 10, y - 2);
@@ -304,7 +304,7 @@ define([
     }
 
     function addScript(paper) {
-      var script = ` // <![CDATA[
+      let script = ` // <![CDATA[
         function mouseOver(evt) {
             var targetRange=evt.target.id.replace(/^line/,'');
             var from=targetRange.replace(/-.*/,'')*1;
@@ -329,8 +329,8 @@ define([
         }
      // ]]>
     `;
-      var scriptElement = paper.el('script', {
-        type: 'application/ecmascript'
+      let scriptElement = paper.el('script', {
+        type: 'application/ecmascript',
       });
       scriptElement.node.textContent = script;
     }

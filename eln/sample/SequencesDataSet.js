@@ -1,10 +1,10 @@
 // this class is not really related to a sampleToc but can be used for any TOC
 
-import API from 'src/util/api';
-import UI from 'src/util/ui';
 import _ from 'lodash';
-import Versioning from 'src/util/versioning';
+import API from 'src/util/api';
 import Color from 'src/util/color';
+import UI from 'src/util/ui';
+import Versioning from 'src/util/versioning';
 
 import md5 from '../../util/md5';
 
@@ -70,12 +70,12 @@ class SequencesDataSet {
       cookieName = 'eln-default-analysis-kind',
     } = options;
 
-    var possibleAnalysis = Object.keys(SequencesConfigs);
-    var defaultAnalysis = localStorage.getItem(cookieName);
+    let possibleAnalysis = Object.keys(SequencesConfigs);
+    let defaultAnalysis = localStorage.getItem(cookieName);
     if (possibleAnalysis.indexOf(defaultAnalysis) === -1) {
       defaultAnalysis = possibleAnalysis[0];
     }
-    var schema = {
+    let schema = {
       type: 'object',
       properties: {
         analysis: {

@@ -1,4 +1,3 @@
-
 // returns a Mysql formatted date, very practical to get a string with dthe date
 define([], function () {
   function twoDigits(d) {

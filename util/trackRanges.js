@@ -1,8 +1,8 @@
 define(['src/util/api'], function (API) {
   async function track(localName, defaultValue, options = {}) {
-    var varName = options.varName || localName;
-    var annotationName = `${varName}Annotations`;
-    var localValue = [];
+    let varName = options.varName || localName;
+    let annotationName = `${varName}Annotations`;
+    let localValue = [];
     try {
       localValue = JSON.parse(window.localStorage.getItem(localName)) || [];
       if (!Array.isArray(localValue)) {
@@ -37,7 +37,7 @@ define(['src/util/api'], function (API) {
   }
 
   function createAnnotations(data, annotationName) {
-    var annotations = [];
+    let annotations = [];
     data = data.resurrect();
     for (let datum of data) {
       let color = 'red';
@@ -47,19 +47,19 @@ define(['src/util/api'], function (API) {
           {
             x: datum.from,
             y: 0,
-            dy: '2px'
+            dy: '2px',
           },
           {
             x: datum.to,
             y: 0,
-            dy: '-2px'
-          }
+            dy: '-2px',
+          },
         ],
         type: 'rect',
         fillColor: color,
         strokeColor: color,
         _highlight: datum._highlight,
-        info: datum
+        info: datum,
       });
     }
     API.createData(annotationName, annotations);

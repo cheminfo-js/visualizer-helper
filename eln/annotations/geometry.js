@@ -10,11 +10,18 @@ function pointAnnotation(point, options = {}) {
     fillColor,
     position: [
       {
-        x, dx: '-2px', y, dy: '-2px',
-      }, {
-        x, dx: '2px', y, dy: '2px',
+        x,
+        dx: '-2px',
+        y,
+        dy: '-2px',
       },
-    ]
+      {
+        x,
+        dx: '2px',
+        y,
+        dy: '2px',
+      },
+    ],
   };
 }
 
@@ -29,16 +36,16 @@ function lineAnnotation(point1, point2, options = {}) {
       {
         x: point1.x,
         y: point1.y,
-      }, {
+      },
+      {
         x: point2.x,
         y: point2.y,
       },
-    ]
-  }
+    ],
+  };
 }
-
 
 module.exports = {
-  pointAnnotation,
   lineAnnotation,
-}
+  pointAnnotation,
+};

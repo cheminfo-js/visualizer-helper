@@ -1,0 +1,6 @@
+tiles/font-awesome
+util/aesjs.js
+util/cloneDeepLimitArray.js
+util/md5.js
+util/yamlParser.js,
+spectra-data/conrec.js

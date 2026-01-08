@@ -1,6 +1,6 @@
+import _ from 'lodash';
 import OCL from 'openchemlib';
 import UI from 'src/util/ui';
-import _ from 'lodash';
 
 module.exports = function (roc, prefix) {
   function getMoleculeWithSalts(options) {
@@ -8,10 +8,10 @@ module.exports = function (roc, prefix) {
     const oclid = idCode || value;
     const mol = OCL.Molecule.fromIDCode(oclid);
     if (saltCode !== 'NX' && oclid !== 'd@') {
-      var salt = salts[saltCode];
+      let salt = salts[saltCode];
       if (salt) {
-        var oclSalt = OCL.Molecule.fromIDCode(String(salt.idCode));
-        for (var i = 0; i < nbSalts; i++) {
+        let oclSalt = OCL.Molecule.fromIDCode(String(salt.idCode));
+        for (let i = 0; i < nbSalts; i++) {
           mol.addMolecule(oclSalt);
         }
         mol.inventCoordinates();
@@ -94,7 +94,7 @@ module.exports = function (roc, prefix) {
   }
 
   async function getNextID() {
-    var v = await roc.view('sampleId', {
+    let v = await roc.view('sampleId', {
       reduce: true,
     });
 
@@ -102,10 +102,10 @@ module.exports = function (roc, prefix) {
       return `${prefix}-1`;
     }
 
-    var id = v[0].value[prefix];
-    var current = Number(id);
-    var nextID = current + 1;
-    var nextIDStr = String(nextID);
+    let id = v[0].value[prefix];
+    let current = Number(id);
+    let nextID = current + 1;
+    let nextIDStr = String(nextID);
     return `${prefix}-${nextIDStr}`;
   }
 

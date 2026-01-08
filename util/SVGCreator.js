@@ -64,7 +64,7 @@ class Element {
 
 function encodeText(string) {
   return string.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
-    return '&#' + i.charCodeAt(0) + ';';
+    return `&#${i.charCodeAt(0)};`;
   });
 }
 
@@ -88,9 +88,9 @@ function appendAttributes(newAttributes, attributes) {
     } else {
       let newKey = key.replace(
         /([A-Z])/g,
-        (match) => '-' + match.toLowerCase(),
+        (match) => `-${match.toLowerCase()}`,
       );
-      attributes.push(newKey + '="' + newAttributes[key] + '"');
+      attributes.push(`${newKey}="${newAttributes[key]}"`);
     }
   }
 }

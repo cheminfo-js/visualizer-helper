@@ -17,7 +17,7 @@ define([
     lookup[chars.charCodeAt(i)] = i;
   }
   return {
-    twig: async function (printFormat, data, options) {
+    async twig(printFormat, data, options) {
       if (printFormat.customFields && printFormat.customFields.length) {
         if (options.creation) {
           printFormat.customFields.forEach((field) => {
@@ -31,11 +31,11 @@ define([
       if (!printFormat.twig) {
         throw new Error('twig processor expect twig property in format');
       }
-      var template = twig.twig({
+      let template = twig.twig({
         data: DataObject.resurrect(printFormat.twig),
       });
       // Render molfile if exists
-      var text = template.render(DataObject.resurrect(data));
+      let text = template.render(DataObject.resurrect(data));
       if (
         data.debug &&
         printFormat.dimensions.height &&
@@ -73,11 +73,12 @@ define([
     const renderingScale = printFormat.molfileOptions.renderingScale || 1;
     const width = Math.ceil(printFormat.molfileOptions.width / 8) * 8;
     const height = Math.ceil(printFormat.molfileOptions.height / 8) * 8;
-    const molfileOptions = Object.assign({}, printFormat.molfileOptions, {
+    const molfileOptions = {
+      ...printFormat.molfileOptions,
       width,
       height,
       renderingScale,
-    });
+    };
     let image = await getMolImage(data.molfile, molfileOptions);
     image = image.invert(); // Why do we need to invert here but not when encoding in BMP?
     const hexa = await dataToHexa(image.data);
@@ -132,7 +133,7 @@ define([
       width: 100,
     };
     const renderingScale = options.renderingScale || 1;
-    options = Object.assign({}, defaultMolOptions, options);
+    options = { ...defaultMolOptions, ...options };
     if (!options.height) options.height = options.width;
     const mol = OCL.Molecule.fromMolfile(molfile);
     const svgString = mol.toSVG(
@@ -160,11 +161,11 @@ define([
       scaleHeight: options.height,
     });
 
-    var pngUrl = canvas.toDataURL('png');
+    let pngUrl = canvas.toDataURL('png');
 
-    var image = await IJS.load(pngUrl);
+    let image = await IJS.load(pngUrl);
 
-    var mask = image.grey({ keepAlpha: true }).mask({ threshold: 0.9 });
+    let mask = image.grey({ keepAlpha: true }).mask({ threshold: 0.9 });
     return mask;
   }
 

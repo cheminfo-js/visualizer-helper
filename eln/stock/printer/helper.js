@@ -1,5 +1,5 @@
-import ui from 'src/util/ui';
 import API from 'src/util/api';
+import ui from 'src/util/ui';
 
 module.exports = {
   async setup(printer, types) {
@@ -76,10 +76,10 @@ module.exports = {
     return API.getData(`${type}Formats`).resurrect();
   },
   async askFormat(type) {
-    var f = {};
+    let f = {};
     const formats = API.getData(`${type}Formats`).resurrect();
     if (!formats) throw new Error('No printer formats available');
-    var lastPrinterFormat = localStorage.getItem('lastPrinterFormat');
+    let lastPrinterFormat = localStorage.getItem('lastPrinterFormat');
     formats.forEach((format) => {
       format.id = `${format.printer._id};${format.format._id}`;
     });

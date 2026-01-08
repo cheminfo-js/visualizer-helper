@@ -41,15 +41,15 @@ module.exports = function (url) {
 
     const toSend = md5s.map((md5) => ({
       id: md5,
-      seq: sequences[md5][0].seq
+      seq: sequences[md5][0].seq,
     }));
 
     const res = await superagent
       .post(`${url}/makeblastdb`)
       .send({ seq: toSend });
     return {
-      sequences: sequences,
-      database: res.body.database
+      sequences,
+      database: res.body.database,
     };
   }
 
@@ -78,13 +78,13 @@ module.exports = function (url) {
 
     const seq = md5s.map((md5) => ({
       id: md5,
-      seq: features[md5][0].seq
+      seq: features[md5][0].seq,
     }));
 
     const res = await superagent.post(`${url}/makeblastdb`).send({ seq });
     return {
       features,
-      database: res.body.database
+      database: res.body.database,
     };
   }
 
@@ -92,7 +92,7 @@ module.exports = function (url) {
     createFeaturesDatabase,
     createSequencesDatabase,
     makeblastdb,
-    blastn
+    blastn,
   };
 };
 // const url = 'https://www.cheminfo.org/blast-webservice';

@@ -1,6 +1,6 @@
 # visualizer-helper
-Small pieces of code useful in the visualizer
 
+Small pieces of code useful in the visualizer
 
 ## Build
 

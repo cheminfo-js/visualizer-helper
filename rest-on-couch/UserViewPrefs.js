@@ -16,11 +16,11 @@ define(['../util/getViewInfo'], function (getViewInfo) {
 
     async getRecord(prefID) {
       if (!prefID) prefID = (await getViewInfo())._id;
-      var user = await this.roc.getUser();
+      let user = await this.roc.getUser();
       if (!user || !user.username) return undefined;
-      var firstEntry = (
+      let firstEntry = (
         await this.roc.view('entryByOwnerAndId', {
-          key: [user.username, ['userViewPrefs', prefID]]
+          key: [user.username, ['userViewPrefs', prefID]],
         })
       )[0];
       return firstEntry;
@@ -36,7 +36,7 @@ define(['../util/getViewInfo'], function (getViewInfo) {
         return this.roc.create({
           $id: ['userViewPrefs', prefID],
           $content: value,
-          $kind: 'userViewPrefs'
+          $kind: 'userViewPrefs',
         });
       }
     }

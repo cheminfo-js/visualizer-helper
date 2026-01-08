@@ -1,14 +1,16 @@
-define(['https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f7eb/jschannel.js'], function () {
-  var initialized = false;
+define([
+  'https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f7eb/jschannel.js',
+], function () {
+  let initialized = false;
   function init(options) {
     if (initialized) return;
     initialized = true;
 
     options = options || {};
-    var state = {
-      a: 1
+    let state = {
+      a: 1,
     };
-    var channel;
+    let channel;
 
     // Establish a channel only if this application is embedded in an iframe.
     // This will let the parent window communicate with this application using
@@ -17,7 +19,7 @@ define(['https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f
       channel = self.Channel.build({
         window: window.parent,
         origin: '*',
-        scope: 'JSInput'
+        scope: 'JSInput',
       });
 
       channel.bind('getGrade', options.getGrade || getGrade);
@@ -43,7 +45,7 @@ define(['https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f
     // object that will not be used here
     // (see http://mozilla.github.io/jschannel/docs/)
     function setState(...args) {
-      var stateStr = args.length === 1 ? args[0] : args[1];
+      let stateStr = args.length === 1 ? args[0] : args[1];
       state = JSON.parse(stateStr);
     }
   }

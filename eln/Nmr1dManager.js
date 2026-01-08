@@ -3,9 +3,9 @@ import API from 'src/util/api';
 import UI from 'src/util/ui';
 
 import { getData } from './jpaths';
+import MolecularFormula from './libs/MolecularFormula';
 import SD from './libs/SD';
 import * as GUI from './nmrGUI';
-import MolecularFormula from './libs/MolecularFormula';
 
 const Ranges = SD.Ranges;
 const NMR = SD.NMR;
@@ -111,14 +111,14 @@ class Nmr1dManager {
         break;
       }
       case 'downloadSVG': {
-        var blob = new Blob([`${action.value}`], {
+        let blob = new Blob([`${action.value}`], {
           type: 'image/svg+xml;charset=utf-8',
         });
         fileSaver(blob, 'spectra.svg');
         break;
       }
       case 'toggleNMR1hAdvancedOptions': {
-        var advancedOptions1H = !API.cache('nmr1hAdvancedOptions');
+        let advancedOptions1H = !API.cache('nmr1hAdvancedOptions');
         API.cache('nmr1hAdvancedOptions', advancedOptions1H);
         if (advancedOptions1H) {
           API.createData(
@@ -134,7 +134,7 @@ class Nmr1dManager {
         break;
       }
       case 'resetNMR1d': {
-        var type = action.name.replace(/[^0-9]/g, '');
+        let type = action.name.replace(/[^0-9]/g, '');
         type = `${type}d`;
         API.createData(`blackNMR${type}`, null);
         API.createData(`annotationNMR${type}`, null);
@@ -142,7 +142,7 @@ class Nmr1dManager {
         break;
       }
       case 'switchNMRLayer': {
-        var goToLayer =
+        let goToLayer =
           action.value && action.value.dimension > 1
             ? 'nmr2D'
             : 'Default layer';
@@ -153,20 +153,18 @@ class Nmr1dManager {
           } else {
             API.createData('blackNMR2d', null);
           }
+        } else if (action.value.jcamp) {
+          API.createData('blackNMR1d', action.value.jcamp.data);
         } else {
-          if (action.value.jcamp) {
-            API.createData('blackNMR1d', action.value.jcamp.data);
-          } else {
-            API.createData('blackNMR1d', null);
-          }
+          API.createData('blackNMR1d', null);
         }
         break;
       }
       case 'executePeakPicking': {
-        var options = API.getData('nmr1hOptions');
+        let options = API.getData('nmr1hOptions');
         delete options.from;
         delete options.to;
-        var currentNmr = API.getData('currentNmr');
+        let currentNmr = API.getData('currentNmr');
         if (currentNmr.dimension > 1) {
           if (typeof UI !== 'undefined') {
             UI.showNotification(
@@ -201,7 +199,7 @@ class Nmr1dManager {
         break;
       }
       case 'clearAllAssignments': {
-        var nmr = this.sample.$content.spectra.nmr;
+        let nmr = this.sample.$content.spectra.nmr;
         nmr.forEach((n) => {
           if (n.range) {
             n.range.forEach((a) => {
@@ -278,7 +276,7 @@ class Nmr1dManager {
     const spectrum = await this._getNMR(nmr);
     if (spectrum && spectrum.sd && nmr.range && nmr.range.length > 0) {
       const ranges = new Ranges(nmr.range);
-      var ppOptions = API.getData('nmr1hOptions');
+      let ppOptions = API.getData('nmr1hOptions');
       spectrum.updateIntegrals(ranges, {
         nH: Number(ppOptions.integral),
       });
@@ -286,32 +284,30 @@ class Nmr1dManager {
   }
 
   updateIntegrals(integral) {
-    var ppOptions = API.getData('nmr1hOptions');
-    var currentRanges = this.getCurrentRanges();
+    let ppOptions = API.getData('nmr1hOptions');
+    let currentRanges = this.getCurrentRanges();
     if (!currentRanges || currentRanges.length === 0) return;
 
     // We initialize ranges with the DataObject so that
     // the integral update is inplace
-    var ranges = new Ranges(currentRanges);
+    let ranges = new Ranges(currentRanges);
     ranges.updateIntegrals({ sum: Number(ppOptions.integral || integral) });
     currentRanges.triggerChange();
   }
 
   _getNMR(currentNMRLine) {
-    var filename = String(currentNMRLine.getChildSync(['jcamp', 'filename']));
+    let filename = String(currentNMRLine.getChildSync(['jcamp', 'filename']));
     return currentNMRLine.getChild(['jcamp', 'data']).then((jcamp) => {
       if (filename && this.spectra[filename]) {
         var spectrum = this.spectra[filename];
-      } else {
-        if (jcamp) {
-          jcamp = String(jcamp.get());
-          spectrum = NMR.fromJcamp(jcamp);
-          if (filename) {
-            this.spectra[filename] = spectrum;
-          }
-        } else {
-          spectrum = new NMR();
+      } else if (jcamp) {
+        jcamp = String(jcamp.get());
+        spectrum = NMR.fromJcamp(jcamp);
+        if (filename) {
+          this.spectra[filename] = spectrum;
         }
+      } else {
+        spectrum = new NMR();
       }
       return spectrum;
     });
@@ -319,8 +315,8 @@ class Nmr1dManager {
 
   _autoRanges(nmrLine) {
     this._getNMR(nmrLine).then((nmrSpectrum) => {
-      var ppOptions = API.getData('nmr1hOptions').resurrect();
-      var removeImpurityOptions = {};
+      let ppOptions = API.getData('nmr1hOptions').resurrect();
+      let removeImpurityOptions = {};
       if (ppOptions.removeImpurities.useIt) {
         removeImpurityOptions = {
           solvent: nmrLine.solvent,
@@ -328,7 +324,7 @@ class Nmr1dManager {
           error: ppOptions.removeImpurities.error,
         };
       }
-      var ranges = nmrSpectrum.getRanges({
+      let ranges = nmrSpectrum.getRanges({
         nH: Number(ppOptions.integral),
         realTop: true,
         thresholdFactor: Number(ppOptions.noiseFactor),
@@ -346,11 +342,11 @@ class Nmr1dManager {
   }
 
   async _createNMRannotationsAndACS() {
-    var nmrLine = API.getData('currentNmr');
-    var ranges = nmrLine.range;
-    var nmrSpectrum = await this._getNMR(nmrLine);
-    var nucleus = nmrLine.nucleus[0];
-    var observe = nmrLine.frequency;
+    let nmrLine = API.getData('currentNmr');
+    let ranges = nmrLine.range;
+    let nmrSpectrum = await this._getNMR(nmrLine);
+    let nucleus = nmrLine.nucleus[0];
+    let observe = nmrLine.frequency;
     if (nmrSpectrum && nmrSpectrum.sd) {
       nucleus = nmrSpectrum.getNucleus(0);
       observe = nmrSpectrum.observeFrequencyX();
@@ -393,7 +389,7 @@ class Nmr1dManager {
   }
 
   updateIntegralOptionsFromMF() {
-    var options = API.getData('nmr1hOptions');
+    let options = API.getData('nmr1hOptions');
     const currentIntegral = Number(options.integral);
     const newIntegral = this.getNumberHydrogens();
     if (currentIntegral !== newIntegral) {
@@ -403,7 +399,7 @@ class Nmr1dManager {
 
   // todo : migrate this code to spectra-data-ranges
   getRangesTotalIntegral() {
-    var ranges = API.getData('currentNmrRanges') || [];
+    let ranges = API.getData('currentNmrRanges') || [];
     let sum = 0;
     for (const range of ranges) {
       if (SD.Ranges.shouldIntegrate(range)) {
@@ -414,7 +410,7 @@ class Nmr1dManager {
   }
 
   updateIntegralOptionsFromRanges() {
-    var options = API.getData('nmr1hOptions');
+    let options = API.getData('nmr1hOptions');
     const currentIntegral = Number(options.integral);
     const newIntegral = Math.round(this.getRangesTotalIntegral());
     if (currentIntegral !== newIntegral && newIntegral > 0) {

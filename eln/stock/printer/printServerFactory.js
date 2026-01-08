@@ -1,5 +1,5 @@
-import ZebraPrintServer from './ZebraPrintServer';
 import CognitivePrintServer from './PrintServer';
+import ZebraPrintServer from './ZebraPrintServer';
 
 module.exports = function printServerFactory(s, opts) {
   if (String(s.kind) === 'zebra') {

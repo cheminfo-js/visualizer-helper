@@ -1,7 +1,8 @@
 import API from 'src/util/api';
-import trackMove from './trackMove';
-import recalculateCharts from './recalculateCharts';
 import Color from 'src/util/color';
+
+import recalculateCharts from './recalculateCharts';
+import trackMove from './trackMove';
 
 const nbColors = 8;
 const colors = Color.getDistinctColorsAsString(nbColors);
@@ -96,7 +97,7 @@ async function addSample(action) {
       {
         sampleID: sample.$id.join(' '),
         sampleUUID: sample._id,
-        measurementUUID: sample._id + '_' + i,
+        measurementUUID: `${sample._id}_${i}`,
         toc: action.value,
       },
     );
@@ -113,7 +114,7 @@ async function addMeasurement(action, options = {}) {
     options.measurementUUID || getMeasurementUUID(action.value);
 
   let measurementID =
-    sampleID + (action.value.__name !== 0 ? ' ' + action.value.__name : '');
+    sampleID + (action.value.__name !== 0 ? ` ${action.value.__name}` : '');
   console.log({ measurementID, measurementUUID });
   let jcamp = '';
 
@@ -137,12 +138,10 @@ async function addMeasurement(action, options = {}) {
     }
 
     if (action.value.jcampTime && action.value.jcampTime.filename) {
-      jcamp +=
-        '\n' +
-        (await API.cache('roc').getAttachment(
-          { _id: sampleUUID },
-          action.value.jcampTime.filename,
-        ));
+      jcamp += `\n${await API.cache('roc').getAttachment(
+        { _id: sampleUUID },
+        action.value.jcampTime.filename,
+      )}`;
     }
   }
 
@@ -159,7 +158,7 @@ async function addMeasurement(action, options = {}) {
       id: measurementUUID,
       code: sampleID,
       label: measurementID,
-      index: action.value.__name + '',
+      index: `${action.value.__name}`,
       measurement: JSON.parse(JSON.stringify(action.value)),
       color: colors[index % nbColors],
       display: true,
@@ -185,7 +184,7 @@ function getSampleUUID(entry) {
 }
 
 function getMeasurementUUID(entry) {
-  return getSampleUUID(entry) + '_' + entry.__name;
+  return `${getSampleUUID(entry)}_${entry.__name}`;
 }
 
 function showAllMeasurements() {

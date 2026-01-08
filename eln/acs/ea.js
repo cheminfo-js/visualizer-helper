@@ -35,7 +35,7 @@ export default function toHtml(value, options = {}) {
 function findBest(eas, theoretical) {
   let bestError = Number.MAX_VALUE;
   let bestEA;
-  for (var ea of eas) {
+  for (let ea of eas) {
     let error = 0;
     for (let th of theoretical) {
       let key = th.element.toLowerCase();

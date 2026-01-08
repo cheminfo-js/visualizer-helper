@@ -18,7 +18,7 @@ export function add(GHS) {
       dom.attr('height', '100%');
       dom.css('display', 'block');
       $element.html(dom);
-    }
+    },
   });
 
   TypeRenderer.addType('ghsHStatement', {
@@ -26,13 +26,13 @@ export function add(GHS) {
       const code = val.code || val;
       const label = String(GHS.getHStatementsObject()[code].statement);
       $element.html(label);
-    }
+    },
   });
   TypeRenderer.addType('ghsPStatement', {
     toscreen($element, val, root, options = {}) {
       const code = val.code || val;
       const label = String(GHS.getPStatementsObject()[code].statement);
       $element.html(label);
-    }
+    },
   });
 }

@@ -4,7 +4,7 @@ function ensureHighlightArray(array) {
     if (!item._highlight) {
       Object.defineProperty(item, '_highlight', {
         writable: true,
-        enumerable: false
+        enumerable: false,
       });
       item._highlight = Math.random();
       changed = true;

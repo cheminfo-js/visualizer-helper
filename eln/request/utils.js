@@ -3,14 +3,14 @@ import Datas from 'src/main/datas';
 const DataBoolean = Datas.DataBoolean;
 
 export function convertParametersToSchema(parameters) {
-  var props = {};
+  let props = {};
 
-  for (var i = 0; i < parameters.length; i++) {
-    var param = parameters[i];
+  for (let i = 0; i < parameters.length; i++) {
+    let param = parameters[i];
     if (param.variable) {
-      var def = {
+      let def = {
         type: 'string',
-        name: String(param.variable)
+        name: String(param.variable),
       };
       props[param.variable] = def;
       if (param.label) {
@@ -25,9 +25,9 @@ export function convertParametersToSchema(parameters) {
       if (param.readonly) {
         def.readonly = DataBoolean.cast(param.readonly);
       }
-      var type = (param.type ? `${param.type}` : 'string').toLowerCase();
+      let type = (param.type ? `${param.type}` : 'string').toLowerCase();
       def.type = type;
-      var converter = getConverter(type);
+      let converter = getConverter(type);
       if (param.default) {
         def.default = converter(String(param.default));
       }
@@ -39,13 +39,13 @@ export function convertParametersToSchema(parameters) {
 
   return {
     type: 'object',
-    properties: props
+    properties: props,
   };
 }
 
 export function getSchemaFromExperiment(experiment) {
-  var schema;
-  var custom = experiment.customOnde;
+  let schema;
+  let custom = experiment.customOnde;
   if (custom && String(custom)) {
     schema = JSON.parse(String(custom));
   } else {
@@ -74,40 +74,40 @@ function castBool(val) {
 export function getServiceAndSetTree(services, sets) {
   const treeSets = {
     label: 'Sets',
-    children: sets.map(formatSet)
+    children: sets.map(formatSet),
   };
 
   const treeServices = {
     label: 'Services',
-    children: services.map(formatService)
+    children: services.map(formatService),
   };
 
   return {
-    children: [treeSets, treeServices]
+    children: [treeSets, treeServices],
   };
 }
 
 function formatSet(theset) {
   return {
     label: theset.$content.name,
-    info: theset
+    info: theset,
   };
 }
 
 function formatService(service) {
   return {
     label: `${service.$content.name} (${service.$id})`,
-    children: service.$content.instruments.map(formatInstrument)
+    children: service.$content.instruments.map(formatInstrument),
   };
   function formatInstrument(instrument) {
     return {
       label: instrument.name,
-      children: instrument.experiments.map(formatExperiment)
+      children: instrument.experiments.map(formatExperiment),
     };
     function formatExperiment(experiment) {
       return {
         label: experiment.name,
-        info: { service, instrument, experiment }
+        info: { service, instrument, experiment },
       };
     }
   }

@@ -58,7 +58,7 @@ function expandRanges(data) {
     let field;
     let value;
     for (let extension of extensions) {
-      if (key.endsWith('_' + extension)) {
+      if (key.endsWith(`_${extension}`)) {
         field = key.replace(/_.*?$/, '');
         if (!ranges[field]) ranges[field] = {};
         ranges[field][extension] = data[key];

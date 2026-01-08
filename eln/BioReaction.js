@@ -9,7 +9,7 @@ import elnPlugin from './libs/elnPlugin';
 
 const DataObject = Datas.DataObject;
 
-var defaultOptions = {
+let defaultOptions = {
   varName: 'sample',
   track: false,
   bindChange: true,
@@ -17,9 +17,9 @@ var defaultOptions = {
 
 class BioReaction {
   constructor(couchDB, uuid, options) {
-    this.options = Object.assign({}, defaultOptions, options);
+    this.options = { ...defaultOptions, ...options };
 
-    var roc = API.cache('roc');
+    let roc = API.cache('roc');
     if (!roc) {
       roc = new Roc({
         url: couchDB.url,
@@ -32,7 +32,7 @@ class BioReaction {
     this.roc = roc;
 
     if (options.onSync) {
-      var emitter = this.roc.getDocumentEventEmitter(uuid);
+      let emitter = this.roc.getDocumentEventEmitter(uuid);
       emitter.on('sync', () => options.onSync(true));
       emitter.on('unsync', () => options.onSync(false));
     }
@@ -55,7 +55,7 @@ class BioReaction {
       this.sample.$content.general = {};
     }
 
-    var sampleVar = API.getVar(this.options.varName);
+    let sampleVar = API.getVar(this.options.varName);
 
     createVar(sampleVar, 'reactionCode');
     createVar(sampleVar, 'creationDate');
@@ -117,14 +117,14 @@ class BioReaction {
   }
 
   async handleDrop(name, askType) {
-    var type;
+    let type;
     if (!name) {
       throw new Error('handleDrop expects a variable name');
     }
     name = String(name);
     if (!askType) {
       // maps name of variable to type of data
-      var types = {
+      let types = {
         droppedNmr: 'nmr',
         droppedIR: 'ir',
         droppedMS: 'mass',
@@ -160,7 +160,7 @@ class BioReaction {
 
     // Dropped data can be an array
     // Expecting format as from drag and drop module
-    var droppedDatas = API.getData(name);
+    let droppedDatas = API.getData(name);
     droppedDatas = droppedDatas.file || droppedDatas.str;
 
     if (type === 'other') {
@@ -187,9 +187,9 @@ class BioReaction {
       case 'attachNMR':
       case 'attachIR':
       case 'attachMass': {
-        var tempType = action.name.replace('attach', '');
-        var type = tempType.charAt(0).toLowerCase() + tempType.slice(1);
-        var droppedDatas = action.value;
+        let tempType = action.name.replace('attach', '');
+        let type = tempType.charAt(0).toLowerCase() + tempType.slice(1);
+        let droppedDatas = action.value;
         droppedDatas = droppedDatas.file || droppedDatas.str;
         await this.attachFiles(droppedDatas, type);
         break;

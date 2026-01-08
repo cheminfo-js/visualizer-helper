@@ -3,12 +3,12 @@ define(['src/util/api', 'lodash'], function (API, _) {
     const {
       varName = localName,
       appendDefault = true,
-      comparator = _.isEqual
+      comparator = _.isEqual,
     } = options;
 
-    var data = API.getData(varName);
+    let data = API.getData(varName);
     if (data) return Promise.resolve(data);
-    var localValue = [];
+    let localValue = [];
     try {
       localValue = JSON.parse(window.localStorage.getItem(localName)) || [];
       if (!Array.isArray(localValue)) {
@@ -16,7 +16,7 @@ define(['src/util/api', 'lodash'], function (API, _) {
       }
       if (localValue.length === 0 || appendDefault) {
         localValue = localValue.concat(
-          JSON.parse(JSON.stringify(defaultValue))
+          JSON.parse(JSON.stringify(defaultValue)),
         );
         localValue = _.uniqWith(localValue, comparator);
       }

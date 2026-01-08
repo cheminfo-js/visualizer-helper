@@ -23,7 +23,7 @@ function Structure(roc) {
 
     async _createFromOcl(ocl, type, rocOptions) {
       rocOptions = rocOptions || {};
-      var prefix = 'X';
+      let prefix = 'X';
       if (type === 'internal') {
         prefix = 'ACI';
       } else if (type === 'commercial') {
@@ -39,17 +39,12 @@ function Structure(roc) {
           coordinates: ocl.coordinates,
         },
       };
-      await roc.create(
-        newEntry,
-        Object.assign(
-          {
-            messages: {
-              409: 'Conflict: this structure already exists',
-            },
-          },
-          rocOptions,
-        ),
-      );
+      await roc.create(newEntry, {
+        messages: {
+          409: 'Conflict: this structure already exists',
+        },
+        ...rocOptions,
+      });
       return newEntry;
     },
 
@@ -80,7 +75,7 @@ function Structure(roc) {
 
 function getOcl(molfile, throwIfEmpty) {
   molfile = String(molfile);
-  var ocl = OCL.Molecule.fromMolfile(molfile);
+  let ocl = OCL.Molecule.fromMolfile(molfile);
   if (throwIfEmpty && !ocl.getAtoms()) {
     throw new Error('Empty molfile');
   }
@@ -96,10 +91,10 @@ async function getNextId(roc, viewName, type) {
     return `${type}-1`;
   }
 
-  var id = v[0].value[type];
-  var current = Number(id);
-  var nextID = current + 1;
-  var nextIDStr = String(nextID);
+  let id = v[0].value[type];
+  let current = Number(id);
+  let nextID = current + 1;
+  let nextIDStr = String(nextID);
   return `${type}-${nextIDStr}`;
 }
 

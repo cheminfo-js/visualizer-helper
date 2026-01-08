@@ -1,6 +1,6 @@
 import API from 'src/util/api';
-import UI from 'src/util/ui';
 import Renderer from 'src/util/typerenderer';
+import UI from 'src/util/ui';
 
 import getViewInfo from './getViewInfo';
 
@@ -48,7 +48,7 @@ export class ModulePrefsManager {
     });
 
     const forceTypeChoices = Renderer.getList()
-      .map((k) => k + ':' + k)
+      .map((k) => `${k}:${k}`)
       .join(';');
 
     const result = await UI.editTable(cols, {
@@ -134,7 +134,7 @@ export class ModulePrefsManager {
   }
 
   async getRecord() {
-    var user = await this.roc.getUser();
+    let user = await this.roc.getUser();
     if (!user || !user.username) return undefined;
     const record = (
       await this.roc.view('entryById', {

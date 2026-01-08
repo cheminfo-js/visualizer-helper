@@ -6,9 +6,8 @@ module.exports = async function loadTwig(category, options = {}) {
   const { variableName = 'twigTemplate' } = options;
 
   try {
-    // eslint-disable-next-line no-undef
     let templates = DataObject(await load(category));
-    var twigTemplate = await templates.getChild([
+    let twigTemplate = await templates.getChild([
       '0',
       'document',
       '$content',

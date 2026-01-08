@@ -1,53 +1,51 @@
-
 import { addType } from 'src/util/typerenderer';
 
 const status = {
   100: {
     description: 'Order to confirm',
-    color: 'orange'
+    color: 'orange',
   },
   200: {
     description: 'Product to order',
-    color: 'lightblue'
+    color: 'lightblue',
   },
   300: {
     description: 'Product ordered',
-    color: 'lightblue'
+    color: 'lightblue',
   },
   400: {
     description: 'Product arrived',
-    color: 'lightgray'
+    color: 'lightgray',
   },
   500: {
     description: 'Product released',
-    color: 'lightgreen'
+    color: 'lightgreen',
   },
   600: {
     description: 'Product to revalidate',
-    color: 'orange'
+    color: 'orange',
   },
   700: {
     description: 'Product refused',
-    color: 'pink'
+    color: 'pink',
   },
   800: {
     description: 'Product expired',
-    color: 'pink'
+    color: 'pink',
   },
   900: {
     description: 'Product lost',
-    color: 'pink'
+    color: 'pink',
   },
   1000: {
     description: 'Product empty',
-    color: 'pink'
-  }
+    color: 'pink',
+  },
 };
 
 for (const key in status) {
   status[key].value = +key;
 }
-
 
 // register type renderer
 function toscreen($element, value, root, options) {

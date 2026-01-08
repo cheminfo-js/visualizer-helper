@@ -1,53 +1,53 @@
-
 import chemspider from 'https://www.lactame.com/lib/chemspider-json-api/1.0.0/chemspider-json-api.min.js';
-import util from 'src/util/util';
 import _ from 'lodash';
+import util from 'src/util/util';
 
 module.exports = {
   search(term) {
-    return chemspider.search({
-      searchOptions: {
+    return chemspider
+      .search({
         searchOptions: {
-          QueryText: term
-        }
-      },
-      resultOptions: {
-        serfilter: 'Compound[Mol|Name|Synonyms|CSID]'
-      }
-    }).then((data) => data.map(fromChemspider));
-  }
+          searchOptions: {
+            QueryText: term,
+          },
+        },
+        resultOptions: {
+          serfilter: 'Compound[Mol|Name|Synonyms|CSID]',
+        },
+      })
+      .then((data) => data.map(fromChemspider));
+  },
 };
 
-
 function fromChemspider(chemspider) {
-  var entry = {
+  let entry = {
     $content: {
       general: {
         molfile: chemspider.Mol,
-        description: chemspider.Name
-      }
+        description: chemspider.Name,
+      },
     },
     names: [chemspider.name],
     id: util.getNextUniqueId(true),
-    source: 'chemspider'
+    source: 'chemspider',
   };
 
-  const name = entry.$content.general.name = [];
-  const identifier = entry.$content.identifier = {};
-  const cas = identifier.cas = [];
-  const CSID = identifier.chemSpiderID = [];
+  const name = (entry.$content.general.name = []);
+  const identifier = (entry.$content.identifier = {});
+  const cas = (identifier.cas = []);
+  const CSID = (identifier.chemSpiderID = []);
   const synonyms = chemspider.Synonyms;
   for (let i = 0; i < synonyms.length; i++) {
     const synonym = synonyms[i];
     if (isReliableSynonym(synonym)) {
       name.push({
         value: synonym.Name,
-        language: synonym.LangID
+        language: synonym.LangID,
       });
     }
     if (isReliableCas(synonym)) {
       cas.push({
-        value: synonym.Name
+        value: synonym.Name,
       });
     }
   }
@@ -60,9 +60,17 @@ function fromChemspider(chemspider) {
 }
 
 function isReliableCas(synonym) {
-  return synonym.Reliability >= 4 && synonym.LangID === 'en' && synonym.SynonymType === 2;
+  return (
+    synonym.Reliability >= 4 &&
+    synonym.LangID === 'en' &&
+    synonym.SynonymType === 2
+  );
 }
 
 function isReliableSynonym(synonym) {
-  return synonym.Reliability >= 4 && synonym.SynonymType === 5 && synonym.LangID === 'en';
+  return (
+    synonym.Reliability >= 4 &&
+    synonym.SynonymType === 5 &&
+    synonym.LangID === 'en'
+  );
 }

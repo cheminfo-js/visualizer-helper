@@ -1,5 +1,6 @@
 import API from 'src/util/api';
 import UI from 'src/util/ui';
+
 import { OCL, OCLUtils } from './libs/OCLUtils';
 
 const { Molecule } = OCL;
@@ -17,7 +18,7 @@ const defaultOptions = {
 
 class ExpandableMolecule {
   constructor(sample, options) {
-    this.options = Object.assign({}, defaultOptions, options);
+    this.options = { ...defaultOptions, ...options };
     this.sample = sample;
     this.molfile = String(
       this.sample.getChildSync(['$content', 'general', 'molfile']) || '',
@@ -33,9 +34,9 @@ class ExpandableMolecule {
       // is this really a modification ? or a loop event ...
       // need to compare former oclID with new oclID
 
-      var newMolecule = Molecule.fromMolfile(`${event.target}`);
+      let newMolecule = Molecule.fromMolfile(`${event.target}`);
 
-      var oclID = newMolecule.getIDCodeAndCoordinates();
+      let oclID = newMolecule.getIDCodeAndCoordinates();
       if (oclID.idCode !== this.idCode) {
         this.idCode = oclID.idCode;
         this.molfile = `${event.target}`;
@@ -128,12 +129,12 @@ class ExpandableMolecule {
     We create the view variable with or without expanded hydrogens
      */
   createViewVariable() {
-    var molecule = Molecule.fromMolfile(this.molfile);
+    let molecule = Molecule.fromMolfile(this.molfile);
     let calculateDiastereotopicID = this.calculateDiastereotopicID;
     if (calculateDiastereotopicID) {
       // is it reasonnable to calculate the DiastereotopicID. We check the time it will take
 
-      var start = Date.now();
+      let start = Date.now();
       molecule.getCompactCopy().getIDCode();
       let expected = (Date.now() - start) * 4 * molecule.getAllAtoms();
       if (expected > this.maxDiastereotopicCalculationTime) {

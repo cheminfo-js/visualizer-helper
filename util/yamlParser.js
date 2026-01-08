@@ -49,7 +49,9 @@ var errors = [],
     key: new RegExp('([a-z0-9_-][ a-z0-9_-]+):( .+)?', 'i'),
     item: new RegExp('^-\\s+'),
     trim: new RegExp('^\\s+|\\s+$'),
-    comment: new RegExp('([^\\\'\\"#]+([\\\'\\"][^\\\'\\"]*[\\\'\\"])*)*(#.*)?')
+    comment: new RegExp(
+      '([^\\\'\\"#]+([\\\'\\"][^\\\'\\"]*[\\\'\\"])*)*(#.*)?',
+    ),
   };
 
 /**
@@ -70,11 +72,11 @@ function Block(lvl) {
     /* Blocks with greater level */
     children: [],
     /* Add a block to the children collection */
-    addChild: function(obj) {
+    addChild: function (obj) {
       this.children.push(obj);
       obj.parent = this;
       ++this.length;
-    }
+    },
   };
 }
 
@@ -92,7 +94,7 @@ function createXMLHTTPRequest() {
       'MSXML2.XMLHTTP.4.0',
       'MSXML2.XMLHTTP.3.0',
       'MSXML2.XMLHTTP',
-      'Microsoft.XMLHTTP'
+      'Microsoft.XMLHTTP',
     );
     var success = false;
     for (var i = 0; i < XMLHTTP_IDS.length && !success; i++) {
@@ -111,7 +113,7 @@ function createXMLHTTPRequest() {
 
 function fromURL(src, ondone) {
   var client = createXMLHTTPRequest();
-  client.onreadystatechange = function() {
+  client.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
       var txt = this.responseText;
       ondone(YAML.parse(txt));
@@ -510,7 +512,7 @@ module.exports = {
    * @function
    * @return Errors found when parsing the last file.
    */
-  getErrors: function() {
+  getErrors: function () {
     return errors;
   },
 
@@ -519,7 +521,7 @@ module.exports = {
    * @function
    * @return Time in milliseconds.
    */
-  getProcessingTime: function() {
+  getProcessingTime: function () {
     return processing_time;
-  }
+  },
 };

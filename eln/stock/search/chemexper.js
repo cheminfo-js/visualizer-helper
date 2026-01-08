@@ -1,15 +1,15 @@
-import superagent from 'superagent';
-import util from 'src/util/util';
-import ui from 'src/util/ui';
 import _ from 'lodash';
+import ui from 'src/util/ui';
+import util from 'src/util/util';
+import superagent from 'superagent';
 
 module.exports = {
   search(term) {
     return superagent
       .get(
         `https://reference.cheminfo.org/v1/search?appendMolfile=true&quick=${encodeURIComponent(
-          term
-        )}`
+          term,
+        )}`,
       )
       .then((result) => {
         const data = result.body && result.body.data;
@@ -25,9 +25,9 @@ module.exports = {
           let rn1 = Number(a.catalogID);
           let rn2 = Number(b.catalogID);
           return rn1 - rn2;
-        })
+        }),
       );
-  }
+  },
 };
 
 function fromChemexper(datum) {
@@ -39,23 +39,23 @@ function fromChemexper(datum) {
         name: [{ value: datum.iupac[0] }],
         mf: datum.mf && datum.mf.mf,
         mw: datum.mf && datum.mf.mass,
-        em: datum.mf && datum.mf.monoisotopicMass
+        em: datum.mf && datum.mf.monoisotopicMass,
       },
       identifier: {
-        cas: numberToCas(datum.catalogID)
+        cas: numberToCas(datum.catalogID),
       },
       stock: {
-        catalogNumber: datum.catalogID
+        catalogNumber: datum.catalogID,
       },
       physical: {
         density: datum.density,
         mp: datum.mp,
-        bp: datum.bp
-      }
+        bp: datum.bp,
+      },
     },
     id: util.getNextUniqueId(true),
     names: datum.iupac,
-    source: 'reference'
+    source: 'reference',
   };
 }
 

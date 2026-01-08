@@ -2,4 +2,4 @@ import * as SDLib from '../../../../../../../../lib/spectra-data/3.7.2/spectra-d
 
 const { GUI, NMR, NMR2D, Ranges, SD } = SDLib;
 
-export { SDLib as default, GUI, NMR, NMR2D, Ranges, SD };
+export { GUI, NMR2D, NMR, Ranges, SD, SDLib as default };

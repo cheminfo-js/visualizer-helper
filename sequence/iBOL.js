@@ -3,9 +3,11 @@ import Nt from 'https://www.lactame.com/lib/NtSeq/HEAD/NtSeq.js';
 const MAX_MISMATCH = 3;
 export function getFiltered(data, selection, keys) {
   return data.filter(function (d) {
-    loop1: for (var i = 0; i < selection.length; i++) {
-      for (var j = 0; j < keys.length; j++) {
-        if (String(d[keys[j]]) !== String(selection[i][keys[j]])) continue loop1;
+    loop1: for (let i = 0; i < selection.length; i++) {
+      for (let j = 0; j < keys.length; j++) {
+        if (String(d[keys[j]]) !== String(selection[i][keys[j]])) {
+          continue loop1;
+        }
       }
       return true;
     }
@@ -14,31 +16,31 @@ export function getFiltered(data, selection, keys) {
 }
 
 export function matchDistribution(posSeq, negSeq, useNtSeq) {
-  var allSeq = posSeq.concat(negSeq);
-  var primerSet = getPrimers(allSeq, 20);
-  var result = new Array(primerSet.size);
-  var counter = 0;
+  let allSeq = posSeq.concat(negSeq);
+  let primerSet = getPrimers(allSeq, 20);
+  let result = new Array(primerSet.size);
+  let counter = 0;
 
-  var fn;
+  let fn;
   if (!useNtSeq) {
     fn = getMatchDistribution;
   } else {
     posSeq = posSeq.map(function (seq) {
-      return (new Nt.Seq()).read(seq);
+      return new Nt.Seq().read(seq);
     });
     negSeq = negSeq.map(function (seq) {
-      return (new Nt.Seq()).read(seq);
+      return new Nt.Seq().read(seq);
     });
     primerSet = primerSet.map(function (p) {
-      return (new Nt.Seq()).read(p);
+      return new Nt.Seq().read(p);
     });
     fn = getMatchDistributionNtSeq;
   }
 
   primerSet.forEach(function (primer) {
-    var pos = fn(primer, posSeq);
-    var neg = fn(primer, negSeq);
-    var r = {};
+    let pos = fn(primer, posSeq);
+    let neg = fn(primer, negSeq);
+    let r = {};
     r.pos = pos.bestMatches;
     r.neg = neg.bestMatches;
     r.posDistribution = pos.distribution;
@@ -50,8 +52,8 @@ export function matchDistribution(posSeq, negSeq, useNtSeq) {
 
   // sort result
   result.sort(function (a, b) {
-    for (var i = 0; i < MAX_MISMATCH + 1; i++) {
-      var diff = a.pos[i] - a.neg[i] - (b.pos[i] - b.neg[i]);
+    for (let i = 0; i < MAX_MISMATCH + 1; i++) {
+      let diff = a.pos[i] - a.neg[i] - (b.pos[i] - b.neg[i]);
       if (diff < 0) return 1;
       else if (diff > 0) return -1;
     }
@@ -63,9 +65,9 @@ export function matchDistribution(posSeq, negSeq, useNtSeq) {
 
 // Seq comparison functions
 function getPrimers(sequences, primerLength) {
-  var s = new Set();
+  let s = new Set();
 
-  for (var i = 0; i < sequences.length; i++) {
+  for (let i = 0; i < sequences.length; i++) {
     processSequence(s, sequences[i], primerLength);
   }
 
@@ -73,18 +75,18 @@ function getPrimers(sequences, primerLength) {
 }
 
 function processSequence(s, seq, primerLength) {
-  for (var i = 0; i < seq.length - primerLength + 1; i++) {
-    var primer = seq.substr(i, primerLength);
+  for (let i = 0; i < seq.length - primerLength + 1; i++) {
+    let primer = seq.substr(i, primerLength);
     s.add(primer);
   }
 }
 
 function findBestMatch(primer, seq) {
-  var mismatches = MAX_MISMATCH + 1;
-  var positions;
-  for (var i = 0; i < seq.length - primer.length + 1; i++) {
-    var subseq = seq.substr(i, primer.length);
-    var m = countMismatches(subseq, primer);
+  let mismatches = MAX_MISMATCH + 1;
+  let positions;
+  for (let i = 0; i < seq.length - primer.length + 1; i++) {
+    let subseq = seq.substr(i, primer.length);
+    let m = countMismatches(subseq, primer);
 
     if (m < mismatches) {
       mismatches = m;
@@ -98,23 +100,23 @@ function findBestMatch(primer, seq) {
 }
 
 function getMatchDistribution(primer, sequences) {
-  var bestMatches = sequences.map(function (seq, idx) {
-    var bestMatch = findBestMatch(primer, seq);
+  let bestMatches = sequences.map(function (seq, idx) {
+    let bestMatch = findBestMatch(primer, seq);
     bestMatch.geneIdx = idx;
     return bestMatch;
   });
 
-  var distribution = new Array(MAX_MISMATCH + 2).fill(0);
+  let distribution = new Array(MAX_MISMATCH + 2).fill(0);
   bestMatches.forEach((best) => {
     distribution[best.mismatches]++;
   });
-
 
   distribution = distribution.map((d) => {
     return d / bestMatches.length;
   });
   return {
-    distribution, bestMatches
+    distribution,
+    bestMatches,
   };
 }
 
@@ -125,8 +127,8 @@ function getMatchDistributionNtSeq(primer, sequences) {
 }
 
 function countMismatches(seq1, seq2) {
-  var mismatch = 0;
-  for (var i = 0; i < seq1.length; i++) {
+  let mismatch = 0;
+  for (let i = 0; i < seq1.length; i++) {
     if (seq1[i] !== seq2[i]) {
       mismatch++;
       if (mismatch === MAX_MISMATCH) return mismatch + 1;

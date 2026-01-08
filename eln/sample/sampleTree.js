@@ -1,7 +1,7 @@
 import { stratify } from 'd3-hierarchy';
-import treeUtil from 'src/util/tree';
 import _ from 'lodash';
 import Datas from 'src/main/datas';
+import treeUtil from 'src/util/tree';
 
 const DataObject = Datas.DataObject;
 
@@ -13,9 +13,7 @@ export function getTree(data, options = { idProperty: 'id' }) {
   const getParentId = getParentIdFunction(idProperty);
   fillGaps(data, options);
 
-  const strat = stratify()
-    .id(getId)
-    .parentId(getParentId);
+  const strat = stratify().id(getId).parentId(getParentId);
 
   let tree = strat(data);
   tree.each((node) => {
@@ -31,7 +29,7 @@ const defaultAnnotationOptions = { label: ['label'] };
 export function getAnnotatedTree(
   data,
   annotationOptions = defaultAnnotationOptions,
-  options = { idProperty: 'id' }
+  options = { idProperty: 'id' },
 ) {
   const annotations = {};
   let { idProperty } = options;

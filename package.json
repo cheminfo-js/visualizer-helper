@@ -8,8 +8,10 @@
     "babel-test": "babel . --ignore node_modules --out-dir build --presets @babel/preset-env --plugins transform-es2015-modules-amd-if-required",
     "eslint": "eslint . --cache",
     "eslint-fix": "npm run eslint -- --fix",
-    "test": "jest && npm run eslint",
-    "testonly": "jest"
+    "prettier": "prettier --check .",
+    "prettier-write": "prettier --write .",
+    "test": "npm run prettier && npm run eslint && npm run test-only",
+    "test-only": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,17 +23,16 @@
   },
   "homepage": "https://github.com/cheminfo-js/visualizer-helper#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
     "babel-plugin-transform-es2015-modules-amd-if-required": "^1.0.4",
-    "eslint": "^7.2.0",
-    "eslint-config-cheminfo": "^4.0.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.13.2",
-    "eslint-plugin-no-only-tests": "^2.4.0",
-    "esm": "^3.2.25",
-    "jest": "^26.0.1"
+    "eslint": "^9.39.2",
+    "eslint-config-zakodium": "^18.0.0",
+    "jest": "^30.2.0",
+    "prettier": "^3.7.4"
   },
-  "dependencies": {}
+  "volta": {
+    "node": "24.12.0"
+  }
 }

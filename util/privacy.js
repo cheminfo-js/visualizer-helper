@@ -5,16 +5,16 @@ define(['src/util/ui'], function (UI) {
         Please note that in order to use this view data WILL BE SUBMITTED to our servers !
     `,
       agree = 'I agree',
-      notAgree = 'I don\'t agree',
+      notAgree = "I don't agree",
       dialogOptions = {
         width: 800,
-        title: 'Privacy information'
-      }
+        title: 'Privacy information',
+      },
     } = options;
 
-    var prefs = JSON.parse(localStorage.getItem(cookieName) || '{}');
+    let prefs = JSON.parse(localStorage.getItem(cookieName) || '{}');
     if (!prefs.validation || !prefs.validation.isValidated) {
-      var result = await UI.confirm(message, agree, notAgree, dialogOptions);
+      let result = await UI.confirm(message, agree, notAgree, dialogOptions);
 
       if (!result) {
         document.body.innerHTML = '';
@@ -22,7 +22,7 @@ define(['src/util/ui'], function (UI) {
 
       prefs.validation = {
         isValidated: result,
-        date: (new Date()).getTime()
+        date: new Date().getTime(),
       };
       localStorage.setItem(cookieName, JSON.stringify(prefs));
     }

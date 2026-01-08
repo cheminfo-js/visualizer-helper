@@ -1,4 +1,4 @@
-var options1D = {
+let options1D = {
   type: 'rect',
   line: 0,
   lineLabel: 1,
@@ -11,17 +11,17 @@ var options1D = {
   toFixed: 1,
   maxLines: Number.MAX_VALUE,
   selectable: true,
-  fromToc: false
+  fromToc: false,
 };
 
-var options2D = {
+let options2D = {
   type: 'rect',
   labelColor: 'red',
   strokeColor: 'red',
   strokeWidth: '1px',
   fillColor: 'green',
   width: '6px',
-  height: '6px'
+  height: '6px',
 };
 
 /**
@@ -40,7 +40,7 @@ function ensureRangesHighlight(ranges) {
         Object.defineProperty(range, '_highlight', {
           value: [],
           enumerable: false,
-          writable: true
+          writable: true,
         });
       }
       // assignment can only be done at the level of a signal !
@@ -51,7 +51,7 @@ function ensureRangesHighlight(ranges) {
           if (!signal._highlight) {
             Object.defineProperty(signal, '_highlight', {
               enumerable: false,
-              writable: true
+              writable: true,
             });
           }
           signal._highlight = signal.diaID;
@@ -92,13 +92,13 @@ function ensureRangesHighlight(ranges) {
 }
 
 function annotations1D(ranges, optionsG) {
-  var options = Object.assign({}, options1D, optionsG);
+  let options = { ...options1D, ...optionsG };
   let { height, line, dy = [0, 0], y } = options;
-  var annotations = [];
+  let annotations = [];
 
-  for (var i = 0; i < ranges.length; i++) {
-    var currentRange = ranges[i];
-    var annotation = {};
+  for (let i = 0; i < ranges.length; i++) {
+    let currentRange = ranges[i];
+    let annotation = {};
     annotation.info = ranges[i];
 
     annotations.push(annotation);
@@ -121,30 +121,31 @@ function annotations1D(ranges, optionsG) {
       (typeof currentRange.to === 'undefined' ||
         typeof currentRange.from === 'undefined' ||
         currentRange.to === currentRange.from) &&
-      (currentRange.signal && currentRange.signal.length > 0)
+      currentRange.signal &&
+      currentRange.signal.length > 0
     ) {
       annotation.position = [
         {
           x: currentRange.signal[0].delta - options.width,
-          y: `${options.line * height}px`
+          y: `${options.line * height}px`,
         },
         {
           x: currentRange.signal[0].delta + options.width,
-          y: `${options.line * height + 8}px`
-        }
+          y: `${options.line * height + 8}px`,
+        },
       ];
     } else {
       annotation.position = [
         {
           x: currentRange.to,
           y: y ? y[0] : `${options.line * height}px`,
-          dy: dy[0]
+          dy: dy[0],
         },
         {
           x: currentRange.from,
           y: y ? y[1] : `${options.line * height + 5}px`,
-          dy: dy[1]
-        }
+          dy: dy[1],
+        },
       ];
     }
 
@@ -168,8 +169,8 @@ function annotations1D(ranges, optionsG) {
         color: labelColor,
         position: {
           x: (annotation.position[0].x + annotation.position[1].x) / 2,
-          dy: `${height + 20}px`
-        }
+          dy: `${height + 20}px`,
+        },
       };
     }
     annotation.selectable = options.selectable;
@@ -194,11 +195,11 @@ function annotations1D(ranges, optionsG) {
 }
 
 function annotations2D(zones, optionsG) {
-  var options = Object.assign({}, options2D, optionsG);
-  var annotations = [];
-  for (var k = zones.length - 1; k >= 0; k--) {
-    var signal = zones[k];
-    var annotation = {};
+  let options = { ...options2D, ...optionsG };
+  let annotations = [];
+  for (let k = zones.length - 1; k >= 0; k--) {
+    let signal = zones[k];
+    let annotation = {};
     annotation.type = options.type;
     annotation._highlight = signal._highlight;
     if (!annotation._highlight || annotation._highlight.length === 0) {
@@ -211,17 +212,17 @@ function annotations2D(zones, optionsG) {
         x: signal.fromTo[0].from - 0.01,
         y: signal.fromTo[1].from - 0.01,
         dx: options.width,
-        dy: options.height
+        dy: options.height,
       },
-      { x: signal.fromTo[0].to + 0.01, y: signal.fromTo[1].to + 0.01 }
+      { x: signal.fromTo[0].to + 0.01, y: signal.fromTo[1].to + 0.01 },
     ];
     annotation.fillColor = options.fillColor;
     annotation.label = {
       text: signal.remark,
       position: {
         x: signal.signal[0].delta[0],
-        y: signal.signal[0].delta[1] - 0.025
-      }
+        y: signal.signal[0].delta[1] - 0.025,
+      },
     };
     if (signal.integral === 1) {
       annotation.strokeColor = options.strokeColor;
@@ -238,4 +239,4 @@ function annotations2D(zones, optionsG) {
   return annotations;
 }
 
-export { annotations2D, annotations1D, ensureRangesHighlight };
+export { annotations1D, annotations2D, ensureRangesHighlight };

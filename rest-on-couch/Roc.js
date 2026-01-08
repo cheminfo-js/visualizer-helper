@@ -169,7 +169,7 @@ define([
 
   class Roc {
     constructor(opts) {
-      for (var key in opts) {
+      for (let key in opts) {
         if (hasOwnProperty(opts, key)) {
           this[key] = opts[key];
         }
@@ -268,7 +268,7 @@ define([
               res.body = res.body.sort(options.sort);
             }
             if (options.varName) {
-              for (var i = 0; i < res.body.length; i++) {
+              for (let i = 0; i < res.body.length; i++) {
                 this.typeUrl(res.body[i].$content, res.body[i]);
               }
               return API.createData(options.varName, res.body).then((data) => {
@@ -277,9 +277,9 @@ define([
                   options,
                   viewName,
                   requestUrl,
-                  data: data,
+                  data,
                 };
-                for (var i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length; i++) {
                   data.traceSync([i]);
                 }
                 return data;
@@ -337,7 +337,7 @@ define([
               res.body = res.body.sort(options.sort);
             }
             if (options.addRightsInfo) {
-              for (var i = 0; i < res.body.length; i++) {
+              for (let i = 0; i < res.body.length; i++) {
                 res.body[i].anonymousRead = {
                   type: 'boolean',
                   withCredentials: true,
@@ -364,7 +364,7 @@ define([
                   options,
                   requestUrl,
                   viewName,
-                  data: data,
+                  data,
                 };
                 return data;
               });
@@ -383,10 +383,8 @@ define([
           isSync: undefined,
           eventEmitter: new EventEmitter(),
         };
-      } else {
-        if (!eventEmitters[uuid].eventEmitter) {
-          eventEmitters[uuid].eventEmitter = new EventEmitter();
-        }
+      } else if (!eventEmitters[uuid].eventEmitter) {
+        eventEmitters[uuid].eventEmitter = new EventEmitter();
       }
       return eventEmitters[uuid].eventEmitter;
     }
@@ -466,7 +464,7 @@ define([
         const data = await API.createData(options.varName, doc);
         this.variables[options.varName] = {
           type: 'document',
-          data: data,
+          data,
           serverJsonString: JSON.stringify(data.$content),
         };
         if (options.track) {
@@ -629,7 +627,7 @@ define([
           for (let i = 0; i < keys.length; i++) {
             let v = this.variables[keys[i]];
             if (v.type === 'view') {
-              var idx = v.data.length;
+              let idx = v.data.length;
               v.data.push(entry);
               v.data.traceSync([idx]);
               if (!options.noTrigger) {
@@ -653,7 +651,7 @@ define([
     async update(entry, options) {
       await this.__ready;
       options = createOptions(options, 'update');
-      var reqEntry = DataObject.resurrect(entry);
+      let reqEntry = DataObject.resurrect(entry);
       this.untypeUrl(reqEntry.$content);
       return superagent
         .put(`${this.entryUrl}/${String(entry._id)}`)
@@ -727,20 +725,20 @@ define([
       if (!row.__parent) {
         throw new Error('row must be linked to parent for unattach to work');
       }
-      var arr = row.__parent;
-      var idx = arr.indexOf(row);
+      let arr = row.__parent;
+      let idx = arr.indexOf(row);
       if (idx === -1) {
         Debug.warn('element to unattach not found');
         return null;
       }
 
-      var toDelete = this._findFilename(row);
+      let toDelete = this._findFilename(row);
       toDelete = toDelete.map((d) => String(d.filename));
 
       // We compute the difference between the delete and still present attachment
       // entries, just in case there are 2 for the same attachment. In that case the
       // attachment should not be deleted
-      var toKeep = this._findFilename(entry.$content, toDelete);
+      let toKeep = this._findFilename(entry.$content, toDelete);
       toKeep = toKeep
         .map((k) => String(k.filename))
         .filter((k) => k === row.filename);
@@ -770,7 +768,7 @@ define([
       );
 
       // If we had to ask for a filename, resolve content type
-      var fallback;
+      let fallback;
       if (filename) {
         fallback = attachment.contentType;
         attachment.contentType = undefined;
@@ -813,7 +811,7 @@ define([
 
     async attach(type, entry, attachment, options) {
       await this.__ready;
-      var attachOptions = createOptions(options, 'attach');
+      let attachOptions = createOptions(options, 'attach');
 
       try {
         const ok = await this._processAttachment(type, attachment);
@@ -902,7 +900,7 @@ define([
             return null;
           }
           // If we had to ask for a filename, resolve content type
-          var fallback = attachments.contentType;
+          let fallback = attachments.contentType;
           attachments.contentType = undefined;
           setContentType(attachments, fallback);
           attachments = [attachments];
@@ -1041,7 +1039,7 @@ define([
       if (eventEmmitter && eventEmmitter.isSync === false) {
         throw new Error('Cannot update group while entry is edited');
       }
-      var method = remove ? 'del' : 'put';
+      let method = remove ? 'del' : 'put';
       await this.__ready;
       options = createOptions(options, remove ? 'deleteGroup' : 'addGroup');
       return superagent[method](
@@ -1094,22 +1092,22 @@ define([
 
     // Private
     _getCdb(entry) {
-      var uuid;
-      var type = DataObject.getType(entry);
+      let uuid;
+      let type = DataObject.getType(entry);
       if (type === 'object') {
         uuid = String(entry._id);
       } else {
         throw new Error('Bad arguments, entry can only be an object');
       }
       const docUrl = `${this.entryUrl}/${String(uuid)}`;
-      var cdb = new CDB(docUrl);
+      let cdb = new CDB(docUrl);
       cdb.setDoc(entry);
       return cdb;
     }
 
     _findByUuid(uuid, key) {
       if (key === undefined) {
-        var result;
+        let result;
         // Return the first one found (they are all supposed to be the same...)
         for (let key in this.variables) {
           result = this._findByUuid(uuid, key);
@@ -1133,7 +1131,7 @@ define([
 
     _findById(id, key) {
       if (key === undefined) {
-        var result;
+        let result;
         for (let key in this.variables) {
           result = this._findById(id, key);
           if (result) return result;
@@ -1227,7 +1225,7 @@ define([
 
     _defaults(content) {
       if (this.processor) {
-        var kind = this.kind;
+        let kind = this.kind;
         if (kind) {
           this.processor.defaults(kind, content);
         }
@@ -1235,8 +1233,8 @@ define([
     }
 
     _traverseFilename(v, cb) {
-      var type = DataObject.getType(v);
-      var i;
+      let type = DataObject.getType(v);
+      let i;
       if (type === 'array') {
         for (i = 0; i < v.length; i++) {
           this._traverseFilename(v[i], cb);
@@ -1245,7 +1243,7 @@ define([
         if (v.filename) {
           cb(v);
         } else {
-          var keys = Object.keys(v);
+          let keys = Object.keys(v);
           for (i = 0; i < keys.length; i++) {
             this._traverseFilename(v[keys[i]], cb);
           }
@@ -1254,7 +1252,7 @@ define([
     }
 
     _findFilename(v, filename) {
-      var r = [];
+      let r = [];
       if (!Array.isArray(filename) && typeof filename !== 'undefined') {
         filename = [filename];
       }
@@ -1270,8 +1268,8 @@ define([
 
     _deleteFilename(v, filename) {
       let hasDeleted = false;
-      var filenames = this._findFilename(v, filename);
-      for (var i = 0; i < filenames.length; i++) {
+      let filenames = this._findFilename(v, filename);
+      for (let i = 0; i < filenames.length; i++) {
         hasDeleted = true;
         delete filenames[i].filename;
       }
@@ -1288,13 +1286,13 @@ define([
 
     typeUrl(content, entry) {
       this._traverseFilename(content, (v) => {
-        var filename = String(v.filename);
+        let filename = String(v.filename);
         if (!entry._attachments) return;
-        var att = entry._attachments[filename];
+        let att = entry._attachments[filename];
         if (!att) return;
-        var contentType = String(att.content_type);
-        var vtype = Util.contentTypeToType(contentType);
-        var prop;
+        let contentType = String(att.content_type);
+        let vtype = Util.contentTypeToType(contentType);
+        let prop;
         if (typeValue.indexOf(vtype) !== -1) {
           prop = 'value';
         } else {
@@ -1310,7 +1308,7 @@ define([
           configurable: true,
         });
 
-        var dUrl = `${this.entryUrl}/${entry._id}/${encodeURIComponent(
+        let dUrl = `${this.entryUrl}/${entry._id}/${encodeURIComponent(
           v.filename,
         )}`;
         v.data[prop] = dUrl;
@@ -1324,13 +1322,12 @@ define([
   }
 
   function createOptions(options, type, custom) {
-    var messages = Object.assign(
-      {},
-      defaultOptions.messages,
-      messagesByType[type],
-      options && options.messages,
-    );
-    options = Object.assign({}, defaultOptions, options, custom);
+    let messages = {
+      ...defaultOptions.messages,
+      ...messagesByType[type],
+      ...(options && options.messages),
+    };
+    options = { ...defaultOptions, ...options, ...custom };
     if (messages) options.messages = messages;
     options.type = type;
     return options;
@@ -1380,8 +1377,8 @@ define([
   }
 
   function getUuid(entry) {
-    var uuid;
-    var type = DataObject.getType(entry);
+    let uuid;
+    let type = DataObject.getType(entry);
     if (type === 'string') {
       uuid = entry;
     } else if (type === 'object') {
@@ -1393,8 +1390,8 @@ define([
   }
 
   function getTokenId(token) {
-    var id;
-    var type = DataObject.getType(token);
+    let id;
+    let type = DataObject.getType(token);
     if (type === 'string') {
       id = token;
     } else if (type === 'object') {
@@ -1412,8 +1409,8 @@ define([
 
   function setContentType(attachment, fallback) {
     fallback = fallback || 'application/octet-stream';
-    var filename = attachment.filename;
-    var contentType = attachment.contentType;
+    let filename = attachment.filename;
+    let contentType = attachment.contentType;
     if (contentType && contentType !== 'application/octet-stream') {
       return;
     }

@@ -2,10 +2,10 @@ import TypeRenderer from 'src/util/typerenderer';
 
 import toHtmlEA from './ea';
 import toHtmlIR from './ir';
+import toHtmlMass from './mass';
+import toHtmlNMR from './nmr';
 import toHtmlRaman from './raman';
 import toHtmlUV from './uv';
-import toHtmlNMR from './nmr';
-import toHtmlMass from './mass';
 
 export function add() {
   TypeRenderer.addType('acsir', {

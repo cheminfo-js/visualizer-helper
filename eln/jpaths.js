@@ -81,8 +81,12 @@ jpaths.xray = ['$content', 'spectra', 'xray'];
 jpaths.pictogram = ['$content', 'safety', 'ghs', 'pictogram'];
 jpaths.signalWord = ['$content', 'safety', 'ghs', 'signalWord'];
 jpaths.hazardStatement = ['$content', 'safety', 'ghs', 'hazardStatement'];
-jpaths.precautionaryStatement = ['$content', 'safety', 'ghs', 'precautionaryStatement'];
-
+jpaths.precautionaryStatement = [
+  '$content',
+  'safety',
+  'ghs',
+  'precautionaryStatement',
+];
 
 // For reactions
 jpaths.reactionCode = ['$id'];

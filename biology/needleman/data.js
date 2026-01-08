@@ -1096,9 +1096,9 @@ function createTable(v, w) {
   let n = v.length;
   let m = w.length;
   let rows = [];
-  for (var i = 0; i < n + 1; i++) {
+  for (let i = 0; i < n + 1; i++) {
     rows[i] = [];
-    for (var j = 0; j < m + 1; j++) {
+    for (let j = 0; j < m + 1; j++) {
       rows[i].push(0);
     }
   }
@@ -1117,9 +1117,9 @@ function identityMatrix(n, match, penalization) {
   penalization = penalization || 0;
 
   let matrix = [];
-  for (var i = 0; i < n; i++) {
+  for (let i = 0; i < n; i++) {
     matrix[i] = [];
-    for (var j = 0; j < n; j++) {
+    for (let j = 0; j < n; j++) {
       matrix[i][j] = i === j ? match : penalization;
     }
   }
@@ -1140,9 +1140,9 @@ function similarityMatrix(v, w, scores) {
 
   let vocab = vocabulary(v + w);
   let matrix = {};
-  for (var i in vocab) {
+  for (let i in vocab) {
     matrix[vocab[i]] = {};
-    for (var j in vocab) {
+    for (let j in vocab) {
       matrix[vocab[i]][vocab[j]] = i === j ? match : mismatch;
     }
   }

@@ -297,6 +297,6 @@ module.exports = function showMfGroupsList() {
   UI.dialog(html, {
     width: 700,
     height: 700,
-    title: 'List of known groups'
+    title: 'List of known groups',
   });
 };

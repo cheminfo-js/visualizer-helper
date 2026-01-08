@@ -93,7 +93,7 @@ define([
           twig: this.defaultTwig,
           category: [
             {
-              value: this.basename + form.category + '.' + form.name,
+              value: `${this.basename + form.category}.${form.name}`,
             },
           ],
           ...this.customProperties,
@@ -137,8 +137,8 @@ define([
 
     async doAction(action, options) {
       if (!action) return;
-      var actionName = action.name;
-      var actionValue = action.value;
+      let actionName = action.name;
+      let actionValue = action.value;
 
       console.log('ACTION:', actionName, actionValue);
 

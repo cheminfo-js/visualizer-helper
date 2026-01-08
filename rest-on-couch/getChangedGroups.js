@@ -3,7 +3,7 @@ define(['src/util/ui', 'lodash'], function (UI, _) {
     const groups = JSON.parse(JSON.stringify(allGroups));
     const groupNames = groups.map((group) => group.name);
     // we will also take the current groups from the record
-    const owners = DataObject.resurrect(record.$owners).slice(1); // eslint-disable-line
+    const owners = DataObject.resurrect(record.$owners).slice(1);
     const groupsToAdd = _.difference(owners, groupNames);
     for (let group of groupsToAdd) {
       groups.push({ name: group });
@@ -42,15 +42,19 @@ define(['src/util/ui', 'lodash'], function (UI, _) {
     </div>
 `,
       { groups },
-      { twig: { groups } }
+      { twig: { groups } },
     ).then(function (result) {
       if (!result) return undefined;
       let groups = result.groups;
-      let add = groups.filter((r) => !r.previous && r.checked).map((r) => r.name);
+      let add = groups
+        .filter((r) => !r.previous && r.checked)
+        .map((r) => r.name);
       if (result.email) add.push(result.email);
       return {
         add,
-        remove: groups.filter((r) => r.previous && !r.checked).map((r) => r.name)
+        remove: groups
+          .filter((r) => r.previous && !r.checked)
+          .map((r) => r.name),
       };
     });
   }

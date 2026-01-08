@@ -36,7 +36,7 @@ export default function toHTML(value) {
 
     return rangesToACS(value.nmrium.ranges.values, {
       nucleus: nucleus[0],
-      solvent: solvent,
+      solvent,
       frequencyObserved: frequency,
       deltaFormat: defaultFormat.deltaFormat,
       couplingFormat: defaultFormat.couplingFormat,

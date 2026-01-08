@@ -93,14 +93,14 @@ export function getReadmeForSample(
       ...bps.map((bp) => ({
         property: '**Boiling Point**',
         value: `${bp.low}${
-          bp.high !== undefined && bp.high !== bp.low ? ' - ' + bp.high : ''
+          bp.high !== undefined && bp.high !== bp.low ? ` - ${bp.high}` : ''
         } °C`,
         conditions: bp.pressure || 'Standard atmospheric pressure',
       })),
       ...mps.map((mp) => ({
         property: '**Melting Point**',
         value: `${mp.low}${
-          mp.high !== undefined && mp.high !== mp.low ? ' - ' + mp.high : ''
+          mp.high !== undefined && mp.high !== mp.low ? ` - ${mp.high}` : ''
         } °C`,
         conditions: '',
       })),
@@ -108,7 +108,7 @@ export function getReadmeForSample(
         property: '**Density**',
         value: `${density.low}${
           density.high !== undefined && density.high !== density.low
-            ? ' - ' + density.high
+            ? ` - ${density.high}`
             : ''
         } g·cm⁻³`,
         conditions: '',
@@ -163,7 +163,7 @@ export function getReadmeForSample(
   }
 
   if (general.molfile) {
-    md.push('```' + general.molfile + '```');
+    md.push(`\`\`\`${general.molfile}\`\`\``);
   }
 
   return md.join('\n');
@@ -405,23 +405,19 @@ export function getMDTable(header, rows) {
   const pad = (str, len) => str + ' '.repeat(len - str.length);
 
   // Build header row
-  const headerRow =
-    '| ' +
-    labels.map((label, i) => pad(label, colWidths[i])).join(' | ') +
-    ' |';
+  const headerRow = `| ${labels
+    .map((label, i) => pad(label, colWidths[i]))
+    .join(' | ')} |`;
 
   // Build divider row (---)
-  const dividerRow =
-    '|-' + colWidths.map((w) => '-'.repeat(w)).join('-|-') + '-|';
+  const dividerRow = `|-${colWidths.map((w) => '-'.repeat(w)).join('-|-')}-|`;
 
   // Build data rows
   const dataRows = rows.map(
     (row) =>
-      '| ' +
-      keys
+      `| ${keys
         .map((k, i) => pad(row[k] != null ? String(row[k]) : '', colWidths[i]))
-        .join(' | ') +
-      ' |',
+        .join(' | ')} |`,
   );
 
   // Join all parts

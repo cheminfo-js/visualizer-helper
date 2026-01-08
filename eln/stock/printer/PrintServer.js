@@ -30,7 +30,7 @@ define(['superagent', 'uri/URI'], function (superagent, URI) {
           'Content-Type',
           typeof printData === 'string'
             ? 'text/plain'
-            : 'application/octet-stream'
+            : 'application/octet-stream',
         )
         .send(printData);
     }

@@ -5,25 +5,25 @@ let categories = actionValue.category || [];
 const spectrumCategories = [
   {
     label: 'reference',
-    description: 'Reference data'
+    description: 'Reference data',
   },
   {
     label: 'nonRepresentative',
-    description: 'Non representative data'
+    description: 'Non representative data',
   },
   {
     label: 'supplementary',
-    description: 'Supplementary data'
-  }
+    description: 'Supplementary data',
+  },
 ];
 
 define(['src/util/ui', 'lodash'], function (UI, _) {
   function setspectrumCategories(record, allCategories) {
     let selectedCategories = categories;
 
-    var entrysample = { group: {} };
+    let entrysample = { group: {} };
     owners.forEach((group) => (entrysample.group[group] = true));
-    var data = { allGroups };
+    let data = { allGroups };
     return UI.form(
       `
   <div>
@@ -47,20 +47,20 @@ define(['src/util/ui', 'lodash'], function (UI, _) {
   </div>
 `,
       entrysample,
-      { twig: data }
+      { twig: data },
     ).then(function (result) {
       if (!result) return null;
       const selected = Object.keys(result.group).filter(
-        (key) => result.group[key]
+        (key) => result.group[key],
       );
       const notSelected = Object.keys(result.group).filter(
-        (key) => !result.group[key]
+        (key) => !result.group[key],
       );
       const toAdd = _.difference(canBeAdded, notSelected);
       const toRemove = _.difference(canBeRemoved, selected);
       return {
         add: toAdd,
-        remove: toRemove
+        remove: toRemove,
       };
     });
   }

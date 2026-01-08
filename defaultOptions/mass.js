@@ -1,4 +1,3 @@
-
 define(function () {
   return {
     monoisotopicMass: 300.123,
@@ -22,14 +21,14 @@ define(function () {
       ya: false,
       yb: false,
       minInternal: 1,
-      maxInternal: 999
+      maxInternal: 999,
     },
     digestion: {
       enzyme: undefined,
       minMissed: undefined,
       maxMissed: undefined,
       minResidue: undefined,
-      maxResidue: undefined
+      maxResidue: undefined,
     },
     options: {
       protonate: false,
@@ -37,10 +36,11 @@ define(function () {
       minimalHeight: 0,
       widthTop: 0.1,
       widthBottom: 0.2,
-      widthFunction: '// var widthBottom = 0.01 + mass / 8000;\r\n// var widthTop = widthBottom / 2;',
+      widthFunction:
+        '// var widthBottom = 0.01 + mass / 8000;\r\n// var widthTop = widthBottom / 2;',
       zone: {
         low: -0.5,
-        high: 4.5
+        high: 4.5,
       },
       mfRange: 'C0-100 H0-200 N0-10 O0-10 S0-5 F0-5 Cl0-5 Br0-5',
       maxResults: 200,
@@ -53,7 +53,7 @@ define(function () {
       massRange: 0.1,
       decimalsPPM: 4,
       decimalsMass: 4,
-      addExperimentalExtract: true
-    }
+      addExperimentalExtract: true,
+    },
   };
 });

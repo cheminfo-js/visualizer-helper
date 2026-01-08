@@ -17,6 +17,6 @@ function decrypt(encryptedHex, key) {
 }
 
 module.exports = {
-  encrypt,
   decrypt,
+  encrypt,
 };

@@ -1,4 +1,3 @@
-
 /*
 In the general preferences you should put something like:
 require(['TrackOptions'], function(TrackOptions) {
@@ -8,11 +7,11 @@ require(['TrackOptions'], function(TrackOptions) {
 
 define([], function () {
   function watchAnswers(cookieName, exercises, options = {}) {
-    var myAnswers = JSON.parse(window.localStorage.getItem(cookieName) || '{}');
+    let myAnswers = JSON.parse(window.localStorage.getItem(cookieName) || '{}');
 
-    for (var i = 0; i < exercises.length; i++) {
-      var exercise = exercises[i];
-      var myAnswer = myAnswers[exercise.id];
+    for (let i = 0; i < exercises.length; i++) {
+      let exercise = exercises[i];
+      let myAnswer = myAnswers[exercise.id];
       if (myAnswer) {
         exercise.myResult = myAnswer;
       }
@@ -20,19 +19,21 @@ define([], function () {
 
     exercises.onChange(function (evt) {
       switch (evt.target.__name) {
-        case 'myResult':
-          var target = evt.target.__parent;
+        case 'myResult': {
+          const target = evt.target.__parent;
           if (target) {
             myAnswers[target.id] = target.myResult;
           }
           break;
-        case 'exercises':
+        }
+        case 'exercises': {
           if (!options.keepAnswers) {
             myAnswers = {};
           }
           break;
+        }
         default:
-                    // throw new Error(`Unexpected target: ${evt.target.__name}`);
+        // throw new Error(`Unexpected target: ${evt.target.__name}`);
       }
       window.localStorage.setItem(cookieName, JSON.stringify(myAnswers));
     });
