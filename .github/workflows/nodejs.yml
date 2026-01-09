@@ -26,4 +26,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run babel on all files
-        run: npm run babel
+        run: npm run babel-test
