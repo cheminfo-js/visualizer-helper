@@ -6,8 +6,9 @@ export default defineConfig(
   globalIgnores([
     'node_modules',
     'build',
-    'tiles/font-awesome',
+
     // Ignore third-party libraries
+    'tiles/font-awesome',
     'util/aesjs.js',
     'util/cloneDeepLimitArray.js',
     'util/md5.js',
