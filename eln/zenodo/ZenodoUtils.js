@@ -229,7 +229,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
     '',
   );
   if (Array.isArray(meta.creators) && meta.creators.length > 0) {
-    for (const [i, c] of meta.creators.entries()) {
+    for (const [, c] of meta.creators.entries()) {
       const identifiers = c.person_or_org.identifiers || [];
       if (identifiers.length === 0) {
         identifiers.push({ scheme: 'orcid', identifier: '' });
@@ -255,7 +255,7 @@ export function getReadmeForDeposition(ZenodoDeposition) {
   }
   if (Array.isArray(meta.contributors) && meta.contributors.length > 0) {
     md.push('', `## Contributors`, '');
-    for (const [i, c] of meta.contributors.entries()) {
+    for (const [, c] of meta.contributors.entries()) {
       md.push(
         `- [**${c.person_or_org.name}**${
           c.affiliations[0].name
@@ -440,6 +440,7 @@ function getAdditionalDescription(description) {
       break;
     }
   }
+  return outputHTML;
 }
 
 export function getKeywordsForDeposition(samples) {

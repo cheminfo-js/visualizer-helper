@@ -1,4 +1,4 @@
-const tiles = [
+globalThis.tiles = [
   {
     label: 'General', // this is my first tab
     tiles: [
@@ -1020,5 +1020,3 @@ const tiles = [
     ],
   },
 ];
-
-module.exports = tiles;

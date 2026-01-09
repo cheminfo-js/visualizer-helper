@@ -26,8 +26,8 @@ function onRocInit(data) {
   return false;
 }
 
-function onDataFocus(dataId, tabId, type) {
-  return function (data) {
+function createOnDataFocus(dataId, tabId, type) {
+  return function onDataFocus(data) {
     if (data.type === 'tab.focus') {
       let data;
       if (type === 'data') data = API.getData(dataId);
@@ -51,10 +51,10 @@ module.exports = {
     });
   },
   sendCacheOnFocus(dataId, tabId) {
-    IB.onMessage(onDataFocus(dataId, tabId, 'cache'));
+    IB.onMessage(createOnDataFocus(dataId, tabId, 'cache'));
   },
   sendDataOnFocus(dataId, tabId) {
-    IB.onMessage(onDataFocus(dataId, tabId, 'data'));
+    IB.onMessage(createOnDataFocus(dataId, tabId, 'data'));
   },
   sendVariableOnChange(data, tabId) {
     data.onChange((event) => {
@@ -75,7 +75,7 @@ module.exports = {
   },
   // register callback to handle message of type 'message', without info about the sender
   onMessage(cb) {
-    IB.onMessage(function (data) {
+    IB.onMessage((data) => {
       if (data.type === 'tab.message') {
         cb(data.message);
       }

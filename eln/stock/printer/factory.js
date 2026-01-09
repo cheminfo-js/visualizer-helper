@@ -6,7 +6,7 @@ module.exports = function printerFactor(opts, cb) {
     opts = {};
   }
   if (typeof IframeBridge !== 'undefined') {
-    self.IframeBridge.onMessage(async function (data) {
+    self.IframeBridge.onMessage(async (data) => {
       if (data.type === 'tab.data') {
         let optsCopy = { ...opts };
         if (data.message.printer && data.message.printer.couchDB) {

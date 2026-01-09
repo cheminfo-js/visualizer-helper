@@ -97,10 +97,6 @@ class MF {
     this.sample.setChildSync(['$content', 'general', 'mf'], mf);
   }
 
-  setMF(mf) {
-    this.sample.setChildSync(['$content', 'general', 'mf'], mf);
-  }
-
   setMW(mw) {
     this.sample.setChildSync(['$content', 'general', 'mw'], mw);
   }

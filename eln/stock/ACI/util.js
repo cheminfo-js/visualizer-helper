@@ -212,7 +212,7 @@ module.exports = function aciUtil(roc, prefix) {
   };
 };
 
-var salts = {
+const salts = {
   NX: {
     name: 'Free base',
     mf: '',

@@ -8,7 +8,7 @@ define([
   const SECOND = 1000;
   const MINUTE = 60 * SECOND;
   const LIMIT = 11 * MINUTE;
-  return async function (opts) {
+  return async function stockPrinter(opts) {
     let printerRoc,
       formatsRoc,
       printServerRoc,
@@ -88,7 +88,7 @@ define([
 
       // printerFormat: uuid of the printer format or printer format document
       async print(printer, printFormat, data) {
-        printer = await printerRoc.get(printer);
+        const dbPrinter = await printerRoc.get(printer);
         if (printFormat.resurrect) {
           printFormat = printFormat.resurrect();
         }
@@ -99,9 +99,9 @@ define([
         const printServer = printServers.find(
           (ps) =>
             String(ps.$content.macAddress) ===
-            String(printer.$content.macAddress),
+            String(dbPrinter.$content.macAddress),
         );
-        const p = new Printer(printer.$content, printServer.$content, opts);
+        const p = new Printer(dbPrinter.$content, printServer.$content, opts);
         await p.print(printFormat.$content, data);
       },
 
@@ -139,7 +139,7 @@ define([
       // get online printers that can print a given format
       async getPrinters(format) {
         if (!format) return onlinePrinters;
-        format = await formatsRoc.get(format);
+        const dbFormat = await formatsRoc.get(format);
         const onlineMacAdresses = onlinePrinters.map(
           (ps) => ps.$content.macAddress,
         );
@@ -147,7 +147,7 @@ define([
           .filter((p) => onlineMacAdresses.includes(p.$content.macAddress))
           .filter((p) => {
             return (
-              format.$content.models.filter(
+              dbFormat.$content.models.filter(
                 (m) => String(m.name) === String(p.$content.model),
               ).length > 0
             );
@@ -155,8 +155,9 @@ define([
       },
 
       async getFormats(printer, type) {
+        let formats;
         if (!printer) {
-          var formats = printFormats.filter((f) => {
+          formats = printFormats.filter((f) => {
             return onlinePrinters.some((printer) =>
               f.$content.models.some(
                 (m) => String(m.name) === String(printer.$content.model),
@@ -164,10 +165,10 @@ define([
             );
           });
         } else {
-          printer = await printerRoc.get(printer);
+          const dbPrinter = await printerRoc.get(printer);
           formats = printFormats.filter((f) =>
             f.$content.models.some(
-              (m) => String(m.name) === String(printer.$content.model),
+              (m) => String(m.name) === String(dbPrinter.$content.model),
             ),
           );
         }

@@ -3,7 +3,7 @@ define([
   'https://www.lactame.com/lib/ml/1.0.0/ml.js',
 ], (CC, ml) => {
   let exports = {};
-  exports.findCoefficients = function (reagents, products) {
+  exports.findCoefficients = function findCoefficient(reagents, products) {
     let atoms = {};
 
     let nbCoeff = reagents.length + products.length;
@@ -62,6 +62,7 @@ define([
         console.warn('cannot solve'); // eslint-disable-line no-console
       }
     } else {
+      // eslint-disable-next-line new-cap
       const LU = ml.Matrix.Decompositions.LU(matrix);
       if (LU.isSingular()) {
         let diag0Pos = findDiag0Pos(LU.LU);

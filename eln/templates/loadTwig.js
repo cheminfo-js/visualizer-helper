@@ -6,7 +6,7 @@ module.exports = async function loadTwig(category, options = {}) {
   const { variableName = 'twigTemplate' } = options;
 
   try {
-    let templates = DataObject(await load(category));
+    let templates = new DataObject(await load(category));
     let twigTemplate = await templates.getChild([
       '0',
       'document',
@@ -15,9 +15,8 @@ module.exports = async function loadTwig(category, options = {}) {
     ]);
     if (variableName) API.createData(variableName, twigTemplate);
     return twigTemplate;
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(`No twig format found for ${category}`);
+  } catch (err) {
+    reportError(err);
     return '';
   }
 };

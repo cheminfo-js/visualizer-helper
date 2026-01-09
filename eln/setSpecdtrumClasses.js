@@ -48,7 +48,7 @@ define(['src/util/ui', 'lodash'], (UI, _) => {
 `,
       entrysample,
       { twig: data },
-    ).then(function (result) {
+    ).then((result) => {
       if (!result) return null;
       const selected = Object.keys(result.group).filter(
         (key) => result.group[key],

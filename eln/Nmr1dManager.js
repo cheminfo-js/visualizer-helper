@@ -177,13 +177,14 @@ class Nmr1dManager {
         this._autoRanges(currentNmr);
         break;
       }
-      case 'deleteAllRanges':
-        var ranges = API.getData('currentNmrRanges');
+      case 'deleteAllRanges': {
+        const ranges = API.getData('currentNmrRanges');
         while (ranges.length) {
           ranges.pop();
         }
         ranges.triggerChange();
         break;
+      }
       case 'clearAssignments': {
         let ranges = this.getCurrentRanges();
         if (ranges) {
@@ -298,8 +299,9 @@ class Nmr1dManager {
   _getNMR(currentNMRLine) {
     let filename = String(currentNMRLine.getChildSync(['jcamp', 'filename']));
     return currentNMRLine.getChild(['jcamp', 'data']).then((jcamp) => {
+      let spectrum;
       if (filename && this.spectra[filename]) {
-        var spectrum = this.spectra[filename];
+        spectrum = this.spectra[filename];
       } else if (jcamp) {
         jcamp = String(jcamp.get());
         spectrum = NMR.fromJcamp(jcamp);
@@ -381,7 +383,7 @@ class Nmr1dManager {
         if (mfInfo && mfInfo.atoms && mfInfo.atoms.H) {
           return mfInfo.atoms.H || 100;
         }
-      } catch (e) {
+      } catch {
         return 100;
       }
     }

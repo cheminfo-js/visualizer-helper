@@ -1,6 +1,7 @@
 const defaultOptions = {
   onTileClick: (target) => {
-    console.log(target);
+    // eslint-disable-next-line no-console
+    console.log(`onTileClick not implemented. Called with target: `, target);
   },
   isNewTabLink: () => false,
   ribbon: () => '',
@@ -127,3 +128,5 @@ function repaint(divID, tiles, options) {
     }
   }
 }
+
+globalThis.TilesManager = TilesManager;

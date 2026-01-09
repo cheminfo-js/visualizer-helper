@@ -1,3 +1,4 @@
+import Slick from 'slickgrid';
 import API from 'src/util/api';
 import Renderer from 'src/util/typerenderer';
 import UI from 'src/util/ui';
@@ -85,6 +86,7 @@ export class ModulePrefsManager {
           id: 'jpath',
           name: 'jpath',
           jpath: ['jpath'],
+          // eslint-disable-next-line new-cap
           editor: Slick.CustomEditors.JPathFactory(objectStructure),
           forceType: 'jpath',
           rendererOptions: {

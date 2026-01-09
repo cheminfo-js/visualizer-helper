@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import ui from 'src/util/ui';
 import util from 'src/util/util';
 import superagent from 'superagent';

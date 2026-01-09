@@ -21,11 +21,11 @@ async function processActions(action) {
     case 'recalculateCharts':
       recalculateCharts();
       break;
-    case 'measurementInfo':
+    case 'measurementInfo': {
       const jcampInfo = await API.require('vh/eln/util/jcampInfo');
-      console.log(action.value);
       jcampInfo(action.value);
       break;
+    }
     case 'removeMeasurement': {
       removeMeasurement(action);
       break;
@@ -47,11 +47,12 @@ async function processActions(action) {
       API.getData('selectedMeasurements').triggerChange();
       updateDistinctLabelUnits();
       break;
-    case 'addMeasurement':
-      let result = await addMeasurement(action, {});
+    case 'addMeasurement': {
+      const result = await addMeasurement(action, {});
       API.getData('selectedMeasurements').triggerChange();
       updateDistinctLabelUnits();
       return result;
+    }
     case 'hideMeasurements':
       hideMeasurements();
       break;
@@ -70,6 +71,10 @@ async function processActions(action) {
     case 'showAllMeasurements':
       showAllMeasurements();
       break;
+    default: {
+      // eslint-disable-next-line no-console
+      console.log(`Unhandled action: ${action.name}`);
+    }
   }
 }
 
@@ -115,7 +120,6 @@ async function addMeasurement(action, options = {}) {
 
   let measurementID =
     sampleID + (action.value.__name !== 0 ? ` ${action.value.__name}` : '');
-  console.log({ measurementID, measurementUUID });
   let jcamp = '';
 
   if (action.value.jcamp && action.value.jcamp.filename) {

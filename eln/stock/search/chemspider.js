@@ -32,10 +32,10 @@ function fromChemspider(chemspider) {
     source: 'chemspider',
   };
 
-  const name = (entry.$content.general.name = []);
-  const identifier = (entry.$content.identifier = {});
-  const cas = (identifier.cas = []);
-  const CSID = (identifier.chemSpiderID = []);
+  const name = entry.$content.general.name ?? [];
+  const identifier = entry.$content.identifier ?? {};
+  const cas = identifier.cas ?? [];
+  const CSID = identifier.chemSpiderID ?? [];
   const synonyms = chemspider.Synonyms;
   for (let i = 0; i < synonyms.length; i++) {
     const synonym = synonyms[i];

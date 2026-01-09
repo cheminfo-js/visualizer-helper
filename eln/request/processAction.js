@@ -33,8 +33,6 @@ async function processAction(actionName, actionValue) {
         API.doAction('refreshRequests');
       }
       break;
-    case 'deleteActivity':
-      break;
     case 'createForm':
       createForm();
       break;

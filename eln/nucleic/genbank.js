@@ -1,7 +1,8 @@
-import Twig from 'lib/twigjs/twig';
+// eslint-disable-next-line import/no-unassigned-import
 import 'angularplasmid';
-import typerenderer from 'src/util/typerenderer';
 import $ from 'jquery';
+import Twig from 'lib/twigjs/twig';
+import typerenderer from 'src/util/typerenderer';
 
 const templateOptions = {
   style: `
@@ -86,9 +87,9 @@ export async function getSvg(parsedGb, options) {
 }
 
 async function compile(val) {
-  return new Promise(function (resolve) {
+  return new Promise(function compile(resolve) {
     let $injector = self.angular.injector(['ng', 'angularplasmid']);
-    $injector.invoke(function ($rootScope, $compile) {
+    $injector.invoke(function invoke($rootScope, $compile) {
       const svg = $compile(String(val))($rootScope);
       // TODO: why is this setTimeout needed
       setTimeout(() => resolve(svg), 0);

@@ -616,11 +616,15 @@ Your local changes will be lost.</p>`;
                 content = atob(droppedData.content);
                 droppedData.encoding = 'text';
                 break;
-              case 'buffer':
+              case 'buffer': {
                 const decoder = new TextDecoder();
                 content = decoder.decode(droppedData.content);
                 droppedData.encoding = 'text';
                 break;
+              }
+              default: {
+                // No special handling
+              }
             }
             droppedData.content = convertToJcamp(content, {
               meta,
@@ -675,8 +679,8 @@ Your local changes will be lost.</p>`;
       case 'translateNucleic':
         Sequence.translateNucleic(this.sample);
         break;
-      case 'createOptions':
-        var advancedOptions1H = API.cache('nmr1hAdvancedOptions');
+      case 'createOptions': {
+        const advancedOptions1H = API.cache('nmr1hAdvancedOptions');
         if (advancedOptions1H) {
           API.createData(
             'nmr1hOndeTemplate',
@@ -689,8 +693,10 @@ Your local changes will be lost.</p>`;
           );
         }
         break;
+      }
       case 'recreateVariables':
         this.createVariables();
+        break;
       case 'deleteAttachment': {
         const ok = await UI.confirm(
           'Are you sure you want to delete the attachment?',

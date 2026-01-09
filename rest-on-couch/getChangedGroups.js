@@ -43,7 +43,7 @@ define(['src/util/ui', 'lodash'], (UI, _) => {
 `,
       { groups },
       { twig: { groups } },
-    ).then(function (result) {
+    ).then((result) => {
       if (!result) return undefined;
       let groups = result.groups;
       let add = groups

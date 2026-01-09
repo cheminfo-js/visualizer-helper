@@ -32,7 +32,7 @@ export function appendedDragAndDrop(experimentalFiles, targetName) {
         target.push({ file });
       }
     } else {
-      var type;
+      let type;
       if (String(file.encoding) === 'text') {
         type = getTargetType(String(file.content));
       } else {

@@ -163,6 +163,7 @@ class SequencesDataSet {
           sequence.category = getJpath(sequence);
         }
         selectedSequences.triggerChange();
+        break;
       }
       case 'showSpectra':
         this.showSpectra();
@@ -189,7 +190,10 @@ class SequencesDataSet {
           action.value.resurrect(),
         );
         break;
-      default:
+      default: {
+        // eslint-disable-next-line no-console
+        console.log(`Unhandled action: ${action.name}`);
+      }
     }
   }
 

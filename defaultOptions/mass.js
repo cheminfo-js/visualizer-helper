@@ -1,4 +1,4 @@
-define(function () {
+define(() => {
   return {
     monoisotopicMass: 300.123,
     resolution: 100000,

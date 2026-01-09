@@ -56,7 +56,7 @@ class Sample {
         case '$content.general.mf':
           try {
             this.mf.fromMF();
-          } catch (e) {
+          } catch {
             // ignore
           }
           break;
@@ -69,11 +69,10 @@ class Sample {
   }
 
   async _init() {
-    this._initialized = new Promise(async (resolve) => {
+    this._initialized = (async () => {
       this.sample = await API.createData(this.options.varName, this.sample);
       this._loadSample();
-      resolve();
-    });
+    })();
   }
 
   bindChange() {

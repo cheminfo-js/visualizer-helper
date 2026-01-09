@@ -128,8 +128,8 @@ module.exports = {
           rowHeight: 150,
         },
       })
-      .catch(function (e) {
-        console.error(e); // eslint-disable-line no-console
+      .catch((err) => {
+        reportError(err);
         ui.showNotification('search failed', 'error');
       });
   },

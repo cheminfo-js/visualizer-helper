@@ -31,6 +31,8 @@ function generateTrackAnnotations(action) {
   const analysesManager = API.cache('analysesManager');
 
   let data;
+  // TODO: What should we do with this?
+  // eslint-disable-next-line no-constant-condition
   if (false) {
     if (analysesManager.getAnalysisByMeasurementId) {
       function getColor(measurementId) {

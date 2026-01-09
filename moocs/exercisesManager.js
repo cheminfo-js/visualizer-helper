@@ -60,8 +60,8 @@ define(['src/util/api'], (API) => {
       saveState(options.cookieName, state);
 
       return API.createData('exercises', selectedExercises).then(
-        function (exercises) {
-          exercises.onChange(function (evt) {
+        (exercises) => {
+          exercises.onChange((evt) => {
             if (evt.target.__name === 'myResult') {
               let target = evt.target.__parent;
               if (target) {
