@@ -3,7 +3,7 @@ define([
   './printServerFactory',
   './printProcessors',
   '../../libs/MolecularFormula',
-], function (Util, printServerFactory, processors, MolecularFormula) {
+], (Util, printServerFactory, processors, MolecularFormula) => {
   class Printer {
     constructor(printer, printServer, opts) {
       this.url = String(printServer.url);

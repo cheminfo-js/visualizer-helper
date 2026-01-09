@@ -1,8 +1,7 @@
-define([
-  '../util/getViewInfo',
-  'src/util/api',
-  'src/util/couchdbAttachments',
-], function (getViewInfo, API) {
+define(['../util/getViewInfo', 'src/util/api', 'src/util/couchdbAttachments'], (
+  getViewInfo,
+  API,
+) => {
   class UserAnalysisResults {
     constructor(roc, sampleID) {
       this.roc = roc;

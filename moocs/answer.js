@@ -1,4 +1,4 @@
-define(['mathjs'], function (mathjs) {
+define(['mathjs'], (mathjs) => {
   let exports = {};
 
   exports.isCorrect = function (sol, ans, options) {

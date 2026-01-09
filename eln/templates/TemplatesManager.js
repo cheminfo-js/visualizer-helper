@@ -4,7 +4,7 @@ define([
   'src/util/api',
   'vh/rest-on-couch/showRecordInfo',
   'src/util/ui',
-], function (Roc, getChangedGroups, API, showRecordInfo, UI) {
+], (Roc, getChangedGroups, API, showRecordInfo, UI) => {
   class TemplatesManager {
     /**
      *

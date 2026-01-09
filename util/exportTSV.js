@@ -3,7 +3,7 @@ Example:
 exportTSV(myArray, {keys:['surface','volume]}
  */
 
-define(['src/util/ui'], function (UI) {
+define(['src/util/ui'], (UI) => {
   function exportTSV(items, options = {}) {
     const { keys = Object.keys(items[0]) } = options;
 

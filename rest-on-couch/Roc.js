@@ -13,7 +13,7 @@ define([
   'eventEmitter',
   './UserViewPrefs',
   './UserAnalysisResults',
-], function (
+], (
   Datas,
   API,
   ui,
@@ -28,7 +28,7 @@ define([
   EventEmitter,
   UserViewPrefs,
   UserAnalysisResults,
-) {
+) => {
   const DataObject = Datas.DataObject;
   const eventEmitters = {};
 

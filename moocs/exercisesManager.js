@@ -1,4 +1,4 @@
-define(['src/util/api'], function (API) {
+define(['src/util/api'], (API) => {
   async function exercisesManager(action, allExercises, options) {
     switch (action) {
       case 'init': {

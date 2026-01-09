@@ -1,4 +1,4 @@
-define(['src/util/ui', 'lodash'], function (UI, _) {
+define(['src/util/ui', 'lodash'], (UI, _) => {
   function editGroups(record, allGroups) {
     const groups = JSON.parse(JSON.stringify(allGroups));
     const groupNames = groups.map((group) => group.name);

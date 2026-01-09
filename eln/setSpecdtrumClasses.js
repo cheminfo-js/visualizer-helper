@@ -17,7 +17,7 @@ const spectrumCategories = [
   },
 ];
 
-define(['src/util/ui', 'lodash'], function (UI, _) {
+define(['src/util/ui', 'lodash'], (UI, _) => {
   function setspectrumCategories(record, allCategories) {
     let selectedCategories = categories;
 

@@ -5,7 +5,7 @@ define([
   'canvg',
   '../../libs/Image',
   'openchemlib',
-], function (Datas, UI, twig, canvg, IJS, OCL) {
+], (Datas, UI, twig, canvg, IJS, OCL) => {
   IJS = IJS.default;
   const DataObject = Datas.DataObject;
   let chars =

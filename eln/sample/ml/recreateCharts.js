@@ -1,4 +1,4 @@
-define(['src/util/api', 'src/util/ui'], function (API, UI) {
+define(['src/util/api', 'src/util/ui'], (API, UI) => {
   async function recreateCharts(variable, action) {
     if (!API.getData('preferences')) return;
     const preferences = JSON.parse(JSON.stringify(API.getData('preferences')));

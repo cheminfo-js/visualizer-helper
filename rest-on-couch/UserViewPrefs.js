@@ -1,4 +1,4 @@
-define(['../util/getViewInfo'], function (getViewInfo) {
+define(['../util/getViewInfo'], (getViewInfo) => {
   class UserViewPrefs {
     constructor(roc) {
       this.roc = roc;

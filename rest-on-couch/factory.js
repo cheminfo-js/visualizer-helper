@@ -1,4 +1,4 @@
-define(['./Roc'], function (Roc) {
+define(['./Roc'], (Roc) => {
   return function (opts, cb) {
     if (typeof opts === 'function') {
       cb = opts;

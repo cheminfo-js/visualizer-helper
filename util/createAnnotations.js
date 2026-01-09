@@ -3,7 +3,7 @@ Create jsgraph annotations from an array
 This method will put the original data in 'info' of the annotations
 */
 
-define(['src/util/api'], function (API) {
+define(['src/util/api'], (API) => {
   function create(data, variableName, options = {}) {
     const {
       from = (datum) => datum.from,

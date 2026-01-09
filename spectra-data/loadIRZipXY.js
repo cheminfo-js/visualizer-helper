@@ -1,4 +1,4 @@
-define(['src/util/api'], function (API) {
+define(['src/util/api'], (API) => {
   return async function loadZips(zipURLs, options = {}) {
     const JSZip = await API.require('jszip');
     const superagent = await API.require('superagent');

@@ -4,7 +4,7 @@ define([
   './printProcessors',
   './printServerFactory',
   '../../../rest-on-couch/Roc',
-], function (API, Printer, processors, printServerFactory, Roc) {
+], (API, Printer, processors, printServerFactory, Roc) => {
   const SECOND = 1000;
   const MINUTE = 60 * SECOND;
   const LIMIT = 11 * MINUTE;
