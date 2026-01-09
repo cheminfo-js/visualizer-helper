@@ -6,7 +6,6 @@ export function add(GHS) {
       const code = val.code || val;
       const svg = String(GHS.getGHSObject()[code].svg);
       const dom = $(svg);
-      console.log(dom);
       const width = dom.attr('width');
       const height = dom.attr('height');
       if (width && height) {

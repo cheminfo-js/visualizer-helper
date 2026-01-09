@@ -31,7 +31,6 @@ class TilesManager {
 function repaint(divID, tiles, options) {
   let lineCount = 0;
   const $div = $(`#${divID}`);
-  console.log($div);
 
   $div.empty();
   const $main = $('<div>');
@@ -43,7 +42,7 @@ function repaint(divID, tiles, options) {
   $main.addClass('on-tabs-tiles');
   $main.append(tiles.map(getTile));
 
-  $main.on('click', function (event) {
+  $main.on('click', (event) => {
     let $el;
     if ($(event.target).hasClass('cell')) {
       $el = $(event.target);

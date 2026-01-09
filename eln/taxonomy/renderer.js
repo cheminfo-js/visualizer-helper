@@ -4,7 +4,6 @@ import { createTaxonomyTree } from '../../../../../../../../lib/mass-tools/7.8.2
 import * as TreeSVG from '../../../../../../../../lib/react-tree-svg/0.1.1/react-tree-svg';
 
 export function add() {
-  console.log(TreeSVG);
   TypeRenderer.addType('taxonomyTree', {
     toscreen($element, val, root, options = {}) {
       let taxonomies = val.code || val;

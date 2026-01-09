@@ -33,7 +33,6 @@ module.exports = {
           endkey: ['sample', [`${term}\ufff0`, {}]],
         })
         .then((data) => {
-          console.log(data);
           data.forEach((d) => {
             const status =
               d.$content &&

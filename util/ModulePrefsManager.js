@@ -15,8 +15,6 @@ export class ModulePrefsManager {
     if (options.hasRoc) {
       let waitingRoc = new Promise((resolveRoc) => {
         this.resolveRoc = resolveRoc;
-      }).then(() => {
-        console.log('Roc initialized');
       });
       promises.push(waitingRoc);
     }
@@ -148,7 +146,12 @@ export class ModulePrefsManager {
     const record = await this.getRecord();
     if (!record) return;
     if (record.$content.version !== this.currentVersion) {
-      console.log('Not correct version', record.$content, this.currentVersion);
+      // eslint-disable-next-line no-console
+      console.log(
+        'ModulePrefsManager: not correct version',
+        record.$content,
+        this.currentVersion,
+      );
       return;
     }
     if (moduleID) {

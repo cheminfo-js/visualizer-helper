@@ -120,7 +120,6 @@ class SequencesDataSet {
   }
 
   async processAction(action) {
-    console.log({ action });
     switch (action.name) {
       case 'clickedSample':
         this.clickedSample(action.value);

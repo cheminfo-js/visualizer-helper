@@ -2,7 +2,7 @@ import _ from 'lodash';
 import OCL from 'openchemlib';
 import UI from 'src/util/ui';
 
-module.exports = function (roc, prefix) {
+module.exports = function aciUtil(roc, prefix) {
   function getMoleculeWithSalts(options) {
     const { saltCode, idCode, nbSalts, value } = options;
     const oclid = idCode || value;

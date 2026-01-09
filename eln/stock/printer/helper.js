@@ -10,7 +10,6 @@ module.exports = {
       ...JSON.parse(JSON.stringify(printer)),
       formats: [],
     }));
-    console.log(varPrinterFormats);
     for (let i = 0; i < printers.length; i++) {
       for (let j = 0; j < types.length; j++) {
         const sFormats = (await printer.getFormats(printers[i], types[j])).map(
@@ -33,7 +32,6 @@ module.exports = {
       await API.createData(`${types[j]}Formats`, varFormats[j]);
     }
     API.createData('varPrinterFormats', varPrinterFormats);
-    console.log(varPrinterFormats);
   },
 
   async askPrintEntry(entry, type) {

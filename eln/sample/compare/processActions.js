@@ -22,10 +22,11 @@ async function processActions(action) {
       case 'recalculateCharts':
         recalculateCharts();
         break;
-      case 'spectrumInfo':
+      case 'spectrumInfo': {
         const jcampInfo = await API.require('vh/eln/util/jcampInfo');
         jcampInfo(action.value);
         break;
+      }
       case 'removeSpectrum': {
         removeSpectrum(action);
         break;
@@ -39,9 +40,6 @@ async function processActions(action) {
           .filter((entry) => DataObject.resurrect(entry.display))
           .map((entry) => String(entry.id));
         let analysis = analysesManager.getAnalyses({ ids })[0];
-        if (!analysis) {
-          console.error('No analysis found');
-        }
 
         const text = ExtendedCommonSpectrum.toText(analysis, {
           selector: preferences.selector,
@@ -63,9 +61,6 @@ async function processActions(action) {
           .filter((entry) => DataObject.resurrect(entry.display))
           .map((entry) => String(entry.id));
         let analyses = analysesManager.getAnalyses({ ids });
-        if (!analyses) {
-          console.error('No analysis found');
-        }
 
         const text = ExtendedCommonSpectrum.toMatrix(analyses, {
           selector: preferences.selector,
@@ -96,11 +91,12 @@ async function processActions(action) {
         API.getData('selectedSpectra').triggerChange();
         updateDistinctLabelUnits();
         break;
-      case 'addSpectrum':
-        let result = await addSpectrum(action, {});
+      case 'addSpectrum': {
+        const result = await addSpectrum(action, {});
         API.getData('selectedSpectra').triggerChange();
         updateDistinctLabelUnits();
         return result;
+      }
       case 'hideSpectra':
         hideSpectra();
         break;
@@ -120,7 +116,8 @@ async function processActions(action) {
         showAllSpectra();
         break;
       default:
-        console.error(`Action ${action.name} is not recognized`);
+        // eslint-disable-next-line no-console
+        console.log(`Unhandled action ${action.name}`);
     }
   } catch (e) {
     UI.showNotification(e.message, 'error');
@@ -167,7 +164,6 @@ async function addSpectrum(action, options = {}) {
   let spectrumUUID = options.spectrumUUID || getSpectrumUUID(action.value);
 
   let spectrumID = `${sampleID} ${action.value.__name}`;
-  console.log({ spectrumID, spectrumUUID });
   let jcamp = '';
 
   if (action.value.jcamp && action.value.jcamp.filename) {

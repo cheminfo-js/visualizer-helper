@@ -1,6 +1,6 @@
 import superagent from 'superagent';
 
-module.exports = function (url) {
+module.exports = function blast(url) {
   async function makeblastdb(sequences) {
     const res = await superagent.post(`${url}/makeblastdb`).send(sequences);
     return res.body;

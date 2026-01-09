@@ -16,7 +16,6 @@ export default function recalculateCharts() {
 
   let analyses = analysesManager.getAnalyses({ ids });
 
-  console.log('Calculate chart');
   try {
     if (preferences.normalization.processing) {
       let chartProcessed = ExtendedCommonSpectrum.JSGraph.getJSGraph(analyses, {

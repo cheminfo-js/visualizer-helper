@@ -50,7 +50,6 @@ define([
                 `${result.$content.general.mf}`,
               );
               result.mfCanonic = mf.toMF();
-              console.log(result.mfCanonic);
             }
             if (result.$content.general.description) {
               result.line1 = result.$content.general.description.substring(

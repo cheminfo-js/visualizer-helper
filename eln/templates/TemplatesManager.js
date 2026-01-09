@@ -29,7 +29,6 @@ define([
     }
 
     async updateTemplate() {
-      console.log('UPDATE TEMPLATE');
       const template = API.getData('currentTemplate');
       await this.roc.update(template.value);
       this.refreshTemplates();
@@ -47,7 +46,7 @@ define([
       this.refreshTemplates();
     }
 
-    async createTemplate(options = {}) {
+    async createTemplate() {
       const form = await UI.form(
         `
           <div>
@@ -102,7 +101,6 @@ define([
 
       const template = await this.roc.create(templateEntry);
       await this.refreshTemplates();
-      console.log(template);
       return template;
     }
 
@@ -140,8 +138,6 @@ define([
       let actionName = action.name;
       let actionValue = action.value;
 
-      console.log('ACTION:', actionName, actionValue);
-
       switch (actionName) {
         case 'createTemplate':
           return this.createTemplate(options);
@@ -157,6 +153,10 @@ define([
           return this.editTemplateAccess(actionValue);
         case 'refreshTemplates':
           return this.refreshTemplates();
+        default: {
+          // eslint-disable-next-line no-console
+          console.log(`TemplatesManager: unhandled action ${actionName}`);
+        }
       }
     }
 
@@ -178,8 +178,6 @@ define([
 
     async showTemplateInfo(entry) {
       const record = await this.roc.get(entry.id);
-      console.log('got record');
-      console.log({ record });
       return showRecordInfo(record);
     }
   }

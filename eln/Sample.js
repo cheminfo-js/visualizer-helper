@@ -691,7 +691,7 @@ Your local changes will be lost.</p>`;
         break;
       case 'recreateVariables':
         this.createVariables();
-      case 'deleteAttachment':
+      case 'deleteAttachment': {
         const ok = await UI.confirm(
           'Are you sure you want to delete the attachment?',
         );
@@ -700,6 +700,7 @@ Your local changes will be lost.</p>`;
         await this.roc.deleteAttachment(this.sample, attachment);
         this.updateOtherAttachments();
         break;
+      }
       case 'deleteNmr': // Deprecated. Use unattach. Leave this for backward compatibility
       case 'unattach':
         if (
@@ -845,7 +846,6 @@ async function pasteAnalysis(sample) {
   API.doAction('refresh', { noConfirmation: true });
 
   function getName(existingAttachments, filename) {
-    console.log({ existingAttachments, filename });
     if (!existingAttachments[filename]) {
       return filename;
     }

@@ -147,7 +147,7 @@ define(['jquery'], ($) => {
     $main.addClass('on-tabs-tiles');
     $main.append(tiles.map(getTile));
 
-    $main.on('click', function (event) {
+    $main.on('click', (event) => {
       let $el;
       if ($(event.target).hasClass('cell')) {
         $el = $(event.target);

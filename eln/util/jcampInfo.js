@@ -9,8 +9,6 @@ async function jcampInfo(value) {
     keepRecordsRegExp: /.*/,
   }).flatten[0];
 
-  console.log(parsed);
-
   let data = [];
 
   for (let key of Object.keys(parsed.meta)) {

@@ -1,4 +1,4 @@
-let tiles = [
+const tiles = [
   {
     label: 'General', // this is my first tab
     tiles: [
@@ -1020,3 +1020,5 @@ let tiles = [
     ],
   },
 ];
+
+module.exports = tiles;
