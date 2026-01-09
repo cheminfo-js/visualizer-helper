@@ -1,7 +1,7 @@
 define([
   'https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8145c522b71fc9c872cb0bcae49a/dist/snap.svg-min.js',
   './sequenceSplitter',
-], function (Snap, sequenceSplitter) {
+], (snap, sequenceSplitter) => {
   function getSVG(sequence, analysisResult, options) {
     const {
       width = 600,
@@ -24,7 +24,7 @@ define([
 
     let line = 0;
     // we create a temporary paper in order to get the width of the text blocs
-    let tempPaper = Snap(1000, 40);
+    let tempPaper = snap(1000, 40);
     for (let i = 0; i < mfParts.length; i++) {
       let part = mfParts[i];
       let text = tempPaper.text(xPos, 20, part);
@@ -130,11 +130,11 @@ define([
       rowHeight * (line + 1) + 50 + verticalShiftForTerminalAnnotations;
 
     // We start to create the SVG and create the paper
-    let paper = Snap(width, height);
+    let paper = snap(width, height);
 
     addScript(paper);
 
-    residues.forEach(function (residue) {
+    residues.forEach((residue) => {
       residue.y = (residue.line + 1) * rowHeight;
       let text = paper.text(residue.xFrom, residue.y, residue.label);
       text.attr({ id: `residue-${residue.nTer}` });
@@ -163,7 +163,7 @@ define([
       let used = {};
       for (let i = from; i < to; i++) {
         let residue = residues[i];
-        residue.usedSlots.forEach(function (usedSlot, index) {
+        residue.usedSlots.forEach((usedSlot, index) => {
           used[index] = true;
         });
       }
@@ -182,7 +182,7 @@ define([
 
     function drawTerminals() {
       for (let result of results) {
-        var residue;
+        let residue;
         let nTerminal = false;
         if (result.fromNTerm) {
           residue = residues[result.to];
@@ -267,7 +267,7 @@ define([
           // var charge = result.charge > 0 ? '+' + result.charge : result.charge;
           // var label = result.type + ' (' + charge + ', ' + Math.round(result.similarity) + '%)';
           // we need to check on how many lines we are
-          var fromX, toX, y;
+          let fromX, toX, y;
           for (let line = fromResidue.line; line <= toResidue.line; line++) {
             y =
               -10 -

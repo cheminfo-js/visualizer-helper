@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import ui from 'src/util/ui';
 
 module.exports = {
@@ -54,21 +53,9 @@ module.exports = {
           rowHeight: 150,
         },
       })
-      .catch(function (e) {
-        console.error(e); // eslint-disable-line no-console
+      .catch((err) => {
+        reportError(err);
         ui.showNotification('search failed', 'error');
       });
   },
 };
-
-function listTemplate(val, prop) {
-  return `
-    <div style="height: 100%; line-height: initial; vertical-align: middle">
-        <table style="width: 100%; text-align: center;">
-            {% for n in ${val} %}
-                <tr><td>{{ n${prop} }}</td></tr>
-            {% endfor %}
-        </table>
-    </div>
-    `;
-}

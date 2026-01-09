@@ -1,4 +1,4 @@
-define(['src/util/ui', './getViewInfo'], function (UI, getViewInfo) {
+define(['src/util/ui', './getViewInfo'], (UI, getViewInfo) => {
   let baseUrl = require.s.contexts._.config.baseUrl;
 
   let pagesURL = `${baseUrl}../../docs/eln/uuid/`;

@@ -1,4 +1,4 @@
-module.exports = function (roc) {
+module.exports = function aciSamples(roc) {
   return {
     async getNextCommercialBatch(structureId) {
       structureId = String(structureId);

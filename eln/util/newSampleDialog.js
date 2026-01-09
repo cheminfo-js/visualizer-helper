@@ -1,4 +1,4 @@
-define(['src/util/ui', 'lodash'], function (ui, _) {
+define(['src/util/ui', 'lodash'], (ui, _) => {
   return async function createSample(roc, allGroups) {
     const storageKey = 'eln-new-sample-default-groups';
     let entrysample = { $content: {} };

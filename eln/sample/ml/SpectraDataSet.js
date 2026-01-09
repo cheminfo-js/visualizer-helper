@@ -444,7 +444,6 @@ class SpectraDataSet {
   }
 
   async processAction(action) {
-    console.log({ action });
     switch (action.name) {
       case 'resetMinMax':
         this.resetMinMax();
@@ -491,10 +490,12 @@ class SpectraDataSet {
           spectrum.category = getJpath(spectrum);
         }
         spectraInDataset.triggerChange();
+        break;
       }
-      case 'addSpectraToSelection':
+      case 'addSpectraToSelection': {
         this.addSpectraToSelection();
         break;
+      }
       case 'selectAllSpectra':
         this.selectAllSpectra();
         break;
@@ -542,7 +543,10 @@ class SpectraDataSet {
       case 'addDirectSpectra': // data are in memory in data property
         this.addDirectSpectra();
         break;
-      default:
+      default: {
+        // eslint-disable-next-line no-console
+        console.log(`SpectraDataSet: unhandled action ${action.name}`);
+      }
     }
   }
 
@@ -630,7 +634,6 @@ class SpectraDataSet {
 
   addDirectSpectrum(spectrum) {
     let spectraInDataset = API.getData('spectraInDataset');
-    console.log({ spectraInDataset });
     this.addDirectSpectrumToSelected(spectrum, spectraInDataset);
     recolor(spectraInDataset);
     spectraInDataset.triggerChange();
@@ -679,7 +682,6 @@ class SpectraDataSet {
   }
 
   addDirectSpectrumToSelected(spectrum, spectraInDataset) {
-    console.log(spectrum);
     if (spectrum.data) {
       let spectrumID = String(spectrum.id);
       let sampleID = String(spectrum.name);

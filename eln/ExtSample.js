@@ -100,7 +100,7 @@ class Sample {
         case '$content.general.mf':
           try {
             this.mf.fromMF();
-          } catch (e) {
+          } catch {
             // ignore
           }
           break;
@@ -119,7 +119,7 @@ class Sample {
   }
 
   async _init() {
-    this._initialized = new Promise(async (resolve) => {
+    this._initialized = (async () => {
       let sample;
       if (this.options.trackId) {
         try {
@@ -143,8 +143,7 @@ class Sample {
         sample.$content.general.molfile = ''; // can not be edited otherwise
       }
       this._loadSample(sample);
-      resolve();
-    });
+    })();
   }
 
   bindChange() {
@@ -157,7 +156,7 @@ class Sample {
   }
 
   async handleDrop(name, askType, options = {}) {
-    let { converters = {}, autoJcamp, autoKind } = options;
+    let { converters = {}, autoKind } = options;
     if (!name) {
       throw new Error('handleDrop expects a variable name');
     }
@@ -201,8 +200,6 @@ class Sample {
       }
 
       if (converters[kind]) {
-        autoJcamp = false;
-
         let converted = await converters[kind](droppedData.content);
         if (!Array.isArray(converted)) {
           converted = [converted];

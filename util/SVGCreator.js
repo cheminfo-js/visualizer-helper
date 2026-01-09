@@ -63,7 +63,7 @@ class Element {
 }
 
 function encodeText(string) {
-  return string.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
+  return string.replace(/[\u00A0-\u9999<>&]/gim, (i) => {
     return `&#${i.charCodeAt(0)};`;
   });
 }

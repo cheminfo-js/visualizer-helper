@@ -2,7 +2,7 @@ import Nt from 'https://www.lactame.com/lib/NtSeq/HEAD/NtSeq.js';
 
 const MAX_MISMATCH = 3;
 export function getFiltered(data, selection, keys) {
-  return data.filter(function (d) {
+  return data.filter((d) => {
     loop1: for (let i = 0; i < selection.length; i++) {
       for (let j = 0; j < keys.length; j++) {
         if (String(d[keys[j]]) !== String(selection[i][keys[j]])) {
@@ -25,19 +25,19 @@ export function matchDistribution(posSeq, negSeq, useNtSeq) {
   if (!useNtSeq) {
     fn = getMatchDistribution;
   } else {
-    posSeq = posSeq.map(function (seq) {
+    posSeq = posSeq.map((seq) => {
       return new Nt.Seq().read(seq);
     });
-    negSeq = negSeq.map(function (seq) {
+    negSeq = negSeq.map((seq) => {
       return new Nt.Seq().read(seq);
     });
-    primerSet = primerSet.map(function (p) {
+    primerSet = primerSet.map((p) => {
       return new Nt.Seq().read(p);
     });
     fn = getMatchDistributionNtSeq;
   }
 
-  primerSet.forEach(function (primer) {
+  primerSet.forEach((primer) => {
     let pos = fn(primer, posSeq);
     let neg = fn(primer, negSeq);
     let r = {};
@@ -51,7 +51,7 @@ export function matchDistribution(posSeq, negSeq, useNtSeq) {
   });
 
   // sort result
-  result.sort(function (a, b) {
+  result.sort((a, b) => {
     for (let i = 0; i < MAX_MISMATCH + 1; i++) {
       let diff = a.pos[i] - a.neg[i] - (b.pos[i] - b.neg[i]);
       if (diff < 0) return 1;
@@ -100,7 +100,7 @@ function findBestMatch(primer, seq) {
 }
 
 function getMatchDistribution(primer, sequences) {
-  let bestMatches = sequences.map(function (seq, idx) {
+  let bestMatches = sequences.map((seq, idx) => {
     let bestMatch = findBestMatch(primer, seq);
     bestMatch.geneIdx = idx;
     return bestMatch;
@@ -121,7 +121,7 @@ function getMatchDistribution(primer, sequences) {
 }
 
 function getMatchDistributionNtSeq(primer, sequences) {
-  return sequences.map(function (seq) {
+  return sequences.map((seq) => {
     return seq.mapSequence(primer).__orderedResults[0];
   });
 }

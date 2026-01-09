@@ -9,7 +9,7 @@ function Structure(roc) {
       };
 
       if (type) {
-        options.filter = function (entry) {
+        options.filter = (entry) => {
           return entry.$id[1] === type;
         };
       }
@@ -55,8 +55,8 @@ function Structure(roc) {
           disableNotification: true,
         });
         return entry;
-      } catch (e) {
-        if (e.message === 'Conflict') {
+      } catch (err) {
+        if (err.message === 'Conflict') {
           // try to get id
           const result = await roc.view('entryById', {
             key: [ocl.idCode, type],
@@ -64,7 +64,9 @@ function Structure(roc) {
           if (result.length) {
             return result[0];
           } else {
-            throw new Error('Unexpected error creating structure');
+            throw new Error('Unexpected error creating structure', {
+              cause: err,
+            });
           }
         }
       }

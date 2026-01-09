@@ -1,4 +1,4 @@
-define(['src/util/api', 'src/util/ui'], function (API, UI) {
+define(['src/util/api', 'src/util/ui'], (API, UI) => {
   async function recreateCharts(variable, action) {
     if (!API.getData('preferences')) return;
     const preferences = JSON.parse(JSON.stringify(API.getData('preferences')));
@@ -33,7 +33,6 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
       }
     }
     API.cache('previousIdsInDataSet', currentSpectraIds);
-    console.log('Update chart');
 
     const selectedIDs = spectraProcessor.spectra
       .filter((spectrum) => spectrum.meta.selected)
@@ -69,7 +68,6 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
               )[0];
           }
           postProcessingOptions.ids = ids;
-          console.log({ postProcessingOptions });
           API.createData(
             'chart',
             spectraProcessor.getPostProcessedChart(postProcessingOptions),
@@ -118,6 +116,7 @@ define(['src/util/api', 'src/util/ui'], function (API, UI) {
     } else {
       preferences.display.correlationIndex = Number.parseInt(
         preferences.display.correlationIndex,
+        10,
       );
       if (!Number.isInteger(preferences.display.correlationIndex)) {
         preferences.display.correlationIndex = Math.floor(

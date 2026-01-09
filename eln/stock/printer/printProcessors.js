@@ -5,7 +5,7 @@ define([
   'canvg',
   '../../libs/Image',
   'openchemlib',
-], function (Datas, UI, twig, canvg, IJS, OCL) {
+], (Datas, UI, twig, canvg, IJS, OCL) => {
   IJS = IJS.default;
   const DataObject = Datas.DataObject;
   let chars =
@@ -175,12 +175,12 @@ define([
     return decode(bmp);
   }
 
-  function concatenate(resultConstructor, ...arrays) {
+  function concatenate(ResultConstructor, ...arrays) {
     let totalLength = 0;
     for (let arr of arrays) {
       totalLength += arr.length;
     }
-    let result = new resultConstructor(totalLength);
+    let result = new ResultConstructor(totalLength);
     let offset = 0;
     for (let arr of arrays) {
       result.set(arr, offset);
@@ -221,7 +221,7 @@ define([
 
   function dataToHexa(arr) {
     return Array.prototype.map
-      .call(arr, function (n) {
+      .call(arr, (n) => {
         let hex = n.toString(16);
         if (hex.length === 1) hex = `0${hex}`;
         return hex;

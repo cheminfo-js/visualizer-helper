@@ -33,7 +33,6 @@ module.exports = {
           endkey: ['sample', [`${term}\ufff0`, {}]],
         })
         .then((data) => {
-          console.log(data);
           data.forEach((d) => {
             const status =
               d.$content &&
@@ -129,8 +128,8 @@ module.exports = {
           rowHeight: 150,
         },
       })
-      .catch(function (e) {
-        console.error(e); // eslint-disable-line no-console
+      .catch((err) => {
+        reportError(err);
         ui.showNotification('search failed', 'error');
       });
   },

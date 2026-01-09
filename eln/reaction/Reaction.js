@@ -196,10 +196,9 @@ export async function selectProduct(reactionRXN, options = {}) {
     row.kind = 'crude';
     rows.push(row);
   }
-  if (rows.length === 0) {
-  } else if (rows.length === 1) {
+  if (rows.length === 1) {
     return rows[0];
-  } else {
+  } else if (rows.length !== 0) {
     const chooseList = [];
     for (let i = 0; i < rows.length; i++) {
       chooseList.push({

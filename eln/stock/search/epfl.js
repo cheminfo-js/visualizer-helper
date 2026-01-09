@@ -13,7 +13,7 @@ module.exports = {
           term,
         )}`,
       )
-      .then(function (result) {
+      .then((result) => {
         result = result.body && result.body.entry;
         if (!result) {
           ui.showNotification('No results in reference DB', 'warn');

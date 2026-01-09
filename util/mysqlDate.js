@@ -1,5 +1,5 @@
 // returns a Mysql formatted date, very practical to get a string with dthe date
-define([], function () {
+define([], () => {
   function twoDigits(d) {
     if (d >= 0 && d < 10) return `0${d.toString()}`;
     if (d > -10 && d < 0) return `-0${(-1 * d).toString()}`;

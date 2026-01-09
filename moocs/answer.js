@@ -1,7 +1,8 @@
-define(['mathjs'], function (mathjs) {
+define(['mathjs'], (mathjs) => {
   let exports = {};
 
-  exports.isCorrect = function (sol, ans, options) {
+  exports.isCorrect = function isCorrect(sol, ans, options) {
+    let errorUnit, solUnit, ansUnit, solU;
     sol = String(sol);
     ans = String(ans);
     options = { ...options };
@@ -11,7 +12,7 @@ define(['mathjs'], function (mathjs) {
     if (options.absoluteError !== undefined) {
       options.absoluteError = String(options.absoluteError);
       try {
-        var errorUnit = mathjs.unit(options.absoluteError);
+        errorUnit = mathjs.unit(options.absoluteError);
       } catch (e) {
         if (e.message.match(/no units/)) {
           options.absoluteError = +options.absoluteError;
@@ -22,7 +23,7 @@ define(['mathjs'], function (mathjs) {
     }
 
     try {
-      var solUnit = mathjs.unit(String(sol));
+      solUnit = mathjs.unit(String(sol));
     } catch (e) {
       if (e.message.match(/no units/)) {
         sol = +sol;
@@ -33,7 +34,7 @@ define(['mathjs'], function (mathjs) {
             reason: 'did not expect units in answer',
           };
         } else {
-          return isCorrect(sol, ans, options);
+          return checkCorrectness(sol, ans, options);
         }
       } else {
         return {
@@ -44,8 +45,8 @@ define(['mathjs'], function (mathjs) {
     }
 
     try {
-      var ansUnit = mathjs.unit(String(ans));
-      var solU = solUnit.formatUnits();
+      ansUnit = mathjs.unit(String(ans));
+      solU = solUnit.formatUnits();
     } catch (e) {
       return {
         correct: false,
@@ -64,14 +65,14 @@ define(['mathjs'], function (mathjs) {
       if (errorUnit) {
         options.absoluteError = errorUnit.toNumber(solU);
       }
-      return isCorrect(sol, ans, options);
+      return checkCorrectness(sol, ans, options);
     }
   };
 
   return exports;
 });
 
-function isCorrect(sol, ans, options) {
+function checkCorrectness(sol, ans, options) {
   let absoluteError =
     options.absoluteError !== undefined && !isNaN(options.absoluteError)
       ? options.absoluteError

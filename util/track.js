@@ -7,35 +7,27 @@ require(['Track'], function(Track) {
 
 let _defaultValue;
 
-define(['jquery', 'src/util/api', 'src/util/versioning'], function (
+define(['jquery', 'src/util/api', 'src/util/versioning'], (
   $,
   API,
   Versioning,
-) {
+) => {
   function track(cookieName, defaultValue, options = {}) {
     let varName = options.varName || cookieName;
     let data = API.getData(varName);
     _defaultValue = defaultValue;
     if (data) return Promise.resolve(data);
     data = {};
-    try {
-      data = JSON.parse(window.localStorage.getItem(cookieName)) || {};
-      if (defaultValue) {
-        if (
-          defaultValue.version &&
-          defaultValue.version > (data.version || 0)
-        ) {
-          data = JSON.parse(JSON.stringify(defaultValue));
-        } else {
-          data = $.extend(true, JSON.parse(JSON.stringify(defaultValue)), data);
-        }
+    data = JSON.parse(window.localStorage.getItem(cookieName)) || {};
+    if (defaultValue) {
+      if (defaultValue.version && defaultValue.version > (data.version || 0)) {
+        data = JSON.parse(JSON.stringify(defaultValue));
+      } else {
+        data = $.extend(true, JSON.parse(JSON.stringify(defaultValue)), data);
       }
-    } catch (e) {
-      console.log(e);
-      return Promise.reject(e);
     }
 
-    return API.createData(varName, data).then(function (result) {
+    return API.createData(varName, data).then((result) => {
       let mainData = Versioning.getData();
 
       result.resetValue = () => {

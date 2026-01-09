@@ -10,7 +10,6 @@ async function getMolecules(mf) {
 
   let response = await fetch(`${pubchemURL}${searchParams.toString()}`);
   let results = await response.json();
-  console.log(results.data);
   return results.data;
 }
 
@@ -66,7 +65,7 @@ module.exports = {
           rowHeight: 140,
         },
       })
-      .catch(function (e) {
+      .catch((e) => {
         console.error(e); // eslint-disable-line no-console
         ui.showNotification('search failed', 'error');
       });

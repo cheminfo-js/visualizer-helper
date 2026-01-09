@@ -208,10 +208,11 @@ class ExpandableMolecule {
       case 'toggleJSMEEdition':
         this.toggleJSMEEdition(!this.jsmeEditionMode);
         break;
-      case 'clearMolfile':
-        var molfile = API.getData('editableMolfile');
+      case 'clearMolfile': {
+        const molfile = API.getData('editableMolfile');
         molfile.setValue('');
         break;
+      }
       case 'swapHydrogens':
         this.setExpandedHydrogens();
         break;

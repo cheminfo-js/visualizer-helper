@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery'], ($) => {
   const styles = `
 <style>
 .on-tabs-tiles {
@@ -131,7 +131,7 @@ define(['jquery'], function ($) {
     icon: (tile) => tile.icon,
   };
 
-  return function (div, options) {
+  return function renderTiles(div, options) {
     let lineCount = 0;
     options = { ...defaultOptions, ...options };
     const { tiles } = options;
@@ -147,7 +147,7 @@ define(['jquery'], function ($) {
     $main.addClass('on-tabs-tiles');
     $main.append(tiles.map(getTile));
 
-    $main.on('click', function (event) {
+    $main.on('click', (event) => {
       let $el;
       if ($(event.target).hasClass('cell')) {
         $el = $(event.target);

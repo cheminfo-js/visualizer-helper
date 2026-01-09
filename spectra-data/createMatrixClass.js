@@ -1,4 +1,4 @@
-define(['src/util/api'], function (API) {
+define(['src/util/api'], (API) => {
   return async function createMatrixClass(
     classURL,
     spectraDataSet,

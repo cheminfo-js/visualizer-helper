@@ -1,4 +1,4 @@
-define(['superagent', 'uri/URI'], function (superagent, URI) {
+define(['superagent', 'uri/URI'], (superagent, URI) => {
   class PrintServer {
     constructor(server, opts) {
       opts = opts || {};

@@ -120,7 +120,6 @@ class SequencesDataSet {
   }
 
   async processAction(action) {
-    console.log({ action });
     switch (action.name) {
       case 'clickedSample':
         this.clickedSample(action.value);
@@ -164,6 +163,7 @@ class SequencesDataSet {
           sequence.category = getJpath(sequence);
         }
         selectedSequences.triggerChange();
+        break;
       }
       case 'showSpectra':
         this.showSpectra();
@@ -190,7 +190,10 @@ class SequencesDataSet {
           action.value.resurrect(),
         );
         break;
-      default:
+      default: {
+        // eslint-disable-next-line no-console
+        console.log(`Unhandled action: ${action.name}`);
+      }
     }
   }
 

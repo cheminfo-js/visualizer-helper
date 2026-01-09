@@ -1,4 +1,4 @@
-define(['src/util/versioning'], function (Versioning) {
+define(['src/util/versioning'], (Versioning) => {
   async function getViewInfo() {
     if (
       !Versioning.lastLoaded ||
@@ -16,7 +16,7 @@ define(['src/util/versioning'], function (Versioning) {
       info = await response.json();
       info.rev = Number(info._rev.replace(/-.*/, ''));
     } catch (e) {
-      console.log(e);
+      reportError(e);
     }
 
     return info;

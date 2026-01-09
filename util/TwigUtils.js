@@ -37,7 +37,7 @@ export async function twigToDoc(moduleID, options = {}) {
     const svg = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(svg);
 
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve) => {
       image.onload = () => {
         ctx.drawImage(image, 0, 0);
         const png = canvas.toDataURL('image/png');

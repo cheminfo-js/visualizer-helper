@@ -177,10 +177,11 @@ class BioReaction {
       case 'save':
         await this.roc.update(this.sample);
         break;
-      case 'deleteAttachment':
-        var attachment = action.value.name;
+      case 'deleteAttachment': {
+        const attachment = action.value.name;
         await this.roc.deleteAttachment(this.sample, attachment);
         break;
+      }
       case 'unattach':
         await this.roc.unattach(this.sample, action.value);
         break;

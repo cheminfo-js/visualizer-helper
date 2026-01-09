@@ -17,7 +17,7 @@ const spectrumCategories = [
   },
 ];
 
-define(['src/util/ui', 'lodash'], function (UI, _) {
+define(['src/util/ui', 'lodash'], (UI, _) => {
   function setspectrumCategories(record, allCategories) {
     let selectedCategories = categories;
 
@@ -48,7 +48,7 @@ define(['src/util/ui', 'lodash'], function (UI, _) {
 `,
       entrysample,
       { twig: data },
-    ).then(function (result) {
+    ).then((result) => {
       if (!result) return null;
       const selected = Object.keys(result.group).filter(
         (key) => result.group[key],

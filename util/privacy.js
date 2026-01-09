@@ -1,4 +1,4 @@
-define(['src/util/ui'], function (UI) {
+define(['src/util/ui'], (UI) => {
   async function privacy(cookieName, options = {}) {
     const {
       message = `

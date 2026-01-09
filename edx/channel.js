@@ -1,6 +1,6 @@
 define([
   'https://cdnjs.cloudflare.com/ajax/libs/jschannel/1.0.0-git-commit1-8c4f7eb/jschannel.js',
-], function () {
+], () => {
   let initialized = false;
   function init(options) {
     if (initialized) return;

@@ -1,5 +1,4 @@
 import API from 'src/util/api';
-import UI from 'src/util/ui';
 
 export default function recalculateCharts() {
   const ExtendedCommonMeasurement = API.cache('ExtendedCommonMeasurement');

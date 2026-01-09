@@ -1,41 +1,41 @@
 define([
   'https://www.lactame.com/lib/chemcalc/3.0.6/chemcalc.js',
   'https://www.lactame.com/lib/ml/1.0.0/ml.js',
-], function (CC, ml) {
+], (CC, ml) => {
   let exports = {};
-  exports.findCoefficients = function (reagents, products) {
+  exports.findCoefficients = function findCoefficient(reagents, products) {
     let atoms = {};
 
     let nbCoeff = reagents.length + products.length;
     let matrix = new Array(nbCoeff);
-    for (var i = 0; i < nbCoeff; i++) {
+    for (let i = 0; i < nbCoeff; i++) {
       matrix[i] = [];
     }
 
-    for (i = 0; i < reagents.length; i++) {
-      var c = CC.analyseMF(reagents[i]);
-      var part = c.parts[0];
-      for (var k = 0; k < part.ea.length; k++) {
-        var ea = part.ea[k];
+    for (let i = 0; i < reagents.length; i++) {
+      const c = CC.analyseMF(reagents[i]);
+      const part = c.parts[0];
+      for (let k = 0; k < part.ea.length; k++) {
+        const ea = part.ea[k];
         atoms[ea.element] = true;
-        var idx = Object.keys(atoms).indexOf(ea.element);
+        const idx = Object.keys(atoms).indexOf(ea.element);
         matrix[i][idx] = part.ea[k].number;
       }
     }
 
-    for (i = reagents.length; i < nbCoeff; i++) {
-      c = CC.analyseMF(products[i - reagents.length]);
-      part = c.parts[0];
-      for (k = 0; k < part.ea.length; k++) {
-        ea = part.ea[k];
+    for (let i = reagents.length; i < nbCoeff; i++) {
+      const c = CC.analyseMF(products[i - reagents.length]);
+      const part = c.parts[0];
+      for (let k = 0; k < part.ea.length; k++) {
+        const ea = part.ea[k];
         atoms[ea.element] = true;
-        idx = Object.keys(atoms).indexOf(ea.element);
+        const idx = Object.keys(atoms).indexOf(ea.element);
         matrix[i][idx] = part.ea[k].number;
       }
     }
 
     let nbAtoms = Object.keys(atoms).length;
-    for (i = 0; i < nbCoeff; i++) {
+    for (let i = 0; i < nbCoeff; i++) {
       for (let j = 0; j < nbAtoms; j++) {
         if (matrix[i][j] === undefined) {
           matrix[i][j] = 0;
@@ -51,9 +51,9 @@ define([
     let result;
     if (!matrix.isSquare()) {
       if (matrix.rows - matrix.columns === -1) {
-        var trivialRow = new Array(matrix.columns).fill(0);
+        const trivialRow = new Array(matrix.columns).fill(0);
         trivialRow[0] = 1;
-        var e = new Array(matrix.columns).fill([0]);
+        const e = new Array(matrix.columns).fill([0]);
         e[matrix.columns - 1] = [1];
         matrix.addRow(matrix.rows, trivialRow);
 
@@ -62,13 +62,14 @@ define([
         console.warn('cannot solve'); // eslint-disable-line no-console
       }
     } else {
-      let LU = ml.Matrix.Decompositions.LU(matrix);
+      // eslint-disable-next-line new-cap
+      const LU = ml.Matrix.Decompositions.LU(matrix);
       if (LU.isSingular()) {
         let diag0Pos = findDiag0Pos(LU.LU);
-        idx = LU.pivotVector.indexOf(diag0Pos);
-        trivialRow = new Array(matrix.columns).fill(0);
+        const idx = LU.pivotVector.indexOf(diag0Pos);
+        const trivialRow = new Array(matrix.columns).fill(0);
         trivialRow[idx] = 1;
-        e = new Array(matrix.columns).fill([0]);
+        const e = new Array(matrix.columns).fill([0]);
         e[idx] = [1];
         matrix.setRow(idx, trivialRow);
         result = matrix.solve(e);
@@ -81,15 +82,15 @@ define([
     return result;
   };
 
-  exports.formatResult = function (reagents, products, result) {
+  exports.formatResult = function formatResult(reagents, products, result) {
     let rstr = reagents
-      .map(function (value, index) {
+      .map((value, index) => {
         return `<span style="color:red;">${result[index]}</span>${value}`;
       })
       .join(' + ');
 
     let pstr = products
-      .map(function (value, index) {
+      .map((value, index) => {
         return `<span style="color:red;">${
           result[reagents.length + index]
         }</span>${value}`;

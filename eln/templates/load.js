@@ -18,20 +18,22 @@ module.exports = async function load(categories, options = {}) {
 
   let templates;
   if (roc) {
-    await fetch(`${roc.url}/db/templates/_query/template?key=abcdef`)
-      .then(async (result) => {
-        if (result.status === 200) {
-          templates = await fetchAndLink(`${roc.url}`, categories);
-          if (!templates || templates.length === 0) {
-            templates = await fetchPublicAndLink(categories);
-          }
-        } else {
+    const result = await fetch(
+      `${roc.url}/db/templates/_query/template?key=abcdef`,
+    );
+
+    if (result.status === 200) {
+      try {
+        templates = await fetchAndLink(`${roc.url}`, categories);
+        if (!templates || templates.length === 0) {
           templates = await fetchPublicAndLink(categories);
         }
-      })
-      .catch(async () => {
+      } catch {
         templates = await fetchPublicAndLink(categories);
-      });
+      }
+    } else {
+      templates = await fetchPublicAndLink(categories);
+    }
   } else {
     templates = await fetchPublicAndLink(categories);
   }
@@ -78,7 +80,10 @@ async function fetchPublicAndLink(categories) {
   return templates;
 }
 
-async function fetchAndLink(url = 'https://mydb.cheminfo.org', categories) {
+async function fetchAndLink(
+  url = 'https://mydb.cheminfo.org',
+  categories = undefined,
+) {
   let templates = [];
   for (let category of categories) {
     let startkey = category;

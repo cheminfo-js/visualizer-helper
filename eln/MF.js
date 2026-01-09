@@ -20,9 +20,9 @@ class MF {
           let mfInfo = new MolecularFormula.MF(mf).getInfo();
           this.setCanonizedMF(mfInfo.mf);
           this.previousEMMF = mfInfo.monoisotopicMass;
-        } catch (e) {
+        } catch (err) {
           this.setCanonizedMF('');
-          console.log('Could not parse MF: ', mf);
+          reportError(err);
         }
       }
     }
@@ -91,10 +91,6 @@ class MF {
 
   getMolfile() {
     return String(this.sample.getChildSync(['$content', 'general', 'molfile']));
-  }
-
-  setMF(mf) {
-    this.sample.setChildSync(['$content', 'general', 'mf'], mf);
   }
 
   setMF(mf) {

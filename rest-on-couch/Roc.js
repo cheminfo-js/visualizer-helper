@@ -13,7 +13,7 @@ define([
   'eventEmitter',
   './UserViewPrefs',
   './UserAnalysisResults',
-], function (
+], (
   Datas,
   API,
   ui,
@@ -28,14 +28,14 @@ define([
   EventEmitter,
   UserViewPrefs,
   UserAnalysisResults,
-) {
+) => {
   const DataObject = Datas.DataObject;
   const eventEmitters = {};
 
   const objectHasOwnProperty = Object.prototype.hasOwnProperty;
-  const hasOwnProperty = function (obj, prop) {
+  function hasOwnProperty(obj, prop) {
     return objectHasOwnProperty.call(obj, prop);
-  };
+  }
 
   function setTabSavedStatus(saved) {
     if (self.IframeBridge) {
@@ -220,7 +220,7 @@ define([
             credentials: 'include',
           })
         ).json();
-      } catch (e) {
+      } catch {
         this.setUserPrefs(defaultPrefs);
         return defaultPrefs;
       }
@@ -288,8 +288,8 @@ define([
           }
           return res.body;
         })
-        .then(handleSuccess(this, options))
-        .catch(handleError(this, options));
+        .then(createHandleSuccess(this, options))
+        .catch(createHandleError(this, options));
     }
 
     async queryBySampleId(options) {
@@ -314,8 +314,8 @@ define([
           }
           return res.body;
         })
-        .then(handleSuccess(this, options))
-        .catch(handleError(this, options));
+        .then(createHandleSuccess(this, options))
+        .catch(createHandleError(this, options));
     }
 
     async query(viewName, options) {
@@ -372,8 +372,8 @@ define([
           }
           return res.body;
         })
-        .then(handleSuccess(this, options))
-        .catch(handleError(this, options));
+        .then(createHandleSuccess(this, options))
+        .catch(createHandleError(this, options));
     }
 
     getDocumentEventEmitter(uuid) {
@@ -499,8 +499,8 @@ define([
           return res.body;
         }
         return null;
-      } catch (e) {
-        handleError(this, options);
+      } catch {
+        createHandleError(this, options);
         return null;
       }
     }
@@ -519,7 +519,7 @@ define([
             }
             return null;
           })
-          .catch(handleError(this, options))
+          .catch(createHandleError(this, options))
       );
     }
 
@@ -546,7 +546,7 @@ define([
           }
           return null;
         })
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async getById(id, options) {
@@ -556,7 +556,7 @@ define([
       if (!entry || options.fromCache) {
         return entry;
       }
-      return this.get(entry).catch(handleError(this, options));
+      return this.get(entry).catch(createHandleError(this, options));
     }
 
     // Get the groups the user is owner of
@@ -571,7 +571,7 @@ define([
         .get(groupUrl)
         .withCredentials()
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     // Get basic info about every group (only name and description)
@@ -586,7 +586,7 @@ define([
         .get(groupsInfoUrl)
         .withCredentials()
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     // Get the groups the user is member of
@@ -599,7 +599,7 @@ define([
         .get(url)
         .withCredentials()
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async create(entry, options) {
@@ -613,7 +613,7 @@ define([
         .post(this.entryUrl)
         .withCredentials()
         .send(entry)
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => {
           if (res.body && (res.status === 200 || res.status === 201)) {
             return this.get(res.body.id);
@@ -639,7 +639,7 @@ define([
           }
           return entry;
         })
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async getLastRevision(entry) {
@@ -657,7 +657,7 @@ define([
         .put(`${this.entryUrl}/${String(entry._id)}`)
         .withCredentials()
         .send(reqEntry)
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => {
           if (res.body && res.status === 200) {
             entry._rev = res.body.rev;
@@ -672,14 +672,14 @@ define([
           }
           return entry;
         })
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async deleteAttachment(entry, attachments, options) {
       await this.__ready;
       options = createOptions(options, 'deleteAttachment');
       if (DataObject.getType(entry) !== 'object') {
-        handleError(this, options)(new Error('invalid argument'));
+        createHandleError(this, options)(new Error('invalid argument'));
         return null;
       }
       if (Array.isArray(attachments) && attachments.length === 0) return entry;
@@ -706,10 +706,10 @@ define([
           await this.update(entry, options);
         } else if (entry.triggerChange && !options.noTrigger) {
           entry.triggerChange();
-          handleSuccess(this, options)(entry);
+          createHandleSuccess(this, options)(entry);
         }
       } catch (e) {
-        return handleError(this, options)(e);
+        return createHandleError(this, options)(e);
       }
       return entry;
     }
@@ -803,9 +803,9 @@ define([
         this.typeUrl(entry.$content, entry);
         await this.update(entry);
       } catch (e) {
-        return handleError(this, attachOptions)(e);
+        return createHandleError(this, attachOptions)(e);
       }
-      handleSuccess(this, attachOptions)(entry);
+      createHandleSuccess(this, attachOptions)(entry);
       return entry;
     }
 
@@ -837,9 +837,9 @@ define([
         this.typeUrl(entry.$content, entry);
         await this.update(entry);
       } catch (e) {
-        return handleError(this, attachOptions)(e);
+        return createHandleError(this, attachOptions)(e);
       }
-      handleSuccess(this, attachOptions)(entry);
+      createHandleSuccess(this, attachOptions)(entry);
       return entry;
     }
 
@@ -855,7 +855,7 @@ define([
       });
       try {
         await idb.delete(uuid);
-      } catch (e) {
+      } catch {
         // ignored error
       }
       // Track data again
@@ -868,7 +868,7 @@ define([
       await this.__ready;
       options = createOptions(options, 'getAttachment');
       const cdb = this._getCdb(entry);
-      return cdb.get(name, options).catch(handleError(this, options));
+      return cdb.get(name, options).catch(createHandleError(this, options));
     }
 
     async getAttachmentList(entry) {
@@ -933,9 +933,9 @@ define([
           entry.triggerChange();
         }
       } catch (e) {
-        return handleError(this, options)(e);
+        return createHandleError(this, options)(e);
       }
-      handleSuccess(this, options)(entry);
+      createHandleSuccess(this, options)(entry);
       return entry;
     }
 
@@ -957,9 +957,9 @@ define([
       return superagent
         .get(tokenUrl)
         .withCredentials()
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async getToken(token, options) {
@@ -973,9 +973,9 @@ define([
       return superagent
         .get(tokenUrl)
         .withCredentials()
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async createToken(entry, options) {
@@ -993,9 +993,9 @@ define([
         request.query({ rights });
       }
       return request
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async createUserToken(options) {
@@ -1012,9 +1012,9 @@ define([
         request.query({ rights });
       }
       return request
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async deleteToken(token, options) {
@@ -1028,9 +1028,9 @@ define([
       return superagent
         .del(tokenUrl)
         .withCredentials()
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => res.body)
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     async addGroup(entry, group, options, remove) {
@@ -1046,7 +1046,7 @@ define([
         `${this.entryUrl}/${uuid}/_owner/${String(group)}`,
       )
         .withCredentials()
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => {
           if (!options.noUpdate) {
             return this.get(uuid).then(() => res.body);
@@ -1054,7 +1054,7 @@ define([
             return res.body;
           }
         })
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     deleteGroup(entry, group, options) {
@@ -1068,7 +1068,7 @@ define([
       return superagent
         .del(`${this.entryUrl}/${uuid}`)
         .withCredentials()
-        .then(handleSuccess(this, options))
+        .then(createHandleSuccess(this, options))
         .then((res) => {
           if (res.body && res.status === 200) {
             for (let key in this.variables) {
@@ -1083,7 +1083,7 @@ define([
           }
           return res.body;
         })
-        .catch(handleError(this, options));
+        .catch(createHandleError(this, options));
     }
 
     remove(entry, options) {
@@ -1256,7 +1256,7 @@ define([
       if (!Array.isArray(filename) && typeof filename !== 'undefined') {
         filename = [filename];
       }
-      this._traverseFilename(v, function (v) {
+      this._traverseFilename(v, (v) => {
         if (typeof filename === 'undefined') {
           r.push(v);
         } else if (filename.indexOf(String(v.filename)) !== -1) {
@@ -1333,8 +1333,8 @@ define([
     return options;
   }
 
-  function handleError(ctx, options) {
-    return function (err) {
+  function createHandleError(ctx, options) {
+    return function handleError(err) {
       if (!options.mute || !options.muteError) {
         if (err.status || err.timeout) {
           // error comes from superagent
@@ -1348,8 +1348,8 @@ define([
     };
   }
 
-  function handleSuccess(ctx, options) {
-    return function (data) {
+  function createHandleSuccess(ctx, options) {
+    return function handleSuccess(data) {
       if (!options.mute && !options.muteSuccess) {
         if (data.status) {
           handleSuperagentSuccess(data, ctx, options);

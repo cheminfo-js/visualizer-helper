@@ -44,7 +44,6 @@ export function splitJcamp(file) {
   }
 
   const baseFilename = file.filename.replace(/(\.fid|\.j?dx)/gi, '');
-  console.log(file);
   for (const group of groups) {
     if (group.fid) {
       newFiles.push({

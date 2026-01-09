@@ -6,8 +6,9 @@ export default defineConfig(
   globalIgnores([
     'node_modules',
     'build',
-    'tiles/font-awesome',
+
     // Ignore third-party libraries
+    'tiles/font-awesome',
     'util/aesjs.js',
     'util/cloneDeepLimitArray.js',
     'util/md5.js',
@@ -33,6 +34,8 @@ export default defineConfig(
       'import/no-extraneous-dependencies': 'off',
       'import/no-named-as-default': 'off',
       'import/no-named-as-default-member': 'off',
+      'no-await-in-loop': 'warn',
+      'prefer-named-capture-group': 'off',
     },
   },
 );

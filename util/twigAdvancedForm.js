@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 /**
  * This code allows to create complex form in the twig module
  * You need in place modification
@@ -48,17 +46,13 @@
  *   </table>
  */
 
-define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
+define(['jquery', 'src/util/api', 'modules/modulefactory'], (
   $,
   API,
   Module,
-) {
-  console.log('START');
-
+) => {
   function AdvancedForm(divID, options = {}) {
     // we will find automatically the variableName
-    if (options.debug) console.log('CREATE ADVANCED FORM');
-
     let moduleId = $(`#${divID}`)
       .closest('[data-module-id]')
       .attr('data-module-id');
@@ -79,9 +73,6 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
     // Can be set via options.singleItemArrays or detected automatically
     let singleItemArrays = options.singleItemArrays || [];
 
-    if (options.debug) console.log('variableName:', variableName);
-    if (options.debug) console.log('singleItemArrays:', singleItemArrays);
-
     let variable = API.getVar(variableName);
     variable.listen(
       {
@@ -89,21 +80,12 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
           return moduleId + variableName;
         },
       },
-      function (newData) {
+      (newData) => {
         newData.currentPromise.then(() => {
-          if (options.debug) console.log('receive newData', newData);
           if (!data) {
-            if (options.debug) {
-              console.log(
-                'The variable',
-                variableName,
-                'does not exist yet. We will load it.',
-              );
-            }
             data = API.getData(variableName);
             updateTwig();
           } else if (!isUpdating) {
-            if (options.debug) console.log('Data changed, updating twig...');
             updateTwig();
           }
         });
@@ -112,13 +94,11 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
 
     // we will initialise the form
     let dom = $(document.getElementById(divID));
-    if (options.debug) {
-      console.log('Initialize the form');
-    }
     // Add the buttons ADD / REMOVE
     let rows = dom.find('[data-repeat]:not([class="form-button addRow"])');
     if (rows) {
-      rows = rows.filter(function () {
+      rows = rows.filter(function filterRows() {
+        // eslint-disable-next-line no-invalid-this
         return !this.innerHTML.includes('form-button addRow');
       });
       rows.prepend(`
@@ -185,11 +165,12 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       } else if (Array.isArray(variable)) {
         length = singleItem ? 1 : variable.length;
       } else {
-        console.log('Wrong variable type', variable);
+        // eslint-disable-next-line no-console
+        console.error('Wrong variable type', variable);
       }
 
       for (let i = 0; i < length; i++) {
-        var currentRow;
+        let currentRow;
         if (i === 0) {
           currentRow = row;
         } else {
@@ -205,16 +186,14 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
 
     // need to replicate rows based on the external variable
     function updateTwig() {
-      if (options.debug) console.log('Update twig');
-
+      let elements;
       do {
-        var elements = dom.find('[data-repeat]:not([data-index])');
+        elements = dom.find('[data-repeat]:not([data-index])');
         elements.each(handleDataRepeat);
       } while (elements.length > 0);
 
       // we force the incorporation of the data in the form
       if (data && module.view.formObject) {
-        if (options.debug) console.log('FORCE update data');
         module.view.fillForm(true);
       }
     }
@@ -225,7 +204,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       row
         .children('td:not(:has(table))')
         .find('[data-field]')
-        .each(function (index, element) {
+        .each((index, element) => {
           element = $(element);
           let name = jpath.join('.');
           if (name) name += '.';
@@ -267,7 +246,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       let dataRepeat = rows.first().attr('data-repeat');
       let singleItem = isSingleItemArray(dataRepeat, isNested);
 
-      rows.each(function (rowIndex, row) {
+      rows.each((rowIndex, row) => {
         let actualIndex = singleItem ? 0 : rowIndex;
         let replace = `${base}.${actualIndex}`;
 
@@ -275,18 +254,15 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
           $(row).attr('data-index', actualIndex);
         }
 
-        for (var attr of ['name', 'name-empty']) {
+        for (let attr of ['name', 'name-empty']) {
           $(row)
             .find(`[${attr}]`)
-            .each(
-              // eslint-disable-next-line no-loop-func
-              function (index, element) {
-                element = $(element);
-                let name = element.attr(attr);
-                name = name.replace(search, replace);
-                element.attr(attr, name);
-              },
-            );
+            .each((index, element) => {
+              element = $(element);
+              let name = element.attr(attr);
+              name = name.replace(search, replace);
+              element.attr(attr, name);
+            });
         }
       });
     }
@@ -299,9 +275,6 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
 
         if (dataRepeat) {
           let base = dataRepeat;
-          if (options.debug) {
-            console.log('Using data-repeat as base:', base);
-          }
           return {
             base,
             index: dataIndex,
@@ -310,7 +283,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       }
 
       let names = [];
-      element.find('[name]').each(function (index, element) {
+      element.find('[name]').each((index, element) => {
         names.push($(element).attr('name'));
       });
       if (names.length === 0) {
@@ -321,25 +294,6 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
         base: names[0].replace(/(.*)\.([0-9]+).*/, '$1'),
         index: names[0].replace(/(.*)\.([0-9]+).*/, '$2'),
       };
-    }
-
-    if (options.debug) {
-      document
-        .getElementById(divID)
-        .addEventListener('mouseover', function (event) {
-          let target = $(event.target);
-          if (target.attr('name')) {
-            console.log('Name', target.attr('name'));
-          }
-        });
-      document
-        .getElementById(divID)
-        .addEventListener('mouseover', function (event) {
-          let target = $(event.target);
-          if (target.attr('name-empty')) {
-            console.log('Empty', target.attr('name-empty'));
-          }
-        });
     }
 
     function changeInputFct(event) {
@@ -359,10 +313,9 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
     document.getElementById(divID).addEventListener('change', changeInputFct);
     document.getElementById(divID).addEventListener('input', changeInputFct);
 
-    document.getElementById(divID).addEventListener('click', function (event) {
+    document.getElementById(divID).addEventListener('click', (event) => {
       // Prevent any clicks during updates
       if (isUpdating) {
-        if (options.debug) console.log('Ignoring click during update');
         event.preventDefault();
         event.stopImmediatePropagation();
         return;
@@ -373,7 +326,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
       let tr = $(from).closest('tr');
 
       let isNested = table.closest('[data-repeat]').length > 0;
-      var dataRepeat = tr.attr('data-repeat');
+      let dataRepeat = tr.attr('data-repeat');
       let singleItem = isSingleItemArray(dataRepeat, isNested);
 
       let hasAddClass =
@@ -384,7 +337,8 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
 
       if (hasAddClass) {
         if (singleItem) {
-          console.log(
+          // eslint-disable-next-line no-console
+          console.error(
             'Cannot add rows in single-item arrays - only one item allowed',
           );
           return;
@@ -412,9 +366,6 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
         rename(table);
       } else if (hasRemoveClass) {
         if (singleItem) {
-          console.log(
-            'Cannot remove rows in single-item arrays - one item must remain',
-          );
           tr.find('select, input, textarea').val('');
           return;
         }
@@ -423,42 +374,17 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        var dataRepeat = tr.attr('data-repeat');
-        let currentRowIndex = 0;
-        tr.prevAll(`tr[data-repeat="${dataRepeat}"]`).each(function () {
-          currentRowIndex++;
-        });
-
-        if (options.debug) {
-          console.log(
-            'Removing row with data-repeat:',
-            dataRepeat,
-            'at current position:',
-            currentRowIndex,
-          );
-        }
+        dataRepeat = tr.attr('data-repeat');
 
         let dataRemoved = false;
         if (dataRepeat) {
-          var data = API.getData(variableName);
+          const data = API.getData(variableName);
 
           let fullJpath = getJpath(tr);
-          if (options.debug) {
-            console.log('Full jpath for removal:', fullJpath);
-          }
 
           if (fullJpath.length > 0) {
             let arrayPath = fullJpath.slice(0, -1);
-            let itemIndex = parseInt(fullJpath[fullJpath.length - 1]);
-
-            if (options.debug) {
-              console.log(
-                'Array path:',
-                arrayPath,
-                'Item index to remove:',
-                itemIndex,
-              );
-            }
+            let itemIndex = parseInt(fullJpath[fullJpath.length - 1], 10);
 
             let arrayVariable = data.getChildSync(arrayPath);
 
@@ -467,32 +393,8 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
               itemIndex >= 0 &&
               itemIndex < arrayVariable.length
             ) {
-              if (options.debug) {
-                console.log(
-                  'Array before removal:',
-                  arrayVariable.length,
-                  'items',
-                );
-                console.log(
-                  'Removing item:',
-                  JSON.stringify(arrayVariable[itemIndex]),
-                );
-              }
               arrayVariable.splice(itemIndex, 1);
               dataRemoved = true;
-              if (options.debug) {
-                console.log(
-                  'Successfully removed item from array, now has:',
-                  arrayVariable.length,
-                  'items',
-                );
-              }
-            } else if (options.debug) {
-              console.log(
-                'Could not find array or invalid index:',
-                arrayVariable,
-                itemIndex,
-              );
             }
           }
         }
@@ -512,13 +414,12 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], function (
         rename(table);
 
         if (dataRemoved) {
-          var data = API.getData(variableName);
+          const data = API.getData(variableName);
           data.triggerChange();
         }
 
         setTimeout(() => {
           isUpdating = false;
-          if (options.debug) console.log('Reset updating flag');
         }, 500);
       }
     });

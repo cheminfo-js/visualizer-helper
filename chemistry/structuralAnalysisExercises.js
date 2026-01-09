@@ -43,7 +43,7 @@ async function fetchData(
     }
     let datum = data[file.rn];
     switch (file.kind) {
-      case 'mol':
+      case 'mol': {
         datum.mol = { type: 'mol2d', url: file.url };
         const molfile = await (await fetch(file.url)).text();
         const molecule = Molecule.fromMolfile(molfile);
@@ -61,6 +61,7 @@ async function fetchData(
         datum.nbH = Number(datum.mf.replace(/.*H([0-9]+).*/, '$1'));
         datum.nbC = Number(datum.mf.replace(/.*C([0-9]+).*/, '$1'));
         break;
+      }
       case 'mass':
         datum.mass = { type: 'jcamp', url: file.url };
         datum.isMass = true;

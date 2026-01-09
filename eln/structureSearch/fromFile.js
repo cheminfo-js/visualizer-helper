@@ -4,7 +4,7 @@ import { OCL, OCLUtils } from '../libs/OCLUtils';
 
 function waitImmediate() {
   return new Promise((resolve) => {
-    setImmediate(resolve);
+    window.setImmediate(resolve);
   });
 }
 

@@ -1,8 +1,7 @@
-define([
-  '../util/getViewInfo',
-  'src/util/api',
-  'src/util/couchdbAttachments',
-], function (getViewInfo, API) {
+define(['../util/getViewInfo', 'src/util/api', 'src/util/couchdbAttachments'], (
+  getViewInfo,
+  API,
+) => {
   class UserAnalysisResults {
     constructor(roc, sampleID) {
       this.roc = roc;
@@ -38,7 +37,10 @@ define([
      */
     async loadResults(key, options = {}) {
       if (!this.roc) {
-        console.log('Can not retrieve results, not connected to roc');
+        // eslint-disable-next-line no-console
+        console.log(
+          'UserAnalysisResults: cannnot retrieve results, not connected to roc',
+        );
         return;
       }
       const { sampleID = this.sampleID } = options;
@@ -59,7 +61,6 @@ define([
       /* if (sampleID) {
         return entries.filter((entry) => entry.$id[2].match(/^[0-9a-f]{32}$/i));
       }*/
-      console.log({ entries });
       return entries;
     }
 
@@ -78,7 +79,6 @@ define([
         return loadTemplateFromLocalStorage(this.viewID, String(entry._id));
       }
       this.lastEntry = entry;
-      console.log(this.lastEntry);
       return this.roc.getAttachment(entry, 'result.json');
     }
 
@@ -106,7 +106,6 @@ define([
         if (!entry._id) entry._id = entry.id;
         entry = await this.roc.get(entry);
         entry.$content = meta;
-        console.log({ entry });
         await this.roc.update(entry);
       } else {
         entry = await this.roc.create({

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "babel": "babel . --out-dir ./build",
+    "babel-test": "babel . --config-file=./test-build.babel.mjs --out-dir ./build",
     "eslint": "eslint . --cache",
     "eslint-fix": "npm run eslint -- --fix",
     "prettier": "prettier --check .",

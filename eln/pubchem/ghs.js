@@ -2,7 +2,7 @@ import OCL from 'openchemlib';
 
 // returns GHS information based on pubchem and a smiles
 
-define(['src/util/ui', 'src/util/api'], function (UI, API) {
+define(['src/util/ui', 'src/util/api'], (UI, API) => {
   async function fromIDCode(oclCode, options) {
     const molecule = OCL.Molecule.fromIDCode(oclCode);
     const smiles = molecule.toSmiles();

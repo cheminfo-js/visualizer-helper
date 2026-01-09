@@ -13,12 +13,12 @@ module.exports = function checkRights(
   if (!usernames) return false;
   if (!Array.isArray(usernames)) usernames = [usernames];
   let alloweds = rights.split(/[ ,;\r\n]+/).filter((a) => a);
-
   for (let allowed of alloweds) {
+    let regexp;
     let isRegExp = false;
     if (allowed.startsWith('/') && allowed.endsWith('/')) {
       isRegExp = true;
-      var regexp = new RegExp(allowed.substring(1, allowed.length - 1));
+      regexp = new RegExp(allowed.substring(1, allowed.length - 1));
     }
 
     for (let username of usernames) {

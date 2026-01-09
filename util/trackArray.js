@@ -1,4 +1,4 @@
-define(['src/util/api', 'lodash'], function (API, _) {
+define(['src/util/api', 'lodash'], (API, _) => {
   function track(localName, defaultValue, options = {}) {
     const {
       varName = localName,
@@ -24,8 +24,8 @@ define(['src/util/api', 'lodash'], function (API, _) {
       return Promise.reject(e);
     }
 
-    return API.createData(varName, localValue).then(function (data) {
-      data.onChange(function () {
+    return API.createData(varName, localValue).then((data) => {
+      data.onChange(() => {
         localStorage.setItem(localName, JSON.stringify(data));
       });
       return data;

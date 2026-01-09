@@ -1,4 +1,4 @@
-define(['src/util/api'], function (API) {
+define(['src/util/api'], (API) => {
   async function track(localName, defaultValue, options = {}) {
     let varName = options.varName || localName;
     let annotationName = `${varName}Annotations`;
@@ -12,9 +12,9 @@ define(['src/util/api'], function (API) {
       return Promise.reject(e);
     }
 
-    return API.createData(varName, localValue).then(function (data) {
+    return API.createData(varName, localValue).then((data) => {
       createAnnotations(data, annotationName);
-      data.onChange(function () {
+      data.onChange(() => {
         ensureHighlight(data);
         createAnnotations(data, annotationName);
         localStorage.setItem(localName, JSON.stringify(data));

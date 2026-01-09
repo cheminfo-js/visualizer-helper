@@ -1,4 +1,4 @@
-let tiles = [
+globalThis.tiles = [
   {
     label: 'General', // this is my first tab
     tiles: [

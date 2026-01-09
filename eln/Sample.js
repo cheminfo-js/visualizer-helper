@@ -616,11 +616,15 @@ Your local changes will be lost.</p>`;
                 content = atob(droppedData.content);
                 droppedData.encoding = 'text';
                 break;
-              case 'buffer':
+              case 'buffer': {
                 const decoder = new TextDecoder();
                 content = decoder.decode(droppedData.content);
                 droppedData.encoding = 'text';
                 break;
+              }
+              default: {
+                // No special handling
+              }
             }
             droppedData.content = convertToJcamp(content, {
               meta,
@@ -675,8 +679,8 @@ Your local changes will be lost.</p>`;
       case 'translateNucleic':
         Sequence.translateNucleic(this.sample);
         break;
-      case 'createOptions':
-        var advancedOptions1H = API.cache('nmr1hAdvancedOptions');
+      case 'createOptions': {
+        const advancedOptions1H = API.cache('nmr1hAdvancedOptions');
         if (advancedOptions1H) {
           API.createData(
             'nmr1hOndeTemplate',
@@ -689,9 +693,11 @@ Your local changes will be lost.</p>`;
           );
         }
         break;
+      }
       case 'recreateVariables':
         this.createVariables();
-      case 'deleteAttachment':
+        break;
+      case 'deleteAttachment': {
         const ok = await UI.confirm(
           'Are you sure you want to delete the attachment?',
         );
@@ -700,6 +706,7 @@ Your local changes will be lost.</p>`;
         await this.roc.deleteAttachment(this.sample, attachment);
         this.updateOtherAttachments();
         break;
+      }
       case 'deleteNmr': // Deprecated. Use unattach. Leave this for backward compatibility
       case 'unattach':
         if (
@@ -845,7 +852,6 @@ async function pasteAnalysis(sample) {
   API.doAction('refresh', { noConfirmation: true });
 
   function getName(existingAttachments, filename) {
-    console.log({ existingAttachments, filename });
     if (!existingAttachments[filename]) {
       return filename;
     }
