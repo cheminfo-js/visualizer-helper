@@ -1,4 +1,4 @@
-define(['src/util/versioning'], function (Versioning) {
+define(['src/util/versioning'], (Versioning) => {
   async function getViewInfo() {
     if (
       !Versioning.lastLoaded ||
@@ -11,12 +11,13 @@ define(['src/util/versioning'], function (Versioning) {
     let recordURL = viewURL.replace(/\/view.json.*/, '');
     let response = await fetch(recordURL, { credentials: 'include' });
 
+    // eslint-disable-next-line prefer-named-capture-group
     let info = { _id: viewURL.replace(/.*\/(.*)\/view.json/, '$1') };
     try {
       info = await response.json();
       info.rev = Number(info._rev.replace(/-.*/, ''));
     } catch (e) {
-      console.log(e);
+      reportError(e);
     }
 
     return info;

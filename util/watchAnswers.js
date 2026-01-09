@@ -5,7 +5,7 @@ require(['TrackOptions'], function(TrackOptions) {
 })
 */
 
-define([], function () {
+define([], () => {
   function watchAnswers(cookieName, exercises, options = {}) {
     let myAnswers = JSON.parse(window.localStorage.getItem(cookieName) || '{}');
 
@@ -17,7 +17,7 @@ define([], function () {
       }
     }
 
-    exercises.onChange(function (evt) {
+    exercises.onChange(function onChange(evt) {
       switch (evt.target.__name) {
         case 'myResult': {
           const target = evt.target.__parent;

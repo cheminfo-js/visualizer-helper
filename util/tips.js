@@ -1,9 +1,9 @@
-define([
-  'src/util/api',
-  './yamlParser',
-  'src/util/ui',
-  './getViewInfo',
-], function (API, yamlParser, UI, getViewInfo) {
+define(['src/util/api', './yamlParser', 'src/util/ui', './getViewInfo'], (
+  API,
+  yamlParser,
+  UI,
+  getViewInfo,
+) => {
   let baseUrl = require.s.contexts._.config.baseUrl;
 
   let tipsURL = `${baseUrl}../../docs/tips/`;
@@ -11,18 +11,19 @@ define([
   let minDelayBetweenTips = 4 * 3600 * 1000;
 
   async function showTips(info) {
-    if (!info) info = await getViewInfo();
-    if (!info._id) return;
+    const infoData = info || (await getViewInfo());
 
     //  info._id='15c9a2dcd55c963fdedf2c18a1471b03';
     //  info.rev=90;
     // retrieve tips toc
-    await fetch(`${tipsURL + info._id}/index.yml`)
+    await fetch(`${tipsURL + infoData._id}/index.yml`)
       .then(async (response) => {
         let text = await response.text();
-        processTipsToc(text, info);
+        processTipsToc(text, infoData);
       })
-      .catch();
+      .catch(() => {
+        // Silent failure if tips do not exist
+      });
   }
 
   function processTipsToc(yaml, info) {

@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery'], ($) => {
   const styles = `
 <style>
 .on-tabs-tiles {
@@ -131,7 +131,7 @@ define(['jquery'], function ($) {
     icon: (tile) => tile.icon,
   };
 
-  return function (div, options) {
+  return function renderTiles(div, options) {
     let lineCount = 0;
     options = { ...defaultOptions, ...options };
     const { tiles } = options;

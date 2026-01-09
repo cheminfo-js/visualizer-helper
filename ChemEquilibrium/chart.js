@@ -1,4 +1,4 @@
-define(['src/util/color'], function (Color) {
+define(['src/util/color'], (Color) => {
   return {
     getChart(x, y, options) {
       options = options || {};
@@ -20,10 +20,9 @@ define(['src/util/color'], function (Color) {
       let species = Object.keys(y[0]);
       let colors = Color.getDistinctColors(species.length);
 
-      for (var i = 0; i < species.length; i++) {
+      for (let i = 0; i < species.length; i++) {
         let data = {};
         chart.data.push(data);
-        // eslint-disable-next-line no-loop-func
         data.y = y.map((y) => {
           return y[species[i]];
         });

@@ -49,7 +49,7 @@ function run(v, w, options = {}) {
       let matrixScore;
       try {
         matrixScore = S[v[i - 1]][w[j - 1]];
-      } catch (e) {
+      } catch {
         // e.g. a letter is not found in the matrix
         matrixScore = indel;
       }

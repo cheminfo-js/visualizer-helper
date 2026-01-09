@@ -147,7 +147,7 @@ let pkas = [
   { ha: 'HCl', a: 'Cl-', pka: 1, specie: { label: 'Cl-', number: 1, pka: 1 } },
 ];
 
-define(['lodash'], function (_) {
+define(['lodash'], (_) => {
   class AcidBase {
     constructor(customPkas) {
       this.pkas = customPkas || pkas;
@@ -165,14 +165,14 @@ define(['lodash'], function (_) {
 
     addAcidBase(label, total) {
       let titrProtonCount;
-      let titrSpecie = pkas.find(function (pka) {
+      let titrSpecie = pkas.find(function equalsLabel(pka) {
         return pka.ha === label;
       });
       if (titrSpecie) {
         titrProtonCount = titrSpecie.specie.number;
         titrSpecie = titrSpecie.specie.label;
       } else {
-        titrSpecie = pkas.find(function (pka) {
+        titrSpecie = pkas.find(function equalsLabel(pka) {
           return pka.a === label;
         });
         if (titrSpecie) {
@@ -222,13 +222,13 @@ define(['lodash'], function (_) {
     getModel() {
       // Get all involved pkas
       let pkas = this.pkas.filter((pka) => {
-        return this.components.find(function (c) {
+        return this.components.find(function equalsLabel(c) {
           return String(c.label) === String(pka.specie.label);
         });
       });
 
       // group pkas by component
-      let grouped = _.groupBy(pkas, function (pka) {
+      let grouped = _.groupBy(pkas, function equalsLabel(pka) {
         return String(pka.specie.label);
       });
 
@@ -241,7 +241,7 @@ define(['lodash'], function (_) {
 
       // Model components
       model.components = new Array(nbComponents);
-      for (i = 0; i < this.components.length; i++) {
+      for (let i = 0; i < this.components.length; i++) {
         model.components[i] = { ...this.components[i] };
       }
 
@@ -256,7 +256,7 @@ define(['lodash'], function (_) {
 
       model.formedSpecies[0].components[protonIndex] = -1;
 
-      for (var i = 0; i < this.components.length; i++) {
+      for (let i = 0; i < this.components.length; i++) {
         if (i === protonIndex) continue;
         let group = grouped[this.components[i].label];
         if (!group) throw new Error('Should be unreachable');

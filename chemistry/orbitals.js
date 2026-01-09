@@ -1,6 +1,6 @@
 define([
   'https://www.lactame.com/github/adobe-webplatform/Snap.svg/84fbff7d512c8145c522b71fc9c872cb0bcae49a/dist/snap.svg-min.js',
-], function (Snap) {
+], (snap) => {
   let exports = {};
 
   let defaultOptions = {
@@ -133,7 +133,7 @@ define([
     }
 
     svgModifier = [];
-    paper = Snap(width, height);
+    paper = snap(width, height);
 
     paper
       .path('M 0 0 L 10 4 L 0 8 z')
@@ -216,7 +216,7 @@ define([
 
   function parseelConfig(elConfig) {
     elConfig = elConfig.split(' ');
-    elConfig = elConfig.map(function (o) {
+    elConfig = elConfig.map((o) => {
       let m = o.match(/^(\d\w)(\d+)/);
       return {
         layer: m[1],
@@ -282,11 +282,11 @@ define([
     return Math.floor(electron / num) === 0 ? 1 : -1;
   }
 
-  exports.getSvg = function (...args) {
+  exports.getSvg = function getSvg(...args) {
     createSvg(args);
     return svg;
   };
-  exports.getSvgAndModifier = function (...args) {
+  exports.getSvgAndModifier = function getSvgAndModifier(...args) {
     createSvg(args);
     return { svg, svgModifier };
   };
