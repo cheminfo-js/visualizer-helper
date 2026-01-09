@@ -34,6 +34,7 @@ export default defineConfig(
       'import/no-named-as-default': 'off',
       'import/no-named-as-default-member': 'off',
       'no-await-in-loop': 'warn',
+      'prefer-named-capture-group': 'off',
     },
   },
 );

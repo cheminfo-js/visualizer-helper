@@ -291,9 +291,7 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], (
       }
       names.sort();
       return {
-        // eslint-disable-next-line prefer-named-capture-group
         base: names[0].replace(/(.*)\.([0-9]+).*/, '$1'),
-        // eslint-disable-next-line prefer-named-capture-group
         index: names[0].replace(/(.*)\.([0-9]+).*/, '$2'),
       };
     }
