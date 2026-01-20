@@ -22,15 +22,15 @@
   },
   "homepage": "https://github.com/cheminfo-js/visualizer-helper#readme",
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.28.6",
     "@babel/plugin-transform-destructuring": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@zakodium/babel-plugin-transform-modules-amd": "^1.0.2",
+    "@babel/preset-env": "^7.28.6",
+    "@zakodium/babel-plugin-transform-modules-amd": "^1.1.1",
     "eslint": "^9.39.2",
-    "eslint-config-zakodium": "^19.0.0",
+    "eslint-config-zakodium": "^19.1.0",
     "jest": "^30.2.0",
-    "prettier": "^3.7.4"
+    "prettier": "^3.8.0"
   },
   "volta": {
     "node": "24.12.0"
