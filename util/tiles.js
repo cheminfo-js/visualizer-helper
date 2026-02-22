@@ -7,7 +7,17 @@ define(['jquery'], ($) => {
 }
 .on-tabs-tiles .cell {
     position: relative;
-    border: 2px solid white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin: 2px;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+}
+
+.on-tabs-tiles .cell.active.link:hover {
+    transform: scale(1.03);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .on-tabs-tiles .cell.inactive {
@@ -181,7 +191,7 @@ define(['jquery'], ($) => {
       let iconType = /(fa|ci-icon)-/.exec(icon);
       if (iconType) iconType = iconType[1];
       const $el = $(`
-                <div class="cell ${active ? 'active' : 'inactive'}">
+                <div class="cell ${active ? 'active' : 'inactive'} ${options.isLink(tile) ? 'link' : ''}">
                     <div class='content'>
                         <div class='header'>${header || ''}</div>
                         ${
