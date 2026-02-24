@@ -102,8 +102,8 @@ define(['jquery', 'src/util/api', 'modules/modulefactory'], (
         return !this.innerHTML.includes('form-button addRow');
       });
       rows.prepend(`
-                  <td><span class="form-button addRow" /></td>
-                  <td><span class="form-button removeRow" /></td>
+                  <td><span class="form-button addRow"></span></td>
+                  <td><span class="form-button removeRow"></span></td>
               `);
     }
 
