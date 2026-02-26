@@ -176,6 +176,7 @@ class Sample {
       droppedDSC: 'differentialScanningCalorimetry',
       droppedHg: 'hgPorosimetry',
       droppedDCS: 'differentialCentrifugalSedimentation',
+      droppedDLS: 'dls',
       droppedXRF: 'xrf',
       droppedImage: 'image',
       droppedGenbank: 'genbank',

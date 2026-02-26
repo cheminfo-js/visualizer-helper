@@ -322,6 +322,7 @@ Your local changes will be lost.</p>`;
         droppedChrom: 'chromatogram',
         droppedCV: 'cyclicVoltammetry',
         droppedTGA: 'thermogravimetricAnalysis',
+        droppedDLS: 'dls',
         droppedIsotherm: 'isotherm',
         droppedDSC: 'differentialScanningCalorimetry',
         droppedHg: 'hgPorosimetry',
@@ -533,6 +534,11 @@ Your local changes will be lost.</p>`;
         chromatogram: {
           type: 'Chromatography',
           xUnit: 'Time [min]',
+          yUnit: 'Intensity',
+        },
+        dls: {
+          type: 'Dynamic light scattering',
+          xUnit: 'Diameter [nm]',
           yUnit: 'Intensity',
         },
       };
