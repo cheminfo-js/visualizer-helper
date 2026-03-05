@@ -66,6 +66,7 @@ class Toc {
       endkey,
       key,
       descending,
+      addRightsInfo,
     } = { ...this.options, ...options };
     let mine = 0;
     let groups = '';
@@ -86,6 +87,7 @@ class Toc {
         endkey,
         key,
         descending,
+        addRightsInfo,
         varName: this.options.varName,
       })
       .then((entries) => {
