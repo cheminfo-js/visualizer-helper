@@ -348,6 +348,11 @@ define([
                   withCredentials: true,
                   url: `${this.entryUrl}/${res.body[i].id}/_rights/write`,
                 };
+                res.body[i].userOwner = {
+                  type: 'boolean',
+                  withCredentials: true,
+                  url: `${this.entryUrl}/${res.body[i].id}/_rights/owner`,
+                };
               }
             }
             for (let i = 0; i < res.body.length; i++) {
