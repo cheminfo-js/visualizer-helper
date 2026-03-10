@@ -114,4 +114,14 @@ module.exports = {
     localStorage.setItem('lastPrinterFormat', f.printer);
     return String(f.printer);
   },
+
+  async loadZebraManager(zebraPrinterProxy) {
+    if (window.zebraManager) return window.zebraManager;
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = `${zebraPrinterProxy.url}/embed.js`;
+      script.onload = () => resolve(window.zebraManager);
+      document.head.appendChild(script);
+    });
+  },
 };
