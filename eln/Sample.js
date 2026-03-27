@@ -12,6 +12,7 @@ import { createVar } from './jpaths';
 import convertToJcamp from './libs/convertToJcamp';
 import elnPlugin from './libs/elnPlugin';
 import { splitJcamp } from './sample/splitJcamp';
+import { updateSample } from './sampleMigrations';
 
 const DataObject = Datas.DataObject;
 
@@ -916,35 +917,4 @@ async function copyAnalysis(sample, original) {
   UI.showNotification('Analysis copied to clipboard', 'success');
 }
 
-function updateSample(sample) {
-  if (!sample.$content.general) {
-    sample.$content.general = {};
-  }
-
-  /** This is the old place we used to put the sequence.
-   * By default we expect it is a peptidic sequence
-   */
-  if (sample.$content.general.sequence) {
-    // eslint-disable-next-line no-console
-    console.log('Migrating sequence', sample.$content.general.sequence);
-    if (!sample.$content.biology) sample.$content.biology = {};
-    if (!sample.$content.biology.peptidic) {
-      sample.$content.biology.peptidic = [];
-    }
-    if (!sample.$content.biology.peptidic.length > 0) {
-      sample.$content.biology.peptidic[0] = {};
-    }
-    if (!sample.$content.biology.peptidic[0].seq) {
-      sample.$content.biology.peptidic[0].seq = [];
-    }
-    if (!sample.$content.biology.peptidic[0].seq.length > 0) {
-      sample.$content.biology.peptidic[0].seq[0] = {};
-    }
-    sample.setChildSync(
-      ['$content', 'biology', 'peptidic', 0, 'seq', 0, 'sequence'],
-      sample.$content.general.sequence,
-    );
-    sample.$content.general.sequence = undefined;
-  }
-}
 module.exports = Sample;
