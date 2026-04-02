@@ -53,6 +53,7 @@ jpaths.xrf = ['$content', 'spectra', 'xrf'];
 jpaths.xps = ['$content', 'spectra', 'xps'];
 jpaths.icp = ['$content', 'spectra', 'icp'];
 jpaths.dls = ['$content', 'spectra', 'dls'];
+jpaths.zetaPotential = ['$content', 'spectra', 'zetaPotential'];
 jpaths.isotherm = ['$content', 'spectra', 'isotherm'];
 jpaths.thermogravimetricAnalysis = [
   '$content',
