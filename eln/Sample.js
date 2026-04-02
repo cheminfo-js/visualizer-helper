@@ -183,6 +183,7 @@ Your local changes will be lost.</p>`;
     createVar(sampleVar, 'xps');
     createVar(sampleVar, 'icp');
     createVar(sampleVar, 'dls');
+    createVar(sampleVar, 'zetaPotential');
     createVar(sampleVar, 'cyclicVoltammetry');
     createVar(sampleVar, 'elementalAnalysis');
     createVar(sampleVar, 'differentialScanningCalorimetry');
@@ -324,6 +325,7 @@ Your local changes will be lost.</p>`;
         droppedCV: 'cyclicVoltammetry',
         droppedTGA: 'thermogravimetricAnalysis',
         droppedDLS: 'dls',
+        droppedZetaPotential: 'zetaPotential',
         droppedIsotherm: 'isotherm',
         droppedDSC: 'differentialScanningCalorimetry',
         droppedHg: 'hgPorosimetry',
@@ -368,7 +370,8 @@ Your local changes will be lost.</p>`;
           cyclicVoltammetry: 'Cyclic voltammetry (csv, tsv, txt, jcamp, pdf)',
           differentialScanningCalorimetry:
             'Differential Scanning Calorimetry (csv, tsv, txt, jcamp)',
-          dls: 'Dynamic light scattering Analysis (csv, tsv, txt, jcamp)',
+          dls: 'Dynamic light scattering Analysis (csv, tsv, txt, jcamp, zmes)',
+          zetaPotential: 'Zeta Potential (csv, tsv, txt, jcamp, zmes)',
           xray: 'Crystal structure (cif, pdb)',
           image: 'Images (jpg, png or tiff)',
           video: 'Videos (mp4, m4a, avi, wav)',
@@ -436,9 +439,23 @@ Your local changes will be lost.</p>`;
           droppedData.converted = true;
         }
       }
+      // Keep original files alongside converted ones
+      const originalFiles = droppedDatas
+        .filter((droppedData) => droppedData.converted)
+        .map((droppedData) => {
+          const original = { ...droppedData };
+          delete original.converted;
+          // If no extension or text-like, ensure .txt extension
+          const extension = original.filename.replace(/.*\./, '').toLowerCase();
+          if (['csv', 'tsv', 'txt'].includes(extension) || !extension) {
+            original.filename = original.filename.replace(/\.[^.]*$/, '.txt');
+          }
+          return original;
+        });
       droppedDatas = droppedDatas
         .filter((droppedData) => !droppedData.converted)
-        .concat(newData);
+        .concat(newData)
+        .concat(originalFiles);
     }
 
     /*
@@ -542,6 +559,11 @@ Your local changes will be lost.</p>`;
           xUnit: 'Diameter [nm]',
           yUnit: 'Intensity',
         },
+        zetaPotential: {
+          type: 'Zeta potential',
+          xUnit: 'Zeta potential [mV]',
+          yUnit: 'Intensity',
+        },
       };
 
       for (let droppedData of droppedDatas) {
@@ -613,6 +635,19 @@ Your local changes will be lost.</p>`;
               },
             );
             if (!meta) return;
+
+            // Keep the original text file alongside the converted jcamp
+            const originalFilename = droppedData.filename.replace(
+              /\.[^.]*$/,
+              '.txt',
+            );
+            droppedDatas.push({
+              filename: originalFilename,
+              mimetype: droppedData.mimetype,
+              contentType: droppedData.contentType,
+              encoding: droppedData.encoding,
+              content: droppedData.content,
+            });
 
             droppedData.filename = `${meta.filename}`;
             droppedData.mimetype = 'chemical/x-jcamp-dx';

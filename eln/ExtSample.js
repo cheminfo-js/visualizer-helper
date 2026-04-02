@@ -177,6 +177,7 @@ class Sample {
       droppedHg: 'hgPorosimetry',
       droppedDCS: 'differentialCentrifugalSedimentation',
       droppedDLS: 'dls',
+      droppedZetaPotential: 'zetaPotential',
       droppedXRF: 'xrf',
       droppedImage: 'image',
       droppedGenbank: 'genbank',
