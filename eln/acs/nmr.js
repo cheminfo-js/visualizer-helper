@@ -23,18 +23,32 @@ const defaultFormats = {
 };
 
 export default function toHTML(value) {
+  let nmriumRanges;
   if (
     value &&
     value.nmrium &&
     value.nmrium.ranges &&
     value.nmrium.ranges.values
   ) {
+    nmriumRanges = value.nmrium.ranges.values;
+  }
+  if (
+    value &&
+    value.nmrium &&
+    value.nmrium.spectrum &&
+    value.nmrium.spectrum.ranges &&
+    value.nmrium.spectrum.ranges.values
+  ) {
+    nmriumRanges = value.nmrium.ranges.values;
+  }
+
+  if (nmriumRanges) {
     const { solvent, frequency, nucleus } = value;
     if (!nucleus || !Array.isArray(nucleus)) return '';
     const defaultFormat =
       defaultFormats[nucleus[0].toLowerCase()] || defaultFormats.h;
 
-    return rangesToACS(value.nmrium.ranges.values, {
+    return rangesToACS(nmriumRanges, {
       nucleus: nucleus[0],
       solvent,
       frequencyObserved: frequency,
