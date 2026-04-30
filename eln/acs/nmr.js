@@ -39,7 +39,7 @@ export default function toHTML(value) {
     value.nmrium.spectrum.ranges &&
     value.nmrium.spectrum.ranges.values
   ) {
-    nmriumRanges = value.nmrium.ranges.values;
+    nmriumRanges = value.nmrium.spectrum.ranges.values;
   }
 
   if (nmriumRanges) {
