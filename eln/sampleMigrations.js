@@ -87,7 +87,6 @@ function migrateIupac(sample) {
  * @param {object} sample - The sample object to migrate
  */
 function updateSample(sample) {
-  debugger;
   migrateSequence(sample);
   migrateTGAZones(sample);
   migrateIupac(sample);
