@@ -1,0 +1,2852 @@
+{
+  "_id": "1315a6d895f431497538cb6d834feab5",
+  "_rev": "2222-447630c5d955c22e6261d8d131234e1d",
+  "$type": "entry",
+  "$id": ["ethylbenzene", ""],
+  "$kind": "sample",
+  "$owners": [
+    "admin@cheminfo.org",
+    "stockWrite",
+    "anonymousRead",
+    "lpatiny@gmail.com",
+    "ch.epfl.isic.isic-ge.xray",
+    "kevin.m.jablonka@gmail.com",
+    "Yakutovicha@gmail.com",
+    "arsene@patiny.com",
+    "de.uni-jena.mass",
+    "de.uni-jena.nmr"
+  ],
+  "$content": {
+    "misc": { "misc": "Test misc info" },
+    "general": {
+      "description": "<p><br></p>",
+      "name": [
+        { "value": "Ethylbenzene", "language": "en" },
+        { "value": "Aethylbenzol", "language": "de" }
+      ],
+      "mf": "C8H10",
+      "molfile": "\nActelion Java MolfileCreator 1.0\n\n  8  8  0  0  0  0  0  0  0  0999 V2000\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  3  1  0  0  0  0\n  2  4  2  0  0  0  0\n  2  5  1  0  0  0  0\n  4  6  1  0  0  0  0\n  5  7  2  0  0  0  0\n  6  8  2  0  0  0  0\n  7  8  1  0  0  0  0\nM  END\n",
+      "mw": 106.16529471443975,
+      "title": " ",
+      "em": 106.0782503223,
+      "ocl": {
+        "value": "daD@@DjUZxHH@@",
+        "coordinates": "!BbOvw?_x@?g?~_{\\Bm?t",
+        "index": [
+          1099173888, 8192, 0, 128, -2147483648, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0
+        ]
+      },
+      "keyword": [
+        { "kind": "final", "value": "JACS2019", "color": "#FFFFFFFF" },
+        {
+          "kind": "sccTubeID",
+          "value": "3245233452323§",
+          "color": "#FFFFFFFF"
+        },
+        { "kind": "caption", "value": "1a", "color": "#FFFFFFFF" }
+      ],
+      "kind": "",
+      "sequence": "",
+      "meta": { "country": "", "abc": "", "asdfasdf": "" }
+    },
+    "spectra": {
+      "ir": [
+        {
+          "jcamp": {
+            "filename": "spectra/ir/spectra_ir_100-41-4-IR.jdx",
+            "dUrl": "https://demo.scipeaks.com/roc/db/eln/entry/1315a6d895f431497538cb6d834feab5/spectra%2Fir%2Fspectra_ir_100-41-4-IR.jdx"
+          },
+          "peak": [
+            {
+              "wavenumber": 1613.8583376884494,
+              "absorbance": 0.473660722610156,
+              "transmittance": 0.33599999999999997,
+              "kind": "m",
+              "_highlight": 0.5620600551849647
+            },
+            {
+              "wavenumber": 1952.5275809045322,
+              "absorbance": 0.13123804178794973,
+              "transmittance": 0.7392,
+              "kind": "w",
+              "_highlight": 0.5211472441361716
+            },
+            {
+              "wavenumber": 2872.4947788943773,
+              "absorbance": 0.4610494379856386,
+              "transmittance": 0.3459,
+              "kind": "m",
+              "_highlight": 0.30496127508514037
+            },
+            {
+              "wavenumber": 2887.659073366737,
+              "absorbance": 0.7066374452885544,
+              "transmittance": 0.1965,
+              "kind": "S",
+              "_highlight": 0.6306151483877337
+            },
+            {
+              "wavenumber": 2907.878132663217,
+              "absorbance": 0.4962093169428189,
+              "transmittance": 0.319,
+              "kind": "S",
+              "_highlight": 0.7220300834282813
+            },
+            {
+              "wavenumber": 2944.9464080400967,
+              "absorbance": 1.0867160982395816,
+              "transmittance": 0.0819,
+              "kind": "S",
+              "_highlight": 0.8391486100817713
+            },
+            {
+              "wavenumber": 2978.6448402008964,
+              "absorbance": 1.7958800173440752,
+              "transmittance": 0.016,
+              "kind": "S",
+              "_highlight": 0.6098050482700554
+            },
+            {
+              "wavenumber": 3014.028193969736,
+              "absorbance": 0.32975414692587596,
+              "transmittance": 0.468,
+              "kind": "m",
+              "_highlight": 0.39091552830124354
+            },
+            {
+              "wavenumber": 3039.302018090336,
+              "absorbance": 1.0969100130080565,
+              "transmittance": 0.08,
+              "kind": "S",
+              "_highlight": 0.502385910408338
+            },
+            {
+              "wavenumber": 3076.3702934672156,
+              "absorbance": 0.5831931281770556,
+              "transmittance": 0.2611,
+              "kind": "S",
+              "_highlight": 0.06293920935800923
+            },
+            {
+              "wavenumber": 3098.2742743717354,
+              "absorbance": 0.38658105496542694,
+              "transmittance": 0.4106,
+              "kind": "m",
+              "_highlight": 0.4934643842659038
+            },
+            {
+              "wavenumber": 3118.493333668215,
+              "absorbance": 0.16557929631846746,
+              "transmittance": 0.6829999999999999,
+              "kind": "w",
+              "_highlight": 0.05290000144269602
+            },
+            {
+              "wavenumber": 1875.0211869346824,
+              "absorbance": 0.11935787359571505,
+              "transmittance": 0.7597,
+              "kind": "w",
+              "_highlight": 0.9972320630781272
+            },
+            {
+              "wavenumber": 1812.6790874371945,
+              "absorbance": 0.11125903931710739,
+              "transmittance": 0.774,
+              "kind": "w",
+              "_highlight": 0.07102323198933491
+            },
+            {
+              "wavenumber": 1753.706831155787,
+              "absorbance": 0.0834934128848443,
+              "transmittance": 0.8251000000000001,
+              "kind": "w",
+              "_highlight": 0.0750629173499594
+            }
+          ]
+        }
+      ],
+      "mass": [
+        {
+          "jcamp": { "filename": "spectra/mass/100-41-4-Mass.jdx" },
+          "peak": [
+            {
+              "mass": 39,
+              "intensity": 7.030703070307031,
+              "_highlight": 0.12369367724700042
+            },
+            {
+              "mass": 51,
+              "intensity": 11.471147114711473,
+              "_highlight": 0.015805499438651505
+            },
+            {
+              "mass": 65,
+              "intensity": 11.311131113111312,
+              "_highlight": 0.8491699410415776
+            },
+            {
+              "mass": 77,
+              "intensity": 9.900990099009901,
+              "_highlight": 0.19516729406122546
+            },
+            { "mass": 91, "intensity": 100, "_highlight": 0.5743302682284573 },
+            {
+              "mass": 106,
+              "intensity": 28.292829282928295,
+              "_highlight": 0.01393611793211269
+            }
+          ],
+          "accurate": { "mf": "", "modification": "" },
+          "experiment": "EI"
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/mass/patiny_ethylbenzene_.1538643826486.jdx"
+          },
+          "accurate": { "mf": "PhCH2CH3", "modification": "+", "value": 106 },
+          "experiment": "Accurate mass",
+          "peak": [
+            { "mass": 91.053917, "intensity": 100 },
+            { "mass": 106.077423, "intensity": 48.61015532884412 }
+          ]
+        }
+      ],
+      "nmr": [
+        {
+          "dimension": 1,
+          "nucleus": ["1H"],
+          "isFid": false,
+          "isFt": true,
+          "title": "ethylbenzene",
+          "solvent": "DMSO",
+          "pulse": "zg30",
+          "experiment": "1d",
+          "temperature": 298.0016,
+          "frequency": 400.082470657773,
+          "type": "NMR SPECTRUM",
+          "date": "2013-08-20T15:50:44.000Z",
+          "jcamp": { "filename": "spectra/nmr/h1_0.jdx" },
+          "range": [
+            {
+              "from": 7.26037,
+              "to": 7.31871,
+              "integral": 2.04275,
+              "signal": [
+                {
+                  "nbAtoms": 0,
+                  "diaID": [],
+                  "multiplicity": "m",
+                  "kind": "",
+                  "remark": "",
+                  "delta": 7.28264
+                }
+              ],
+              "_highlight": ["0.5518342282609199"]
+            },
+            {
+              "from": 7.15091,
+              "to": 7.22304,
+              "integral": 2.887,
+              "signal": [
+                {
+                  "nbAtoms": 0,
+                  "diaID": [],
+                  "multiplicity": "m",
+                  "kind": "",
+                  "remark": "",
+                  "delta": 7.20152
+                }
+              ],
+              "_highlight": ["0.455637126142189"]
+            },
+            {
+              "from": 2.56504,
+              "to": 2.64283,
+              "integral": 2.07789,
+              "signal": [
+                {
+                  "nbAtoms": 0,
+                  "diaID": [],
+                  "multiplicity": "q",
+                  "kind": "",
+                  "remark": "",
+                  "j": [{ "coupling": 7.65449122379232, "multiplicity": "q" }],
+                  "delta": 2.60393
+                }
+              ],
+              "kind": "signal",
+              "_highlight": ["did@`@fTf[Waj@@bJ@_iB@bUP"]
+            },
+            {
+              "from": 1.16673,
+              "to": 1.2144,
+              "integral": 2.99236,
+              "signal": [
+                {
+                  "nbAtoms": 0,
+                  "diaID": [],
+                  "multiplicity": "t",
+                  "kind": "",
+                  "remark": "",
+                  "j": [{ "coupling": 7.654491223786863, "multiplicity": "t" }],
+                  "delta": 1.19057
+                }
+              ],
+              "_highlight": ["did@`@fTeYWaj@@@GzP`HeT"]
+            }
+          ]
+        },
+        {
+          "dimension": 2,
+          "nucleus": ["13C", "1H"],
+          "isFid": false,
+          "isFt": true,
+          "title": "ethylbenzene",
+          "solvent": "DMSO",
+          "pulse": "hsqcedetgpsisp2.3",
+          "experiment": "hsqc",
+          "temperature": 298.0009,
+          "frequency": 400.08188157624,
+          "type": "nD NMR SPECTRUM",
+          "date": "2013-08-20T16:18:58.000Z",
+          "jcamp": { "filename": "spectra/nmr/hsqc_0.jdx" },
+          "range": []
+        },
+        {
+          "dimension": 2,
+          "nucleus": ["13C", "1H"],
+          "isFid": false,
+          "isFt": true,
+          "title": "ethylbenzene",
+          "solvent": "DMSO",
+          "pulse": "hmbcgplpndqf",
+          "experiment": "hmbc",
+          "temperature": 298.0004,
+          "frequency": 400.0819144864,
+          "type": "nD NMR SPECTRUM",
+          "date": "2013-08-20T16:25:18.000Z",
+          "jcamp": { "filename": "spectra/nmr/hmbc_0.jdx" },
+          "range": []
+        },
+        {
+          "dimension": 2,
+          "nucleus": ["1H", "1H"],
+          "isFid": false,
+          "isFt": true,
+          "title": "ethylbenzene",
+          "solvent": "DMSO",
+          "pulse": "cosygpppqf",
+          "experiment": "cosy",
+          "temperature": 298.0012,
+          "frequency": 400.0819144864,
+          "type": "nD NMR SPECTRUM",
+          "date": "2013-08-20T16:07:42.000Z",
+          "jcamp": { "filename": "spectra/nmr/cosy_0.jdx" },
+          "range": []
+        },
+        {
+          "dimension": 2,
+          "nucleus": ["1H", "1H"],
+          "isFid": false,
+          "isFt": true,
+          "title": "",
+          "solvent": "CDCl3",
+          "pulse": "cosygpmfphpp",
+          "experiment": "cosy",
+          "temperature": 298.0118,
+          "frequency": 400.301880106283,
+          "type": "nD NMR SPECTRUM",
+          "probe": "Z140678_0033 (PA BBO 400S1 BBF-H-D-05 Z SP N",
+          "acquisitionMode": 0,
+          "expno": 2,
+          "date": "2019-07-02T09:36:18.000Z",
+          "jcamp": { "filename": "spectra/nmr/cosy-dqf.jdx" },
+          "range": []
+        }
+      ],
+      "raman": [
+        {
+          "jcamp": { "filename": "spectra/raman/Adamantan.jdx" },
+          "peak": [
+            {
+              "wavenumber": 2913.7252010212374,
+              "intensity": 21726,
+              "kind": "S",
+              "_highlight": 0.9980196377921478
+            },
+            {
+              "wavenumber": 1219.26005372187,
+              "intensity": 4223,
+              "kind": "w",
+              "_highlight": 0.5997125259625802
+            },
+            {
+              "wavenumber": 1215.907996061535,
+              "intensity": 1049.8,
+              "kind": "w",
+              "_highlight": 0.4785640372354789
+            }
+          ]
+        },
+        { "jcamp": { "filename": "spectra/raman/6x6.jdx" } }
+      ],
+      "chromatogram": [
+        {
+          "cdf": { "filename": "spectra/chromatogram/agilent_hplc.cdf" },
+          "peak": [
+            {
+              "from": 190.81200284324586,
+              "to": 202.8120030220598,
+              "width": 12.000000178813934,
+              "retentionTime": 195.61200291477144,
+              "intensity": 99.10100751604354,
+              "relativeIntegration": 0.07330418132583573
+            },
+            {
+              "from": 317.21200472675264,
+              "to": 406.01200604997575,
+              "width": 88.80000132322311,
+              "retentionTime": 324.412004834041,
+              "intensity": 5.929052775246757,
+              "relativeIntegration": 0.007697217946054735
+            },
+            {
+              "from": 515.2120076771826,
+              "to": 539.2120080348104,
+              "width": 24.00000035762787,
+              "retentionTime": 527.2120078559965,
+              "intensity": 5.959773363385882,
+              "relativeIntegration": 0.0066157495191163955
+            },
+            {
+              "from": 686.8120102342218,
+              "to": 722.0120107587427,
+              "width": 35.200000524520874,
+              "retentionTime": 708.4120105560869,
+              "intensity": 15.233358355930875,
+              "relativeIntegration": 0.021022061416268122
+            },
+            {
+              "from": 722.0120107587427,
+              "to": 760.8120113369077,
+              "width": 38.800000578165054,
+              "retentionTime": 735.6120109613985,
+              "intensity": 12.25826930999756,
+              "relativeIntegration": 0.013189920449679935
+            },
+            {
+              "from": 779.6120116170496,
+              "to": 819.2120122071356,
+              "width": 39.60000059008598,
+              "retentionTime": 798.8120119031519,
+              "intensity": 5.748665646144322,
+              "relativeIntegration": 0.010803552091511223
+            },
+            {
+              "from": 998.8120148833841,
+              "to": 1064.8120158668607,
+              "width": 66.00000098347664,
+              "retentionTime": 1028.812015330419,
+              "intensity": 81.31006709507534,
+              "relativeIntegration": 0.3361997447480468
+            },
+            {
+              "from": 1142.4120170231909,
+              "to": 1214.4120180960745,
+              "width": 72.0000010728836,
+              "retentionTime": 1177.2120175417513,
+              "intensity": 118.91736951555527,
+              "relativeIntegration": 0.531167572503487
+            }
+          ],
+          "defaultTrace": "uv254"
+        },
+        {
+          "cdf": { "filename": "spectra/chromatogram/shimadzu-gcms.cdf" },
+          "peak": [
+            {
+              "from": 192,
+              "to": 250.5,
+              "relativeIntegration": 1,
+              "retentionTime": 221.25
+            }
+          ],
+          "defaultTrace": "bpc"
+        },
+        {
+          "xml": { "filename": "spectra/chromatogram/3-28-5.mzdata.xml" },
+          "peak": [
+            {
+              "from": 2.936,
+              "to": 3.195999999999998,
+              "width": 0.259999999999998,
+              "retentionTime": 3.056,
+              "intensity": 2638799.035714286,
+              "relativeIntegration": 0.3881614347957734
+            },
+            {
+              "from": 4.036999999999999,
+              "to": 4.2070000000000025,
+              "width": 0.17000000000000348,
+              "retentionTime": 4.067,
+              "intensity": 75772.14391741072,
+              "relativeIntegration": 0.01032006045735031
+            },
+            {
+              "from": 4.420000000000001,
+              "to": 4.560000000000003,
+              "width": 0.14000000000000234,
+              "retentionTime": 4.47,
+              "intensity": 14344.237151227679,
+              "relativeIntegration": -0.0000148511827851876
+            },
+            {
+              "from": 4.866999999999999,
+              "to": 4.9270000000000005,
+              "width": 0.060000000000001386,
+              "retentionTime": 4.897,
+              "intensity": 15430.150892857142,
+              "relativeIntegration": 0.0005813949984051824
+            },
+            {
+              "from": 4.9270000000000005,
+              "to": 5.074999999999996,
+              "width": 0.14799999999999525,
+              "retentionTime": 4.955,
+              "intensity": 34717.07767857143,
+              "relativeIntegration": 0.0012223173021200058
+            },
+            {
+              "from": 5.113999999999999,
+              "to": 5.233999999999995,
+              "width": 0.11999999999999567,
+              "retentionTime": 5.144,
+              "intensity": 194248.43995535717,
+              "relativeIntegration": 0.017772673100635482
+            },
+            {
+              "from": 5.808999999999999,
+              "to": 5.854857142857143,
+              "width": 0.04585714285714371,
+              "retentionTime": 5.839,
+              "intensity": 241791.07321428572,
+              "relativeIntegration": 0.00018787018827471489
+            },
+            {
+              "from": 5.854857142857143,
+              "to": 5.905999999999993,
+              "width": 0.05114285714284961,
+              "retentionTime": 5.876,
+              "intensity": 221260.3517857143,
+              "relativeIntegration": -0.0005229021696978706
+            },
+            {
+              "from": 5.939000000000006,
+              "to": 6.048999999999999,
+              "width": 0.10999999999999233,
+              "retentionTime": 5.999,
+              "intensity": 231506.0799107143,
+              "relativeIntegration": 0.00910256333561013
+            },
+            {
+              "from": 6.476000000000006,
+              "to": 6.596000000000002,
+              "width": 0.11999999999999567,
+              "retentionTime": 6.536,
+              "intensity": 2311536.1875,
+              "relativeIntegration": 0.11310536415883835
+            },
+            {
+              "from": 7.205000000000006,
+              "to": 7.302222222222221,
+              "width": 0.09722222222221433,
+              "retentionTime": 7.265,
+              "intensity": 6445385.171428571,
+              "relativeIntegration": 0.4653050378621387
+            },
+            {
+              "from": 7.302222222222221,
+              "to": 7.392000000000002,
+              "width": 0.08977777777778151,
+              "retentionTime": 7.332,
+              "intensity": 236913.93191964287,
+              "relativeIntegration": -0.019683002081486625
+            },
+            {
+              "from": 7.520000000000001,
+              "to": 7.629999999999994,
+              "width": 0.10999999999999233,
+              "retentionTime": 7.57,
+              "intensity": 473550.3879464286,
+              "relativeIntegration": 0.024242128691027154
+            },
+            {
+              "from": 10.014000000000014,
+              "to": 10.117,
+              "width": 0.10299999999998732,
+              "retentionTime": 10.104,
+              "intensity": 79440.33102678572,
+              "relativeIntegration": -0.00648585493007841
+            },
+            {
+              "from": 10.117,
+              "to": 10.189999999999985,
+              "width": 0.07299999999998441,
+              "retentionTime": 10.13,
+              "intensity": 83361.15290178572,
+              "relativeIntegration": -0.003294234526125344
+            }
+          ],
+          "defaultTrace": "bpc"
+        },
+        {
+          "jcamp": { "filename": "spectra/chromatogram/0140_2c.jdx" },
+          "peak": [
+            {
+              "from": 658.089355884587,
+              "to": 672.5528568573876,
+              "width": 14.463500972800603,
+              "retentionTime": 666.7674564682674,
+              "intensity": 0.2547776082285715,
+              "relativeIntegration": 0.03181015190797035
+            },
+            {
+              "from": 697.1408085111486,
+              "to": 710.1579593866692,
+              "width": 13.017150875520542,
+              "retentionTime": 704.3725589975489,
+              "intensity": 0.33275070994285716,
+              "relativeIntegration": 0.04271519900105157
+            },
+            {
+              "from": 745.352478420484,
+              "to": 762.7086795878447,
+              "width": 17.356201167360723,
+              "retentionTime": 754.0305790041643,
+              "intensity": 0.36350307108571434,
+              "relativeIntegration": 0.06311004514607907
+            },
+            {
+              "from": 781.5112308524855,
+              "to": 797.6621402721128,
+              "width": 16.150909419627283,
+              "retentionTime": 790.1893314361658,
+              "intensity": 0.19527986057142857,
+              "relativeIntegration": 0.01313983029292113
+            },
+            {
+              "from": 797.6621402721128,
+              "to": 810.92034949718,
+              "width": 13.258209225067276,
+              "retentionTime": 803.6885990107797,
+              "intensity": 0.26118781302857147,
+              "relativeIntegration": 0.02785448053664166
+            },
+            {
+              "from": 831.1692508591009,
+              "to": 847.0791019291815,
+              "width": 15.909851070080663,
+              "retentionTime": 839.8473514427812,
+              "intensity": 0.27429027611428575,
+              "relativeIntegration": 0.04182659428496991
+            },
+            {
+              "from": 905.8973392185707,
+              "to": 922.771423686838,
+              "width": 16.87408446826737,
+              "retentionTime": 916.0217898995311,
+              "intensity": 0.4734729920000001,
+              "relativeIntegration": 0.06520742240067542
+            },
+            {
+              "from": 922.771423686838,
+              "to": 949.7699588360658,
+              "width": 26.99853514922779,
+              "retentionTime": 929.521057474145,
+              "intensity": 0.20409364434285715,
+              "relativeIntegration": -0.0007465807354328192
+            },
+            {
+              "from": 959.8944095170262,
+              "to": 981.5896609762272,
+              "width": 21.695251459200904,
+              "retentionTime": 970.0188601979867,
+              "intensity": 0.13639202285714289,
+              "relativeIntegration": 0.019356668975293135
+            },
+            {
+              "from": 1002.3206790372413,
+              "to": 1021.1232303018821,
+              "width": 18.802551264640783,
+              "retentionTime": 1012.4451297182018,
+              "intensity": 0.21882414217142862,
+              "relativeIntegration": 0.0291206355181619
+            },
+            {
+              "from": 1029.8013308855639,
+              "to": 1050.0502322474895,
+              "width": 20.24890136192562,
+              "retentionTime": 1038.4794314692463,
+              "intensity": 0.1368691341714286,
+              "relativeIntegration": 0.012074090963355585
+            },
+            {
+              "from": 1086.2089846794995,
+              "to": 1102.118835749584,
+              "width": 15.909851070084414,
+              "retentionTime": 1094.887085263182,
+              "intensity": 0.2148647254857143,
+              "relativeIntegration": 0.019058998521045735
+            },
+            {
+              "from": 1127.6710208015377,
+              "to": 1140.6881716770613,
+              "width": 13.017150875523612,
+              "retentionTime": 1134.9027712879397,
+              "intensity": 0.19727006994285715,
+              "relativeIntegration": 0.01568905353436683
+            },
+            {
+              "from": 1161.9013064371738,
+              "to": 1196.6137087719035,
+              "width": 34.71240233472963,
+              "retentionTime": 1183.5965578963799,
+              "intensity": 0.6450278838857144,
+              "relativeIntegration": 0.22245164179210025
+            },
+            {
+              "from": 1207.2202761519598,
+              "to": 1234.7009280002874,
+              "width": 27.480651848327625,
+              "retentionTime": 1218.791076930203,
+              "intensity": 0.28980049920000006,
+              "relativeIntegration": 0.06308608731248383
+            },
+            {
+              "from": 1295.4476320860642,
+              "to": 1330.1600344207939,
+              "width": 34.71240233472963,
+              "retentionTime": 1304.1257326697466,
+              "intensity": 0.3734782171428572,
+              "relativeIntegration": 0.03025362546896351
+            },
+            {
+              "from": 1355.2301027736542,
+              "to": 1398.6206056920662,
+              "width": 43.39050291841204,
+              "retentionTime": 1363.9082033573366,
+              "intensity": 0.12416509142857143,
+              "relativeIntegration": 0.029263653800927172
+            },
+            {
+              "from": 1409.709289771216,
+              "to": 1431.404541230422,
+              "width": 21.69525145920602,
+              "retentionTime": 1418.3873903548983,
+              "intensity": 0.18103476342857144,
+              "relativeIntegration": 0.016268593998071634
+            },
+            {
+              "from": 1445.868042203226,
+              "to": 1476.482452595661,
+              "width": 30.614410392435047,
+              "retentionTime": 1455.9924928841888,
+              "intensity": 0.2594887456,
+              "relativeIntegration": 0.05817611695413808
+            },
+            {
+              "from": 1476.482452595661,
+              "to": 1499.8651125016943,
+              "width": 23.38265990603327,
+              "retentionTime": 1482.5089113343295,
+              "intensity": 0.08765907794285716,
+              "relativeIntegration": 0.014334219178587933
+            },
+            {
+              "from": 1597.734802417668,
+              "to": 1612.1983033904721,
+              "width": 14.463500972804013,
+              "retentionTime": 1604.96655290407,
+              "intensity": 0.3180654838857143,
+              "relativeIntegration": 0.04560445043287105
+            },
+            {
+              "from": 1666.1953736889404,
+              "to": 1689.0959168958802,
+              "width": 22.9005432069398,
+              "retentionTime": 1679.212524564464,
+              "intensity": 0.44887547428571434,
+              "relativeIntegration": 0.06641334891177397
+            },
+            {
+              "from": 1689.0959168958802,
+              "to": 1696.0866090327354,
+              "width": 6.990692136855159,
+              "retentionTime": 1687.408508449053,
+              "intensity": 0.37254578560000007,
+              "relativeIntegration": 0.0009414258613622876
+            },
+            {
+              "from": 1739.4771119511474,
+              "to": 1765.5114137021947,
+              "width": 26.034301751047224,
+              "retentionTime": 1749.6015626321102,
+              "intensity": 0.2977240594285715,
+              "relativeIntegration": 0.07299024594162086
+            }
+          ],
+          "defaultTrace": "intensity"
+        },
+        {
+          "cdf": {
+            "filename": "spectra/chromatogram/JC-012_cleavage test_+.cdf"
+          },
+          "peak": [],
+          "defaultTrace": "bpc"
+        },
+        {
+          "jcamp": { "filename": "spectra/chromatogram/MixC8-C40_140630.JDX" },
+          "peak": [
+            {
+              "from": 22.981,
+              "to": 25.71050000000001,
+              "width": 2.7295000000000087,
+              "retentionTime": 25.711,
+              "intensity": 132242.74285714288,
+              "relativeIntegration": -0.0022610147062224898
+            },
+            {
+              "from": 25.71050000000001,
+              "to": 28.439999999999998,
+              "width": 2.7294999999999874,
+              "retentionTime": 27.075,
+              "intensity": 177870.4,
+              "relativeIntegration": 0.0005767899147190178
+            },
+            {
+              "from": 33.897000000000006,
+              "to": 37.855499999999985,
+              "width": 3.9584999999999795,
+              "retentionTime": 36.627,
+              "intensity": 5472188.342857143,
+              "relativeIntegration": -0.032074990613352415
+            },
+            {
+              "from": 37.855499999999985,
+              "to": 40.718999999999994,
+              "width": 2.863500000000009,
+              "retentionTime": 39.084,
+              "intensity": 5473192.228571429,
+              "relativeIntegration": 0.008863684315940415
+            },
+            {
+              "from": 40.718999999999994,
+              "to": 45.08400000000001,
+              "width": 4.365000000000016,
+              "retentionTime": 42.359,
+              "intensity": 6501332.114285714,
+              "relativeIntegration": 0.037239199931986856
+            },
+            {
+              "from": 70.46900000000002,
+              "to": 81.38399999999999,
+              "width": 10.914999999999964,
+              "retentionTime": 71.834,
+              "intensity": 59872.68571428571,
+              "relativeIntegration": 0.001802780263102962
+            },
+            {
+              "from": 133.51700000000005,
+              "to": 138.9720000000001,
+              "width": 5.455000000000041,
+              "retentionTime": 136.242,
+              "intensity": 12632.657142857144,
+              "relativeIntegration": 0.00005238373478639343
+            },
+            {
+              "from": 157.52799999999996,
+              "to": 167.08299999999997,
+              "width": 9.555000000000007,
+              "retentionTime": 164.353,
+              "intensity": 1348706.7428571428,
+              "relativeIntegration": 0.04411353768630785
+            },
+            {
+              "from": 253.59600000000006,
+              "to": 261.78599999999994,
+              "width": 8.189999999999884,
+              "retentionTime": 259.056,
+              "intensity": 1669851.4285714286,
+              "relativeIntegration": 0.045175462655297524
+            },
+            {
+              "from": 351.85099999999994,
+              "to": 358.6710000000001,
+              "width": 6.820000000000164,
+              "retentionTime": 357.306,
+              "intensity": 1951301.4857142856,
+              "relativeIntegration": 0.05419163688654025
+            },
+            {
+              "from": 447.6409999999999,
+              "to": 454.46599999999995,
+              "width": 6.8250000000000455,
+              "retentionTime": 451.736,
+              "intensity": 2232159.0857142857,
+              "relativeIntegration": 0.05868989173945356
+            },
+            {
+              "from": 536.8900000000001,
+              "to": 543.7099999999997,
+              "width": 6.819999999999595,
+              "retentionTime": 540.98,
+              "intensity": 2312323.657142857,
+              "relativeIntegration": 0.06102133733765034
+            },
+            {
+              "from": 619.5790000000001,
+              "to": 627.7690000000002,
+              "width": 8.190000000000168,
+              "retentionTime": 625.039,
+              "intensity": 2197447.314285714,
+              "relativeIntegration": 0.06178487958149469
+            },
+            {
+              "from": 698.7300000000005,
+              "to": 706.9150000000002,
+              "width": 8.184999999999718,
+              "retentionTime": 704.185,
+              "intensity": 2138825.142857143,
+              "relativeIntegration": 0.0625243131400852
+            },
+            {
+              "from": 773.2320000000001,
+              "to": 781.4220000000003,
+              "width": 8.190000000000168,
+              "retentionTime": 778.692,
+              "intensity": 2231603.2,
+              "relativeIntegration": 0.06300124465327464
+            },
+            {
+              "from": 826.4519999999999,
+              "to": 830.5470000000003,
+              "width": 4.095000000000368,
+              "retentionTime": 827.817,
+              "intensity": 9072.171428571428,
+              "relativeIntegration": 0.00004127970319580882
+            },
+            {
+              "from": 844.191,
+              "to": 851.0160000000001,
+              "width": 6.8250000000000455,
+              "retentionTime": 849.651,
+              "intensity": 1968462.6285714286,
+              "relativeIntegration": 0.06226871159594719
+            },
+            {
+              "from": 911.3290000000001,
+              "to": 916.7905000000003,
+              "width": 5.461500000000228,
+              "retentionTime": 916.789,
+              "intensity": 2000874.0571428575,
+              "relativeIntegration": -0.0438279224398246
+            },
+            {
+              "from": 916.7905000000003,
+              "to": 923.6120000000002,
+              "width": 6.821499999999901,
+              "retentionTime": 920.882,
+              "intensity": 1992821.0285714285,
+              "relativeIntegration": -0.022143533691473892
+            },
+            {
+              "from": 957.4570000000001,
+              "to": 964.2769999999997,
+              "width": 6.819999999999595,
+              "retentionTime": 961.547,
+              "intensity": 15154.942857142856,
+              "relativeIntegration": 0.00022895815376724308
+            },
+            {
+              "from": 975.1919999999996,
+              "to": 982.2864999999999,
+              "width": 7.09450000000038,
+              "retentionTime": 980.652,
+              "intensity": 1984821.0285714287,
+              "relativeIntegration": 0.05923598093702273
+            },
+            {
+              "from": 982.2864999999999,
+              "to": 989.3860000000002,
+              "width": 7.099500000000262,
+              "retentionTime": 986.656,
+              "intensity": 1719193.6,
+              "relativeIntegration": 0.05676426782689042
+            },
+            {
+              "from": 1036.0570000000005,
+              "to": 1044.2420000000002,
+              "width": 8.184999999999718,
+              "retentionTime": 1041.512,
+              "intensity": 2014120.228571429,
+              "relativeIntegration": 0.060711801977311596
+            },
+            {
+              "from": 1095.5490000000002,
+              "to": 1102.3740000000003,
+              "width": 6.8250000000000455,
+              "retentionTime": 1099.644,
+              "intensity": 1988885.9428571428,
+              "relativeIntegration": 0.0590572205181227
+            },
+            {
+              "from": 1151.229,
+              "to": 1158.0490000000002,
+              "width": 6.820000000000164,
+              "retentionTime": 1155.319,
+              "intensity": 1860432.4571428574,
+              "relativeIntegration": 0.05420822521429659
+            },
+            {
+              "from": 1204.721,
+              "to": 1211.5410000000002,
+              "width": 6.820000000000164,
+              "retentionTime": 1208.811,
+              "intensity": 1619296.9142857143,
+              "relativeIntegration": 0.04839732648247766
+            },
+            {
+              "from": 1213.997,
+              "to": 1215.3619999999996,
+              "width": 1.3649999999995543,
+              "retentionTime": 1213.997,
+              "intensity": 46045.25714285715,
+              "relativeIntegration": -0.000023292539075551776
+            },
+            {
+              "from": 1255.7520000000002,
+              "to": 1263.9419999999998,
+              "width": 8.1899999999996,
+              "retentionTime": 1259.847,
+              "intensity": 1450976.9142857145,
+              "relativeIntegration": 0.04665439513566811
+            },
+            {
+              "from": 1266.124,
+              "to": 1267.4889999999996,
+              "width": 1.3649999999995543,
+              "retentionTime": 1266.124,
+              "intensity": 57412.57142857143,
+              "relativeIntegration": -0.000029583435427189077
+            },
+            {
+              "from": 1305.15,
+              "to": 1311.9750000000001,
+              "width": 6.8250000000000455,
+              "retentionTime": 1309.245,
+              "intensity": 1254592,
+              "relativeIntegration": 0.03367812132013258
+            },
+            {
+              "from": 1353.7299999999998,
+              "to": 1360.5549999999998,
+              "width": 6.8250000000000455,
+              "retentionTime": 1356.46,
+              "intensity": 1043770.5142857145,
+              "relativeIntegration": 0.03376518422219059
+            },
+            {
+              "from": 1362.191,
+              "to": 1363.5559999999996,
+              "width": 1.3649999999995543,
+              "retentionTime": 1362.191,
+              "intensity": 100525.25714285715,
+              "relativeIntegration": -0.00004901397585569236
+            },
+            {
+              "from": 1400.1260000000002,
+              "to": 1408.311,
+              "width": 8.184999999999718,
+              "retentionTime": 1404.221,
+              "intensity": 807045.4857142858,
+              "relativeIntegration": 0.028230366696200472
+            },
+            {
+              "from": 1411.044,
+              "to": 1412.4089999999997,
+              "width": 1.3649999999995543,
+              "retentionTime": 1411.044,
+              "intensity": 84546.5142857143,
+              "relativeIntegration": 0.00001699503827658274
+            },
+            {
+              "from": 1456.8969999999995,
+              "to": 1465.0819999999992,
+              "width": 8.184999999999718,
+              "retentionTime": 1462.352,
+              "intensity": 541052.3428571429,
+              "relativeIntegration": 0.01713283902745256
+            },
+            {
+              "from": 1529.4889999999996,
+              "to": 1540.4039999999995,
+              "width": 10.914999999999964,
+              "retentionTime": 1534.949,
+              "intensity": 389035.8857142857,
+              "relativeIntegration": 0.020486763459139256
+            },
+            {
+              "from": 1625.0110000000004,
+              "to": 1637.2959999999998,
+              "width": 12.2849999999994,
+              "retentionTime": 1626.376,
+              "intensity": 220937.1428571429,
+              "relativeIntegration": 0.007726110396584962
+            },
+            {
+              "from": 1738.271,
+              "to": 1753.2809999999997,
+              "width": 15.009999999999764,
+              "retentionTime": 1745.096,
+              "intensity": 165524.1142857143,
+              "relativeIntegration": 0.012979523548255144
+            },
+            {
+              "from": 1901.7500000000005,
+              "to": 1907.2099999999998,
+              "width": 5.459999999999354,
+              "retentionTime": 1903.115,
+              "intensity": 45341.942857142865,
+              "relativeIntegration": -0.0002118616923400837
+            }
+          ],
+          "defaultTrace": "bpc"
+        },
+        {
+          "jcamp": { "filename": "spectra/chromatogram/gc-ms-2Signals.jdx" },
+          "peak": [
+            {
+              "from": 8.882272720336914,
+              "to": 8.977726936340332,
+              "relativeIntegral": 1,
+              "retentionTime": 8.929999828338623,
+              "nbPure": 2,
+              "relativeIntegration": 1
+            }
+          ],
+          "defaultTrace": "bpc"
+        }
+      ],
+      "xray": [
+        { "pdb": { "filename": "spectra/xray/1cwa.pdb" }, "rscrCode": "123" },
+        { "cif": { "filename": "spectra/xray/2000094.cif" } },
+        { "cif": { "filename": "spectra/xray/spectra_xray_RRO.cif" } },
+        { "cif": { "filename": "spectra/xray/spectra_xray_ABW.cif" } },
+        { "cif": { "filename": "spectra/xray/spectra_xray_Moganite.cif" } },
+        {
+          "cif": { "filename": "spectra/xray/spectra_xray_Diamond.cif" },
+          "rscrCode": "dia"
+        }
+      ],
+      "differentialScanningCalorimetry": [
+        {
+          "jcamp": {
+            "filename": "spectra/differentialScanningCalorimetry/dsc.jdx"
+          },
+          "zone": []
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/differentialScanningCalorimetry/spectra_differentialScanningCalorimetry_dsc (1).jdx"
+          },
+          "zone": []
+        }
+      ],
+      "thermogravimetricAnalysis": [
+        {
+          "jcamp": {
+            "filename": "spectra/thermogravimetricAnalysis/SN_MIL-160_Pristine_TGA.jdx"
+          },
+          "instrument": { "model": "sdfgsdfg" },
+          "weight": { "SI": 0.0000128009, "unit": "mg" },
+          "zones": [
+            {
+              "from": { "SI": 311.28, "unit": "degC" },
+              "inflectionPoint": { "SI": 670.3399999999999, "unit": "degC" },
+              "middlePoint": { "SI": 674.42, "unit": "degC" },
+              "to": { "SI": 920.42, "unit": "degC" },
+              "weightLoss": { "SI": -0.000008569599999999998, "unit": "mg" },
+              "weightLossRelative": -0.669395,
+              "_highlight": 0.10875596557433598
+            },
+            {
+              "from": { "SI": 920.42, "unit": "degC" },
+              "inflectionPoint": { "SI": 930.55, "unit": "degC" },
+              "middlePoint": { "SI": 931.28, "unit": "degC" },
+              "to": { "SI": 922.37, "unit": "degC" },
+              "weightLoss": { "SI": -0.0000019266, "unit": "mg" },
+              "weightLossRelative": -0.15049400000000002,
+              "_highlight": 0.9899411259315256
+            }
+          ]
+        },
+        {
+          "jcamp": { "filename": "spectra/thermogravimetricAnalysis/TGA.jdx" },
+          "instrument": { "model": "dd" },
+          "method": "1",
+          "zones": []
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/thermogravimetricAnalysis/spectra_thermogravimetricAnalysis_test_TGA_f7350079.jdx"
+          },
+          "instrument": { "model": "fds" },
+          "zones": [
+            {
+              "from": { "unit": "degC", "SI": 373.15 },
+              "to": { "unit": "degC", "SI": 473.15 }
+            }
+          ]
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/thermogravimetricAnalysis/ntuples.jdx"
+          },
+          "instrument": { "model": "gfdq" },
+          "zones": []
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/thermogravimetricAnalysis/TS-009-A.jdx"
+          },
+          "zones": []
+        },
+        {
+          "method": "650 TGA/DSC",
+          "holder": {
+            "kind": "Alumina 70ul",
+            "mass": { "value": 179.215, "units": "mg" },
+            "material": "Ceramic"
+          },
+          "initialValue": { "value": 12.8009, "units": "mg" },
+          "zones": [
+            {
+              "relativeMassLoss": 0.669395,
+              "massLoss": { "value": 8.5696, "units": "mg" },
+              "from": { "value": 38.13, "units": "°C" },
+              "to": { "value": 647.27, "units": "°C" },
+              "kind": "horizontal",
+              "inflectionPoint": { "value": 397.19, "units": "°C" },
+              "middlePoint": { "value": 401.27, "units": "°C" }
+            },
+            {
+              "relativeMassLoss": 0.15049400000000002,
+              "massLoss": { "value": 1.9266, "units": "mg" },
+              "from": { "value": 647.27, "units": "°C" },
+              "to": { "value": 649.22, "units": "°C" },
+              "kind": "horizontal",
+              "inflectionPoint": { "value": 657.4, "units": "°C" },
+              "middlePoint": { "value": 658.13, "units": "°C" }
+            },
+            {
+              "relativeMassLoss": 0.18011100000000002,
+              "massLoss": { "value": 2.304700000000001, "units": "mg" },
+              "kind": "Residual"
+            }
+          ],
+          "sampleMass": { "value": 12.8009, "units": "mg" },
+          "jcamp": {
+            "filename": "spectra/thermogravimetricAnalysis/mettlerToledoWeight.jdx"
+          }
+        }
+      ],
+      "uv": [
+        { "jcamp": { "filename": "spectra/uv/MS5093A.DX" }, "peak": [] },
+        { "jcamp": { "filename": "spectra/uv/XY1BC53.DX" }, "peak": [] },
+        { "jcamp": { "filename": "spectra/uv/belsorp.jdx" } },
+        { "jcamp": { "filename": "spectra/uv/belsorp2.jdx" } },
+        {
+          "jcamp": { "filename": "spectra/uv/spectra_uv_LP123_f1_ecae8747.jdx" }
+        },
+        { "jcamp": { "filename": "spectra/uv/221021_MJ-STO-001.jdx" } }
+      ],
+      "iv": [{ "jcamp": { "filename": "spectra/iv/LL_20mM_HBpin_C02.jdx" } }],
+      "elementalAnalysis": [
+        { "c": 0.9, "h": 0.093, "n": 0, "s": 0, "date": 1605101301411 },
+        { "c": 0.9055, "h": 0.094, "n": 0.3, "date": 1605101601411 },
+        { "date": 1605101601411, "c": 0.9055, "h": 0.094 },
+        { "date": 1605101601411, "c": 0.9055, "h": 0.094 }
+      ],
+      "cyclicVoltammetry": [
+        {
+          "jcamp": {
+            "filename": "spectra/cyclicVoltammetry/LL_20mM_HBpin_C02.jdx"
+          }
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/cyclicVoltammetry/LL_echem_Bpinproduct_nBu4F_Fc_C02.jdx"
+          }
+        }
+      ],
+      "xps": [
+        {
+          "region": {
+            "name": "wide",
+            "orbital": {
+              "element": null,
+              "shell": null,
+              "angularMomentum": null
+            },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "wide",
+          "components": [],
+          "from": 286.69,
+          "to": 2697.69,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned.jdx" }
+        },
+        {
+          "region": {
+            "name": "O 1s",
+            "orbital": { "element": "O", "shell": 1, "angularMomentum": "s" },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "O",
+          "components": [],
+          "from": 943.69,
+          "to": 979.84,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_1.jdx" }
+        },
+        {
+          "region": {
+            "name": "C 1s",
+            "orbital": { "element": "C", "shell": 1, "angularMomentum": "s" },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "C",
+          "components": [],
+          "from": 1186.715,
+          "to": 1232.7649999999999,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_2.jdx" }
+        },
+        {
+          "region": {
+            "name": "Br 3d",
+            "orbital": { "element": "Br", "shell": 3, "angularMomentum": "d" },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "Br",
+          "components": [],
+          "from": 1408.715,
+          "to": 1436.7649999999999,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_3.jdx" }
+        },
+        {
+          "region": {
+            "name": "Nb 3d",
+            "orbital": { "element": "Nb", "shell": 3, "angularMomentum": "d" },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "Nb",
+          "components": [],
+          "from": 1271.715,
+          "to": 1311.7649999999999,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_4.jdx" }
+        },
+        {
+          "region": {
+            "name": "Mo 3d",
+            "orbital": { "element": "Mo", "shell": 3, "angularMomentum": "d" },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "Mo",
+          "components": [
+            {
+              "kineticEnergy": { "value": 1257.22, "units": "eV" },
+              "bindingEnergy": { "value": 229.47000000000003, "units": "eV" },
+              "assignment": "Mo 3d MoS2 2H",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.88528218 },
+              "area": 230.36971
+            },
+            {
+              "kineticEnergy": { "value": 1254.08, "units": "eV" },
+              "bindingEnergy": { "value": 232.61000000000013, "units": "eV" },
+              "assignment": "Mo 3d MoS2 2H",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.76493355 },
+              "area": 153.57981
+            },
+            {
+              "kineticEnergy": { "value": 1257.89, "units": "eV" },
+              "bindingEnergy": { "value": 228.79999999999995, "units": "eV" },
+              "assignment": "Mo 3d MoS2 1T",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.91171962 },
+              "area": 7955.3136
+            },
+            {
+              "kineticEnergy": { "value": 1254.75, "units": "eV" },
+              "bindingEnergy": { "value": 231.94000000000005, "units": "eV" },
+              "assignment": "Mo 3d MoS2 1T",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.91171962 },
+              "area": 5303.5425
+            },
+            {
+              "kineticEnergy": { "value": 1253.99, "units": "eV" },
+              "bindingEnergy": { "value": 232.70000000000005, "units": "eV" },
+              "assignment": "Mo 3d MoO3",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.99977143 },
+              "area": 1401.4078
+            },
+            {
+              "kineticEnergy": { "value": 1260.5811, "units": "eV" },
+              "bindingEnergy": { "value": 226.10889999999995, "units": "eV" },
+              "assignment": "S 2s",
+              "type": "LA",
+              "shapeParameters": { "gamma": 1.7375263 },
+              "area": 3602.311
+            },
+            {
+              "kineticEnergy": { "value": 1255.8573, "units": "eV" },
+              "bindingEnergy": { "value": 230.83270000000016, "units": "eV" },
+              "assignment": "Mo 3d MoO2",
+              "type": "LA",
+              "shapeParameters": { "gamma": 1.0329112 },
+              "area": 863.91709
+            },
+            {
+              "kineticEnergy": { "value": 1252.7173, "units": "eV" },
+              "bindingEnergy": { "value": 233.97270000000003, "units": "eV" },
+              "assignment": "Mo 3d MoO2",
+              "type": "LA",
+              "shapeParameters": { "gamma": 1.0329112 },
+              "area": 575.94473
+            },
+            {
+              "kineticEnergy": { "value": 1254.5622, "units": "eV" },
+              "bindingEnergy": { "value": 232.12779999999998, "units": "eV" },
+              "assignment": "Mo 3d MoO3",
+              "type": "LA",
+              "shapeParameters": { "gamma": 1.4420932 },
+              "area": 2669.5646
+            },
+            {
+              "kineticEnergy": { "value": 1251.4222, "units": "eV" },
+              "bindingEnergy": { "value": 235.26780000000008, "units": "eV" },
+              "assignment": "Mo 3d MoO3",
+              "type": "LA",
+              "shapeParameters": { "gamma": 1.4420932 },
+              "area": 1779.7097
+            }
+          ],
+          "from": 1246.715,
+          "to": 1286.7649999999999,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_5.jdx" }
+        },
+        {
+          "region": {
+            "name": "W 4f",
+            "orbital": { "element": "W", "shell": 4, "angularMomentum": "f" },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "W",
+          "components": [
+            {
+              "kineticEnergy": { "value": 1454.4025, "units": "eV" },
+              "bindingEnergy": { "value": 32.287500000000136, "units": "eV" },
+              "assignment": "W 4f WSe2",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.70766798 },
+              "area": 2709.2313
+            },
+            {
+              "kineticEnergy": { "value": 1452.3225, "units": "eV" },
+              "bindingEnergy": { "value": 34.367500000000064, "units": "eV" },
+              "assignment": "W 4f WSe2",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.70766798 },
+              "area": 2031.9235
+            },
+            {
+              "kineticEnergy": { "value": 1451.3323, "units": "eV" },
+              "bindingEnergy": { "value": 35.35770000000002, "units": "eV" },
+              "assignment": "W 4f WO3",
+              "type": "GL",
+              "shapeParameters": { "gamma": 1.2728662 },
+              "area": 5019.8908
+            },
+            {
+              "kineticEnergy": { "value": 1449.1823, "units": "eV" },
+              "bindingEnergy": { "value": 37.50770000000011, "units": "eV" },
+              "assignment": "W 4f WO3",
+              "type": "GL",
+              "shapeParameters": { "gamma": 1.2728662 },
+              "area": 3764.9181
+            },
+            {
+              "kineticEnergy": { "value": 1448.5164, "units": "eV" },
+              "bindingEnergy": { "value": 38.17360000000008, "units": "eV" },
+              "assignment": "W 4d WSe2",
+              "type": "GL",
+              "shapeParameters": { "gamma": 2.3131698 },
+              "area": 224.05343
+            },
+            {
+              "kineticEnergy": { "value": 1454.8883, "units": "eV" },
+              "bindingEnergy": { "value": 31.801699999999983, "units": "eV" },
+              "assignment": "W 4f W(0)",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.47924931 },
+              "area": 693.70012
+            },
+            {
+              "kineticEnergy": { "value": 1452.7883, "units": "eV" },
+              "bindingEnergy": { "value": 33.90170000000012, "units": "eV" },
+              "assignment": "W 4f W(0)",
+              "type": "LA",
+              "shapeParameters": { "gamma": 0.47924931 },
+              "area": 520.27509
+            },
+            {
+              "kineticEnergy": { "value": 1449.0022, "units": "eV" },
+              "bindingEnergy": { "value": 37.68780000000015, "units": "eV" },
+              "assignment": "W 4d W(0)",
+              "type": "GL",
+              "shapeParameters": { "gamma": 2.1131698 },
+              "area": 57.369
+            }
+          ],
+          "from": 1441.715,
+          "to": 1481.7649999999999,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_6.jdx" }
+        },
+        {
+          "region": {
+            "name": "1: S 2p",
+            "orbital": { "element": "S", "shell": 2, "angularMomentum": "p" },
+            "auger": { "element": "", "transition": "S" }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "S",
+          "components": [
+            {
+              "kineticEnergy": { "value": 1323.9177, "units": "eV" },
+              "bindingEnergy": { "value": 162.7723000000001, "units": "eV" },
+              "assignment": "S 2p WS2",
+              "type": "GL",
+              "shapeParameters": { "gamma": 1 },
+              "area": 273.10085
+            },
+            {
+              "kineticEnergy": { "value": 1322.7577, "units": "eV" },
+              "bindingEnergy": { "value": 163.93229999999994, "units": "eV" },
+              "assignment": "S 2p WS2",
+              "type": "GL",
+              "shapeParameters": { "gamma": 1 },
+              "area": 136.55042
+            },
+            {
+              "kineticEnergy": { "value": 1324.9322, "units": "eV" },
+              "bindingEnergy": { "value": 161.7578000000001, "units": "eV" },
+              "assignment": "S 2p MoS2",
+              "type": "GL",
+              "shapeParameters": { "gamma": 0.89879457 },
+              "area": 5317.9403
+            },
+            {
+              "kineticEnergy": { "value": 1323.7722, "units": "eV" },
+              "bindingEnergy": { "value": 162.91779999999994, "units": "eV" },
+              "assignment": "S 2p MoS2",
+              "type": "GL",
+              "shapeParameters": { "gamma": 0.89879457 },
+              "area": 2658.9701
+            }
+          ],
+          "from": 1314.715,
+          "to": 1354.7649999999999,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_7.jdx" }
+        },
+        {
+          "region": {
+            "name": "1: N 1s",
+            "orbital": { "element": "N", "shell": 1, "angularMomentum": "s" },
+            "auger": { "element": "", "transition": "N" }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "N",
+          "components": [],
+          "from": 1071.69,
+          "to": 1131.8400000000001,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_8.jdx" }
+        },
+        {
+          "region": {
+            "name": "wide",
+            "orbital": {
+              "element": null,
+              "shell": null,
+              "angularMomentum": null
+            },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "wide",
+          "components": [],
+          "from": 286.69,
+          "to": 2697.69,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_9.jdx" }
+        },
+        {
+          "region": {
+            "name": "O 1s",
+            "orbital": { "element": "O", "shell": 1, "angularMomentum": "s" },
+            "auger": { "element": null, "transition": null }
+          },
+          "energyType": { "kind": "kinetic", "units": "eV" },
+          "analysisSource": {
+            "label": "Al (mono)",
+            "characteristicEnergy": { "value": 1486.69, "units": "eV" },
+            "beamWidthX": { "value": 1e37, "units": "um" },
+            "beamWidthY": { "value": 1e37, "units": "um" }
+          },
+          "speciesLabel": "O",
+          "components": [],
+          "from": 943.69,
+          "to": 979.84,
+          "analyserMode": "FAT",
+          "jcamp": { "filename": "spectra/xps/assigned_10.jdx" }
+        }
+      ],
+      "xrd": [
+        {
+          "jcamp": { "filename": "spectra/xrd/test.jdx" },
+          "zone": [
+            { "x": 34.8641, "y": 4192 },
+            { "x": 38.8688, "y": 6269 },
+            { "x": 48.6717, "y": 3900 },
+            { "x": 57.5901, "y": 3845 }
+          ],
+          "peak": [],
+          "anode": null,
+          "crystallinity": 0.00002040003847641056
+        },
+        {
+          "jcamp": { "filename": "spectra/xrd/test2.jdx" },
+          "zone": [],
+          "peak": [],
+          "instrument": { "model": "aa" }
+        },
+        {
+          "jcamp": { "filename": "spectra/xrd/MG1-Cu2O-28_bg_subtracted.jdx" },
+          "zone": []
+        },
+        { "text": { "filename": "spectra/xrd/CU2O23.txt" }, "zone": [] },
+        { "jcamp": { "filename": "spectra/xrd/test3.jdx" }, "zone": [] }
+      ],
+      "isotherm": [
+        {
+          "jcamp": {
+            "filename": "spectra/isotherm/spectra_isotherm_isotherm (1).jcamp"
+          },
+          "zone": [],
+          "zones": [],
+          "meta": { "bet": { "value": 123, "units": "p/p0" } },
+          "peak": []
+        },
+        {
+          "jcamp": { "filename": "spectra/isotherm/isotherm.jdx" },
+          "zone": [],
+          "peak": []
+        }
+      ],
+      "differentialCentrifugalSedimentation": [],
+      "hgPorosimetry": [],
+      "xrf": [],
+      "oan": [{ "jcamp": { "filename": "spectra/oan/oan.jdx" } }],
+      "pelletHardness": [
+        {
+          "average50": { "value": 17.634, "units": "cN" },
+          "sd": { "value": 7.307435687471401, "units": "cN" },
+          "min": { "value": 7.1, "units": "cN" },
+          "max": { "value": 44, "units": "cN" },
+          "averageHardest10": { "value": 33.04, "units": "cN" },
+          "method": "ASTM-D5230-50",
+          "jcamp": { "filename": "spectra/pelletHardness/Archive.jdx" }
+        }
+      ],
+      "dls": [
+        {
+          "zAverage": { "value": 489.14361669506616, "units": "nm" },
+          "polydispersityIndex": 0.264454378275493,
+          "derivedMeanCountRate": {
+            "value": 13500.15192206252,
+            "units": "kcps"
+          },
+          "intercept": 0.9310968508788467,
+          "distributions": [
+            {
+              "intensity": {
+                "mean": { "value": 492.17331702095305, "units": "nm" },
+                "area": { "value": 100, "units": "%" },
+                "standardDeviation": {
+                  "value": 137.32095013039134,
+                  "units": "nm"
+                }
+              },
+              "volume": {
+                "mean": { "value": 527.8231806814123, "units": "nm" },
+                "area": { "value": 100, "units": "%" },
+                "standardDeviation": {
+                  "value": 165.12126293171164,
+                  "units": "nm"
+                }
+              },
+              "number": {
+                "mean": { "value": 413.77124201019484, "units": "nm" },
+                "area": { "value": 100, "units": "%" },
+                "standardDeviation": {
+                  "value": 124.77276691684906,
+                  "units": "nm"
+                }
+              }
+            }
+          ],
+          "average": {
+            "intensity": {
+              "mean": { "value": 492.17331702095305, "units": "nm" }
+            },
+            "volume": { "mean": { "value": 527.8231806814123, "units": "nm" } },
+            "number": { "mean": { "value": 413.77124201019484, "units": "nm" } }
+          },
+          "jcamp": { "filename": "spectra/dls/test.jdx" }
+        },
+        {
+          "zAverage": { "value": 502.6087930980165, "units": "nm" },
+          "polydispersityIndex": 0.43089387309090005,
+          "derivedMeanCountRate": {
+            "value": 13385.978998185345,
+            "units": "kcps"
+          },
+          "intercept": 0.9576356176458312,
+          "distributions": [
+            {
+              "intensity": {
+                "mean": { "value": 331.29836780738077, "units": "nm" },
+                "area": { "value": 100, "units": "%" },
+                "standardDeviation": {
+                  "value": 46.54263613008237,
+                  "units": "nm"
+                }
+              },
+              "volume": {
+                "mean": { "value": 338.44909731419847, "units": "nm" },
+                "area": { "value": 100, "units": "%" },
+                "standardDeviation": {
+                  "value": 58.97791117236165,
+                  "units": "nm"
+                }
+              },
+              "number": {
+                "mean": { "value": 320.1148989085482, "units": "nm" },
+                "area": { "value": 100, "units": "%" },
+                "standardDeviation": {
+                  "value": 55.46821328197701,
+                  "units": "nm"
+                }
+              }
+            }
+          ],
+          "average": {
+            "intensity": {
+              "mean": { "value": 331.29836780738077, "units": "nm" }
+            },
+            "volume": {
+              "mean": { "value": 338.44909731419847, "units": "nm" }
+            },
+            "number": { "mean": { "value": 320.1148989085482, "units": "nm" } }
+          },
+          "jcamp": { "filename": "spectra/dls/test_2.jdx" }
+        },
+        { "jcamp": { "filename": "spectra/dls/zetaPotential-chb.jdx" } },
+        { "jcamp": { "filename": "spectra/dls/zetaPotential-chb_2.jdx" } },
+        { "jcamp": { "filename": "spectra/dls/zetaPotential-chb_3.jdx" } },
+        { "jcamp": { "filename": "spectra/dls/zetaPotential-chb_4.jdx" } }
+      ],
+      "icp": [
+        {
+          "instrument": { "brand": "Agilent Technologies", "model": "ICP-OES" },
+          "elements": [
+            {
+              "element": "Al",
+              "wavelength": { "value": 308.215, "units": "nm" },
+              "experimentalConcentration": { "units": "mg/l", "value": 0.12 },
+              "sampleConcentration": { "units": "mg/l", "value": 1.2 },
+              "dilution": { "factor": 10, "solvent": "Nitric acid 2%" }
+            },
+            {
+              "element": "Al",
+              "wavelength": { "value": 309.271, "units": "nm" },
+              "experimentalConcentration": { "units": "mg/l", "value": 0.1 }
+            },
+            {
+              "element": "Al",
+              "wavelength": { "value": 396.152, "units": "nm" },
+              "experimentalConcentration": { "units": "mg/l", "value": 0.12 }
+            },
+            {
+              "element": "Cu",
+              "wavelength": { "value": 213.598, "units": "nm" },
+              "experimentalConcentration": { "units": "mg/l", "value": 2.67 }
+            },
+            {
+              "element": "Cu",
+              "wavelength": { "value": 324.754, "units": "nm" },
+              "experimentalConcentration": { "units": "mg/l", "value": 2.66 }
+            },
+            {
+              "element": "Cu",
+              "wavelength": { "value": 327.395, "units": "nm" },
+              "experimentalConcentration": { "units": "mg/l", "value": 2.65 }
+            },
+            { "element": "Fe" },
+            { "element": "Cu" },
+            { "element": "K", "wavelength": { "value": 123.32, "units": "nm" } }
+          ]
+        }
+      ],
+      "voidVolume": [],
+      "permeability": [
+        { "jcamp": { "filename": "spectra/permeability/hiden.export.jdx" } }
+      ],
+      "zetaPotential": [
+        {
+          "jcamp": { "filename": "spectra/zetaPotential/zetaPotential-chb.jdx" }
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/zetaPotential/zetaPotential-chb_2.jdx"
+          }
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/zetaPotential/zetaPotential-chb_3.jdx"
+          }
+        },
+        {
+          "jcamp": {
+            "filename": "spectra/zetaPotential/zetaPotential-chb_4.jdx"
+          }
+        },
+        {
+          "text": { "filename": "spectra/zetaPotential/zetaPotential-chb.txt" }
+        }
+      ]
+    },
+    "physical": {
+      "bp": [{ "low": 136, "high": 137, "pressure": 760, "doi": "" }],
+      "density": [{ "low": 0.866, "high": 0.867, "doi": "" }],
+      "mp": [{ "low": -95, "doi": "" }],
+      "nd": []
+    },
+    "image": [
+      {
+        "image": { "filename": "image/PI-Ag_2-2_0010.tif" },
+        "annotation": [
+          {
+            "kind": "line",
+            "label": "",
+            "options": { "x1": 1715, "y1": 1608, "x2": 1731, "y2": 1650 },
+            "length": { "unit": "nm", "SI": 1.2257566393224126e-8 }
+          }
+        ],
+        "pixelSize": { "unit": "nm", "SI": 2.7272727272727273e-10 }
+      },
+      {
+        "image": { "filename": "image/colonies.jpg" },
+        "annotation": [
+          {
+            "kind": "line",
+            "label": "a",
+            "options": { "x1": 902, "y1": 749, "x2": 918, "y2": 782 },
+            "length": { "unit": "mm", "SI": 0.0366742416417845 }
+          },
+          {
+            "kind": "line",
+            "label": "b",
+            "options": { "x1": 1131, "y1": 742, "x2": 1160, "y2": 764 },
+            "length": { "unit": "mm", "SI": 0.03640054944640259 }
+          },
+          {
+            "kind": "line",
+            "label": "c",
+            "options": { "x1": 1237, "y1": 872, "x2": 1214, "y2": 839 },
+            "length": { "unit": "mm", "SI": 0.04022437072223753 }
+          },
+          {
+            "kind": "polygon",
+            "label": "",
+            "options": { "points": "944,859 913,902 954,950 1010,913 994,852" },
+            "surface": { "unit": "mm^2", "SI": 0.0059394999999999995 }
+          },
+          {
+            "kind": "polygon",
+            "label": "",
+            "options": {
+              "points": "1105,959 1066,1007 1132,1055 1192,1010 1173,936"
+            },
+            "surface": { "unit": "mm^2", "SI": 0.008742 }
+          },
+          {
+            "kind": "line",
+            "label": "",
+            "options": { "x1": 741, "y1": 784, "x2": 1290, "y2": 800 },
+            "length": { "unit": "mm", "SI": 0.5492331016972667 }
+          }
+        ],
+        "pixelSize": { "unit": "mm", "SI": 0.001 }
+      },
+      {
+        "image": { "filename": "image/test.jpg" },
+        "annotation": [],
+        "pixelSize": { "SI": 0, "unit": "mm" }
+      },
+      {
+        "image": { "filename": "image/cells.png" },
+        "annotation": [],
+        "pixelSize": { "SI": 0, "unit": "mm" }
+      },
+      {
+        "image": { "filename": "image/Foto 3.tiff" },
+        "annotation": [],
+        "pixelSize": { "SI": 0, "unit": "mm" }
+      },
+      {
+        "image": { "filename": "image/shapes.small.png" },
+        "annotation": [],
+        "pixelSize": { "SI": 0, "unit": "mm" }
+      },
+      {
+        "image": {
+          "filename": "image/2BFF24EB-2D1A-4672-85FA-6762420ACA8D.tiff"
+        }
+      },
+      {
+        "image": { "filename": "image/test.png" },
+        "annotation": [],
+        "pixelSize": { "SI": 0, "unit": "mm" }
+      },
+      {
+        "image": { "filename": "image/Ref2_350nm.jpg" },
+        "annotation": [],
+        "pixelSize": { "unit": "nm", "SI": 6.830000000000001e-10 }
+      },
+      { "image": { "filename": "image/abcd.png" } }
+    ],
+    "biology": {
+      "nucleic": [],
+      "peptidic": [
+        { "seq": [{ "name": "", "moleculeType": "", "sequence": "AAAATTT" }] }
+      ]
+    },
+    "hidden": false,
+    "stock": {
+      "history": [
+        {
+          "location": "CHIM.1234",
+          "status": 500,
+          "date": 1775834087675,
+          "user": "admin@cheminfo.org"
+        },
+        {
+          "location": "CHIM.1234",
+          "status": "1000",
+          "date": 1708532223519,
+          "user": "admin@cheminfo.org"
+        },
+        {
+          "location": "CHIM.1234",
+          "status": "100",
+          "date": 1708532203692,
+          "user": "admin@cheminfo.org"
+        },
+        {
+          "location": "CHIM.1234",
+          "status": "1000",
+          "date": 1708532121965,
+          "user": "admin@cheminfo.org"
+        },
+        {
+          "location": "CHIM.1234",
+          "status": 500,
+          "date": 1649777382262,
+          "user": "admin@cheminfo.org"
+        },
+        {
+          "location": "aaaaa",
+          "status": "500",
+          "user": "admin@cheminfo.org",
+          "date": 1613383855607
+        },
+        {
+          "location": "BDH1234",
+          "status": "500",
+          "user": "admin@cheminfo.org",
+          "date": 1613383352876
+        },
+        {
+          "location": "BDH1234",
+          "status": "700",
+          "user": "admin@cheminfo.org",
+          "date": 1613383342745
+        },
+        {
+          "location": "BDH1234",
+          "status": "100",
+          "user": "admin@cheminfo.org",
+          "date": 1613383333217
+        },
+        {
+          "location": "BDH1234",
+          "status": "100",
+          "user": "admin@cheminfo.org",
+          "date": 1613383325213
+        },
+        {
+          "location": "",
+          "status": "100",
+          "user": "admin@cheminfo.org",
+          "date": 1613383263442
+        },
+        {
+          "location": "BCH1234",
+          "status": "100",
+          "user": "admin@cheminfo.org",
+          "date": 1613383253660
+        },
+        {
+          "location": "BCH1234",
+          "status": "100",
+          "user": "admin@cheminfo.org",
+          "date": 1613383224791
+        },
+        {
+          "location": "",
+          "status": "0",
+          "user": "admin@cheminfo.org",
+          "date": 1613383191541
+        },
+        {
+          "location": "",
+          "status": "0",
+          "user": "admin@cheminfo.org",
+          "date": 1613383139405
+        },
+        {
+          "location": "",
+          "status": "0",
+          "user": "admin@cheminfo.org",
+          "date": 1613383090936
+        },
+        {
+          "location": "BCH12343",
+          "status": 500,
+          "user": "admin@cheminfo.org",
+          "date": 1613380416692
+        },
+        {
+          "location": "BCH1234",
+          "status": 500,
+          "user": "admin@cheminfo.org",
+          "date": 1613379675830
+        },
+        {
+          "location": "BCH1234",
+          "status": 500,
+          "user": "admin@cheminfo.org",
+          "date": 1613379605313
+        },
+        {
+          "location": "BCH.5121",
+          "status": 500,
+          "date": 1594816491574,
+          "user": "admin@cheminfo.org"
+        },
+        {}
+      ],
+      "supplier": "",
+      "catalogNumber": "",
+      "quantity": "",
+      "purity": "97%"
+    },
+    "video": [],
+    "safety": {
+      "ghs": {
+        "pictogram": [
+          { "code": "GHS02" },
+          { "code": "GHS07" },
+          { "code": "GHS08" }
+        ],
+        "signalWord": [],
+        "hazardStatement": [
+          { "code": "H225" },
+          { "code": "H332" },
+          { "code": "H304" },
+          { "code": "H373" },
+          { "code": "H412" }
+        ],
+        "precautionaryStatement": [
+          { "code": "P301+P310" },
+          { "code": "P331" },
+          { "code": "P304+P340" },
+          { "code": "P312" },
+          { "code": "P260" },
+          { "code": "P210" }
+        ]
+      }
+    }
+  },
+  "$lastModification": "arsene@patiny.com",
+  "$modificationDate": 1777988363853,
+  "$creationDate": 1497883915768,
+  "_attachments": {
+    "spectra/nmr/h1_0.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 6,
+      "digest": "md5-YXmYgQi9UtnEfAjrf1rz9g==",
+      "length": 544934,
+      "stub": true
+    },
+    "spectra/nmr/cosy_0.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 8,
+      "digest": "md5-HDF0jbmbBnXxejVW2LETFQ==",
+      "length": 3228923,
+      "stub": true
+    },
+    "spectra/nmr/hsqc_0.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 10,
+      "digest": "md5-Ry4oC5gaq/qZ/ZKR6vlrbA==",
+      "length": 5488559,
+      "stub": true
+    },
+    "spectra/nmr/hmbc_0.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 12,
+      "digest": "md5-2h0JbfnPy0UY6OdApPM6/g==",
+      "length": 9701227,
+      "stub": true
+    },
+    "spectra/mass/100-41-4-Mass.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 436,
+      "digest": "md5-7v5k5UoAeF39XXDlxjD6xA==",
+      "length": 832,
+      "stub": true
+    },
+    "spectra/mass/patiny_ethylbenzene_.1538643826486.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 718,
+      "digest": "md5-74jSEkuvjV6WvmRFVj+fCA==",
+      "length": 281384,
+      "stub": true
+    },
+    "spectra/chromatogram/agilent_hplc.cdf": {
+      "content_type": "application/x-netcdf",
+      "revpos": 723,
+      "digest": "md5-1btHUotF+Cf+0kfMpWxa/w==",
+      "length": 21508,
+      "stub": true
+    },
+    "spectra/chromatogram/shimadzu-gcms.cdf": {
+      "content_type": "application/x-netcdf",
+      "revpos": 728,
+      "digest": "md5-tmfzXSCCg9qv8PjwzX2d4Q==",
+      "length": 21731156,
+      "stub": true
+    },
+    "spectra/chromatogram/3-28-5.mzdata.xml": {
+      "content_type": "text/xml",
+      "revpos": 744,
+      "digest": "md5-wYx5VuhXIqyDssBCTOt8hA==",
+      "length": 11972366,
+      "stub": true
+    },
+    "spectra/uv/MS5093A.DX": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 866,
+      "digest": "md5-DtT/sg/wlVNDrlc5NKxEeQ==",
+      "length": 37670,
+      "stub": true
+    },
+    "spectra/uv/XY1BC53.DX": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 880,
+      "digest": "md5-itKQiWK3Q1u0GOmKJ7vfbw==",
+      "length": 38164,
+      "stub": true
+    },
+    "spectra/nmr/cosy-dqf.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 899,
+      "digest": "md5-UxhwieOd2IN+sy9+hf7DQA==",
+      "length": 5402098,
+      "stub": true
+    },
+    "spectra/raman/Adamantan.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 919,
+      "digest": "md5-kTW8bVLtYH198h20H5pjzA==",
+      "length": 32956,
+      "stub": true
+    },
+    "spectra/chromatogram/0140_2c.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 926,
+      "digest": "md5-QY4uoCUdUWap+J3ynG6R1g==",
+      "length": 71439,
+      "stub": true
+    },
+    "spectra/xray/1cwa.pdb": {
+      "content_type": "application/vnd.palm",
+      "revpos": 965,
+      "digest": "md5-HaFWlJjSAJUwSba49morIA==",
+      "length": 171234,
+      "stub": true
+    },
+    "spectra/xray/2000094.cif": {
+      "content_type": "chemical/x-cif",
+      "revpos": 970,
+      "digest": "md5-UI2X8Ej5QzkW1qXNYreDmQ==",
+      "length": 4940,
+      "stub": true
+    },
+    "spectra/mass/1h.dx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 978,
+      "digest": "md5-jVSf3Cn6QRsx2jCB8ZEtLg==",
+      "length": 437483,
+      "stub": true
+    },
+    "spectra/chromatogram/JC-012_cleavage test_+.cdf": {
+      "content_type": "application/x-netcdf",
+      "revpos": 1004,
+      "digest": "md5-2ZhI5POMkPyctEx/GiWhDw==",
+      "length": 1603636,
+      "stub": true
+    },
+    "test copy 2.txt": {
+      "content_type": "text/plain",
+      "revpos": 1021,
+      "digest": "md5-cktimtLosyR2u5j1h6ERJA==",
+      "length": 111654,
+      "stub": true
+    },
+    "spectra/iv/test copy 2.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1023,
+      "digest": "md5-UpruT5pkvkd12gRKZsXrmA==",
+      "length": 111884,
+      "stub": true
+    },
+    "biology/nucleic/CCR5_multifrag_insert1.gb": {
+      "content_type": "chemical/x-genbank",
+      "revpos": 1041,
+      "digest": "md5-IzGsGPmwE9vE1f2U/oIh1w==",
+      "length": 2295,
+      "stub": true
+    },
+    "biology/nucleic/genbankThatBrokeSbolImport.gb": {
+      "content_type": "chemical/x-genbank",
+      "revpos": 1043,
+      "digest": "md5-UIPHn5wDlJNs7gp1bEeoKA==",
+      "length": 7780,
+      "stub": true
+    },
+    "biology/nucleic/pj5_00028.gb": {
+      "content_type": "chemical/x-genbank",
+      "revpos": 1044,
+      "digest": "md5-SL7x0dX/OHWjlZIanKbMsQ==",
+      "length": 8877,
+      "stub": true
+    },
+    "biology/nucleic/SBOL_no_preserve_example.gb": {
+      "content_type": "chemical/x-genbank",
+      "revpos": 1047,
+      "digest": "md5-HxCTI+wr9SIFF2UovojRcQ==",
+      "length": 7757,
+      "stub": true
+    },
+    "biology/nucleic/SBOL_preserve_example.gb": {
+      "content_type": "chemical/x-genbank",
+      "revpos": 1049,
+      "digest": "md5-BHToMyYw4SCM1GGJKSgu0Q==",
+      "length": 47752,
+      "stub": true
+    },
+    "spectra/thermogravimetricAnalysis/SN_MIL-160_Pristine_TGA.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1099,
+      "digest": "md5-aag3/+6hjBd19/Y5mxXTsg==",
+      "length": 111934,
+      "stub": true
+    },
+    "spectra/thermogravimetricAnalysis/TGA.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1111,
+      "digest": "md5-Tix3FCJvPfhBO+Hr67seVQ==",
+      "length": 62730,
+      "stub": true
+    },
+    "image/PI-Ag_2-2_0010.tif": {
+      "content_type": "image/tiff",
+      "revpos": 1113,
+      "digest": "md5-j+z+Jbdc1YlKG/z9cQLVYw==",
+      "length": 8391182,
+      "stub": true
+    },
+    "image/colonies.jpg": {
+      "content_type": "image/jpeg",
+      "revpos": 1115,
+      "digest": "md5-Iwt3MlebCUQrNZkd2rWCMA==",
+      "length": 120431,
+      "stub": true
+    },
+    "image/test.jpg": {
+      "content_type": "image/jpeg",
+      "revpos": 1127,
+      "digest": "md5-YkxnXJYez2z29tiRafJ4lA==",
+      "length": 250417,
+      "stub": true
+    },
+    "spectra/thermogravimetricAnalysis/spectra_thermogravimetricAnalysis_test_TGA_f7350079.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1129,
+      "digest": "md5-izJv0iYQTPf8dmqqqT6rRA==",
+      "length": 281739,
+      "stub": true
+    },
+    "spectra/xrd/test.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1156,
+      "digest": "md5-G+uT2An76rScUceJBk8xpw==",
+      "length": 66055,
+      "stub": true
+    },
+    "spectra/xrd/test2.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1259,
+      "digest": "md5-FQmn6jB+9TMuA3tzdLDWvQ==",
+      "length": 105183,
+      "stub": true
+    },
+    "spectra/xrd/MG1-Cu2O-28_bg_subtracted.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1182,
+      "digest": "md5-ce2LisW6qJE9YXjCtXgShw==",
+      "length": 120719,
+      "stub": true
+    },
+    "spectra/thermogravimetricAnalysis/ntuples.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1198,
+      "digest": "md5-mW95GNEcj8XEl7Ju27QYiA==",
+      "length": 9815,
+      "stub": true
+    },
+    "image/cells.png": {
+      "content_type": "image/png",
+      "revpos": 1229,
+      "digest": "md5-oLfcLAZzJ0HktZHVRKuXxQ==",
+      "length": 1419151,
+      "stub": true
+    },
+    "spectra/xrd/CU2O23.txt": {
+      "content_type": "text/plain",
+      "revpos": 1239,
+      "digest": "md5-TpDyq8asR4BCXOHSJyF6rg==",
+      "length": 149351,
+      "stub": true
+    },
+    "spectra/differentialScanningCalorimetry/dsc.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1242,
+      "digest": "md5-9RgTRJVIl96m42c+0YdbzA==",
+      "length": 9864,
+      "stub": true
+    },
+    "spectra/xrd/test3.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1261,
+      "digest": "md5-FQmn6jB+9TMuA3tzdLDWvQ==",
+      "length": 105183,
+      "stub": true
+    },
+    "spectra/chromatogram/MixC8-C40_140630.JDX": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1263,
+      "digest": "md5-jngz6itrEDWMe8hPieFrJg==",
+      "length": 6385910,
+      "stub": true
+    },
+    "image/Foto 3.tiff": {
+      "content_type": "image/tiff",
+      "revpos": 1266,
+      "digest": "md5-XxMIAqp0rm4XyQM7DUNexw==",
+      "length": 1055938,
+      "stub": true
+    },
+    "image/shapes.small.png": {
+      "content_type": "image/png",
+      "revpos": 1271,
+      "digest": "md5-Pn/cs0GuD5LU6zaB3DCR9Q==",
+      "length": 22975,
+      "stub": true
+    },
+    "L1760A_4.JDX": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1317,
+      "digest": "md5-aFPgaFeHKOu73hBbDD3SWw==",
+      "length": 70728,
+      "stub": true
+    },
+    "spectra/isotherm/spectra_isotherm_isotherm (1).jcamp": {
+      "content_type": "application/octet-stream",
+      "revpos": 1333,
+      "digest": "md5-OuDL1BtUIpkexEzmGr5IEQ==",
+      "length": 3009,
+      "stub": true
+    },
+    "spectra/isotherm/isotherm.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1337,
+      "digest": "md5-chvlgFoPeviT3fUzEtDmEQ==",
+      "length": 3354,
+      "stub": true
+    },
+    "spectra/xray/spectra_xray_RRO.cif": {
+      "content_type": "chemical/x-cif",
+      "revpos": 1347,
+      "digest": "md5-Po8rt3yvtodCTB4VRdrLtw==",
+      "length": 1667,
+      "stub": true
+    },
+    "spectra/xray/spectra_xray_ABW.cif": {
+      "content_type": "chemical/x-cif",
+      "revpos": 1349,
+      "digest": "md5-arAfm87/YeEOfSKd1/0QNA==",
+      "length": 1396,
+      "stub": true
+    },
+    "spectra/xray/spectra_xray_Moganite.cif": {
+      "content_type": "chemical/x-cif",
+      "revpos": 1351,
+      "digest": "md5-vOW8hSjoSAQuBHoqH2Oh1g==",
+      "length": 1239,
+      "stub": true
+    },
+    "spectra/xray/spectra_xray_Diamond.cif": {
+      "content_type": "chemical/x-cif",
+      "revpos": 1353,
+      "digest": "md5-/w9WI6qPPUVArmzh6lIV8g==",
+      "length": 4714,
+      "stub": true
+    },
+    "spectra/chromatogram/gc-ms-2Signals.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1358,
+      "digest": "md5-Gr+9e4NpW3NuHpCoRtw7/w==",
+      "length": 74528,
+      "stub": true
+    },
+    "spectra/differentialScanningCalorimetry/spectra_differentialScanningCalorimetry_dsc (1).jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1513,
+      "digest": "md5-9RgTRJVIl96m42c+0YdbzA==",
+      "length": 9864,
+      "stub": true
+    },
+    "image/2BFF24EB-2D1A-4672-85FA-6762420ACA8D.tiff": {
+      "content_type": "image/tiff",
+      "revpos": 1547,
+      "digest": "md5-72xgYhcmWanA9SBNoNCi/w==",
+      "length": 1916,
+      "stub": true
+    },
+    "spectra/ir/spectra_ir_100-41-4-IR.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1559,
+      "digest": "md5-JlPWyfkDlV4k1NjjzOIgTQ==",
+      "length": 19578,
+      "stub": true
+    },
+    "test.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1561,
+      "digest": "md5-0xC47+8JSAE1XI/e8gFexw==",
+      "length": 835,
+      "stub": true
+    },
+    "spectra/oan/oan.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1564,
+      "digest": "md5-sem5nVpc7o6lAoijzTn+2w==",
+      "length": 1890,
+      "stub": true
+    },
+    "spectra/iv/LL_20mM_HBpin_C02.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1568,
+      "digest": "md5-sVN1JtRL7aizbGAtE+piLQ==",
+      "length": 403529,
+      "stub": true
+    },
+    "spectra/xps/assigned_8.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1809,
+      "digest": "md5-rf8LgOTKzjd4r2NuZx2IWw==",
+      "length": 10612,
+      "stub": true
+    },
+    "spectra/xps/assigned.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1793,
+      "digest": "md5-WPcr3H/m0jf0lHoJEVUvUA==",
+      "length": 24921,
+      "stub": true
+    },
+    "spectra/xps/assigned_1.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1795,
+      "digest": "md5-6lmz0mkm6TntAmeRUGnsSw==",
+      "length": 7004,
+      "stub": true
+    },
+    "spectra/xps/assigned_2.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1797,
+      "digest": "md5-wY2aE9Y3We+ui+WO02nGDw==",
+      "length": 9890,
+      "stub": true
+    },
+    "spectra/xps/assigned_3.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1799,
+      "digest": "md5-cG13g3VrdUfP7LJCZ1NDKQ==",
+      "length": 7531,
+      "stub": true
+    },
+    "spectra/xps/assigned_4.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1801,
+      "digest": "md5-mOCsFEkTXfsVTKksnTzs0Q==",
+      "length": 9216,
+      "stub": true
+    },
+    "spectra/xps/assigned_5.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1803,
+      "digest": "md5-UJ2WCSYz92qR0+jSE2Jbtg==",
+      "length": 13635,
+      "stub": true
+    },
+    "spectra/xps/assigned_6.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1805,
+      "digest": "md5-t18Nc7gkUQmH2vwXSP6EpQ==",
+      "length": 12451,
+      "stub": true
+    },
+    "spectra/xps/assigned_7.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1807,
+      "digest": "md5-d9VR4120bsY62bnog+GJEA==",
+      "length": 10910,
+      "stub": true
+    },
+    "spectra/xps/assigned_9.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1811,
+      "digest": "md5-qKJNXeLXHQ9gc3dt7tyqFg==",
+      "length": 25027,
+      "stub": true
+    },
+    "spectra/xps/assigned_10.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1813,
+      "digest": "md5-xaU3CwuOJXbic4PAmuwcfg==",
+      "length": 7003,
+      "stub": true
+    },
+    "spectra/xps/assigned_11.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1815,
+      "digest": "md5-5CNSuCRXnMm8yyHePA2Ztg==",
+      "length": 10017,
+      "stub": true
+    },
+    "spectra/isotherm/test_iso.jcamp": {
+      "content_type": "",
+      "revpos": 1880,
+      "digest": "md5-b6ajeXsSCvVro+9w+b3QYA==",
+      "length": 469,
+      "stub": true
+    },
+    "spectra/isotherm/test_iso_2.jcamp": {
+      "content_type": "",
+      "revpos": 1884,
+      "digest": "md5-b6ajeXsSCvVro+9w+b3QYA==",
+      "length": 469,
+      "stub": true
+    },
+    "spectra/cyclicVoltammetry/LL_20mM_HBpin_C02.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1899,
+      "digest": "md5-9LgsM2MZwS6bp0/K+5n/iQ==",
+      "length": 403514,
+      "stub": true
+    },
+    "spectra/cyclicVoltammetry/LL_echem_Bpinproduct_nBu4F_Fc_C02.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1901,
+      "digest": "md5-ya/51ohV78uoAXkMZdpwsQ==",
+      "length": 171428,
+      "stub": true
+    },
+    "spectra/thermogravimetricAnalysis/TS-009-A.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1903,
+      "digest": "md5-tgUr3+kAbRlyYaUs2Zrmrg==",
+      "length": 839921,
+      "stub": true
+    },
+    "spectra/pelletHardness/Archive.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1971,
+      "digest": "md5-kJqn4DI5tXedXjj8vcxEUA==",
+      "length": 2094,
+      "stub": true
+    },
+    "spectra/raman/6x6.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 1976,
+      "digest": "md5-vY10Rm73x2qf3a0vykrQpQ==",
+      "length": 1154608,
+      "stub": true
+    },
+    "spectra/uv/belsorp.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2003,
+      "digest": "md5-5HT/h1Y/1ZZGMf2hB68LDg==",
+      "length": 4343,
+      "stub": true
+    },
+    "spectra/uv/belsorp2.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2005,
+      "digest": "md5-wzGJIi9S3feyY5JjcYsDlA==",
+      "length": 3956,
+      "stub": true
+    },
+    "spectra/permeability/hiden.export.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2013,
+      "digest": "md5-b44xEb4DOVg0OHDrua5H/g==",
+      "length": 106442,
+      "stub": true
+    },
+    "image/Ref2_350nm.jpg": {
+      "content_type": "image/jpeg",
+      "revpos": 2020,
+      "digest": "md5-GUmoZx8JRCqG8W82q+gFpw==",
+      "length": 98973,
+      "stub": true
+    },
+    "image/abcd.png": {
+      "content_type": "image/png",
+      "revpos": 2037,
+      "digest": "md5-yinCMj4B1hq4NAzK/+l+Tw==",
+      "length": 3522,
+      "stub": true
+    },
+    "spectra/uv/spectra_uv_LP123_f1_ecae8747.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2071,
+      "digest": "md5-Nh4a9/Tu+KoSCU6RRZAHag==",
+      "length": 5613,
+      "stub": true
+    },
+    "spectra/uv/221021_MJ-STO-001.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2073,
+      "digest": "md5-MFWR0i3s/I9gX3LDqCtAqg==",
+      "length": 7291,
+      "stub": true
+    },
+    "spectra/thermogravimetricAnalysis/mettlerToledoWeight.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2116,
+      "digest": "md5-jLskslK2KK8fLRjwwNYaeg==",
+      "length": 56798,
+      "stub": true
+    },
+    "spectra/dls/test.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2188,
+      "digest": "md5-RvPtAYziQ2JYxE5lcCsk/w==",
+      "length": 10107,
+      "stub": true
+    },
+    "spectra/dls/test_2.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2190,
+      "digest": "md5-6TE883zOA5AO7njTLt2s2g==",
+      "length": 9853,
+      "stub": true
+    },
+    "spectra/dls/zetaPotential-chb.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2202,
+      "digest": "md5-Kqpa4pfMOyN3nu2/Iz9gWw==",
+      "length": 1531,
+      "stub": true
+    },
+    "spectra/dls/zetaPotential-chb_2.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2204,
+      "digest": "md5-UV/nWxPn7xvgeFWztRFxcA==",
+      "length": 1546,
+      "stub": true
+    },
+    "spectra/dls/zetaPotential-chb_3.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2206,
+      "digest": "md5-kQe4fLTsmXMtwsXC5OaxYw==",
+      "length": 1564,
+      "stub": true
+    },
+    "spectra/dls/zetaPotential-chb_4.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2208,
+      "digest": "md5-ZN4NImZtkx+PgoIh17TVag==",
+      "length": 1547,
+      "stub": true
+    },
+    "spectra/zetaPotential/zetaPotential-chb.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2210,
+      "digest": "md5-Kqpa4pfMOyN3nu2/Iz9gWw==",
+      "length": 1531,
+      "stub": true
+    },
+    "spectra/zetaPotential/zetaPotential-chb_2.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2212,
+      "digest": "md5-UV/nWxPn7xvgeFWztRFxcA==",
+      "length": 1546,
+      "stub": true
+    },
+    "spectra/zetaPotential/zetaPotential-chb_3.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2214,
+      "digest": "md5-kQe4fLTsmXMtwsXC5OaxYw==",
+      "length": 1564,
+      "stub": true
+    },
+    "spectra/zetaPotential/zetaPotential-chb_4.jdx": {
+      "content_type": "chemical/x-jcamp-dx",
+      "revpos": 2216,
+      "digest": "md5-ZN4NImZtkx+PgoIh17TVag==",
+      "length": 1547,
+      "stub": true
+    },
+    "spectra/zetaPotential/zetaPotential-chb.txt": {
+      "content_type": "text/plain",
+      "revpos": 2218,
+      "digest": "md5-6FiBDgA915Ne+tWGqyQREw==",
+      "length": 225331,
+      "stub": true
+    }
+  }
+}

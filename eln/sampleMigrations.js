@@ -61,13 +61,36 @@ function migrateTGAZones(sample) {
 }
 
 /**
+ * Migrates name entries from boolean kind to string kind.
+ * Old: kind: true → New: kind: 'iupac'
+ * Old: kind: false → New: kind: 'trivial'
+ * Old: kind: undefined → New: kind: 'iupac'
+ *
+ * @param {object} sample - The sample object to migrate
+ */
+function migrateIupac(sample) {
+  const iupacEntries = sample.$content?.general?.name;
+  if (!Array.isArray(iupacEntries)) return;
+
+  for (const entry of iupacEntries) {
+    if (entry.kind === true || entry.kind === undefined) {
+      entry.kind = 'iupac';
+    } else if (entry.kind === false) {
+      entry.kind = 'trivial';
+    }
+  }
+}
+
+/**
  * Run all migrations on a sample
  *
  * @param {object} sample - The sample object to migrate
  */
 function updateSample(sample) {
+  debugger;
   migrateSequence(sample);
   migrateTGAZones(sample);
+  migrateIupac(sample);
 }
 
-module.exports = { updateSample };
+module.exports = { migrateIupac, updateSample };
