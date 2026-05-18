@@ -72,6 +72,24 @@ class UserPreferences {
   }
 
   /**
+   * Returns the current value of a preference key from the live API data.
+   * @param {string} key
+   * @returns {unknown}
+   */
+  get(key) {
+    const data = API.getData(this.varName);
+    return data ? data[key] : undefined;
+  }
+
+  /**
+   * Returns the current list of groups to append for the logged-in user.
+   * @returns {string[]}
+   */
+  getGroupsToAppend() {
+    return /** @type {string[]} */ (this.get('groupsToAppend') ?? []);
+  }
+
+  /**
    * Saves current preferences to CouchDB.
    * @returns {Promise<void>}
    */
