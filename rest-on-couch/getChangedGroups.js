@@ -1,4 +1,4 @@
-define(['src/util/ui', 'lodash'], (UI, _) => {
+define(['src/util/twig', 'lodash'], (Twig, _) => {
   function editGroups(record, allGroups) {
     const groups = JSON.parse(JSON.stringify(allGroups));
     const groupNames = groups.map((group) => group.name);
@@ -18,7 +18,7 @@ define(['src/util/ui', 'lodash'], (UI, _) => {
       }
     }
 
-    return UI.form(
+    return Twig.form(
       `
     <div>
     <form>

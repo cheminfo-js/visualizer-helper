@@ -3,7 +3,9 @@ const { migrateIupac } = require('../sampleMigrations');
 const sample = require('./data/sample.json');
 
 test('kind: true is migrated to iupac', () => {
-  const s = { $content: { general: { name: [{ value: 'ethylbenzene', kind: true }] } } };
+  const s = {
+    $content: { general: { name: [{ value: 'ethylbenzene', kind: true }] } },
+  };
   migrateIupac(s);
   expect(s.$content.general.name[0].kind).toBe('iupac');
 });
@@ -15,7 +17,11 @@ test('kind: false is migrated to trivial', () => {
 });
 
 test('kind: undefined is migrated to iupac', () => {
-  const s = { $content: { general: { name: [{ value: 'ethylbenzene', kind: undefined }] } } };
+  const s = {
+    $content: {
+      general: { name: [{ value: 'ethylbenzene', kind: undefined }] },
+    },
+  };
   migrateIupac(s);
   expect(s.$content.general.name[0].kind).toBe('iupac');
 });
@@ -23,7 +29,12 @@ test('kind: undefined is migrated to iupac', () => {
 test('already-migrated string kind is left unchanged', () => {
   const s = {
     $content: {
-      general: { name: [{ value: 'ethylbenzene', kind: 'iupac' }, { value: 'EB', kind: 'trivial' }] },
+      general: {
+        name: [
+          { value: 'ethylbenzene', kind: 'iupac' },
+          { value: 'EB', kind: 'trivial' },
+        ],
+      },
     },
   };
   migrateIupac(s);

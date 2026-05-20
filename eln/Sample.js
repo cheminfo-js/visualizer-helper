@@ -1,5 +1,6 @@
 import Datas from 'src/main/datas';
 import API from 'src/util/api';
+import Twig from 'src/util/twig';
 import UI from 'src/util/ui';
 
 import Roc from '../rest-on-couch/Roc';
@@ -577,7 +578,7 @@ Your local changes will be lost.</p>`;
               '',
             )}.jdx`;
             // we will ask for meta information
-            let meta = await UI.form(
+            let meta = await Twig.form(
               `
               <style>
                   #jcamp {

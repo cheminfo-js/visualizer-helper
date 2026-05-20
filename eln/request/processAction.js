@@ -1,4 +1,5 @@
 import API from 'src/util/api';
+import Twig from 'src/util/twig';
 import UI from 'src/util/ui';
 
 import Status from './Status';
@@ -133,7 +134,7 @@ async function askNewStatus(request) {
     currentStatus++;
   }
 
-  let newStatusObject = await UI.form(
+  let newStatusObject = await Twig.form(
     `   <style>
             #status {
                 zoom: 1.5;

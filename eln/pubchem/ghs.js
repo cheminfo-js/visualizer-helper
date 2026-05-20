@@ -1,44 +1,56 @@
 import OCL from 'openchemlib';
+import API from 'src/util/api';
+import Twig from 'src/util/twig';
+import UI from 'src/util/ui';
 
-// returns GHS information based on pubchem and a smiles
+/**
+ * @typedef {object} GhsOptions
+ * @property {boolean} [detailed=false] - Show full GHS data instead of summary
+ */
 
-define(['src/util/ui', 'src/util/api'], (UI, API) => {
-  async function fromIDCode(oclCode, options) {
-    const molecule = OCL.Molecule.fromIDCode(oclCode);
-    const smiles = molecule.toSmiles();
-    return fromSMILES(smiles, options);
-  }
+/**
+ * @param {string} oclCode
+ * @param {GhsOptions} [options]
+ */
+async function fromIDCode(oclCode, options) {
+  const molecule = OCL.Molecule.fromIDCode(oclCode);
+  const smiles = molecule.toSmiles();
+  return fromSMILES(smiles, options);
+}
 
-  async function fromSMILES(smiles, options = {}) {
-    const { detailed = false } = options;
+/**
+ * @param {string} smiles
+ * @param {GhsOptions} [options]
+ */
+async function fromSMILES(smiles, options = {}) {
+  const { detailed = false } = options;
 
-    const { Compound } = await API.require(
-      'https://www.lactame.com/lib/pubchem/0.2.0/pubchem.js',
-    );
-    const compound = await Compound.fromSmiles(String(smiles));
-    const compoundData = await compound.getData();
+  const { Compound } = await API.require(
+    'https://www.lactame.com/lib/pubchem/0.2.0/pubchem.js',
+  );
+  const compound = await Compound.fromSmiles(String(smiles));
+  const compoundData = await compound.getData();
 
-    const ghs = compoundData.ghs;
-    const ghsFull = compoundData.getGHS();
+  const ghs = compoundData.ghs;
+  const ghsFull = compoundData.getGHS();
 
-    const html = detailed
-      ? await UI.renderTwig(ghsFullTemplate, { ghsFull })
-      : await UI.renderTwig(ghsTemplate, { ghs });
+  const html = detailed
+    ? await Twig.renderTwig(ghsFullTemplate, { ghsFull })
+    : await Twig.renderTwig(ghsTemplate, { ghs });
 
-    UI.dialog(html, {
-      width: 1000,
-      height: 800,
-      title: 'GHS information',
-    });
-  }
+  UI.dialog(html, {
+    width: 1000,
+    height: 800,
+    title: 'GHS information',
+  });
+}
 
-  return { fromIDCode, fromSMILES };
-});
+export default { fromIDCode, fromSMILES };
 
 const ghsTemplate = `
 <style>
     #ghsSmmary {
-        
+
     }
     #ghsSummary table {
         border-collapse: collapse;
@@ -110,7 +122,7 @@ const ghsTemplate = `
 const ghsFullTemplate = `
 <style>
     #ghsFull {
-        
+
     }
     #ghsFull table {
         border-collapse: collapse;

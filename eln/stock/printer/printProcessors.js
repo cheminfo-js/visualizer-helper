@@ -1,11 +1,11 @@
 define([
   'src/main/datas',
-  'src/util/ui',
+  'src/util/twig',
   'browserified/twig/twig',
   'canvg',
   '../../libs/Image',
   'openchemlib',
-], (Datas, UI, twig, canvg, IJS, OCL) => {
+], (Datas, Twig, twig, canvg, IJS, OCL) => {
   IJS = IJS.default;
   const DataObject = Datas.DataObject;
   let chars =
@@ -239,7 +239,7 @@ define([
     }
     if (allDefined) return data;
 
-    return UI.form(
+    return Twig.form(
       `
             <div>
                 <form>
