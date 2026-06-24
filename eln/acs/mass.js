@@ -86,8 +86,15 @@ function formatExactMass(value) {
   result.push(mf + getCharge(mfInfo.charge));
 
   result.push(`${mfInfo.observedMonoisotopicMass.toFixed(4)};`);
-  result.push('Found');
-  result.push(Number(accurate.value).toFixed(4));
+
+  if (
+    Math.abs(mfInfo.observedMonoisotopicMass - Number(accurate.value)) > 1000
+  ) {
+    result.push('NOT FOUND');
+  } else {
+    result.push('Found');
+    result.push(Number(accurate.value).toFixed(4));
+  }
 
   return `${result.join(' ')}`;
 }
