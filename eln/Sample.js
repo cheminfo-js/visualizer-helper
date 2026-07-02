@@ -930,6 +930,7 @@ async function copyAnalysis(sample, original) {
   // we need to keep dUrl if available and add mimetype of the file
   for (const key in cloned) {
     if (
+      cloned[key] &&
       typeof cloned[key] === 'object' &&
       cloned[key].filename &&
       attachments[cloned[key]]?.filename
