@@ -864,7 +864,7 @@ async function pasteAnalysis(sample) {
   const newAttachments = [];
 
   for (const key in data) {
-    if (typeof data[key] === 'object' && data[key]._source) {
+    if (data[key] && typeof data[key] === 'object' && data[key]._source) {
       const source = data[key]._source;
       delete data[key]._source;
       // we need to load the files from dURL
