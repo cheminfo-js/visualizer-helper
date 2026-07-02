@@ -933,7 +933,7 @@ async function copyAnalysis(sample, original) {
       cloned[key] &&
       typeof cloned[key] === 'object' &&
       cloned[key].filename &&
-      attachments[cloned[key]]?.filename
+      attachments[cloned[key]?.filename]
     ) {
       if (original[key].dUrl) {
         cloned[key]._source = {
