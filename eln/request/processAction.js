@@ -94,7 +94,7 @@ async function refreshRequests(options) {
     queryOptions.startkey = [statusCode];
     queryOptions.endkey = [statusCode];
   }
-  let results = await roc.query('analysisRequestByKindAndStatus', queryOptions);
+  let results = await roc.query(options.view || 'analysisRequestByKindAndStatus', queryOptions);
   results.forEach((result) => {
     result.color = Status.getStatusColor(Number(result.value.status.status));
   });
