@@ -566,8 +566,8 @@ Your local changes will be lost.</p>`;
           yUnit: 'Intensity',
         },
       };
-
-      for (let droppedData of droppedDatas) {
+      const droppedDatasToProcess = droppedDatas.slice();
+      for (let droppedData of droppedDatasToProcess) {
         if (!droppedData.filename.includes('.')) droppedData.filename += '.txt';
         let extension = droppedData.filename.replace(/.*\./, '').toLowerCase();
         if (extension === 'txt' || extension === 'csv' || extension === 'tsv') {
