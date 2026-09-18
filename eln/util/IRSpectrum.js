@@ -34,16 +34,13 @@ export async function getChartFromIR(experiment, options = {}) {
       options.name || String(experiment.text.filename).match(/([^/]+)\..+/)[1];
     let data = (await experiment.getChild(['text', 'data'])).get();
     let text = String(data);
-    let points = parseXY(String(text), {
-      arrayType: 'xxyy',
-      uniqueX: true,
-    });
+    let points = parseXY(String(text), { uniqueX: true });
     return {
       data: [
         {
           label: name,
-          x: points[0],
-          y: points[1],
+          x: points.x,
+          y: points.y,
         },
       ],
     };

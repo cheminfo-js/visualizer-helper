@@ -40,16 +40,13 @@ export async function getChartFromMass(experiment, options = {}) {
       ? experiment.text.content
       : (await experiment.getChild(['text', 'data'])).get();
     let text = String(data);
-    let points = parseXY(String(text), {
-      arrayType: 'xxyy',
-      uniqueX: true,
-    });
+    let points = parseXY(String(text), { uniqueX: true });
     return {
       data: [
         {
           label: name,
-          x: points[0],
-          y: rescaleY(points[1], scaleY),
+          x: points.x,
+          y: rescaleY(points.y, scaleY),
         },
       ],
     };

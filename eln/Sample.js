@@ -10,10 +10,10 @@ import MF from './MF';
 import Nmr1dManager from './Nmr1dManager';
 import Sequence from './Sequence';
 import { createVar } from './jpaths';
-import convertToJcamp from './libs/convertToJcamp';
 import elnPlugin from './libs/elnPlugin';
 import { splitJcamp } from './sample/splitJcamp';
 import { updateSample } from './sampleMigrations';
+import { convertTextToJcamp } from './util/convertTextToJcamp';
 
 const DataObject = Datas.DataObject;
 
@@ -669,9 +669,7 @@ Your local changes will be lost.</p>`;
                 // No special handling
               }
             }
-            droppedData.content = convertToJcamp(content, {
-              meta,
-            });
+            droppedData.content = convertTextToJcamp(content, meta);
           } else {
             // eslint-disable-next-line no-console
             console.log('Could not convert to jcamp file: ', type);

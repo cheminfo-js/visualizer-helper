@@ -1,1 +1,4 @@
-export { parseXY } from '../../../../../../../../lib/xy-parser/2.0.0/xy-parser.min';
+export {
+  parseXY,
+  parseXYAndKeepInfo,
+} from '../../../../../../../../lib/xy-parser/6.0.1/xy-parser.umd.min';
