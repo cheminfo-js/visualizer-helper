@@ -120,6 +120,7 @@ define(['Track'], (track) => {
 rest-on-couch/     Roc.js, UserViewPrefs.js, UserAnalysisResults.js
 eln/               ELN-specific helpers (samples, NMR, preference.js, stock, …)
 eln/util/          Shared ELN utilities (appendedDragAndDrop, getChartFromMass, …)
+eln/toolTab/       A tab that frames a cheminfo site and hands it the sample (host protocol)
 util/              Generic helpers: track.js, ModulePrefsManager.js, tips.js, privacy.js
 chemistry/         Molecular formula, OCL, NMR renderers
 biology/           DNA sequences, alignment helpers
