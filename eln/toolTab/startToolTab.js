@@ -100,6 +100,8 @@ function frameSite(container, record, hostName) {
   frame.style.width = '100%';
   frame.style.height = '100%';
   frame.style.border = '0';
+  // A cross-origin frame gets neither unless delegated before it navigates.
+  frame.allow = 'clipboard-write; fullscreen';
   const connection = connectSite({
     target: () => frame.contentWindow,
     origin: new URL(record.url).origin,
