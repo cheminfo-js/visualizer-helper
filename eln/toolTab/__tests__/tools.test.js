@@ -4,6 +4,7 @@ test('a tile naming a tool gets its record', () => {
   expect(toolRecord({ tool: '3d' })).toStrictEqual({
     title: '3D model',
     url: 'https://3d.cheminfo.org/?embed=1',
+    entry: 'sample',
     read: ['structure'],
     save: {},
   });
@@ -17,6 +18,7 @@ test('a tile overrides the fields it gives, and keeps the others', () => {
   expect(toolRecord({ tool: '3d', save })).toStrictEqual({
     title: '3D model',
     url: 'https://3d.cheminfo.org/?embed=1',
+    entry: 'sample',
     read: ['structure'],
     save,
   });
@@ -24,13 +26,33 @@ test('a tile overrides the fields it gives, and keeps the others', () => {
 
 test('a tile may frame a site of its own, named after its host', () => {
   expect(
-    toolRecord({ url: 'https://lcao.cheminfo.org/?embed=1' }),
+    toolRecord({ url: 'https://surge.cheminfo.org/?embed=1' }),
   ).toStrictEqual({
-    title: 'lcao.cheminfo.org',
-    url: 'https://lcao.cheminfo.org/?embed=1',
+    title: 'surge.cheminfo.org',
+    url: 'https://surge.cheminfo.org/?embed=1',
+    entry: 'sample',
     read: ['structure'],
     save: {},
   });
+});
+
+test('draw opens a reaction, and saves its RXN file with its drawing', () => {
+  expect(toolRecord({ tool: 'draw' })).toStrictEqual({
+    title: 'Reaction scheme',
+    url: 'https://draw.cheminfo.org/?embed=1',
+    entry: 'reaction',
+    read: ['reaction', 'drawing'],
+    save: {
+      reaction: { writer: 'content', jpath: ['reactionRXN'] },
+      drawing: { writer: 'attachment', filename: 'overview.svg' },
+    },
+  });
+});
+
+test('a tab opens only a sample or a reaction', () => {
+  expect(() => toolRecord({ tool: '3d', entry: 'sampel' })).toThrow(
+    'A tool tab opens a sample or a reaction, not a "sampel", so nothing was opened.',
+  );
 });
 
 test('data typed as JSON text in a tiles grid reads the same', () => {
@@ -43,8 +65,8 @@ test('data typed as JSON text in a tiles grid reads the same', () => {
 });
 
 test('a tool this version does not know opens nothing', () => {
-  expect(() => toolRecord({ tool: 'lcao' })).toThrow(
-    'No tool is named "lcao" in this version of visualizer-helper, so nothing was opened.',
+  expect(() => toolRecord({ tool: 'surge' })).toThrow(
+    'No tool is named "surge" in this version of visualizer-helper, so nothing was opened.',
   );
   expect(() => toolRecord({ tool: 'toString' })).toThrow(
     'No tool is named "toString"',

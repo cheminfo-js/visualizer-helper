@@ -1,16 +1,42 @@
 /**
  * The sites a tool tab can frame, under the name a tile gives in `data.tool`.
  *
- * A record says which site to frame, what the tab reads from the sample for it,
- * and where a result the site hands back is saved. A tile may override any of
- * its fields, so one ELN can save what another only shows.
+ * A record says which site to frame, which kind of entry it works on — a
+ * sample, or a reaction — what the tab reads from that entry for it, and where
+ * what the site hands back is saved. A tile may override any of its fields, so
+ * one ELN can save what another only shows.
  */
+
+/** The kinds of entry a tab can open, as rest-on-couch names them. */
+const ENTRY_KINDS = ['sample', 'reaction'];
 
 const TOOLS = {
   '3d': {
     title: '3D model',
     url: 'https://3d.cheminfo.org/?embed=1',
     read: ['structure'],
+  },
+  lcao: {
+    title: 'Orbitals',
+    url: 'https://lcao.cheminfo.org/?embed=1',
+    read: ['structure'],
+  },
+  osiris: {
+    title: 'Toxicity and properties',
+    url: 'https://osiris.cheminfo.org/?embed=1',
+    read: ['structure'],
+  },
+  draw: {
+    title: 'Reaction scheme',
+    url: 'https://draw.cheminfo.org/?embed=1',
+    entry: 'reaction',
+    read: ['reaction', 'drawing'],
+    // The RXN file and the drawing go back together: the drawing is what the
+    // reaction page shows, and what reopens in draw with everything on it.
+    save: {
+      reaction: { writer: 'content', jpath: ['reactionRXN'] },
+      drawing: { writer: 'attachment', filename: 'overview.svg' },
+    },
   },
 };
 
@@ -20,11 +46,12 @@ const TOOLS = {
  *
  * @param {object | string} [data] - The tile's `data`, as the tab receives it:
  * an object, or the same as JSON text when a tiles grid column edits it.
- * @returns {{ title: string, url: string, read: string[], save: object }} The
- * record.
+ * @returns {{ title: string, url: string, entry: string, read: string[], save:
+ * object }} The record; `save` maps a key the site sends back to where it is
+ * kept (see `./writers.js`).
  * @throws {Error} When the tile's data is not JSON, names a tool this version
- * does not know, gives neither a tool nor a `url`, or gives a `url` that is not
- * an http(s) address.
+ * does not know, gives neither a tool nor a `url`, gives a `url` that is not
+ * an http(s) address, or names a kind of entry the tab cannot open.
  */
 function toolRecord(data = {}) {
   const { tool, ...overrides } = tileData(data);
@@ -34,6 +61,7 @@ function toolRecord(data = {}) {
     );
   }
   const record = {
+    entry: 'sample',
     read: ['structure'],
     save: {},
     ...(tool === undefined ? {} : TOOLS[tool]),
@@ -50,9 +78,15 @@ function toolRecord(data = {}) {
       `"${record.url}" is not an http(s) address, so nothing was opened.`,
     );
   }
+  if (!ENTRY_KINDS.includes(record.entry)) {
+    throw new Error(
+      `A tool tab opens a ${ENTRY_KINDS.join(' or a ')}, not a "${record.entry}", so nothing was opened.`,
+    );
+  }
   return {
     title: record.title ?? url.host,
     url: record.url,
+    entry: record.entry,
     read: [...record.read],
     save: { ...record.save },
   };
@@ -80,4 +114,4 @@ function parseAddress(text) {
   }
 }
 
-module.exports = { TOOLS, toolRecord };
+module.exports = { ENTRY_KINDS, TOOLS, toolRecord };

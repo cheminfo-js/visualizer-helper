@@ -1,0 +1,29 @@
+{
+  "type": "load",
+  "id": "load-1",
+  "document": "eln:1315a6d895f431497538cb6d834feab5",
+  "items": [
+    {
+      "kind": "chem.molfile.2d",
+      "value": {
+        "molfile": "\nActelion Java MolfileCreator 1.0\n\n  8  8  0  0  0  0  0  0  0  0999 V2000\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0  0  0  0\n  1  3  1  0  0  0  0\n  2  4  2  0  0  0  0\n  2  5  1  0  0  0  0\n  4  6  1  0  0  0  0\n  5  7  2  0  0  0  0\n  6  8  2  0  0  0  0\n  7  8  1  0  0  0  0\nM  END\n"
+      },
+      "label": "Ethylbenzene"
+    },
+    {
+      "kind": "chem.ocl.id",
+      "value": {
+        "idCode": "daD@@DjUZxHH@@",
+        "coordinates": "!BbOvw?_x@?g?~_{\\Bm?t"
+      },
+      "label": "Ethylbenzene"
+    },
+    {
+      "kind": "chem.mf",
+      "value": {
+        "mf": "C8H10"
+      }
+    }
+  ],
+  "accept": []
+}

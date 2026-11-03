@@ -23,7 +23,7 @@ function inTestRealm(message) {
  * hello when told to. The ports are real, so every message is cloned as in a
  * browser.
  */
-function startSite() {
+function startSite({ timeout } = {}) {
   const posted = [];
   const frameWindow = {
     postMessage(message, targetOrigin, transfer) {
@@ -36,6 +36,7 @@ function startSite() {
     target: () => frameWindow,
     origin: SITE_ORIGIN,
     name: 'Test ELN',
+    timeout,
     listen(next) {
       listener = next;
       return () => {
@@ -167,4 +168,73 @@ test('closing stops listening', () => {
   site.connection.close();
 
   expect(site.isListening()).toBe(false);
+});
+
+test("a get goes through the port and resolves with the site's items", async () => {
+  const site = startSite();
+  site.hello();
+  const { port } = site.posted[0];
+  const asked = nextMessage(port);
+  const answer = site.connection.get(['reaction', 'drawing']);
+
+  expect(await asked).toStrictEqual({
+    type: 'get',
+    id: 'get-1',
+    keys: ['reaction', 'drawing'],
+  });
+
+  const items = [
+    { key: 'reaction', kind: 'chem.rxn', value: { rxn: '$RXN' } },
+    { key: 'drawing', kind: 'image.svg', value: { svg: '<svg/>' } },
+  ];
+  port.postMessage({ type: 'result', id: 'get-1', ok: true, items });
+
+  expect(inTestRealm(await answer)).toStrictEqual(items);
+  expect(site.answers).toStrictEqual([]);
+});
+
+test('a get the site refuses fails with its sentence', async () => {
+  const site = startSite();
+  site.hello();
+  const answer = site.connection.get(['drawing']);
+  site.posted[0].port.postMessage({
+    type: 'result',
+    id: 'get-1',
+    ok: false,
+    error: { code: 'no-output', message: 'Nothing is drawn yet.' },
+  });
+
+  await expect(answer).rejects.toThrow('Nothing is drawn yet.');
+});
+
+test('a get is given up before the site connects, across a reload, or past its time', async () => {
+  const site = startSite({ timeout: 20 });
+
+  await expect(site.connection.get(['reaction'])).rejects.toThrow(
+    'The site is not connected yet.',
+  );
+
+  site.hello();
+  const beforeReload = site.connection.get(['reaction']);
+  site.hello();
+
+  await expect(beforeReload).rejects.toThrow(
+    'The site reloaded before it answered.',
+  );
+  await expect(site.connection.get(['reaction'])).rejects.toThrow(
+    'The site did not answer in time.',
+  );
+});
+
+test('what the site sends unasked still reaches the tab', async () => {
+  const site = startSite();
+  site.hello();
+  const output = {
+    type: 'output',
+    document: LOAD.document,
+    items: [{ key: 'reaction', kind: 'chem.rxn', value: { rxn: '$RXN' } }],
+  };
+  site.posted[0].port.postMessage(output);
+
+  expect(await site.answered(1)).toStrictEqual([output]);
 });

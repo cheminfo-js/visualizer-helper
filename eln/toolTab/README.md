@@ -1,10 +1,11 @@
 # Tool tab
 
 A view of visualizer-on-tabs that frames one of the cheminfo sites —
-3d.cheminfo.org today — and hands it the sample the tab was opened for, over
-the cheminfo host protocol. One view serves every site: the tile that opens the
-tab names the site, and `tools.js` says where the site is and what to read from
-the sample for it.
+3d.cheminfo.org, lcao.cheminfo.org, osiris.cheminfo.org and draw.cheminfo.org
+today — and hands it the entry the tab was opened for, a sample or a reaction,
+over the cheminfo host protocol. One view serves every site: the tile or the
+button that opens the tab names the site, and `tools.js` says where the site
+is, what to read from the entry for it, and where to save what it gives back.
 
 ## Create the view
 
@@ -50,7 +51,7 @@ Once, for every ELN that uses it.
         "general": [
           {
             "script": [
-              "const { startToolTab } = await API.require('vh/eln/toolTab/startToolTab');\nstartToolTab({ hostName: 'SciPeaks' });"
+              "const { startToolTab } = await API.require('vh/eln/toolTab/startToolTab');\nstartToolTab();"
             ]
           }
         ]
@@ -83,10 +84,11 @@ The init script, written out:
 
 ```js
 const { startToolTab } = await API.require('vh/eln/toolTab/startToolTab');
-startToolTab({ hostName: 'SciPeaks' });
+startToolTab();
 ```
 
-`hostName` is how the tab introduces itself to the site; it defaults to `ELN`.
+The tab introduces itself to the site as `SciPeaks`; another ELN passes its own
+name, `startToolTab({ hostName: 'ELN' })`.
 To put the site in an element of your own instead of over the whole tab, pass
 it as `container`.
 
@@ -150,6 +152,27 @@ Both kinds then open with or without a sample. Keep `sampleTool` apart only to
 grey its tile until a sample is selected — where the tiles' `isActive` tests
 `tile.kind === 'sample'`, test `sampleTool` too; otherwise one kind is enough.
 
+### Or open draw from a reaction
+
+draw edits a reaction, so it is opened for one rather than for the selected
+sample: a button on the reaction page opens the tab with the reaction's uuid.
+
+```js
+const reaction = API.getData('reaction');
+IframeBridge.postMessage('tab.open', {
+  id: `Scheme ${reaction.$id}`,
+  url: '<id of the view>',
+  data: {
+    couchDB: { url: API.cache('couchUrl'), database: API.cache('database') },
+    uuid: String(reaction._id),
+    data: { tool: 'draw' },
+  },
+});
+```
+
+The tab refuses an entry that is not a reaction, so a draw tile handed a sample
+opens nothing rather than writing a reaction into it.
+
 ### Or name the site from the registry
 
 A tile of kind `sample` or `optionalSample` can open this view directly, with
@@ -167,20 +190,41 @@ and any field of the record can be replaced there.
 | It is handed the same sample again         | Changes nothing, so what the user did in the site stays.                               |
 | The site reloads (a link inside it)        | Connects again and sends the sample again.                                             |
 | The site cannot use the sample             | Shows the site's own sentence as a notification, e.g. a sample with no structure.      |
+| It opens draw with a reaction              | Sends its RXN file and its `overview.svg`, the drawing draw saved last time.           |
+| The reaction is changed in draw            | Saves the RXN file and the drawing together, into the reaction.                        |
 
 The site gets the structure in every form the sample keeps — the molfile,
 the OpenChemLib idcode and the formula — and takes the one it prefers.
 
+### What draw saves
+
+| What draw gives back | Where it goes                                                      |
+| -------------------- | ------------------------------------------------------------------ |
+| `reaction`           | `$content.reactionRXN`, the RXN file the reaction page reads       |
+| `drawing`            | the `overview.svg` attachment, the picture the reaction page shows |
+
+draw says when the reaction changes; the tab then asks it for both and writes
+them from that one moment, so the picture never shows another reaction than the
+RXN file. It reads the latest revision first and writes a file only when its
+text changed, and opening a reaction saves nothing. The drawing is draw's own
+SVG: opened again, it brings back the conditions, curly arrows and style. An
+`overview.svg` draw did not write is ignored, and draw opens the RXN file.
+
 ## Add a site
 
-1. **The site must speak the host protocol.** 3d.cheminfo.org does: its README
-   has the messages under _Framed by a notebook_.
+1. **The site must speak the host protocol.** 3d, lcao and osiris do, through
+   `react-cheminfo/host`; their READMEs have the messages under _Framed by a
+   notebook_.
 2. **Add its record to `TOOLS` in `tools.js`**: a `title`, an https `url` with
-   `?embed=1`, and the readers it needs (`read`, `['structure']` today).
+   `?embed=1`, the kind of `entry` it opens (`sample`, the default, or
+   `reaction`), the readers it needs (`read`: `structure`, `reaction`,
+   `drawing`), and in `save` where each output it gives back is kept — a field
+   of `$content` (`{ writer: 'content', jpath }`) or a file
+   (`{ writer: 'attachment', filename }`).
 3. **Run `npm test`, merge, and move the view's `vh` alias** to that commit.
 
 A site that does not speak the protocol yet can still be framed by naming it
-in the tile, `"data": { "url": "https://lcao.cheminfo.org/?embed=1" }`: it opens
+in the tile, `"data": { "url": "https://surge.cheminfo.org/?embed=1" }`: it opens
 as a plain frame, with no sample.
 
 ## When it does not work
@@ -190,10 +234,12 @@ as a plain frame, with no sample.
 | A notification: _No tool is named "x" in this version of visualizer-helper_ | The view's `vh` commit predates that tool: move the alias.                                                |
 | The site, without the sample                                                | The sample has no molfile, idcode or formula (the site says so), or the site does not speak the protocol. |
 | _The sample could not be read…_                                             | The user may not read that sample, or rest-on-couch did not answer.                                       |
+| _The reaction could not be read…: it is a sample, not a reaction_           | A draw tab was opened from a sample tile: open it from the reaction (above).                              |
+| _What Reaction scheme gave back could not be saved…_                        | The user may not write that reaction, or rest-on-couch did not answer. draw keeps the drawing.            |
+| The reaction page, saving after draw did, reports a conflict                | It still holds the revision it loaded: reload it before saving there again.                               |
 | An empty frame, `ERR_BLOCKED_BY_LOCAL_NETWORK_ACCESS_CHECKS` in the console | A public ELN framing a site on `localhost`: Chrome refuses it. Frame the deployed site.                   |
 | _IframeBridge is not loaded_ in the console                                 | The view was opened outside visualizer-on-tabs, e.g. to edit it. Expected.                                |
 
 ## Not built yet
 
-Saving a result back into the sample, and reading its spectra and
-chromatograms for a site that takes them.
+Reading a sample's spectra and chromatograms for a site that takes them.
